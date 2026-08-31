@@ -1,892 +1,396 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1234 Solution | Estratégia, Gestão e Governança</title>
-  <meta name="description" content="A 1234 Solution, fundada por Adalberto Chagas, transforma infraestrutura em resultado através de consultoria especializada em gestão de ativos, comprovação de investimentos e blindagem de processos." />
-  <meta property="og:title" content="1234 Solution | Estratégia, Gestão e Governança" />
-  <meta property="og:description" content="Consultoria especializada em gestão de ativos, comprovação de investimentos e blindagem de processos de revisão tarifária." />
-  <meta property="og:type" content="website" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1234 Solution — Gestão de Ativos e Governança</title>
   
-  <link rel="icon" type="image/png" href="assets/img/Logo 1234 - Médio_1 20260814.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600;1,9..144,700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  
-  <!-- Iconify -->
-  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+  <!-- CDNs Atualizados -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    :root {
+      --navy:           #0E1B2B;
+      --navy-2:         #16283F; 
+      --video-bg:       #111F31; 
+      --gold:           #C6A45A;
+      --gold-2:         #E4C787;
+      --paper:          #F4EFE4;
+      --stone:          #7C8798;
+      
+      --font-display:   'Fraunces', Georgia, serif;
+      --font-body:      'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono:      'IBM Plex Mono', 'Courier New', monospace;
+
+      --text-xs:    0.75rem;
+      --text-sm:    0.9rem;
+      --text-base:  1.05rem;
+      --text-lg:    1.125rem;
+      --text-xl:    1.25rem;
+      --text-2xl:   1.5rem;
+      --text-3xl:   1.875rem;
+      --text-4xl:   2.25rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html, body {
+      font-family: var(--font-body);
+      background: var(--navy); 
+      color: var(--paper);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* ============================================================
+       HERO FULL-BLEED ABSOLUTO
+    ============================================================ */
+    .hero-fullbleed {
+      position: relative;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10%;
+      overflow: hidden; /* Garante que nada saia da tela principal */
+    }
+
+    /* CAMADA DE FUNDO: VÍDEO ABSOLUTO */
+    .hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Fica no fundo */
+      background: var(--navy);
+    }
+    .hero-video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Preenche rigorosamente toda a tela sem deixar bordas nem espaços vazios */
+    }
+
+    /* CAMADA DE CONTRASTE: OVERLAY
+       Um gradiente escuro de baixo para cima para garantir que os textos brancos no rodapé
+       fiquem perfeitamente legíveis sobre qualquer parte brilhante do vídeo. */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(100deg, rgba(11,25,41,0.90) 0%, rgba(11,25,41,0.78) 35%, rgba(11,25,41,0.40) 58%, rgba(11,25,41,0) 78%);
+      z-index: 2;
+      opacity: 0; /* Fica invisível durante todo o vídeo, aguardando o final */
+      pointer-events: none;
+    }
+
+    /* CAMADA DE CONTEÚDO: TEXTOS */
+    .hero-content {
+      position: relative;
+      z-index: 10; /* Fica acima do vídeo e do overlay */
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    /* KICKER TÉCNICO */
+    .hero-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero-kicker::before {
+      content: ""; width: 24px; height: 1px; background: var(--gold); display: inline-block;
+    }
+
+    /* HEADLINE UNIFICADO CORRIDO */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--paper); /* Cor base CREME (paper) para tudo */
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    /* Destaque cirúrgico pontual (apenas o 1,1 milhão) */
+    .text-highlight {
+      color: var(--gold-2);
+      white-space: nowrap; /* Evita quebra de linha estranha no meio do número */
+    }
+
+    /* SUBHEADLINE */
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 1.2vw, 1.15rem);
+      color: var(--paper); /* Mais claro, como pedido */
+      line-height: 1.6;
+      font-weight: 500; /* Levemente mais robusto para leitura */
+      max-width: 85%;
+      /* Sombra/Glow para garantir leitura perfeita contra linhas claras que passem atrás */
+      text-shadow: 0px 2px 12px rgba(11,25,41, 0.9), 0px 0px 24px rgba(11,25,41, 0.9);
+    }
+
+    /* LOGO SUPERIOR REINSERIDO */
+    .hero-brand-logo-top {
+      max-height: 64px;
+      width: auto;
+      object-fit: contain; /* Nunca distorce */
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+      display: block;
+    }
+
+    /* INDICADOR DE SCROLL PREMIUM (Posicionado na base) */
+    .hero-scroll-indicator {
+      margin-top: 5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 2px solid rgba(244,239,228,0.3);
+      border-radius: 12px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      padding-top: 4px;
+    }
+    .scroll-wheel {
+      width: 4px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 2px;
+      animation: scrollWheelAnim 2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+    }
+    @keyframes scrollWheelAnim {
+      0% { transform: translateY(0); opacity: 1; }
+      40% { transform: translateY(12px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
+    .scroll-text {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(244,239,228,0.6);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.6; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 12px rgba(198, 164, 90, 0.4); color: var(--gold); }
+      100% { opacity: 0.6; text-shadow: none; }
+    }
+
+    /* SISTEMA DE REVELAÇÃO (MASCARA + SLIDE UP) MANTIDO E OTIMIZADO */
+    .reveal-mask {
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+    }
+    .reveal-item {
+      display: inline-block;
+      will-change: transform;
+    }
+
+    .spacer-section {
+      height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    @media (max-width: 992px) {
+      .hero-fullbleed { padding: 0 5%; text-align: center; }
+      .hero-content { align-items: center; max-width: 100%; }
+      .hero-subtitle { text-align: center; max-width: 95%; margin: 0 auto; }
+      .reveal-mask { justify-content: center; }
+      .hero-scroll-indicator { margin-top: 3rem; justify-content: center; }
+      .hero-kicker { justify-content: center; }
+      .hero-kicker::before { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Barra de Progresso de Leitura -->
-  <div class="scroll-progress"></div>
-
-  <!-- HEADER DE NAVEGAÇÃO -->
-  <header class="site-header">
-    <div class="max-w header-inner">
-      <div class="header-logo">
-        <a href="#">
-          <img src="assets/img/Logo 1234 - Médio_1 20260814.png" alt="1234 Solution Logo" style="height: 38px; width: auto; display: block;">
-        </a>
-      </div>
-      <nav class="header-nav">
-        <a href="#problema" class="nav-link">O problema</a>
-        <a href="#resposta" class="nav-link">A resposta</a>
-        <a href="#atuacao" class="nav-link">Atuação</a>
-        <a href="#trajetoria" class="nav-link">Trajetória</a>
-        <a href="#credenciais" class="nav-link">Credenciais</a>
-        <a href="#perguntas" class="nav-link">Perguntas</a>
-        <a href="#contato" class="nav-link">Contato</a>
-      </nav>
-      <div class="header-cta">
-        <a href="#contato" class="btn-premium">
-          <div class="btn-inner-track">
-            <div class="btn-conic"></div>
-            <div class="btn-bg">
-              <div class="btn-shimmer"></div>
-              <div class="btn-glow"></div>
-            </div>
-          </div>
-          <span class="btn-label">Falar com Adalberto &rarr;</span>
-        </a>
-      </div>
+  <section class="hero-fullbleed" id="hero">
+    
+    <!-- Camada 1: O Vídeo Supremo em Fundo -->
+    <div class="hero-video-bg">
+      <video 
+        id="hero-video" 
+        autoplay 
+        muted 
+        playsinline 
+        preload="auto"
+      >
+        <source src="assets/video/hero-blueprint.mp4" type="video/mp4" />
+      </video>
     </div>
-  </header>
 
-  <!-- Cursor Customizado -->
-  <div id="cursor"></div>
+    <!-- Camada 2: O Overlay Escuro para Contraste de Texto -->
+    <div class="hero-overlay"></div>
 
-  <!-- Linhas Decorativas de Fundo -->
-  <div class="hero-grid-lines">
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-    <div class="grid-line"></div>
-  </div>
-
-  <main class="hero-section">
-    <div class="hero-main-content">
+    <!-- Camada 3: O Conteúdo Limpo, Minimalista, focado na Tipografia -->
+    <div class="hero-content">
       
-      <div class="max-w hero-split-grid">
-        
-        <!-- Coluna de Texto (Esquerda) -->
-        <div class="hero-text-col">
-          <div class="eyebrow gs-reveal">1234 Solution . Estratégia, Gestão e Governança</div>
-          <h1 class="headline">
-            <div class="gs-reveal-split">Ativos bem geridos não são sorte.</div>
-            <div class="gs-reveal-split gold-italic">São métodos.</div>
-          </h1>
-          <p class="subheadline gs-reveal">
-            Sou Adalberto Chagas, fundador e CEO da 1234 Solution. Em mais de 30 anos, transformei infraestrutura em resultado, hoje ajudando concessionárias de saneamento, autarquias, indústrias de capital intensivo e empresas de infraestrutura, reguladas ou não, a comprovar investimentos, blindar processos de auditoria e revisão tarifária, e tomar decisões mais inteligentes sobre seus ativos.
-          </p>
-          <div class="hero-actions gs-reveal">
-            <a href="mailto:contato@1234solution.com.br" class="btn btn-primary interactive">
-              Agendar conversa
-              <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
-            </a>
-            <a href="#atuacao" class="btn btn-secondary interactive">
-              Ver áreas de atuação
-            </a>
-          </div>
-        </div>
-
-        <!-- Coluna Visual / Vídeo (Direita) -->
-        <div class="hero-visual-col gs-reveal-video">
-          <div class="video-glow-backdrop"></div>
-          <div class="video-wrapper">
-            <video 
-              class="hero-video interactive" 
-              id="heroVideo"
-              autoplay 
-              muted 
-              playsinline 
-              preload="auto"
-              poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%2316283F'/%3E%3C/svg%3E">
-              <source src="assets/video/Video_hero_1234.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-          </div>
-        </div>
-
-      </div> <!-- /hero-split-grid -->
-
-      <!-- Estatísticas Abaixo -->
-      <div class="max-w hero-stats-wrapper">
-        <div class="hero-stats gs-reveal-stagger">
-          <div class="stat-card interactive">
-            <div class="stat-value">1,1 mi+</div>
-            <div class="stat-desc">Ativos inventariados</div>
-          </div>
-          <div class="stat-card interactive">
-            <div class="stat-value">R$4,6 bi</div>
-            <div class="stat-desc">Em ativos sob gestão</div>
-          </div>
-          <div class="stat-card interactive">
-            <div class="stat-value">R$3,6 mi</div>
-            <div class="stat-desc">Em benefício fiscal</div>
-          </div>
-          <div class="stat-card interactive">
-            <div class="stat-value">300+</div>
-            <div class="stat-desc">Conselheiros e C-Levels capacitados</div>
-          </div>
+      <!-- LOGO DE TOPO (Reinserida com máscara GSAP) -->
+      <div class="reveal-mask">
+        <div class="reveal-item">
+          <img src="assets/raw_files/Logo 1234 - Grande_1 20260814.webp" alt="1234 Solution Logo" class="hero-brand-logo-top" />
         </div>
       </div>
 
-    </div> <!-- /hero-main-content -->
-
-    <!-- Marquee Footer do Hero -->
-    <div class="hero-marquee-wrapper gs-reveal">
-      <div class="marquee-track" id="marqueeTrack">
-        <!-- Template clonado via JS -->
+      <div class="reveal-mask">
+        <div class="hero-kicker reveal-item">Gestão de Ativos e Governança para o Saneamento Básico</div>
       </div>
-    </div>
-  </main>
-
-  <template id="marqueeTemplate">
-    <div class="marquee-item">
-      Conselheiro Consultivo Certificado
-      <span class="iconify marquee-separator" data-icon="lucide:diamond"></span>
-    </div>
-    <div class="marquee-item">
-      Especialista em ISO 55.000
-      <span class="iconify marquee-separator" data-icon="lucide:diamond"></span>
-    </div>
-    <div class="marquee-item">
-      Mestre em Engenharia Civil, USP
-      <span class="iconify marquee-separator" data-icon="lucide:diamond"></span>
-    </div>
-    <div class="marquee-item">
-      Troféu Quirón Diamante ESG
-      <span class="iconify marquee-separator" data-icon="lucide:diamond"></span>
-    </div>
-    <div class="marquee-item">
-      +30 anos de experiência
-      <span class="iconify marquee-separator" data-icon="lucide:diamond"></span>
-    </div>
-  </template>
-
-  <!-- ==========================================================================
-       DOBRA: O PROBLEMA
-       ========================================================================== -->
-  <section class="section-problem" id="problema">
-    <div class="max-w">
       
-      <div class="problem-header gs-reveal">
-        <div class="eyebrow">O problema</div>
-        <h2 class="problem-title">Quanto do seu patrimônio você consegue comprovar sob pressão?</h2>
-        <p class="problem-lede">No setor regulado, a pressão vem da agência. Na indústria, vem da auditoria, da seguradora ou do conselho. O risco por trás é o mesmo: ativo que existe, mas não está comprovado do jeito que alguém vai exigir.</p>
+      <!-- O logo duplicado foi cirurgicamente removido daqui! O vídeo é dono do clímax do logo. -->
+
+      <!-- O Título em parágrafo único (frase corrida) com destaque pontual -->
+      <div class="reveal-mask">
+        <h1 class="hero-title reveal-item">
+          30+ anos de campo. Mais de <span class="text-highlight">1,1 milhão</span> de ativos geridos. Um método para o saneamento básico.
+        </h1>
       </div>
 
-      <div class="problem-grid gs-reveal-stagger">
-        
-        <!-- Card 01 -->
-        <div class="problem-card interactive">
-          <div class="problem-card-header">
-            <div class="problem-icon-wrapper">
-              <img src="assets/img/icon-3.jpg" alt="Risco de glosa" loading="lazy">
-            </div>
-            <h3 class="problem-card-title">Risco de glosa ou de auditoria</h3>
-          </div>
-          <p class="problem-card-desc">Em saneamento e infraestrutura regulada, CAPEX que a ARSESP e a ANA podem não reconhecer na Base de Remuneração Regulatória. Em outras indústrias, o mesmo gap aparece em auditorias, seguros e certificações como ISO 55.000.</p>
-        </div>
-
-        <!-- Card 02 -->
-        <div class="problem-card interactive">
-          <div class="problem-card-header">
-            <div class="problem-icon-wrapper">
-              <img src="assets/img/icon-2.jpg" alt="Ativos ocultos" loading="lazy">
-            </div>
-            <h3 class="problem-card-title">Ativos ocultos</h3>
-          </div>
-          <p class="problem-card-desc">Redes enterradas, equipamentos legados, instalações antigas que ninguém documentou direito. Sem mapeamento e valoração, esse patrimônio não sustenta indenização, seguro nem composição de custo.</p>
-        </div>
-
-        <!-- Card 03 -->
-        <div class="problem-card interactive">
-          <div class="problem-card-header">
-            <div class="problem-icon-wrapper">
-              <img src="assets/img/icon-1.jpg" alt="Dado fragmentado" loading="lazy">
-            </div>
-            <h3 class="problem-card-title">Dado fragmentado</h3>
-          </div>
-          <p class="problem-card-desc">A engenharia usa um sistema, a contabilidade usa outro. Cada auditoria ou revisão tarifária vira uma corrida para reconciliar planilhas que deveriam falar a mesma língua.</p>
-        </div>
-
-        <!-- Card 04 -->
-        <div class="problem-card interactive">
-          <div class="problem-card-header">
-            <div class="problem-icon-wrapper">
-              <img src="assets/img/icon-4.jpg" alt="Pressão normativa constante" loading="lazy">
-            </div>
-            <h3 class="problem-card-title">Pressão normativa constante</h3>
-          </div>
-          <p class="problem-card-desc">Resoluções de agências ou normas internas de compliance mudam mais rápido do que a equipe consegue se atualizar. Ficar em conformidade virou trabalho em tempo integral.</p>
-        </div>
-
+      <div class="reveal-mask" style="margin-top: 2.5rem;">
+        <p class="hero-subtitle reveal-item">
+          Consultoria especializada em gestão de ativos, gestão patrimonial e planejamento estratégico para autarquias, concessionárias e grupos do setor regulado.
+        </p>
       </div>
 
-      <div class="problem-footer gs-reveal">
-        <p class="problem-bridge">Se alguma dessas situações é familiar, você já sabe o tamanho do risco que carrega.</p>
+      <div class="reveal-mask">
+        <div class="hero-scroll-indicator reveal-item" id="hero-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+          <div class="scroll-text">Role para conhecer o método</div>
+        </div>
       </div>
 
     </div>
+
   </section>
 
-  <!-- ==========================================================================
-       DOBRA: A RESPOSTA
-       ========================================================================== -->
-  <section class="section-solution" id="resposta">
-    <!-- Linhas de grade verticais decorativas (CSS Vanilla puro) -->
-    <div class="solution-grid-lines">
-        <div class="solution-grid-col"></div>
-        <div class="solution-grid-col"></div>
-        <div class="solution-grid-col"></div>
-    </div>
-
-    <div class="max-w solution-grid relative z-10">
-      
-      <!-- Coluna da Esquerda: História e Chips -->
-      <div class="solution-content">
-        <div class="eyebrow gs-reveal">A resposta</div>
-        
-        <h2 class="solution-title">
-          <div class="overflow-hidden"><div class="gs-reveal-split">Em mais de 30 anos,</div></div>
-          <div class="overflow-hidden"><div class="gs-reveal-split">resolvendo exatamente</div></div>
-          <div class="overflow-hidden"><div class="gs-reveal-split">esse tipo de problema.</div></div>
-        </h2>
-        
-        <div class="solution-bio gs-reveal-stagger">
-          <p>Liderança, para mim, sempre foi uma escolha ativa. Liderei equipes multidisciplinares de alto desempenho no Departamento de Gestão de Ativos Imobilizados da Sabesp, onde coordenei o inventário de mais de 1,1 milhão de bens patrimoniais, supervisionei a imobilização de R$4,6 bilhões em ativos e a desmobilização de 23 mil itens com benefício fiscal de R$3,6 milhões, e conduzi 19 oficinas patrimoniais para capacitar centralizadores em todas as unidades da companhia.</p>
-          <p>Esses números não são apenas indicadores. São o reflexo do que acontece quando uma equipe entende o propósito do seu trabalho.</p>
-          <p>Hoje, como fundador e CEO da 1234 Solution, canalizo essa experiência para ajudar organizações a tomarem decisões mais inteligentes sobre ativos, investimentos e pessoas.</p>
-        </div>
-
-        <div class="solution-chips gs-reveal-stagger">
-          <span class="chip">Mestre em Eng. Civil, USP</span>
-          <span class="chip">3 MBAs</span>
-          <span class="chip">3 Especializações</span>
-          <span class="chip">Conselheiro Certificado</span>
-          <span class="chip">Autor de capítulos em 5 obras</span>
-        </div>
-      </div>
-
-      <!-- Coluna da Direita: Ficha Técnica -->
-      <div class="solution-panel interactive gs-reveal" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
-        <!-- Ícone rotativo decorativo -->
-        <span class="iconify solution-panel-icon" data-icon="solar:star-fall-minimalistic-linear"></span>
-        
-        <h3 class="panel-title">Ficha Técnica</h3>
-        <ul class="tech-list gs-reveal-stagger">
-          <li>
-            <span class="tech-label">Cargo atual</span>
-            <span class="tech-value">Fundador e CEO, 1234 Solution</span>
-          </li>
-          <li>
-            <span class="tech-label">Formação</span>
-            <span class="tech-value">Mestre em Engenharia Civil (Hidráulica), Escola Politécnica, USP</span>
-          </li>
-          <li>
-            <span class="tech-label">MBAs</span>
-            <span class="tech-value">Gestão de Projetos, Gestão de Ativos e Gestão de Negócios, USP/Esalq e Fundação Gorceix</span>
-          </li>
-          <li>
-            <span class="tech-label">Especializações</span>
-            <span class="tech-value">Gestão Ambiental, Engenharia de Segurança do Trabalho e Gestão Exponencial (USP, UNINOVE e FIA)</span>
-          </li>
-          <li>
-            <span class="tech-label">Governança</span>
-            <span class="tech-value">Conselheiro Consultivo Certificado, Board Academy / Conselho na Prática</span>
-          </li>
-          <li>
-            <span class="tech-label">Cursando</span>
-            <span class="tech-value">Pós-graduação em Liderança e Gestão Estratégica de Pessoas, FIA Online</span>
-          </li>
-        </ul>
-      </div>
-
-    </div>
+  <section class="spacer-section">
+    <h2 style="color:var(--gold-2); font-family:var(--font-display);">Próximas dobras (Em breve)</h2>
   </section>
 
-  <!-- ==========================================================================
-       DOBRA: ATUAÇÃO E MENTORIA
-       ========================================================================== -->
-  <section class="section-atuacao" id="atuacao">
-    <div class="max-w">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
       
-      <!-- Cabeçalho Atuação -->
-      <div class="atuacao-header gs-reveal-stagger">
-        <h2 class="atuacao-title">Quatro frentes, um mesmo compromisso: decisão bem fundamentada.</h2>
-        <p class="atuacao-lede">Os quatro pilares da 1234 Solution, como os quatro dígitos do nome, funcionam em sequência: entender o ativo, regularizar o patrimônio, planejar o próximo passo e governar com transparência.</p>
-      </div>
+      gsap.registerPlugin(ScrollTrigger);
 
-      <!-- Netflix Top 10 Carousel -->
-      <div class="atuacao-carousel gs-reveal-stagger">
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
+      gsap.ticker.lagSmoothing(0, 0);
+
+      // Oculta rigorosamente todo o texto empurrando-o para debaixo da máscara (overflow: hidden)
+      // garantindo que NADA do texto fique visível durante a reprodução do vídeo.
+      gsap.set('.reveal-item', { yPercent: 120 });
+
+      // O vídeo surge da escuridão gradativamente no carregamento
+      gsap.from('.hero-video-bg', {
+        opacity: 0,
+        duration: 2.5,
+        ease: 'power2.inOut'
+      });
+
+      // Função blindada para disparar o texto apenas uma vez
+      let textRevealed = false;
+      function triggerTextReveal() {
+        if (textRevealed) return;
+        textRevealed = true;
         
-        <!-- Pilar 01 -->
-        <div class="netflix-item">
-          <div class="netflix-number">1</div>
-          <div class="netflix-card">
-            <h3 class="netflix-title">Gestão de Ativos</h3>
-            <p class="netflix-desc">Ciclo de vida completo dos seus ativos operacionais, com conformidade à ISO 55.000 e metodologia estruturada de inventário.</p>
-          </div>
-        </div>
-
-        <!-- Pilar 02 -->
-        <div class="netflix-item">
-          <div class="netflix-number">2</div>
-          <div class="netflix-card">
-            <h3 class="netflix-title">Gestão Patrimonial</h3>
-            <p class="netflix-desc">Gestão patrimonial de ativos móveis e imóveis, com controle apoiado em tecnologias como RFID, avaliação e regularização alinhadas à NBR 14.653 e ARSESP.</p>
-          </div>
-        </div>
-
-        <!-- Pilar 03 -->
-        <div class="netflix-item">
-          <div class="netflix-number">3</div>
-          <div class="netflix-card">
-            <h3 class="netflix-title">Planejamento Estratégico</h3>
-            <p class="netflix-desc">Estruturação de projetos complexos e políticas de gestão e qualidade alinhadas aos objetivos do seu negócio.</p>
-          </div>
-        </div>
-
-        <!-- Pilar 04 -->
-        <div class="netflix-item">
-          <div class="netflix-number">4</div>
-          <div class="netflix-card">
-            <h3 class="netflix-title">Governança Corporativa</h3>
-            <p class="netflix-desc">Atuação como conselheiro consultivo, apoiando conselhos administrativos em decisões de finanças, riscos e conformidade regulatória.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Seção Complementar: Mentoria -->
-      <div class="mentoria-section">
+        const revealTl = gsap.timeline();
         
-        <!-- Conteúdo Mentoria -->
-        <div class="mentoria-content gs-reveal-stagger">
-          <div class="eyebrow">Além dos 4 pilares</div>
-          <h2 class="mentoria-title">
-            <div class="overflow-hidden"><div class="gs-reveal-split">Desenvolvo líderes,</div></div>
-            <div class="overflow-hidden"><div class="gs-reveal-split">não apenas processos.</div></div>
-          </h2>
-          <p class="atuacao-lede" style="max-width: 90%;">Por mais de dez anos, formei profissionais em sala de aula como professor e coordenador acadêmico de Engenharia. Hoje, essa vivência se traduz em mentoria para lideranças e conselhos: acredito que as organizações crescem quando as pessoas que as compõem crescem junto.</p>
-        </div>
-
-        <!-- Estatísticas -->
-        <div class="mentoria-stats gs-reveal-stagger">
-          
-          <div class="stat-item">
-            <span class="stat-number">300+</span>
-            <span class="stat-desc">Conselheiros e C-Levels capacitados no Programa PFIC</span>
-          </div>
-
-          <div class="stat-item">
-            <span class="stat-number">10+ turmas</span>
-            <span class="stat-desc">focadas em Valuation e Finanças, Board Academy</span>
-          </div>
-
-          <div class="stat-item">
-            <span class="stat-number">10+ anos</span>
-            <span class="stat-desc">como professor e coordenador acadêmico</span>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       DOBRA: TRAJETÓRIA
-       ========================================================================== -->
-  <section class="section-trajetoria" id="trajetoria">
-    <div class="max-w relative z-10">
-      
-      <div class="trajetoria-header gs-reveal">
-        <div class="eyebrow">Trajetória</div>
-        <h2 class="trajetoria-title gs-reveal-split">Trajetória</h2>
-        <p class="problem-lede">Uma progressão construída dentro da própria estrutura que hoje ele ajuda outras empresas a organizar, e que culminou na fundação da 1234 Solution.</p>
-      </div>
-
-      <div class="timeline-ruler-wrapper gs-reveal-stagger">
-        <div class="engineering-ruler"></div>
-
-        <!-- Marco 1 (Atual) -->
-        <div class="timeline-item is-current interactive">
-          <div class="timeline-node"></div>
-          <div class="timeline-period">2026, atual</div>
-          <h3 class="timeline-role">Fundador e CEO, dedicação integral</h3>
-          <p class="timeline-desc">1234 Solution, consultoria em gestão de ativos, gestão patrimonial, planejamento estratégico e governança.</p>
-        </div>
-
-        <!-- Marco 2 -->
-        <div class="timeline-item interactive">
-          <div class="timeline-node"></div>
-          <div class="timeline-period">ago 2024 a 2026</div>
-          <h3 class="timeline-role">Fundador, 1234 Solution</h3>
-          <p class="timeline-desc">Consultoria estruturada e conduzida em paralelo à atuação na Sabesp.</p>
-        </div>
-
-        <!-- Marco 3 -->
-        <div class="timeline-item interactive">
-          <div class="timeline-node"></div>
-          <div class="timeline-period">2023 a 2024</div>
-          <h3 class="timeline-role">Gerente de Divisão de Gestão do Imobiliário</h3>
-          <p class="timeline-desc">Sabesp, planejamento estratégico e operacional da gestão de ativos imobiliários da companhia.</p>
-        </div>
-
-        <!-- Marco 4 -->
-        <div class="timeline-item interactive">
-          <div class="timeline-node"></div>
-          <div class="timeline-period">2020 a 2023</div>
-          <h3 class="timeline-role">Gerente do Departamento de Gestão Patrimonial</h3>
-          <p class="timeline-desc">Sabesp, implementação de RFID para controle patrimonial e estruturação de planos de gestão e qualidade.</p>
-        </div>
-
-        <!-- Marco 5 -->
-        <div class="timeline-item interactive">
-          <div class="timeline-node"></div>
-          <div class="timeline-period">1999 a 2020</div>
-          <h3 class="timeline-role">Engenheiro Civil</h3>
-          <p class="timeline-desc">Sabesp, atuação técnica em engenharia de perícias e avaliações imobiliárias.</p>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       DOBRA: ESTAÇÕES E CAPTAÇÃO
-       ========================================================================== -->
-  <section class="section-estacoes" id="estacoes">
-    <div class="max-w">
-      
-      <!-- Cabeçalho (Topo) -->
-      <div class="estacoes-header-wrapper gs-reveal">
-        <div class="estacoes-header">
-          <div class="eyebrow">Projetos em Campo</div>
-          <h2 class="estacoes-title">Da captação ao reservatório,<br>presença real em cada etapa.</h2>
-          <p class="estacoes-lede">Gestão de ativos não se aprende só em planilha. Décadas de visita técnica, inspeção e acompanhamento direto em estações de tratamento, captação e reservação por todo o sistema Sabesp.</p>
-        </div>
+        // Revela o Scrim Assimétrico no exato momento em que o vídeo acaba
+        revealTl.to('.hero-overlay', {
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out'
+        }, 0);
         
-        <!-- Swiper Navigation -->
-        <div class="swiper-nav-wrapper">
-          <button class="swiper-btn-custom swiper-prev">
-            <span class="iconify" data-icon="lucide:arrow-left" data-width="20"></span>
-          </button>
-          <button class="swiper-btn-custom swiper-next">
-            <span class="iconify" data-icon="lucide:arrow-right" data-width="20"></span>
-          </button>
-        </div>
-      </div>
+        // Após 0.15s, dispara a entrada do texto por cima do Scrim já em formação
+        revealTl.to('.reveal-item', {
+          yPercent: 0,
+          duration: 1.4,
+          stagger: 0.15,
+          ease: 'power4.out'
+        }, 0.15);
+      }
 
-    </div> <!-- Fim max-w -->
-
-    <!-- Pista Horizontal (Cards com Fotos) -->
-    <div style="padding-left: max(2rem, calc((100vw - 1280px) / 2));">
-      <div class="swiper estacoes-swiper gs-reveal">
-        <div class="swiper-wrapper">
-          
-          <div class="swiper-slide estacao-card">
-            <div class="estacao-img-wrap">
-              <img src="assets/img/1.webp?t=9999" alt="Decantadores em operação" class="estacao-img">
-            </div>
-            <div class="estacao-card-content">
-              <div class="estacao-num">01</div>
-              <h3 class="estacao-card-title">Decantadores em operação</h3>
-              <p class="estacao-card-desc">Vista elevada de uma estação de tratamento em plena operação, mostrando a escala real dos ativos que sustentam o abastecimento de água.</p>
-            </div>
-          </div>
-
-          <div class="swiper-slide estacao-card">
-            <div class="estacao-img-wrap">
-              <img src="assets/img/2.webp?t=9999" alt="Plataforma da ETA Cabuçu" class="estacao-img">
-            </div>
-            <div class="estacao-card-content">
-              <div class="estacao-num">02</div>
-              <h3 class="estacao-card-title">Plataforma da ETA Cabuçu</h3>
-              <p class="estacao-card-desc">Inspeção técnica em uma das estações de tratamento de água da região metropolitana, parte da rotina de acompanhamento de ativos operacionais.</p>
-            </div>
-          </div>
-
-          <div class="swiper-slide estacao-card">
-            <div class="estacao-img-wrap">
-              <img src="assets/img/3.webp?t=9999" alt="Reservatório" class="estacao-img">
-            </div>
-            <div class="estacao-card-content">
-              <div class="estacao-num">03</div>
-              <h3 class="estacao-card-title">Reservatório</h3>
-              <p class="estacao-card-desc">Estrutura de reservação em concreto, um dos muitos tipos de ativo mapeados e avaliados ao longo da carreira.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       DOBRA: INFRAESTRUTURA TÉCNICA
-       ========================================================================== -->
-  <section class="section-infra" id="infraestrutura-tecnica">
-    <div class="max-w">
-      
-      <div class="infra-header gs-reveal">
-        <div class="eyebrow">Infraestrutura Técnica</div>
-        <h2 class="infra-title">Onde a engenharia elétrica encontra o saneamento.</h2>
-        <p class="infra-lede">Grande parte da gestão de ativos em saneamento depende de infraestrutura elétrica e mecânica que poucos profissionais do setor dominam na prática. Essa interseção técnica é construída em campo, não em teoria.</p>
-      </div>
-
-      <div class="swiper infra-swiper gs-reveal">
-        <div class="swiper-wrapper">
-          
-          <!-- Foto 1 -->
-          <div class="swiper-slide">
-            <div class="infra-card">
-              <div class="infra-img-wrap">
-                <img src="assets/img/4.webp?t=9999" 
-                     alt="Adalberto Chagas em frente à fachada histórica da Usina Henry Borden" 
-                     class="infra-img"
-                     >
-              </div>
-              <p class="infra-caption">Usina Henry Borden, um dos marcos históricos da infraestrutura elétrica brasileira, referência de como engenharia e patrimônio se conectam ao longo de décadas.</p>
-            </div>
-          </div>
-
-          <!-- Foto 2 -->
-          <div class="swiper-slide">
-            <div class="infra-card">
-              <div class="infra-img-wrap">
-                <img src="assets/img/5.webp?t=9999" 
-                     alt="Vista panorâmica em altura durante inspeção técnica com equipe em EPI" 
-                     class="infra-img"
-                     >
-              </div>
-              <p class="infra-caption">Acompanhamento técnico em campo, com equipe de segurança, sobre estrutura de grande porte, parte da rotina de inspeção de ativos críticos.</p>
-            </div>
-          </div>
-
-          <!-- Foto 3 -->
-          <div class="swiper-slide">
-            <div class="infra-card">
-              <div class="infra-img-wrap">
-                <img src="assets/img/6.webp?t=9999" 
-                     alt="Adalberto Chagas na sala de turbinas da unidade geradora 12, com sinalização de risco elétrico" 
-                     class="infra-img"
-                     >
-              </div>
-              <p class="infra-caption">Sala de turbinas de uma usina hidrelétrica histórica (unidade geradora nº 12), o tipo de ativo de altíssima complexidade técnica que exige rigor extremo em inventário, segurança e conformidade.</p>
-            </div>
-          </div>
-
-        </div>
+      // O GATILHO OFICIAL: Apenas quando o vídeo decretar o evento "ended" (fim da animação do logo blueprint)
+      const videoEl = document.getElementById('hero-video');
+      if (videoEl) {
+        videoEl.addEventListener('ended', triggerTextReveal);
         
-        <!-- Pagination -->
-        <div class="swiper-pagination infra-pagination"></div>
-      </div>
-    </div>
-  </section>
+        // Fallback de segurança corporativa: se por acaso o navegador do investidor bloquear o Autoplay
+        // agressivamente, disparamos a timeline forçadamente após 3 segundos para que o site não pareça quebrado.
+        // Se o vídeo tocar normalmente, um timer de segurança máximo de 14s (vídeo tem ~10s) garante o destrave.
+        setTimeout(() => {
+          if (videoEl.paused) triggerTextReveal();
+        }, 3000);
+        setTimeout(triggerTextReveal, 14000); 
+      } else {
+        triggerTextReveal();
+      }
 
-  <!-- ==========================================================================
-       DOBRA: CREDENCIAIS E RECONHECIMENTO
-       ========================================================================== -->
-  <section class="section-credenciais" id="credenciais">
-    <div class="max-w">
-      
-      <div class="credenciais-header gs-reveal">
-        <div class="eyebrow">Credenciais</div>
-        <h2 class="credenciais-title">Credenciais e reconhecimento</h2>
-        <p class="credenciais-lede">Formação técnica, certificações em governança e prêmios conquistados à frente da gestão patrimonial na Sabesp.</p>
-      </div>
+      // Micro-Scroll apenas para resposta física e sensação de elevação (O vídeo e texto movem-se levemente a velocidades distintas)
+      let mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tlScroll = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          }
+        });
+        // Texto move-se levemente para cima
+        tlScroll.to('.hero-content', { yPercent: -5, opacity: 0.3, ease: 'none' }, 0);
+        // O fundo do vídeo desce levemente criando o Parallax sutil
+        tlScroll.to('.hero-video-bg', { yPercent: 10, ease: 'none' }, 0);
+      });
 
-      <div class="credenciais-grid">
-        
-        <!-- Coluna 1: Formação -->
-        <div class="formacao-col gs-reveal-stagger">
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">01.</span> Engenharia Civil, Universidade Paulista</div>
-            <div class="formacao-date">1994 . 1999</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">02.</span> Mestrado em Engenharia Civil, USP</div>
-            <div class="formacao-date">2003 . 2006</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">03.</span> Especialização em Gestão Ambiental, USP</div>
-            <div class="formacao-date">2001 . 2002</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">04.</span> MBA em Gestão de Projetos, USP/Esalq</div>
-            <div class="formacao-date">2018 . 2020</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">05.</span> Engenharia de Segurança do Trabalho</div>
-            <div class="formacao-date">2020 . 2021</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">06.</span> MBA em Gestão de Ativos, Fundação Gorceix</div>
-            <div class="formacao-date">2021 . dez 2023</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">07.</span> Board Starter, Board Academy Br</div>
-            <div class="formacao-date">out 2023</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">08.</span> MBA em Gestão de Negócios, USP/Esalq</div>
-            <div class="formacao-date">abr 2024 . abr 2026</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">09.</span> Pós-graduação em Gestão Exponencial, FIA Online</div>
-            <div class="formacao-date">mai 2024 . dez 2025</div>
-          </div>
-          <div class="formacao-item">
-            <div class="formacao-info"><span class="formacao-num">10.</span> Pós-graduação em Liderança e Gestão Estratégica de Pessoas, FIA Online</div>
-            <div class="formacao-date">fev 2026 . fev 2027</div>
-          </div>
-        </div>
-
-        <!-- Coluna 2: Prêmios -->
-        <div class="premios-col gs-reveal-stagger">
-          
-          <div class="premio-card diamante-card interactive">
-             <div class="premio-img-wrap">
-               <img src="assets/img/7.webp" alt="Adalberto Chagas recebendo o Troféu Quirón Diamante ESG, PNQS 2022" class="premio-img" >
-             </div>
-             <div class="premio-content">
-                <div class="premio-badge">PNQS 2022</div>
-                <h3 class="premio-title">Troféu Quirón "Diamante" ESG</h3>
-                <p class="premio-org">Superintendência de Gestão Patrimonial, Sabesp</p>
-             </div>
-          </div>
-
-          <div class="premio-card interactive">
-             <div class="premio-content">
-                <div class="premio-badge">PNQS 2021</div>
-                <h3 class="premio-title">Troféu Quirón "Ouro"</h3>
-                <p class="premio-org">Superintendência de Gestão Patrimonial, Sabesp</p>
-             </div>
-          </div>
-
-          <div class="premio-card interactive">
-             <div class="premio-content">
-                <div class="premio-badge">PPQG IPEG 2013</div>
-                <h3 class="premio-title">Troféu Governador do Estado de SP</h3>
-                <p class="premio-org">Superintendência de Gestão Patrimonial, Sabesp</p>
-             </div>
-          </div>
-
-          <p class="premios-addendum gs-reveal">Liderei a implementação da tecnologia RFID para controle patrimonial, apoiei o grupo gestor que implantou o PGRS (Portal de Gestão Regulatória no Saneamento) e alinhei a equipe da empresa contratada nos processos e procedimentos de gestão patrimonial no setor. Publiquei artigos técnicos sobre o uso de drones na gestão de ativos imobiliários, apresentados no 37º Congresso Brasileiro de Manutenção, e fui Revisor Técnico da Revista DAE. Escrevi capítulos em 5 livros publicados sobre ESG, Diversidade, Governança e Liderança.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Faixa de big numbers -->
-    <div class="credenciais-stats-wrapper">
-      <div class="max-w">
-         <div class="credenciais-stats gs-reveal-stagger">
-           <div class="cred-stat-item">
-             <div class="cred-stat-value"><span class="count-up" data-target="1.1" data-decimals="1">0</span><span class="cred-stat-unit">mi+</span></div>
-             <div class="cred-stat-desc">ativos imobilizados inventariados e avaliados</div>
-           </div>
-           <div class="cred-stat-item">
-             <div class="cred-stat-value"><span class="cred-stat-prefix">R$</span><span class="count-up" data-target="4.6" data-decimals="1">0</span><span class="cred-stat-unit">bi</span></div>
-             <div class="cred-stat-desc">em ativos imobilizados sob supervisão direta</div>
-           </div>
-           <div class="cred-stat-item">
-             <div class="cred-stat-value"><span class="cred-stat-prefix">R$</span><span class="count-up" data-target="3.6" data-decimals="1">0</span><span class="cred-stat-unit">mi</span></div>
-             <div class="cred-stat-desc">em benefício fiscal, 23 mil itens desmobilizados</div>
-           </div>
-           <div class="cred-stat-item">
-             <div class="cred-stat-value"><span class="count-up" data-target="19" data-decimals="0">0</span></div>
-             <div class="cred-stat-desc">oficinas patrimoniais conduzidas em todas as unidades</div>
-           </div>
-         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       DOBRA: PERGUNTAS (FAQ)
-       ========================================================================== -->
-  <section class="section-perguntas" id="perguntas">
-    <div class="max-w">
-      
-      <div class="perguntas-header gs-reveal">
-        <h2 class="perguntas-title">
-          <div class="overflow-hidden"><div class="gs-reveal-split">As objeções que você</div></div>
-          <div class="overflow-hidden"><div class="gs-reveal-split">provavelmente tem antes</div></div>
-          <div class="overflow-hidden"><div class="gs-reveal-split">de nos conhecer.</div></div>
-        </h2>
-        <p class="perguntas-lede">Prefiro responder direto a deixar você adivinhando.</p>
-      </div>
-
-      <div class="perguntas-list gs-reveal-stagger">
-        
-        <!-- Item 01 -->
-        <div class="faq-item is-open" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
-          <button class="faq-summary" aria-expanded="true">
-            <div class="faq-question">
-              <span class="faq-num">01.</span>
-              Vocês entendem mesmo de saneamento, ou são uma consultoria genérica de gestão patrimonial?
-            </div>
-            <div class="faq-icon">
-              <span class="iconify" data-icon="lucide:plus" data-width="20"></span>
-            </div>
-          </button>
-          <div class="faq-content-wrapper">
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                Minha trajetória não começou numa consultoria, começou dentro de uma concessionária. Mais de 30 anos na Sabesp, gerenciando o Departamento de Gestão de Ativos Imobilizados, inventariando mais de 1,1 milhão de bens e conduzindo o mesmo tipo de diálogo que você tem hoje com ARSESP e ANA. Também apoiei o grupo gestor que implantou o PGRS, Portal de Gestão Regulatória no Saneamento, e alinhei a equipe da empresa contratada nos processos e procedimentos de gestão patrimonial aplicados ao setor. Isso não se aprende em curso, se aprende sentado na mesa da revisão tarifária.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 02 -->
-        <div class="faq-item" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
-          <button class="faq-summary" aria-expanded="false">
-            <div class="faq-question">
-              <span class="faq-num">02.</span>
-              Como isso se integra aos sistemas que minha equipe já usa hoje, sem travar a operação?
-            </div>
-            <div class="faq-icon">
-              <span class="iconify" data-icon="lucide:plus" data-width="20"></span>
-            </div>
-          </button>
-          <div class="faq-content-wrapper">
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                O diagnóstico inicial mapeia exatamente onde a engenharia (GIS, cadastro técnico) e a contabilidade (ERP) divergem, antes de qualquer mudança de sistema. A metodologia se conecta ao que já existe, não substitui, e o processo é desenhado para não parar a operação durante a implementação.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 03 -->
-        <div class="faq-item" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
-          <button class="faq-summary" aria-expanded="false">
-            <div class="faq-question">
-              <span class="faq-num">03.</span>
-              Vocês atendem só empresas do setor regulado de saneamento, ou também indústria?
-            </div>
-            <div class="faq-icon">
-              <span class="iconify" data-icon="lucide:plus" data-width="20"></span>
-            </div>
-          </button>
-          <div class="faq-content-wrapper">
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                Os dois. A base técnica é a mesma, gestão de ativos, comprovação de investimento, conciliação físico-contábil. Muda só quem exige a comprovação: uma agência reguladora, uma auditoria, uma seguradora ou o seu próprio conselho.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Item 04 -->
-        <div class="faq-item" onmousemove="const rect = this.getBoundingClientRect(); this.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`); this.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);">
-          <button class="faq-summary" aria-expanded="false">
-            <div class="faq-question">
-              <span class="faq-num">04.</span>
-              Vocês têm experiência real em processos de fusão, incorporação ou desativação de operações?
-            </div>
-            <div class="faq-icon">
-              <span class="iconify" data-icon="lucide:plus" data-width="20"></span>
-            </div>
-          </button>
-          <div class="faq-content-wrapper">
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                Sim. Elaborei as minutas de Termo de Referência para contratação de empresas responsáveis pelo inventário físico em processos de fusão, aquisição, incorporação e encerramento de atividades em municípios operados pela Sabesp. Também conduzi reuniões de benchmarking com companhias de saneamento de outros estados que nos procuraram, como DESO, Saneago, Copasa e Sanasa, entre outras.
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SEÇÃO CONTATO -->
-  <section id="contato" class="contato-section">
-    <div class="max-w contato-grid gs-reveal">
-      
-      <!-- Coluna Esquerda -->
-      <div class="contato-content">
-        <div class="eyebrow">Contato</div>
-        <h2 class="contato-title">
-          <div class="overflow-hidden"><div class="gs-reveal-split">Vamos conversar sobre</div></div>
-          <div class="overflow-hidden"><div class="gs-reveal-split">o seu patrimônio.</div></div>
-        </h2>
-        <p class="contato-body">Fui professor e coordenador acadêmico em cursos de Engenharia e Pós-graduação por mais de dez anos, o que me deu uma visão sistêmica que vai além da técnica. Atuo como Conselheiro Curador da Fundação Nacional da Qualidade e Conselheiro na Salute, contribuindo com governança orientada a resultados e impacto social.</p>
-        <p class="contato-quote">"Se você busca alguém que una engenharia, finanças, gestão de ativos e liderança de equipes em uma trajetória coerente e orientada a resultados concretos, vamos nos conectar."</p>
-        <a href="mailto:contato@1234solution.com.br" class="btn-premium gs-reveal" style="margin-top: 1rem;">
-          <div class="btn-inner-track">
-            <div class="btn-conic"></div>
-            <div class="btn-bg">
-              <div class="btn-shimmer"></div>
-              <div class="btn-glow"></div>
-            </div>
-          </div>
-          <span class="btn-label">Enviar e-mail <span class="iconify" data-icon="lucide:arrow-right" data-width="20" style="margin-left:0.5rem"></span></span>
-        </a>
-      </div>
-
-      <!-- Coluna Direita -->
-      <div class="contato-panel gs-reveal-stagger">
-        <div class="contact-item gs-reveal">
-          <div class="contact-label">E-mail</div>
-          <a href="mailto:contato@1234solution.com.br" class="contact-value">contato@1234solution.com.br</a>
-        </div>
-        <div class="contact-item gs-reveal">
-          <div class="contact-label">Telefone</div>
-          <a href="tel:+5511933607230" class="contact-value">+55 11 9.3360-7230</a>
-        </div>
-        <div class="contact-item gs-reveal">
-          <div class="contact-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/adalbertofchagas" target="_blank" rel="noopener" class="contact-value">linkedin.com/in/adalbertofchagas</a>
-        </div>
-        <div class="contact-item gs-reveal">
-          <div class="contact-label">Base</div>
-          <div class="contact-value">São Paulo, SP, Brasil</div>
-        </div>
-      </div>
-      
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="max-w footer-flex">
-      <div class="footer-brand">1234 SOLUTION · Estratégia, Gestão e Governança</div>
-      <div class="footer-copy">&copy; 2026 1234 Solution. Todos os direitos reservados</div>
-    </div>
-  </footer>
-
-  <!-- Bibliotecas JS via CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/split-type"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <script src="assets/js/main.js"></script>
+    });
+  </script>
 </body>
 </html>
-
