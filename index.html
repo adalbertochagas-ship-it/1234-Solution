@@ -23,6 +23,11 @@
       --gold-2:         #E4C787;
       --paper:          #F4EFE4;
       --stone:          #7C8798;
+      --stone-2:        #6E6552;
+      --ink:            #17212E;
+      --gold-deep:      #9C7C3C;
+      --line-dark:      rgba(198,164,90,0.18);
+      --line-light:     rgba(23,33,46,0.12);
       
       --font-display:   'Fraunces', Georgia, serif;
       --font-body:      'IBM Plex Sans', system-ui, sans-serif;
@@ -233,7 +238,1287 @@
       .hero-kicker { justify-content: center; }
       .hero-kicker::before { display: none; }
     }
-  </style>
+  
+
+    /* ============================================================
+       DOBRA 2: O PROBLEMA (DIGITAL ARCHITECT REDESIGN)
+       ============================================================ */
+    .da-problem-section {
+      background: var(--paper);
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--line-light);
+    }
+    .da-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      border-left: 1px solid var(--line-light);
+      border-right: 1px solid var(--line-light);
+      position: relative;
+    }
+    .da-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 992px) {
+      .da-grid { grid-template-columns: repeat(12, 1fr); }
+    }
+    
+    /* Header Grid */
+    .da-header-grid {
+      border-bottom: 1px solid var(--line-light);
+      min-height: 400px;
+    }
+    .da-col-left {
+      padding: 4rem 3rem;
+      border-bottom: 1px solid var(--line-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (min-width: 992px) {
+      .da-col-left { grid-column: span 5; border-bottom: none; border-right: 1px solid var(--line-light); padding: 6rem 4rem; }
+    }
+    .da-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold-deep);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    .da-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    
+    .da-col-right {
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(198,164,90,0.03);
+    }
+    @media (min-width: 992px) {
+      .da-col-right { grid-column: span 7; padding: 6rem 5rem; }
+    }
+    .da-stat-value {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 1;
+      font-weight: 700;
+      color: var(--gold-deep);
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+    }
+    .da-stat-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-lg);
+      color: var(--stone-2);
+      max-width: 450px;
+      line-height: 1.6;
+    }
+
+    /* List View Items */
+    .sector-grid {
+      width: 100%;
+    }
+    .da-list-item {
+      width: 100%;
+      border-top: 1px solid var(--line-light);
+      background: var(--paper);
+      transition: background 0.5s var(--ease-smooth);
+      cursor: pointer;
+    }
+    .da-list-item:hover {
+      background: #ffffff;
+    }
+    .da-list-content {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (min-width: 992px) {
+      .da-list-content { grid-column: span 5; padding: 5rem 4rem; border-right: 1px solid var(--line-light); }
+    }
+    .da-list-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .da-list-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--stone-2);
+    }
+    .da-list-line {
+      height: 1px;
+      width: 2rem;
+      background: var(--line-light);
+    }
+    .da-list-cat {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+    }
+    .da-list-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 2.5vw, 2.5rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      transition: transform 0.5s var(--ease-spring);
+    }
+    .da-list-item:hover .da-list-title {
+      transform: translateX(12px);
+    }
+    .da-list-body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--stone-2);
+      max-width: 400px;
+    }
+
+    /* List Item Images */
+    .da-list-image {
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 992px) {
+      .da-list-image { display: block; grid-column: span 7; }
+    }
+    .da-image-inner {
+      position: absolute;
+      inset: 2rem;
+      background: rgba(23,33,46,0.05);
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+    }
+    .da-image-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1);
+      opacity: 0.75;
+      transform: scale(1);
+      transition: filter 0.8s ease, opacity 0.8s ease, transform 1s var(--ease-smooth);
+    }
+    .da-list-item:hover .da-image-inner img {
+      filter: grayscale(0);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* Transition block */
+    .da-transition {
+      position: relative;
+      width: 100%;
+      min-height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .da-scrim-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--paper) 0%, rgba(14, 27, 43, 0.7) 70%, var(--navy) 100%);
+      z-index: 2;
+    }
+    .da-transition-title {
+      position: relative;
+      z-index: 3;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+      color: var(--paper); 
+      text-shadow: 0 2px 10px rgba(14,27,43,0.8);
+      max-width: 800px;
+      line-height: 1.3;
+    }
+
+    /* ============================================================
+       DOBRA 3: AUTORIDADE NO SETOR
+       ============================================================ */
+    .authority-section {
+      background: var(--navy);
+      color: var(--paper);
+      position: relative;
+      border-top: 1px solid var(--line-dark);
+    }
+    
+    .auth-pin-wrapper {
+      width: 100%;
+    }
+    
+    .auth-pin-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+    
+    .auth-left-col {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .auth-header {
+      margin-bottom: 3.5rem;
+    }
+    
+    .auth-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+      color: var(--paper);
+      line-height: 1.15;
+      margin-top: 1rem;
+    }
+    
+    .auth-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem 2rem;
+    }
+    
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .stat-item:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 3.5vw, 4rem);
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: var(--glow-gold);
+      margin-bottom: 0.5rem;
+      transition: text-shadow 0.4s;
+    }
+    .stat-item:hover .stat-num {
+      text-shadow: var(--glow-gold-lg);
+    }
+    .stat-suffix {
+      font-size: 0.35em;
+      font-weight: 500;
+      letter-spacing: 1px;
+      vertical-align: middle;
+      margin-left: 6px;
+      opacity: 0.9;
+    }
+    
+    .stat-desc {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--stone);
+      line-height: 1.6;
+    }
+    
+    .auth-right-col {
+      padding-top: 25vh; /* Fotos descem um pouco para alinhar o inicio da rolagem */
+      padding-bottom: 25vh;
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+    }
+    
+    .auth-parallax-box {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .auth-img-parallax {
+      position: absolute;
+      top: -15%;
+      left: -15%;
+      width: 130%;
+      height: 130%;
+      object-fit: cover;
+      will-change: transform;
+    }
+    .auth-img-scrim {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(14,27,43,0.05) 0%, rgba(14,27,43,0.4) 100%);
+    }
+    
+    .auth-paragraph {
+      font-family: var(--font-body);
+      font-size: 1.25rem;
+      color: var(--paper);
+      line-height: 1.8;
+      border-left: 3px solid var(--gold);
+      padding-left: 2rem;
+      text-shadow: 0 2px 10px rgba(14,27,43,0.5);
+    }
+    
+    .auth-badge-box {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--navy-2);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--line-dark);
+      box-shadow: var(--shadow-md);
+    }
+    .badge-svg {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+    .badge-draw-path {
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+    }
+    .badge-text {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--gold-2);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+    }
+    
+    .auth-footer {
+      text-align: left;
+      padding-top: 3rem;
+    }
+    .auth-footer-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+      color: var(--paper);
+      line-height: 1.3;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    /* ============================================================
+       DOBRA 4: PAINEL DE RESULTADOS
+       ============================================================ */
+    .dashboard-section {
+      background: var(--navy);
+      color: var(--paper);
+      padding: 10rem 5%;
+      position: relative;
+      overflow: visible !important;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    
+    .dash-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+    }
+    
+    .dash-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 30;
+}
+    .dash-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      color: var(--paper);
+      line-height: 1.15;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .dash-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.25rem;
+      color: var(--gold-2);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    
+    /* Mockup UI */
+    .dash-mockup-wrapper {
+      position: relative;
+      width: 100%;
+      perspective: 1500px;
+      z-index: 30;
+}
+    .dash-mockup-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(circle at center, rgba(198,164,90,0.12) 0%, transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.4; transform: scale(0.97); }
+      100% { opacity: 1; transform: scale(1.03); }
+    }
+    
+    .dash-mockup {
+      position: relative;
+      z-index: 1;
+      background: rgba(14,27,43,0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(198,164,90,0.1) inset;
+      overflow: visible;
+      transform-style: preserve-3d;
+    }
+    
+    .dash-top-bar {
+      background: rgba(0,0,0,0.25);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .dash-dots {
+      display: flex;
+      gap: 8px;
+    }
+    .dash-dots span {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+    .dash-dots span:nth-child(1) { background: #ff5f56; }
+    .dash-dots span:nth-child(2) { background: #ffbd2e; }
+    .dash-dots span:nth-child(3) { background: #27c93f; }
+    
+    .dash-title-bar {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--stone);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding-right: 56px; 
+    }
+    
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      padding: 3.5rem;
+      will-change: transform;
+    }
+    
+    .dash-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .dash-card:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(198,164,90,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .dash-card-title {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--paper-2);
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    /* Gauges SVG */
+    .dash-gauge-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dash-gauge {
+      position: absolute;
+      inset: 0;
+      transform: rotate(-90deg);
+      filter: drop-shadow(0 0 6px rgba(198,164,90,0.3));
+    }
+    .gauge-track {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 8;
+    }
+    .gauge-progress {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 251.2;
+      stroke-dashoffset: 251.2; 
+    }
+    .gauge-value {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: var(--paper);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    /* Before / After */
+    .dash-compare-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      width: 100%;
+      height: 100%;
+    }
+    .compare-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(0,0,0,0.3);
+      padding: 1.5rem;
+      border-radius: 8px;
+      flex: 1;
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .compare-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--stone);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .compare-val {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--paper);
+    }
+    .highlight-gold {
+      color: var(--gold);
+      text-shadow: var(--glow-gold);
+    }
+    .compare-arrow {
+      color: var(--stone);
+      opacity: 0; /* GSAP will animate */
+      transform: translateX(-15px);
+    }
+    
+    .dash-disclaimer {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: rgba(124,135,152,0.6); /* Stone with opacity */
+      text-align: center;
+      margin-top: 1.5rem;
+      padding: 0 2rem;
+    }
+    
+    .dash-footer {
+      text-align: center;
+      margin-top: 3rem;
+      position: relative;
+      z-index: 30;
+}
+    .dash-footer-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      color: var(--paper);
+      line-height: 1.3;
+    }
+    
+    @media (max-width: 992px) {
+      .dash-grid { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      .dash-compare-container { flex-direction: column; gap: 1rem; }
+      .compare-arrow { transform: rotate(90deg) translateX(-15px) !important; margin: 0.5rem 0; }
+    }
+
+    @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+      .auth-left-col {
+        height: auto;
+        padding-top: 6rem;
+      }
+      .auth-right-col {
+        padding-top: 2rem;
+        padding-bottom: 6rem;
+        gap: 4rem;
+      }
+      .auth-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .problem-grid-wrapper { padding: 2rem 1.5rem; }
+      .problem-impact-block { padding: 3rem 1.5rem; }
+      .problem-container { gap: 4rem; }
+      .problem-section { padding: 5rem 0; }
+    }
+
+
+    /* Efeitos de Vida (Life Effects) para o Dashboard */
+    .dashboard-section.bg-grid {
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    
+    .laser-scanner {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      box-shadow: 0 0 10px var(--gold);
+      opacity: 0.5;
+      animation: scan 4s linear infinite;
+      z-index: 10;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0% { transform: translateY(-10px); opacity: 0; }
+      10% { opacity: 0.5; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(600px); opacity: 0; }
+    }
+    
+    .dash-dots span {
+      animation: blinkDot 3s infinite alternate;
+    }
+    .dash-dots span:nth-child(1) { animation-delay: 0s; }
+    .dash-dots span:nth-child(2) { animation-delay: 1s; }
+    .dash-dots span:nth-child(3) { animation-delay: 0.5s; }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 5px currentColor; }
+      50% { opacity: 0.4; box-shadow: none; }
+    }
+
+    /* Spotlight Spotlight Hover no Dash Card */
+    .dash-card::after {
+      content: "";
+      position: absolute;
+      inset: 0px;
+      background: radial-gradient(
+        400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(198,164,90, 0.15),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .dash-card:hover::after {
+      opacity: 1;
+    }
+    /* Guarantee content is above spotlight */
+    .dash-card-title, .dash-gauge-container, .dash-compare-container {
+      z-index: 2;
+      position: relative;
+    }
+    
+    @media (max-width: 992px) {
+      .hero-fullbleed { padding: 0 5%; text-align: center; }
+      .hero-content { align-items: center; max-width: 100%; }
+      .hero-subtitle { text-align: center; max-width: 95%; margin: 0 auto; }
+      .reveal-mask { justify-content: center; }
+      .hero-scroll-indicator { margin-top: 3rem; justify-content: center; }
+      .hero-kicker { justify-content: center; }
+      .hero-kicker::before { display: none; }
+      
+      .problem-grid-wrapper { padding: 2rem 1.5rem; }
+      .problem-impact-block { padding: 3rem 1.5rem; }
+      .problem-container { gap: 4rem; }
+      .problem-section { padding: 5rem 0; }
+      
+      .auth-pin-content {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+      .auth-left-col {
+        height: auto;
+        padding-top: 6rem;
+      }
+      .auth-right-col {
+        padding-top: 2rem;
+        padding-bottom: 6rem;
+        gap: 4rem;
+      }
+      .auth-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .dash-grid { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      .dash-compare-container { flex-direction: column; gap: 1rem; }
+      .compare-arrow { transform: rotate(90deg) translateX(-15px) !important; margin: 0.5rem 0; }
+    }
+
+  
+    /* --- AEX Style Sector Grid (Cards) --- */
+    .sector-grid {
+      display: flex;
+      gap: 1.5rem;
+      width: 100%;
+      height: 60vh;
+      min-height: 400px;
+      padding: 0 5%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .sector-grid::-webkit-scrollbar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sector-grid {
+        height: 75vh;
+        min-height: 500px;
+        gap: 2rem;
+        padding: 0 10%;
+      }
+    }
+    
+    .sector-card {
+      position: relative;
+      flex: 0 0 85%;
+      height: 100%;
+      background: var(--navy-2);
+      overflow: hidden;
+      cursor: pointer;
+      scroll-snap-align: center;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    @media (min-width: 768px) {
+      .sector-card { flex: 0 0 45%; }
+    }
+    @media (min-width: 1024px) {
+      .sector-card { flex: 0 0 30%; }
+    }
+    
+    @keyframes kenburns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+    .sector-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+      animation: kenburns 20s infinite alternate linear;
+    }
+    .sector-card:hover .sector-bg {
+      transform: scale(1.2);
+    }
+    
+    .sector-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 27, 43, 0.9) 0%, rgba(14, 27, 43, 0.2) 60%, transparent 100%);
+      pointer-events: none;
+    }
+    
+    .sector-title-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 2rem;
+      z-index: 20;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    
+    .sector-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(244, 239, 228, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .sector-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 500;
+      color: var(--paper);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    /* Sliding Glass Panel */
+    .sector-panel {
+      position: absolute;
+      inset-y: 0;
+      right: 0;
+      width: 70%;
+      background: rgba(14, 27, 43, 0.7); /* --navy with opacity */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      transform: translateX(100%);
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+    @media (min-width: 1024px) {
+      .sector-panel { width: 85%; }
+    }
+    
+    .sector-card:hover .sector-panel {
+      transform: translateX(0);
+    }
+    
+    .sector-panel-line {
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+      transition: width 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+    }
+    .sector-card:hover .sector-panel-line {
+      width: 100%;
+    }
+    
+    .sector-panel-desc {
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+    }
+    .sector-card:hover .sector-panel-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Metrics Top Block */
+    .metrics-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 5% 4rem 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+    
+    .metrics-header {
+      max-width: 800px;
+    }
+    
+    .metrics-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .metrics-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      font-weight: 400;
+      color: var(--paper);
+    }
+    
+    .metrics-card-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 768px) {
+      .metrics-card-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .metric-card {
+      background: rgba(23, 33, 46, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .metric-card.accent {
+      background: linear-gradient(135deg, var(--navy-2) 0%, rgba(198,164,90,0.15) 100%);
+      border-color: rgba(198,164,90,0.3);
+    }
+    
+    .metric-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone);
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+    }
+    
+    .metric-suffix {
+      font-family: var(--font-mono);
+      font-size: var(--text-lg);
+      margin-left: 0.2rem;
+    }
+    
+    .metric-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: rgba(244, 239, 228, 0.7);
+      line-height: 1.4;
+    }
+
+    .da-transition {
+      padding: 6rem 10%;
+      text-align: center;
+      background: var(--navy);
+    }
+    .da-transition-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 300;
+      color: var(--paper);
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.2;
+    }
+
+
+
+    /* --- AEX Style Sector Grid (Cards) --- */
+    .sector-grid {
+      display: flex;
+      gap: 1.5rem;
+      width: 100%;
+      height: 60vh;
+      min-height: 400px;
+      padding: 0 5%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .sector-grid::-webkit-scrollbar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sector-grid {
+        height: 75vh;
+        min-height: 500px;
+        gap: 2rem;
+        padding: 0 10%;
+      }
+    }
+    
+    .sector-card {
+      position: relative;
+      flex: 0 0 85%;
+      height: 100%;
+      background: var(--navy-2);
+      overflow: hidden;
+      cursor: pointer;
+      scroll-snap-align: center;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    @media (min-width: 768px) {
+      .sector-card { flex: 0 0 45%; }
+    }
+    @media (min-width: 1024px) {
+      .sector-card { flex: 0 0 30%; }
+    }
+    
+    @keyframes kenburns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+    .sector-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+      animation: kenburns 20s infinite alternate linear;
+    }
+    .sector-card:hover .sector-bg {
+      transform: scale(1.2);
+    }
+    
+    .sector-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 27, 43, 0.9) 0%, rgba(14, 27, 43, 0.2) 60%, transparent 100%);
+      pointer-events: none;
+    }
+    
+    .sector-title-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 2rem;
+      z-index: 20;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    
+    .sector-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(244, 239, 228, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .sector-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 500;
+      color: var(--paper);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    /* Sliding Glass Panel */
+    .sector-panel {
+      position: absolute;
+      inset-y: 0;
+      right: 0;
+      width: 70%;
+      background: rgba(14, 27, 43, 0.7); /* --navy with opacity */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      transform: translateX(100%);
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+    @media (min-width: 1024px) {
+      .sector-panel { width: 85%; }
+    }
+    
+    .sector-card:hover .sector-panel {
+      transform: translateX(0);
+    }
+    
+    .sector-panel-line {
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+      transition: width 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+    }
+    .sector-card:hover .sector-panel-line {
+      width: 100%;
+    }
+    
+    .sector-panel-desc {
+      color: var(--paper);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s;
+    }
+    .sector-card:hover .sector-panel-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Metrics Top Block */
+    .metrics-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 5% 4rem 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+    
+    .metrics-header {
+      max-width: 800px;
+    }
+    
+    .metrics-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .metrics-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      font-weight: 400;
+      color: var(--paper);
+    }
+    
+    .metrics-card-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 768px) {
+      .metrics-card-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    .metric-card {
+      background: rgba(23, 33, 46, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .metric-card.accent {
+      background: linear-gradient(135deg, var(--navy-2) 0%, rgba(198,164,90,0.15) 100%);
+      border-color: rgba(198,164,90,0.3);
+    }
+    
+    .metric-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone);
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+    }
+    
+    .metric-suffix {
+      font-family: var(--font-mono);
+      font-size: var(--text-lg);
+      margin-left: 0.2rem;
+    }
+    
+    .metric-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: rgba(244, 239, 228, 0.7);
+      line-height: 1.4;
+    }
+
+    .da-transition {
+      padding: 6rem 10%;
+      text-align: center;
+      background: var(--navy);
+    }
+    .da-transition-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 300;
+      color: var(--paper);
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.2;
+    }
+
+
+
+</style>
 </head>
 <body>
 
@@ -297,8 +1582,294 @@
 
   </section>
 
-  <section class="spacer-section">
-    <h2 style="color:var(--gold-2); font-family:var(--font-display);">Próximas dobras (Em breve)</h2>
+  
+  <!-- ==============================================
+       DOBRA 2: O PROBLEMA
+       ============================================== -->
+  <section class="da-problem-section" id="section-problem" style="background-color: var(--navy); color: var(--paper);">
+    
+    <!-- HEADER & IMPACT (Finex Style) -->
+    <div class="metrics-container">
+      <div class="metrics-header gs-prob-reveal">
+        <span class="metrics-kicker">O Cenário do Setor</span>
+        <h2 class="metrics-title">Um setor sob pressão crescente, e a maioria não vê os sinais a tempo.</h2>
+      </div>
+      
+      <div class="metrics-card-wrapper gs-prob-reveal">
+        <!-- Metric 1: The Main Impact -->
+        <div class="metric-card accent">
+          <div class="metric-label">Perda Regulatória Média</div>
+          <div class="metric-value"><span id="impact-counter">0</span><span class="metric-suffix">%</span></div>
+          <div class="metric-desc">da água tratada no Brasil se perde antes de chegar ao consumidor, corroendo margens e limitando investimentos (SINISA, 2024).</div>
+        </div>
+        
+        <!-- Metric 2 -->
+        <div class="metric-card">
+          <div class="metric-label">Riscos de Glosa</div>
+          <div class="metric-value">R$ 50<span class="metric-suffix">M+</span></div>
+          <div class="metric-desc">é a exposição média em bases de remuneração não conciliadas, sujeitas a cortes severos em revisões tarifárias.</div>
+        </div>
+        
+        <!-- Metric 3 -->
+        <div class="metric-card">
+          <div class="metric-label">Desvio Contábil</div>
+          <div class="metric-value">30<span class="metric-suffix">%</span></div>
+          <div class="metric-desc">de descasamento físico-contábil encontrado em autarquias sem rastreabilidade de ativos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIN POINTS (Carousel Style) -->
+    <div class="carousel-wrapper" style="width: 100%; overflow: hidden; padding: 2rem 0 6rem 0;">
+      <div class="sector-grid">
+      
+      <!-- Card 1 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-30 at 12.36.48.jpeg" alt="Perda Oculta" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 01</span>
+          <h3 class="sector-title">Perda Oculta</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Ativos que existem na planilha, mas não em campo, ou medidores que registram vazão isolados do sistema central. A base que deveria sustentar decisões regulatórias está furada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-23 at 21.57.03.jpeg" alt="Visão Fragmentada" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 02</span>
+          <h3 class="sector-title">Visão Ilhada</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Engenharia, Operação e Contabilidade trabalham em silos. A conciliação físico-contábil vira um pesadelo manual, gerando um descompasso brutal na hora de comprovar investimentos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-20 at 21.07.51.jpeg" alt="Riscos de Compliance" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 03</span>
+          <h3 class="sector-title">Risco Regulatório</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Grandes operações e expansões ambientais sem rastreabilidade do ciclo de vida dos ativos. Falhas de governança no campo geram multas pesadas e glosas nas agências reguladoras.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-17 at 22.52.10.jpeg" alt="Obsolescência Silenciosa" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 04</span>
+          <h3 class="sector-title">Obsolescência</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Infraestrutura física envelhecendo no tempo, sem um acompanhamento preditivo. O que a contabilidade deprecia nem sempre reflete a realidade da engenharia, comprometendo o plano financeiro.
+          </p>
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+    <!-- TRANSITION -->
+    <div class="da-transition gs-prob-reveal">
+      <h3 class="da-transition-title">Esses não são problemas hipotéticos. São o que corrói a margem e a tarifa do seu negócio agora mesmo.</h3>
+    </div>
+
+  </section>
+
+  <!-- ==============================================
+       DOBRA 3: AUTORIDADE NO SETOR
+       ============================================== -->
+  <section class="authority-section" id="section-authority">
+    <div class="auth-pin-wrapper">
+      
+      <div class="auth-pin-content">
+        <!-- Esquerda: Dados Travados -->
+        <div class="auth-left-col">
+          <div class="auth-header">
+            <div class="hero-kicker">QUEM RESOLVE ESSE PROBLEMA</div>
+            <h2 class="auth-title">Dentro do problema antes de vender a solução.</h2>
+          </div>
+          
+          <div class="auth-stats-grid">
+            <div class="stat-item gs-stat">
+              <div class="stat-num"><span id="stat-anos">0</span><span class="stat-suffix">+</span></div>
+              <div class="stat-desc">anos de atuação direta em gestão de ativos e patrimonial na Sabesp</div>
+            </div>
+            <div class="stat-item gs-stat">
+              <div class="stat-num"><span id="stat-ativos">0</span><span class="stat-suffix">milhão+</span></div>
+              <div class="stat-desc">de ativos inventariados e geridos</div>
+            </div>
+            <div class="stat-item gs-stat">
+              <div class="stat-num">R$<span id="stat-cap">0</span><span class="stat-suffix">bilhões</span></div>
+              <div class="stat-desc">em capitalização de ativos fixos conduzida</div>
+            </div>
+            <div class="stat-item gs-stat">
+              <div class="stat-num" id="stat-itens">0</div>
+              <div class="stat-desc">itens desmobilizados, gerando R$3,6 milhões em benefícios fiscais</div>
+            </div>
+            <div class="stat-item gs-stat">
+              <div class="stat-num" id="stat-oficinas">0</div>
+              <div class="stat-desc">oficinas de gestão de ativos conduzidas</div>
+            </div>
+            <div class="stat-item gs-stat">
+              <div class="stat-num"><span id="stat-c">0</span><span class="stat-suffix">+</span></div>
+              <div class="stat-desc">Conselheiros e C-Levels capacitados (Programa PFIC, Board Academy)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direita: Conteúdo que Rola (Fotos, Textos, Selo) -->
+        <div class="auth-right-col">
+          <div class="auth-parallax-box gs-auth-reveal">
+            <img src="assets/images/Henri_Borden_Place.png" alt="Complexo Henri Borden" class="auth-img-parallax" />
+            <div class="auth-img-scrim"></div>
+          </div>
+
+          <p class="auth-paragraph gs-auth-reveal">
+            Antes de fundar a 1234 Solution, Adalberto Francisco Chagas passou mais de três décadas dentro da maior companhia de saneamento do país, liderando a Divisão de Gestão do Imobiliário e o Departamento de Gestão Patrimonial da Sabesp. Não chegou ao problema do setor por fora, como consultor observando de longe. Chegou por dentro, implementando RFID para controle patrimonial, mapeando 14 áreas por drone, coordenando o inventário de mais de 1,1 milhão de ativos operacionais.
+          </p>
+
+          <div class="auth-parallax-box gs-auth-reveal">
+            <img src="assets/images/Autoridade_Campo.png" alt="Adalberto em campo" class="auth-img-parallax" />
+            <div class="auth-img-scrim"></div>
+          </div>
+          
+          <!-- Selo SVG -->
+          <div class="auth-badge-box gs-auth-reveal">
+            <!-- DrawSVG Diamante Simples -->
+            <svg class="badge-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="badge-draw-path" d="M50 5 L90 35 L50 95 L10 35 Z" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="badge-draw-path" d="M30 35 L50 95 L70 35 M10 35 L90 35 M30 35 L50 5 L70 35" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="badge-text">Troféu Quirón Diamante ESG, PNQS 2022</div>
+          </div>
+
+          <!-- Fechamento -->
+          <div class="auth-footer gs-auth-reveal">
+            <h3 class="auth-footer-text">Os números não são discurso. São o que sobra depois de três décadas de campo.</h3>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       DOBRA 4: PAINEL DE RESULTADOS
+       ============================================== -->
+  <section class="dashboard-section bg-grid" id="section-dashboard">
+    <div class="dash-container">
+      
+      <div class="dash-header gs-dash-reveal">
+        <div class="hero-kicker">O QUE A GESTÃO DE ATIVOS REVELA</div>
+        <h2 class="dash-title">Da planilha dispersa ao painel de controle único.</h2>
+        <h3 class="dash-subtitle">Não é sobre ter mais dados. É sobre finalmente enxergar o que já era seu.</h3>
+      </div>
+
+      <!-- Mockup do Dashboard UI -->
+      <div class="dash-mockup-wrapper gs-dash-reveal">
+        <div class="dash-mockup">
+          <div class="laser-scanner"></div>
+          <div class="dash-top-bar">
+            <div class="dash-dots"><span></span><span></span><span></span></div>
+            <div class="dash-title-bar">Visão Executiva: Gestão Patrimonial</div>
+          </div>
+          
+          <div class="dash-grid gs-dash-parallax">
+            <!-- Indicador 1: Gauge SVG -->
+            <div class="dash-card">
+              <h4 class="dash-card-title">Taxa de unitização de ativos</h4>
+              <div class="dash-gauge-container">
+                <svg viewBox="0 0 100 100" class="dash-gauge">
+                  <circle cx="50" cy="50" r="40" class="gauge-track"></circle>
+                  <circle cx="50" cy="50" r="40" class="gauge-progress" id="gauge-1-svg"></circle>
+                </svg>
+                <div class="gauge-value"><span id="gauge-1-num">0</span>%</div>
+              </div>
+            </div>
+
+            <!-- Indicador 2: Antes / Depois -->
+            <div class="dash-card">
+              <h4 class="dash-card-title">Ativos sem cadastro atualizado</h4>
+              <div class="dash-compare-container" id="compare-1">
+                <div class="compare-box compare-before">
+                  <span class="compare-label">Antes</span>
+                  <span class="compare-val">38%</span>
+                </div>
+                <div class="compare-arrow">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="compare-box compare-after">
+                  <span class="compare-label">Depois</span>
+                  <span class="compare-val highlight-gold">3%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indicador 3: Antes / Depois -->
+            <div class="dash-card">
+              <h4 class="dash-card-title">Tempo médio de resposta regulatória</h4>
+              <div class="dash-compare-container" id="compare-2">
+                <div class="compare-box compare-before">
+                  <span class="compare-label">Antes</span>
+                  <span class="compare-val">45 dias</span>
+                </div>
+                <div class="compare-arrow">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="compare-box compare-after">
+                  <span class="compare-label">Depois</span>
+                  <span class="compare-val highlight-gold">6 dias</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indicador 4: Gauge SVG -->
+            <div class="dash-card">
+              <h4 class="dash-card-title">Cobertura de inventário físico validado</h4>
+              <div class="dash-gauge-container">
+                <svg viewBox="0 0 100 100" class="dash-gauge">
+                  <circle cx="50" cy="50" r="40" class="gauge-track"></circle>
+                  <circle cx="50" cy="50" r="40" class="gauge-progress" id="gauge-2-svg"></circle>
+                </svg>
+                <div class="gauge-value"><span id="gauge-2-num">0</span>%</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="dash-disclaimer">
+          Ilustração representativa da visibilidade que a metodologia proporciona. Valores reais variam por operação e são apresentados sob NDA em proposta comercial.
+        </div>
+      </div>
+
+      <div class="dash-footer gs-dash-reveal">
+        <h3 class="dash-footer-text">E isso não acontece por acaso. Existe um método por trás.</h3>
+      </div>
+      
+    </div>
   </section>
 
   <script>
@@ -390,6 +1961,321 @@
         tlScroll.to('.hero-video-bg', { yPercent: 10, ease: 'none' }, 0);
       });
 
+      // ==============================================
+      // ANIMAÇÕES DA DOBRA 2 (O PROBLEMA - REDESIGN)
+      // ==============================================
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        
+        // 1. Elementos do topo aparecendo (Reveal)
+        gsap.utils.toArray('.gs-prob-reveal').forEach(elem => {
+          gsap.from(elem, {
+            scrollTrigger: {
+              trigger: elem,
+              start: "top 85%", 
+            },
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+          });
+        });
+
+        // 2. Animação de Contagem do Dado de Impacto (0 a 39,53)
+        const counterEl = document.getElementById("impact-counter");
+        if(counterEl) {
+          gsap.fromTo(counterEl, 
+            { innerHTML: 0 }, 
+            {
+              innerHTML: 39.53,
+              duration: 2,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ".problem-impact-block",
+                start: "top 80%"
+              },
+              snap: { innerHTML: 0.01 }, // Atualiza permitindo 2 casas decimais
+              onUpdate: function() {
+                let rawVal = parseFloat(this.targets()[0].innerHTML);
+                let formatted = rawVal.toFixed(2).replace('.', ',');
+                counterEl.innerHTML = formatted;
+              }
+            }
+          );
+        }
+
+        // 3. StaggerReveal das Linhas de Dor
+        gsap.from('.gs-prob-list', {
+          scrollTrigger: {
+            trigger: ".sector-grid",
+            start: "top 80%"
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        });
+        
+      });
+      
+      
+      // ==============================================
+      
+      mm.add("(min-width: 993px)", () => {
+        // PINNING (Apenas no Desktop)
+        ScrollTrigger.create({
+          trigger: ".auth-pin-content",
+          start: "top top",
+          end: "bottom bottom",
+          pin: ".auth-left-col",
+          pinSpacing: false
+        });
+      });
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        
+        // Elementos da coluna direita aparecendo com Fade Up
+        gsap.utils.toArray('.gs-auth-reveal').forEach(elem => {
+          gsap.from(elem, {
+            scrollTrigger: {
+              trigger: elem,
+              start: "top 85%",
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power3.out"
+          });
+        });
+        
+        // Efeito Parallax multicamada nas Imagens da Dobra 3
+        gsap.utils.toArray('.auth-img-parallax').forEach(img => {
+          gsap.to(img, {
+            yPercent: 25,
+            ease: "none",
+            scrollTrigger: {
+              trigger: img.parentElement,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1
+            }
+          });
+        });
+        
+        // Efeito Draw SVG do Selo Quirón Diamante
+        gsap.to('.badge-draw-path', {
+          scrollTrigger: {
+            trigger: ".auth-badge-box",
+            start: "top 80%",
+          },
+          strokeDashoffset: 0,
+          duration: 3,
+          ease: "power2.out",
+          stagger: 0.4
+        });
+        
+        // Animando os Contadores (Não linear, tempos e easings variados)
+        const statConfig = [
+          { id: "stat-anos", end: 30, dur: 1.5, ease: "back.out(1.5)" },
+          { id: "stat-ativos", end: 1.1, dur: 2.5, ease: "power2.out", decimals: 1 },
+          { id: "stat-cap", end: 4.6, dur: 3.5, ease: "power1.out", decimals: 1 },
+          { id: "stat-itens", end: 23000, dur: 4, ease: "power4.out" },
+          { id: "stat-oficinas", end: 19, dur: 1.2, ease: "bounce.out" },
+          { id: "stat-c", end: 300, dur: 2, ease: "power3.out" }
+        ];
+        
+        statConfig.forEach(stat => {
+          const el = document.getElementById(stat.id);
+          if (el) {
+            gsap.fromTo(el, { innerHTML: 0 }, {
+              innerHTML: stat.end,
+              duration: stat.dur,
+              ease: stat.ease,
+              scrollTrigger: {
+                trigger: ".auth-stats-grid",
+                start: "top 75%"
+              },
+              snap: { innerHTML: stat.decimals ? 0.1 : 1 },
+              onUpdate: function() {
+                let val = parseFloat(this.targets()[0].innerHTML);
+                if (stat.decimals) {
+                   el.innerHTML = val.toFixed(1).replace(".", ",");
+                } else {
+                   el.innerHTML = Math.round(val).toLocaleString('pt-BR');
+                }
+              }
+            });
+          }
+        });
+        
+      });
+
+      // ==============================================
+      // ANIMAÇÕES DA DOBRA 4 (DASHBOARD)
+      // ==============================================
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        
+        // 1. Reveal do texto e do dashboard container
+        gsap.utils.toArray('.gs-dash-reveal').forEach(elem => {
+          gsap.from(elem, {
+            scrollTrigger: {
+              trigger: elem,
+              start: "top 85%",
+            },
+            y: 0,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+          });
+        });
+        
+        // 2. Parallax do Grid Interno vs Mockup
+        gsap.to('.dash-grid', {
+          y: -40,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".dash-mockup-wrapper",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+        
+        // 3. Indicadores de Anel (Gauges SVG)
+        const gauges = [
+          { idVal: "gauge-1-num", idSvg: "gauge-1-svg", endNum: 94, isFloat: false },
+          { idVal: "gauge-2-num", idSvg: "gauge-2-svg", endNum: 99.2, isFloat: true }
+        ];
+        
+        gauges.forEach(gauge => {
+          const numEl = document.getElementById(gauge.idVal);
+          const svgEl = document.getElementById(gauge.idSvg);
+          if (numEl && svgEl) {
+            
+            let tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: ".dash-grid",
+                start: "top 75%"
+              }
+            });
+            
+            let offsetEnd = 251.2 - (251.2 * (gauge.endNum / 100));
+            tl.to(svgEl, {
+              strokeDashoffset: offsetEnd,
+              duration: 2,
+              ease: "power2.inOut"
+            }, 0);
+            
+            tl.fromTo(numEl, { innerHTML: 0 }, {
+              innerHTML: gauge.endNum,
+              duration: 2,
+              ease: "power2.inOut",
+              snap: { innerHTML: gauge.isFloat ? 0.1 : 1 },
+              onUpdate: function() {
+                let val = parseFloat(this.targets()[0].innerHTML);
+                if (gauge.isFloat) {
+                  numEl.innerHTML = val.toFixed(1).replace(".", ",");
+                } else {
+                  numEl.innerHTML = Math.round(val);
+                }
+              }
+            }, 0);
+          }
+        });
+        
+        // 4. Indicadores de Antes / Depois
+        gsap.set('.compare-after', { opacity: 0, y: 15, scale: 0.95 });
+        
+        gsap.utils.toArray('.dash-compare-container').forEach(container => {
+           let tl = gsap.timeline({
+             scrollTrigger: {
+               trigger: container,
+               start: "top 80%"
+             }
+           });
+           
+           tl.to(container, { duration: 0.6 }) // Pausa
+             .to(container.querySelector('.compare-arrow'), { opacity: 1, x: 0, duration: 0.4, ease: "back.out(2)" })
+             .to(container.querySelector('.compare-after'), { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power2.out" }, "-=0.2");
+        });
+        
+      });
+
+
+        // 5. Efeitos de Vida: Spotlight Tracker nos Cards do Dashboard
+        document.querySelectorAll('.dash-card').forEach(card => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+          });
+        });
+        
+        // 6. Efeitos de Vida: 3D Tilt interativo no Dashboard Inteiro
+        const dashWrapper = document.querySelector('.dash-mockup-wrapper');
+        const dashMockup = document.querySelector('.dash-mockup');
+        if (dashWrapper && dashMockup) {
+          dashWrapper.addEventListener('mousemove', (e) => {
+            const rect = dashWrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // max 4 graus de inclinação para não exagerar
+            const rotateX = ((y - centerY) / centerY) * -4; 
+            const rotateY = ((x - centerX) / centerX) * 4;
+            
+            gsap.to(dashMockup, {
+              rotateX: rotateX,
+              rotateY: rotateY,
+              transformPerspective: 1500,
+              ease: "power2.out",
+              duration: 0.5
+            });
+          });
+          
+          dashWrapper.addEventListener('mouseleave', () => {
+            gsap.to(dashMockup, {
+              rotateX: 0,
+              rotateY: 0,
+              ease: "power3.out",
+              duration: 1
+            });
+          });
+        }
+
+      // Fallback para Acessibilidade (prefers-reduced-motion: reduce)
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+         // Fix Dashboard Dobra 4
+         const dashMockup = document.querySelector(".dash-mockup-wrapper");
+         if (dashMockup) dashMockup.style.animation = "none"; // kill pulse glow
+         
+         const svg1 = document.getElementById("gauge-1-svg");
+         if (svg1) svg1.style.strokeDashoffset = 251.2 - (251.2 * 0.94);
+         const num1 = document.getElementById("gauge-1-num");
+         if (num1) num1.innerHTML = "94";
+         
+         const svg2 = document.getElementById("gauge-2-svg");
+         if (svg2) svg2.style.strokeDashoffset = 251.2 - (251.2 * 0.992);
+         const num2 = document.getElementById("gauge-2-num");
+         if (num2) num2.innerHTML = "99,2";
+         
+         gsap.set('.compare-arrow', { opacity: 1, x: 0 });
+         gsap.set('.compare-after', { opacity: 1, y: 0, scale: 1 });
+
+        const counterEl = document.getElementById("impact-counter");
+        if(counterEl) counterEl.innerHTML = "39";
+        
+        const finals = { "stat-anos": "30", "stat-ativos": "1,1", "stat-cap": "4,6", "stat-itens": "23.000", "stat-oficinas": "19", "stat-c": "300" };
+        for(const key in finals) {
+          const el = document.getElementById(key);
+          if(el) el.innerHTML = finals[key];
+        }
+      });
     });
   </script>
 </body>
