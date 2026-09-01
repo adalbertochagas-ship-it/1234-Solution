@@ -472,51 +472,86 @@
       margin-top: 1rem;
     }
     
+    /* --- REDESIGN DOBRA 3: STATS GRID --- */
     .auth-stats-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
     }
     
     .stat-item {
       display: flex;
       flex-direction: column;
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .stat-item::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at top left, rgba(198,164,90,0.1), transparent 60%);
+      opacity: 0; transition: opacity 0.4s ease;
     }
     .stat-item:hover {
       transform: translateY(-8px) scale(1.02);
+      border-color: rgba(198,164,90,0.4);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 15px rgba(198,164,90,0.1);
     }
+    .stat-item:hover::before { opacity: 1; }
     
     .stat-num {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 3.5vw, 4rem);
+      font-size: clamp(3rem, 4.5vw, 4.5rem);
       color: var(--gold);
-      font-weight: 700;
+      font-weight: 300;
       line-height: 1;
-      text-shadow: var(--glow-gold);
-      margin-bottom: 0.5rem;
-      transition: text-shadow 0.4s;
-    }
-    .stat-item:hover .stat-num {
-      text-shadow: var(--glow-gold-lg);
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 2;
     }
     .stat-suffix {
-      font-size: 0.35em;
-      font-weight: 500;
+      font-size: 0.4em;
+      font-weight: 400;
       letter-spacing: 1px;
-      vertical-align: middle;
-      margin-left: 6px;
-      opacity: 0.9;
+      vertical-align: super;
+      margin-left: 4px;
+      opacity: 0.8;
     }
     
     .stat-desc {
       font-family: var(--font-body);
-      font-size: 1rem;
-      color: var(--stone);
-      line-height: 1.6;
+      font-size: 0.95rem;
+      color: rgba(244, 239, 228, 0.8);
+      line-height: 1.5;
+      font-weight: 300;
+      position: relative;
+      z-index: 2;
+    }
+    
+
+    /* --- Mini Carousel Crossfade --- */
+    .crossfade-carousel {
+      position: relative;
+    }
+    .crossfade-img {
+      position: absolute;
+      top: -15%; left: -15%; width: 130%; height: 130%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      object-fit: cover;
+    }
+    .crossfade-img.active {
+      opacity: 1;
     }
     
     .auth-right-col {
+
       padding-top: 25vh; /* Fotos descem um pouco para alinhar o inicio da rolagem */
       padding-bottom: 25vh;
       display: flex;
@@ -549,12 +584,25 @@
     
     .auth-paragraph {
       font-family: var(--font-body);
-      font-size: 1.25rem;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       color: var(--paper);
       line-height: 1.8;
-      border-left: 3px solid var(--gold);
-      padding-left: 2rem;
+      border-left: 4px solid var(--gold);
+      padding-left: 2.5rem;
       text-shadow: 0 2px 10px rgba(14,27,43,0.5);
+      font-style: italic;
+      font-weight: 300;
+      position: relative;
+    }
+    .auth-paragraph::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 10px;
+      font-size: 4rem;
+      color: var(--gold);
+      opacity: 0.3;
+      font-family: var(--font-display);
     }
     
     .auth-badge-box {
@@ -854,7 +902,24 @@
         height: auto;
         padding-top: 6rem;
       }
-      .auth-right-col {
+  
+    /* --- Mini Carousel Crossfade --- */
+    .crossfade-carousel {
+      position: relative;
+    }
+    .crossfade-img {
+      position: absolute;
+      top: -15%; left: -15%; width: 130%; height: 130%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      object-fit: cover;
+    }
+    .crossfade-img.active {
+      opacity: 1;
+    }
+    
+    .auth-right-col {
+
         padding-top: 2rem;
         padding-bottom: 6rem;
         gap: 4rem;
@@ -954,7 +1019,24 @@
         height: auto;
         padding-top: 6rem;
       }
-      .auth-right-col {
+  
+    /* --- Mini Carousel Crossfade --- */
+    .crossfade-carousel {
+      position: relative;
+    }
+    .crossfade-img {
+      position: absolute;
+      top: -15%; left: -15%; width: 130%; height: 130%;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      object-fit: cover;
+    }
+    .crossfade-img.active {
+      opacity: 1;
+    }
+    
+    .auth-right-col {
+
         padding-top: 2rem;
         padding-bottom: 6rem;
         gap: 4rem;
@@ -1180,7 +1262,7 @@
     }
     
     .metric-card {
-      background: rgba(23, 33, 46, 0.4);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 1.5rem;
       padding: 2rem;
@@ -1456,7 +1538,7 @@
     }
     
     .metric-card {
-      background: rgba(23, 33, 46, 0.4);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 1.5rem;
       padding: 2rem;
@@ -1889,8 +1971,12 @@
 
         <!-- Direita: Conteúdo que Rola (Fotos, Textos, Selo) -->
         <div class="auth-right-col">
-          <div class="auth-parallax-box gs-auth-reveal">
-            <img src="assets/images/Henri_Borden_Place.png" alt="Complexo Henri Borden" class="auth-img-parallax" />
+          <div class="auth-parallax-box gs-auth-reveal crossfade-carousel">
+            <img src="assets/raw_files/WhatsApp Image 2026-08-23 at 22.01.53.webp" alt="Histórico 1" class="auth-img-parallax crossfade-img active" />
+            <img src="assets/raw_files/WhatsApp Image 2026-08-23 at 21.46.32.webp" alt="Histórico 2" class="auth-img-parallax crossfade-img" />
+            <img src="assets/raw_files/WhatsApp Image 2026-08-20 at 21.34.23.webp" alt="Histórico 3" class="auth-img-parallax crossfade-img" />
+            <img src="assets/raw_files/WhatsApp Image 2026-08-20 at 21.18.19.webp" alt="Histórico 4" class="auth-img-parallax crossfade-img" />
+            <img src="assets/raw_files/WhatsApp Image 2026-08-17 at 23.07.32.webp" alt="Histórico 5" class="auth-img-parallax crossfade-img" />
             <div class="auth-img-scrim"></div>
           </div>
 
@@ -1899,7 +1985,7 @@
           </p>
 
           <div class="auth-parallax-box gs-auth-reveal">
-            <img src="assets/images/Autoridade_Campo.png" alt="Adalberto em campo" class="auth-img-parallax" />
+            <img src="assets/raw_files/2022 - Trofeu Quiron de Platina - PNQS (Campo Grande MS).webp" alt="Prêmio PNQS" class="auth-img-parallax" style="object-position: top center;" />
             <div class="auth-img-scrim"></div>
           </div>
           
@@ -2228,6 +2314,17 @@
           });
         });
         
+        // --- Carousel Crossfade ---
+        const cfImages = document.querySelectorAll('.crossfade-img');
+        if(cfImages.length > 0) {
+          let cfIndex = 0;
+          setInterval(() => {
+            cfImages[cfIndex].classList.remove('active');
+            cfIndex = (cfIndex + 1) % cfImages.length;
+            cfImages[cfIndex].classList.add('active');
+          }, 3500);
+        }
+        
         // Efeito Parallax multicamada nas Imagens da Dobra 3
         gsap.utils.toArray('.auth-img-parallax').forEach(img => {
           gsap.to(img, {
@@ -2254,6 +2351,23 @@
           stagger: 0.4
         });
         
+        // Animando a Entrada dos Cards (Stagger)
+        gsap.fromTo('.gs-stat', 
+          { y: 50, opacity: 0, scale: 0.95 }, 
+          {
+            y: 0, 
+            opacity: 1, 
+            scale: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "back.out(1.2)",
+            scrollTrigger: {
+              trigger: ".auth-stats-grid",
+              start: "top 80%"
+            }
+          }
+        );
+
         // Animando os Contadores (Não linear, tempos e easings variados)
         const statConfig = [
           { id: "stat-anos", end: 30, dur: 1.5, ease: "back.out(1.5)" },
