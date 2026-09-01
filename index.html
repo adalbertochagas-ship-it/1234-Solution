@@ -2098,15 +2098,63 @@
         }
 
         // 3. StaggerReveal das Linhas de Dor
-        gsap.from('.gs-prob-list', {
+        // ==============================================
+        // ANIMAÇÕES DA DOBRA 2 (O CENÁRIO DO SETOR)
+        // ==============================================
+        
+        // 1. Reveal do Header (Título e Kicker)
+        gsap.from('.metrics-header', {
           scrollTrigger: {
-            trigger: ".sector-grid",
+            trigger: ".da-problem-section",
             start: "top 80%"
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out"
+        });
+
+        // 2. Reveal Stagger dos 3 Cards de Métricas
+        gsap.from('.metric-card', {
+          scrollTrigger: {
+            trigger: ".metrics-card-wrapper",
+            start: "top 85%"
+          },
+          y: 80,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.2,
+          ease: "back.out(1.2)"
+        });
+
+        // 3. Contador do Impact-Counter (39,53%)
+        const impactCounter = document.getElementById("impact-counter");
+        if (impactCounter) {
+          gsap.fromTo(impactCounter, { innerHTML: 0 }, {
+            scrollTrigger: {
+              trigger: ".metrics-card-wrapper",
+              start: "top 85%"
+            },
+            innerHTML: 39.53,
+            duration: 3,
+            ease: "power2.out",
+            snap: { innerHTML: 0.01 },
+            onUpdate: function() {
+              let val = parseFloat(this.targets()[0].innerHTML);
+              impactCounter.innerHTML = val.toFixed(2).replace(".", ",");
+            }
+          });
+        }
+
+        // 4. Reveal do Carrossel Marquee
+        gsap.from('.carousel-wrapper', {
+          scrollTrigger: {
+            trigger: ".carousel-wrapper",
+            start: "top 85%"
           },
           y: 40,
           opacity: 0,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 1.2,
           ease: "power3.out"
         });
         
