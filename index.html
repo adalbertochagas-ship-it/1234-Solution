@@ -989,48 +989,62 @@
 
   
     /* --- AEX Style Sector Grid (Cards) --- */
+    .carousel-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 2rem 0 6rem 0;
+      position: relative;
+    }
+    
     .sector-grid {
       display: flex;
       gap: 1.5rem;
-      width: 100%;
+      width: max-content;
       height: 60vh;
       min-height: 400px;
-      padding: 0 5%;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
+      padding: 0 1rem;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      animation: marquee 30s linear infinite;
     }
-    .sector-grid::-webkit-scrollbar {
-      display: none;
+    
+    .sector-grid:hover {
+      animation-play-state: paused;
     }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 0.75rem)); }
+    }
+    
     @media (min-width: 1024px) {
       .sector-grid {
         height: 75vh;
         min-height: 500px;
         gap: 2rem;
-        padding: 0 10%;
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - 1rem)); }
       }
     }
     
     .sector-card {
       position: relative;
-      flex: 0 0 85%;
+      width: 85vw;
       height: 100%;
       background: var(--navy-2);
       overflow: hidden;
       cursor: pointer;
-      scroll-snap-align: center;
       border-radius: 12px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      flex-shrink: 0;
     }
     @media (min-width: 768px) {
-      .sector-card { flex: 0 0 45%; }
+      .sector-card { width: 45vw; }
     }
     @media (min-width: 1024px) {
-      .sector-card { flex: 0 0 30%; }
+      .sector-card { width: 25vw; min-width: 350px; }
     }
     
     @keyframes kenburns {
@@ -1254,48 +1268,62 @@
 
 
     /* --- AEX Style Sector Grid (Cards) --- */
+    .carousel-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 2rem 0 6rem 0;
+      position: relative;
+    }
+    
     .sector-grid {
       display: flex;
       gap: 1.5rem;
-      width: 100%;
+      width: max-content;
       height: 60vh;
       min-height: 400px;
-      padding: 0 5%;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
+      padding: 0 1rem;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      animation: marquee 30s linear infinite;
     }
-    .sector-grid::-webkit-scrollbar {
-      display: none;
+    
+    .sector-grid:hover {
+      animation-play-state: paused;
     }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 0.75rem)); }
+    }
+    
     @media (min-width: 1024px) {
       .sector-grid {
         height: 75vh;
         min-height: 500px;
         gap: 2rem;
-        padding: 0 10%;
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - 1rem)); }
       }
     }
     
     .sector-card {
       position: relative;
-      flex: 0 0 85%;
+      width: 85vw;
       height: 100%;
       background: var(--navy-2);
       overflow: hidden;
       cursor: pointer;
-      scroll-snap-align: center;
       border-radius: 12px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      flex-shrink: 0;
     }
     @media (min-width: 768px) {
-      .sector-card { flex: 0 0 45%; }
+      .sector-card { width: 45vw; }
     }
     @media (min-width: 1024px) {
-      .sector-card { flex: 0 0 30%; }
+      .sector-card { width: 25vw; min-width: 350px; }
     }
     
     @keyframes kenburns {
@@ -1657,7 +1685,73 @@
 
       <!-- Card 3 -->
       <div class="sector-card gs-prob-list">
-        <img src="assets/raw_files/WhatsApp Image 2026-08-20 at 21.07.51.jpeg" alt="Riscos de Compliance" class="sector-bg" />
+        <img src="assets/raw_files/WhatsApp Image 2026-08-30 at 12.44.49.jpeg" alt="Riscos de Compliance" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 03</span>
+          <h3 class="sector-title">Risco Regulatório</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Grandes operações e expansões ambientais sem rastreabilidade do ciclo de vida dos ativos. Falhas de governança no campo geram multas pesadas e glosas nas agências reguladoras.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-17 at 22.52.10.jpeg" alt="Obsolescência Silenciosa" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 04</span>
+          <h3 class="sector-title">Obsolescência</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Infraestrutura física envelhecendo no tempo, sem um acompanhamento preditivo. O que a contabilidade deprecia nem sempre reflete a realidade da engenharia, comprometendo o plano financeiro.
+          </p>
+        </div>
+      </div>
+
+    
+      
+      <!-- Card 1 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-30 at 12.36.48.jpeg" alt="Perda Oculta" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 01</span>
+          <h3 class="sector-title">Perda Oculta</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Ativos que existem na planilha, mas não em campo, ou medidores que registram vazão isolados do sistema central. A base que deveria sustentar decisões regulatórias está furada.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-23 at 21.57.03.jpeg" alt="Visão Fragmentada" class="sector-bg" />
+        <div class="sector-gradient"></div>
+        <div class="sector-title-wrapper">
+          <span class="sector-meta">Sintoma 02</span>
+          <h3 class="sector-title">Visão Ilhada</h3>
+        </div>
+        <div class="sector-panel">
+          <div class="sector-panel-line"></div>
+          <p class="sector-panel-desc">
+            Engenharia, Operação e Contabilidade trabalham em silos. A conciliação físico-contábil vira um pesadelo manual, gerando um descompasso brutal na hora de comprovar investimentos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="sector-card gs-prob-list">
+        <img src="assets/raw_files/WhatsApp Image 2026-08-30 at 12.44.49.jpeg" alt="Riscos de Compliance" class="sector-bg" />
         <div class="sector-gradient"></div>
         <div class="sector-title-wrapper">
           <span class="sector-meta">Sintoma 03</span>
