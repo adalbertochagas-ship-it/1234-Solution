@@ -1204,13 +1204,22 @@
       border-radius: 1.5rem;
       padding: 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: border-color 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
     }
     .metric-card:hover {
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(198,164,90, 0.5);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(198,164,90, 0.15), 0 0 20px rgba(198,164,90, 0.1);
     }
+    .metric-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at top right, rgba(198,164,90,0.1), transparent 50%);
+      opacity: 0; transition: opacity 0.4s; pointer-events: none;
+    }
+    .metric-card:hover::after { opacity: 1; }
     
     .metric-card.accent {
       background: linear-gradient(135deg, var(--navy-2) 0%, rgba(198,164,90,0.15) 100%);
@@ -1483,13 +1492,22 @@
       border-radius: 1.5rem;
       padding: 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: border-color 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
     }
     .metric-card:hover {
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(198,164,90, 0.5);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(198,164,90, 0.15), 0 0 20px rgba(198,164,90, 0.1);
     }
+    .metric-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at top right, rgba(198,164,90,0.1), transparent 50%);
+      opacity: 0; transition: opacity 0.4s; pointer-events: none;
+    }
+    .metric-card:hover::after { opacity: 1; }
     
     .metric-card.accent {
       background: linear-gradient(135deg, var(--navy-2) 0%, rgba(198,164,90,0.15) 100%);
@@ -2060,72 +2078,43 @@
       // ==============================================
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         
-        // 1. Elementos do topo aparecendo (Reveal)
-        gsap.utils.toArray('.gs-prob-reveal').forEach(elem => {
-          gsap.from(elem, {
-            scrollTrigger: {
-              trigger: elem,
-              start: "top 85%", 
-            },
-            y: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out"
-          });
-        });
-
-        // 2. Animação de Contagem do Dado de Impacto (0 a 39,53)
-        const counterEl = document.getElementById("impact-counter");
-        if(counterEl) {
-          gsap.fromTo(counterEl, 
-            { innerHTML: 0 }, 
-            {
-              innerHTML: 39.53,
-              duration: 2,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: ".problem-impact-block",
-                start: "top 80%"
-              },
-              snap: { innerHTML: 0.01 }, // Atualiza permitindo 2 casas decimais
-              onUpdate: function() {
-                let rawVal = parseFloat(this.targets()[0].innerHTML);
-                let formatted = rawVal.toFixed(2).replace('.', ',');
-                counterEl.innerHTML = formatted;
-              }
-            }
-          );
-        }
-
-        // 3. StaggerReveal das Linhas de Dor
         // ==============================================
         // ANIMAÇÕES DA DOBRA 2 (O CENÁRIO DO SETOR)
         // ==============================================
         
         // 1. Reveal do Header (Título e Kicker)
-        gsap.from('.metrics-header', {
-          scrollTrigger: {
-            trigger: ".da-problem-section",
-            start: "top 80%"
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out"
-        });
+        gsap.fromTo('.metrics-header', 
+          { y: 60, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: ".da-problem-section",
+              start: "top 80%"
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out"
+          }
+        );
 
-        // 2. Reveal Stagger dos 3 Cards de Métricas
-        gsap.from('.metric-card', {
-          scrollTrigger: {
-            trigger: ".metrics-card-wrapper",
-            start: "top 85%"
-          },
-          y: 80,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: "back.out(1.2)"
-        });
+        // 2. Reveal Stagger dos 3 Cards de Métricas (com 3D pop)
+        gsap.fromTo('.metric-card', 
+          { y: 80, opacity: 0, scale: 0.9, rotationX: 15 },
+          {
+            scrollTrigger: {
+              trigger: ".metrics-card-wrapper",
+              start: "top 85%"
+            },
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            rotationX: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "back.out(1.2)",
+            transformPerspective: 1000
+          }
+        );
 
         // 3. Contador do Impact-Counter (39,53%)
         const impactCounter = document.getElementById("impact-counter");
