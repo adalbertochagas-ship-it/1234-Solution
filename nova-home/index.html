@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>1234 Solution | Engenharia que comprova, regulariza e protege o seu patrimônio</title>
+  <meta name="description" content="Consultoria de engenharia em gestão de ativos e patrimonial e serviços técnicos de engenharia para saneamento, autarquias e indústrias de capital intensivo. Comece pelo diagnóstico técnico gratuito." />
+  <meta name="theme-color" content="#0E1B2B" />
+  <meta name="color-scheme" content="dark light" />
+  <meta property="og:title" content="1234 Solution | Engenharia que comprova, regulariza e protege o seu patrimônio" />
+  <meta property="og:description" content="Gestão de ativos e serviços técnicos para saneamento, autarquias e indústrias de capital intensivo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero_poster.jpg" />
+  <link rel="icon" type="image/png" href="assets/favicon_1234.png" />
+
+  <!-- Estado inicial definido antes da primeira pintura: evita flash do pré-carregamento -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('rm');
+      else d.classList.add('is-loading');
+    })();
+  </script>
+
+  <link rel="preload" as="image" href="assets/hero_poster.jpg" fetchpriority="high" />
+
+  <!-- Google Fonts: Fraunces, IBM Plex Sans, IBM Plex Mono (carregamento idêntico ao design_system2.html) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <noscript><style>.preloader { display: none !important; } html.is-loading { overflow: auto !important; } .video-wrapper, .intro { opacity: 1 !important; }</style></noscript>
+
+  <style>
+    /* ============================================================
+       TOKENS: copiados do design_system2.html, sem alteração
+    ============================================================ */
+    :root {
+      --navy: #0E1B2B;  --navy-2: #16283F;  --navy-3: #1E3350;
+      --gold: #C6A45A;  --gold-2: #E4C787;  --gold-deep: #9C7C3C;
+      --paper: #F4EFE4; --paper-2: #ECE4D3;
+      --ink: #17212E;   --stone: #7C8798;   --stone-2: #6E6552;
+      --line-dark: rgba(198,164,90,0.18);
+      --line-light: rgba(23,33,46,0.12);
+      --text-lede: #B9C2CF; /* copiado de assets/css/style.css (--text-lede): texto secundário nas seções escuras */
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+      --text-xs: 0.6875rem;  --text-sm: 0.8125rem; --text-base: 1rem;
+      --text-lg: 1.125rem;   --text-xl: 1.25rem;   --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;  --text-4xl: 2.25rem;  --text-5xl: 3rem;
+      --text-6xl: 3.75rem;   --text-7xl: 4.5rem;   --text-8xl: 6rem;
+
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-6: 1.5rem;  --space-8: 2rem;   --space-12: 3rem;   --space-16: 4rem;
+      --space-20: 5rem;   --space-24: 6rem;
+
+      --radius-sm: 3px; --radius-md: 6px; --radius-lg: 10px; --radius-xl: 16px;
+      --radius-2xl: 24px; --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(14,27,43,0.35);
+      --shadow-md: 0 8px 28px rgba(14,27,43,0.45);
+      --shadow-lg: 0 20px 60px rgba(14,27,43,0.55);
+      --glow-gold: 0 0 32px rgba(198,164,90,0.28);
+      --glow-gold-lg: 0 0 60px rgba(198,164,90,0.20);
+
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      --grid-max: 1280px;
+      --grid-gap: 24px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--navy); }
+    html.is-loading { overflow: hidden; }
+    body {
+      font-family: var(--font-body);
+      background: var(--navy);
+      color: var(--paper);
+      line-height: 1.6;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1 { font-family: var(--font-display); }
+    a { color: inherit; text-decoration: none; }
+    img, video, svg { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .max-w { max-width: var(--grid-max); margin-inline: auto; padding-inline: 2.5rem; width: 100%; }
+
+    .skip-link {
+      position: fixed; top: var(--space-3); left: var(--space-3); z-index: 2000;
+      padding: var(--space-2) var(--space-4);
+      background: var(--gold); color: var(--navy);
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.14em;
+      border-radius: var(--radius-sm);
+      transform: translateY(-200%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    /* ============================================================
+       BOTÕES (sistema do design_system2.html)
+    ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; position: relative; overflow: hidden; isolation: isolate;
+      font-family: var(--font-body); font-weight: 600;
+      font-size: var(--text-sm); letter-spacing: 0.02em;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.3s var(--ease-elastic), box-shadow 0.3s, background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .btn-primary { padding: 0.85rem 2.2rem; border-radius: var(--radius-sm); color: var(--navy); background: transparent; }
+    .btn-primary .btn-inner-track { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden; padding: 1px; display: block; }
+    .btn-primary .btn-conic {
+      position: absolute; inset: -100%; display: block;
+      background: conic-gradient(from 0deg, transparent 0deg 270deg, var(--gold) 360deg);
+      animation: conic-spin 3s linear infinite;
+    }
+    .btn-primary .btn-bg { position: absolute; inset: 1px; border-radius: inherit; background: var(--gold); overflow: hidden; display: block; }
+    .btn-primary .btn-shimmer {
+      position: absolute; inset: 0; display: block;
+      opacity: 0.15; mix-blend-mode: plus-lighter;
+      background-image: repeating-linear-gradient(90deg, #fff, #fff 1px, transparent 1px, transparent 8px);
+      background-size: 24px 100%;
+      animation: lines-slide 1.8s linear infinite;
+    }
+    .btn-primary .btn-glow {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 70%; height: 60%; display: block;
+      background: rgba(198,164,90,0.3); border-radius: 50%;
+      transition: background 0.4s;
+    }
+    .btn-primary .btn-label { position: relative; z-index: 2; color: var(--navy); font-weight: 700; }
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-ghost {
+      padding: 0.82rem 2rem; border-radius: var(--radius-sm);
+      color: var(--gold-2);
+      background: rgba(198,164,90,0.05);
+      border: 1px solid rgba(198,164,90,0.42);
+    }
+    .btn-ghost:active { transform: scale(0.98); }
+
+    .btn-sm { padding: 0.6rem 1.35rem; font-size: var(--text-xs); }
+    .btn-ico { flex-shrink: 0; }
+
+    /* Microinterações de hover somente com mouse. Elevação e brilho sutil. */
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow-gold); }
+      .btn-primary:hover .btn-glow { background: rgba(198,164,90,0.55); }
+      .btn-ghost:hover {
+        transform: translateY(-2px);
+        background: rgba(198,164,90,0.10);
+        border-color: var(--gold);
+        color: var(--gold-2);
+        box-shadow: var(--glow-gold);
+      }
+    }
+    .mag { display: inline-flex; }
+
+    @keyframes conic-spin { to { transform: rotate(360deg); } }
+    @keyframes lines-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    @keyframes logo-breathe {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.035); }
+    }
+
+    /* ============================================================
+       PRÉ-CARREGAMENTO
+    ============================================================ */
+    .preloader {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      place-items: center;
+      background: var(--navy);
+      will-change: transform;
+    }
+    html.js:not(.rm) .preloader { display: grid; }
+    .preloader-inner { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth); }
+    .preloader-logo {
+      width: clamp(140px, 22vw, 200px); height: auto;
+      border-radius: var(--radius-lg);
+      animation: logo-breathe 2.4s var(--ease-smooth) infinite;
+    }
+    .preloader-bar { width: min(220px, 52vw); height: 2px; background: var(--line-dark); border-radius: 99px; overflow: hidden; }
+    .preloader-fill {
+      display: block; width: 100%; height: 100%;
+      background: linear-gradient(to right, var(--gold), var(--gold-2));
+      transform: scaleX(0); transform-origin: left;
+    }
+    .preloader.is-leaving { transform: translateY(-100%); transition: transform 0.9s var(--ease-spring) 0.25s; }
+    .preloader.is-leaving .preloader-inner { opacity: 0; transform: translateY(-14px) scale(0.96); }
+
+    /* ============================================================
+       CABEÇALHO MÍNIMO: transparente no topo; com a página rolada (mais de 8 px) ganha fundo navy, desfoque e linha inferior
+    ============================================================ */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100; pointer-events: none;
+      background-color: transparent; border-bottom: 1px solid transparent;
+      -webkit-backdrop-filter: blur(0px); backdrop-filter: blur(0px);
+      transition: background-color 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth), -webkit-backdrop-filter 0.35s var(--ease-smooth), backdrop-filter 0.35s var(--ease-smooth);
+    }
+    .site-header::before {
+      content: ''; position: absolute; left: 0; right: 0; top: 0; height: 140%;
+      background: linear-gradient(to bottom, rgba(14,27,43,0.72), rgba(14,27,43,0));
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-smooth);
+    }
+    .site-header.is-scrolled {
+      pointer-events: auto;
+      background-color: var(--navy); border-bottom-color: var(--line-dark);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .site-header.is-scrolled::before { opacity: 0; }
+    .header-inner {
+      position: relative;
+      max-width: var(--grid-max); margin-inline: auto;
+      padding: var(--space-4) 2.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+    }
+    .brand { pointer-events: auto; display: inline-flex; border-radius: var(--radius-md); }
+    .brand img { height: 44px; width: auto; border-radius: var(--radius-md); }
+    .header-cta {
+      pointer-events: auto;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity 0.5s var(--ease-spring), transform 0.5s var(--ease-spring), visibility 0s linear 0.5s;
+    }
+    .header-cta.is-on {
+      opacity: 1; visibility: visible; transform: translateY(0);
+      transition: opacity 0.5s var(--ease-spring), transform 0.5s var(--ease-spring), visibility 0s linear 0s;
+    }
+
+    /* ============================================================
+       HERO: uma única dobra, layout igual ao da landing de referência
+       Texto à esquerda, vídeo à direita (grid 1.15fr / 0.85fr)
+    ============================================================ */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: 100vh; min-height: 100svh;
+      display: flex; flex-direction: column;
+      background: var(--navy);
+    }
+
+    /* Linhas decorativas de fundo (mesmo padrão da referência) */
+    .hero-grid-lines {
+      position: absolute; inset: 0; z-index: 1;
+      display: grid; grid-template-columns: repeat(12, 1fr);
+      max-width: var(--grid-max); margin: 0 auto; padding: 0 2.5rem;
+      pointer-events: none;
+    }
+    .grid-line { border-left: 1px solid rgba(198,164,90,0.06); height: 100%; }
+    .grid-line:last-child { border-right: 1px solid rgba(198,164,90,0.06); }
+
+    .hero-main {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; align-items: center;
+      padding-top: max(5.5rem, 10svh); padding-bottom: max(3rem, 6svh);
+    }
+    .hero-split-grid {
+      display: grid; grid-template-columns: minmax(0, 1fr) clamp(480px, 40vw, 640px);
+      gap: 3rem; align-items: center;
+    }
+    .hero-text-col { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 0.85rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.28em;
+      color: var(--gold-2); margin-bottom: var(--space-6);
+    }
+    .eyebrow::before { content: ''; display: block; width: 26px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.8vw, 3.5rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--paper);
+      margin-bottom: var(--space-6);
+    }
+    .hero-title em { font-style: italic; font-weight: 400; color: var(--gold-2); }
+    /* Duas colunas: o tamanho máximo acompanha a largura da coluna de texto (grid menos o quadro do vídeo), para o título não passar de 3 linhas */
+    @media (min-width: 1025px) {
+      .hero-title { font-size: clamp(2rem, min(3.8vw, (min(1200px, 100vw - 5rem) - 3rem - clamp(480px, 40vw, 640px)) / 10.8), 3.5rem); }
+    }
+    .ln-mask { padding-bottom: 0.14em; margin-bottom: -0.14em; }
+
+    .hero-sub {
+      font-size: clamp(var(--text-base), 1.1vw, var(--text-lg));
+      font-weight: 300; line-height: 1.6;
+      color: rgba(244,239,228,0.9);
+      max-width: 95%;
+      margin-bottom: var(--space-8);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
+    .actions-break { flex-basis: 100%; height: 0; margin: -0.25rem 0 0; }
+    /* Computador (duas colunas): os 3 botões com a mesma largura e a mesma altura, e fonte maior */
+    @media (min-width: 1025px) {
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 0.875rem; width: min(100%, 24rem); }
+      .actions-break { display: none; }
+      .hero-actions .mag { display: flex; }
+      .hero-actions .btn { width: 100%; height: 3.5rem; padding: 0 var(--space-6); font-size: var(--text-base); }
+    }
+
+    /* Coluna do vídeo: posição, moldura e overlay iguais aos da referência */
+    .hero-visual-col {
+      position: relative; width: 100%;
+      justify-self: end;
+      max-width: calc((100vh - 14rem) * 16 / 9);
+      max-width: calc((100svh - 14rem) * 16 / 9); /* se faltar altura, reduz a largura e mantém 16:9 */
+      display: flex; justify-content: center; align-items: center;
+    }
+    .video-glow-backdrop {
+      position: absolute; inset: -30px;
+      background: radial-gradient(circle at center, rgba(198,164,90,0.15) 0%, transparent 60%);
+      filter: blur(25px);
+      z-index: 1; border-radius: 50%;
+      pointer-events: none;
+    }
+    .video-wrapper {
+      position: relative; width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: var(--navy-2);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--line-dark);
+      box-shadow: 0 20px 50px rgba(14,27,43,0.8), 0 0 30px rgba(198,164,90,0.08);
+      z-index: 2;
+      isolation: isolate;
+    }
+    .hero-poster, .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-video { opacity: 0; transition: opacity 0.6s var(--ease-smooth); }
+    .hero-video.is-playing { opacity: 1; }
+    /* Gradiente da cor principal sobre o vídeo, como na referência */
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(14,27,43,0.3) 0%, rgba(14,27,43,0.1) 100%);
+      pointer-events: none; z-index: 3;
+    }
+
+    /* Estado inicial da entrada (a animação sobe cada item ao carregar) */
+    html.js:not(.rm) .intro, html.js:not(.rm) .video-wrapper { opacity: 0; }
+
+    /* Âncoras temporárias: sem altura, só para os botões não ficarem com âncora quebrada */
+    .anchor-temp { display: block; height: 0; overflow: hidden; }
+
+    /* ============================================================
+       FUNDOS ALTERNADOS (navy e paper, como na referência)
+       Sequência planejada para a página:
+         1 Hero ............... navy
+         2 Faixa de prova ..... paper
+         3 Dois caminhos ...... navy
+         4 O problema ......... paper
+         5 Como trabalhamos ... navy
+         6 Credenciais ........ paper
+         7 Perguntas frequentes navy
+         8 Contato ............ paper
+         9 Rodapé ............. navy
+       Seções comuns: 8rem de respiro vertical (5rem até 1024px).
+       .section-strip: faixa, 3rem (2.25rem até 1024px).
+    ============================================================ */
+    .section-dark, .section-light { position: relative; padding-block: 8rem; }
+    .section-dark {
+      background-color: var(--navy);
+      color: var(--paper);
+      border-top: 1px solid var(--line-dark);
+    }
+    .section-light {
+      background-color: var(--paper);
+      color: var(--ink);
+      border-top: 1px solid var(--line-light);
+    }
+    @media (max-width: 1024px) {
+      .section-dark, .section-light { padding-block: 5rem; }
+    }
+    /* A faixa vem depois das regras comuns para sobrepor o respiro */
+    .section-strip { padding-block: 3rem; }
+    @media (max-width: 1024px) {
+      .section-strip { padding-block: 2.25rem; }
+    }
+
+    /* ============================================================
+       DOBRA 2: FAIXA DE PROVA (fundo paper)
+       Rótulo em var(--stone-2) (5,0:1 sobre paper, AA). O dourado
+       var(--gold-deep) dá 3,4:1 e não serve para texto pequeno.
+    ============================================================ */
+    .proof-list {
+      list-style: none; margin: 0; padding: 0;
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .proof-item {
+      min-width: 0; padding-inline: 2rem;
+      border-left: 1px solid var(--line-light);
+    }
+    .proof-item:first-child { padding-left: 0; border-left: 0; }
+    .proof-item:last-child { padding-right: 0; }
+    .proof-label {
+      display: block; margin-bottom: 0.5rem;
+      font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.15em; line-height: 1.4;
+      color: var(--stone-2);
+    }
+    .proof-text {
+      display: block;
+      font-family: var(--font-body); font-size: var(--text-base); line-height: 1.45;
+      color: var(--ink);
+    }
+    @media (max-width: 1024px) {
+      .proof-list { grid-template-columns: 1fr; }
+      .proof-item { padding: 1rem 0; border-left: 0; border-top: 1px solid var(--line-light); }
+      .proof-item:first-child { padding-top: 0; border-top: 0; }
+      .proof-item:last-child { padding-bottom: 0; }
+    }
+    /* Entrada: só com JavaScript e sem movimento reduzido (senão, tudo já visível).
+       Anima apenas opacity e transform, com os easings do design system. */
+    html.js:not(.rm) .proof-item {
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-spring);
+    }
+    html.js:not(.rm) .proof-item:nth-child(2) { transition-delay: 0.08s; }
+    html.js:not(.rm) .proof-item:nth-child(3) { transition-delay: 0.16s; }
+    html.js:not(.rm) .proof-list.is-in .proof-item { opacity: 1; transform: none; }
+
+    /* ============================================================
+       DOBRA 3: DOIS CAMINHOS (fundo navy)
+       Seletor com duas abas. Sem JavaScript: seletor escondido e os dois painéis
+       visíveis, um abaixo do outro. Com JavaScript: painéis na mesma célula do grid.
+    ============================================================ */
+    .paths-inner { position: relative; z-index: 2; }
+    .paths-head { max-width: 800px; margin-bottom: var(--space-16); }
+    .paths-head .eyebrow { justify-content: flex-start; margin-bottom: var(--space-6); }
+    .paths-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-3xl), 3.6vw, var(--text-5xl));
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--paper); margin-bottom: var(--space-6);
+    }
+    .paths-lede { max-width: 40rem; font-size: var(--text-lg); font-weight: 300; line-height: 1.6; color: var(--text-lede); }
+
+    /* Seletor de abas (só com JavaScript). Aba ativa: navy-2, borda dourada e traço de 2 px na base. */
+    .path-tabs { display: none; }
+    html.js .path-tabs {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4);
+      margin-bottom: var(--space-4);
+      scroll-margin-top: var(--space-24); /* o cabeçalho fixo não cobre o seletor ao chegar pela âncora */
+    }
+    .path-tab {
+      display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2);
+      min-width: 0; padding: var(--space-6);
+      font: inherit; text-align: left; cursor: pointer;
+      color: var(--text-lede); background: transparent;
+      border: 1px solid var(--line-dark); border-radius: var(--radius-xl);
+      transition: background-color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+    }
+    .path-tab-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.28em; color: inherit;
+    }
+    .path-tab-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-xl), 2vw, var(--text-2xl));
+      font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; color: inherit;
+    }
+    .path-tab-note { font-size: var(--text-sm); line-height: 1.5; color: inherit; }
+    .path-tab[aria-selected="true"] {
+      background: var(--navy-2); border-color: var(--gold);
+      box-shadow: inset 0 -2px 0 var(--gold);
+    }
+    .path-tab[aria-selected="true"] .path-tab-label { color: var(--gold-2); }
+    .path-tab[aria-selected="true"] .path-tab-title { color: var(--paper); }
+
+    /* Painéis: visual do cartão anterior. Desktop em duas colunas (5/12 e 7/12). */
+    .path-panels { display: grid; gap: var(--space-8); }
+    .path-panel {
+      display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      column-gap: var(--space-16); row-gap: var(--space-8);
+      min-width: 0; padding: var(--space-8);
+      background: var(--navy-2); border: 1px solid var(--line-dark);
+      border-radius: var(--radius-xl); box-shadow: var(--shadow-md);
+      scroll-margin-top: var(--space-24); /* âncora sem JavaScript */
+    }
+    @media (min-width: 769px) { .path-panel { padding: var(--space-12); } }
+    @media (min-width: 1025px) {
+      .path-panel { padding: var(--space-6) var(--space-12); row-gap: var(--space-6); }
+    }
+    /* Título do painel: só aparece sem JavaScript, quando o seletor está escondido */
+    .path-panel-head { display: none; grid-column: 1 / -1; }
+    html:not(.js) .path-panel-head { display: block; }
+    .path-label {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.28em;
+      color: var(--gold-2); margin-bottom: var(--space-4);
+    }
+    .path-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-2xl), 2.4vw, var(--text-3xl));
+      font-weight: 700; line-height: 1.2; letter-spacing: -0.01em;
+      color: var(--paper);
+    }
+    .path-col-main { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+    .path-desc { font-size: var(--text-base); line-height: 1.6; color: var(--text-lede); margin-bottom: var(--space-6); }
+    .path-link {
+      display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.75rem;
+      font-size: var(--text-base); font-weight: 600; color: var(--gold-2);
+      border-radius: var(--radius-sm);
+    }
+    .path-arrow { display: inline-block; transition: transform 0.3s var(--ease-spring); }
+    .path-col-fronts { min-width: 0; }
+    .path-fronts-title {
+      font-family: var(--font-mono); font-size: var(--text-sm);
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--paper); margin-bottom: var(--space-6);
+    }
+    .path-groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+    .path-group { min-width: 0; }
+    @media (min-width: 1025px) {
+      .path-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-8); row-gap: var(--space-4); align-items: start; }
+      .path-fronts-title { margin-bottom: var(--space-4); }
+    }
+    .path-group-name {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--gold-2); margin-bottom: var(--space-1);
+    }
+    .path-list { list-style: none; margin: 0; padding: 0; }
+    .path-list li {
+      display: flex; align-items: flex-start; gap: var(--space-3);
+      padding: var(--space-3) 0;
+      font-size: var(--text-base); line-height: 1.5; color: var(--paper);
+      overflow-wrap: break-word;
+    }
+    .path-list li + li { border-top: 1px solid var(--line-dark); }
+    .path-list li::before { content: ''; flex-shrink: 0; width: 12px; height: 1px; margin-top: 0.75em; background: var(--gold); }
+    .path-panel-foot {
+      grid-column: 1 / -1; padding-top: var(--space-6);
+      border-top: 1px solid var(--line-dark);
+      font-size: var(--text-base); line-height: 1.6; color: var(--text-lede);
+    }
+    @media (min-width: 1025px) {
+      .path-list li { padding: var(--space-2) 0; }
+      .path-panel-foot { padding-top: var(--space-4); }
+    }
+    /* Com JavaScript: os dois painéis dividem a mesma célula (a altura é a do maior, nada pula ao trocar).
+       O inativo fica com visibility hidden, opacity 0 e pointer-events none, fora do teclado. */
+    html.js .path-panel {
+      grid-area: 1 / 1;
+      opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(8px);
+      transition: opacity 0.35s var(--ease-smooth), transform 0.35s var(--ease-spring), visibility 0s linear 0.35s;
+    }
+    html.js .path-panel.is-active {
+      opacity: 1; visibility: visible; pointer-events: auto; transform: none;
+      transition: opacity 0.35s var(--ease-smooth), transform 0.35s var(--ease-spring), visibility 0s linear 0s;
+    }
+    /* Hover só com mouse. Foco por teclado sempre visível (outline global do :focus-visible). */
+    @media (hover: hover) and (pointer: fine) {
+      .path-tab[aria-selected="false"]:hover { border-color: var(--gold); color: var(--paper); }
+      .path-link:hover .path-arrow { transform: translateX(4px); }
+    }
+    .path-link:focus-visible .path-arrow { transform: translateX(4px); }
+    /* Movimento reduzido: troca instantânea, sem animação */
+    @media (prefers-reduced-motion: reduce) {
+      .path-tab, .path-arrow, html.js .path-panel, html.js .path-panel.is-active { transition: none; }
+    }
+    html.rm .path-tab, html.rm .path-arrow, html.rm.js .path-panel, html.rm.js .path-panel.is-active { transition: none; }
+    @media (max-width: 1024px) { .path-panel { grid-template-columns: minmax(0, 1fr); } }
+    @media (max-width: 768px) { html.js .path-tabs { grid-template-columns: minmax(0, 1fr); } }
+    /* Entrada: cabeçalho e cartões (16 px, 0,1 s entre eles). Só opacity e transform. */
+    html.js:not(.rm) .reveal {
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-spring);
+    }
+    html.js:not(.rm) .reveal-2 { transition-delay: 0.1s; }
+    html.js:not(.rm) .reveal-3 { transition-delay: 0.2s; }
+    html.js:not(.rm) .section-dark.is-in .reveal,
+    html.js:not(.rm) .section-light.is-in .reveal { opacity: 1; transform: none; }
+
+    /* ============================================================
+       DOBRA 4: O PROBLEMA (fundo paper)
+       Cabeçalho, duas linhas de cartões (4 e 3 + fechamento) e entrada com .reveal.
+       O atraso de cada item vem da variável --i (0,08 s por passo).
+    ============================================================ */
+    #problema { scroll-margin-top: var(--space-24); }
+    .eyebrow-light { color: var(--stone-2); }
+    .eyebrow-light::before { background: var(--gold-deep); }
+    .problem-head { max-width: 800px; margin-bottom: var(--space-16); }
+    .problem-head .eyebrow { justify-content: flex-start; margin-bottom: var(--space-6); }
+    .problem-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-3xl), 3.6vw, var(--text-5xl));
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: var(--space-6);
+    }
+    .problem-lede { max-width: 40rem; font-size: var(--text-lg); font-weight: 300; line-height: 1.6; color: var(--ink); }
+    .problem-row + .problem-row { margin-top: var(--space-12); }
+    .problem-row-label {
+      display: flex; align-items: center; gap: var(--space-4);
+      font-family: var(--font-mono); font-size: var(--text-sm);
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--stone-2); margin-bottom: var(--space-6);
+    }
+    .problem-row-label::after { content: ''; flex: 1; min-width: var(--space-6); height: 1px; background: var(--line-light); }
+    .problem-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--grid-gap); }
+    .problem-cell { min-width: 0; }
+    .problem-card {
+      position: relative; overflow: hidden; height: 100%;
+      padding: var(--space-8);
+      background: transparent; border: 1px solid var(--line-light); border-radius: var(--radius-xl);
+      transition: transform 0.3s var(--ease-spring), border-color 0.3s var(--ease-smooth);
+    }
+    .problem-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold-deep); }
+    .problem-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-xl), 1.6vw, var(--text-2xl));
+      font-weight: 700; line-height: 1.2; letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: var(--space-4);
+      overflow-wrap: break-word;
+    }
+    .problem-card-text { font-size: var(--text-base); line-height: 1.6; color: var(--ink); overflow-wrap: break-word; }
+    .problem-close { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: var(--space-4); }
+    .problem-close-text {
+      font-family: var(--font-display); font-size: var(--text-xl);
+      line-height: 1.3; color: var(--ink); overflow-wrap: break-word;
+    }
+    .problem-link {
+      display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.75rem;
+      font-size: var(--text-base); font-weight: 600; color: var(--ink);
+      text-decoration: underline; text-decoration-color: var(--gold-deep);
+      text-decoration-thickness: 2px; text-underline-offset: 0.25em;
+      border-radius: var(--radius-sm);
+    }
+    .problem-link:focus-visible { outline-color: var(--gold-deep); }
+    .problem-link:focus-visible .problem-arrow { transform: translateX(4px); }
+    .problem-arrow { display: inline-block; text-decoration: none; transition: transform 0.3s var(--ease-spring); }
+    /* Hover só com mouse */
+    @media (hover: hover) and (pointer: fine) {
+      .problem-card:hover { transform: translateY(-4px); border-color: var(--gold-deep); }
+      .problem-link:hover .problem-arrow { transform: translateX(4px); }
+    }
+    @media (min-width: 769px) {
+      .problem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1200px) {
+      .problem-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    /* Entrada: o atraso de cada item vem de --i */
+    html.js:not(.rm) #problema .reveal { transition-delay: calc(var(--i, 0) * 0.08s); }
+    @media (prefers-reduced-motion: reduce) {
+      .problem-card, .problem-arrow { transition: none; }
+    }
+    html.rm .problem-card, html.rm .problem-arrow { transition: none; }
+
+    /* ============================================================
+       DOBRA 5: COMO TRABALHAMOS (fundo navy)
+       Régua de engenharia sobre uma planta. Estado base (sem JavaScript ou com movimento
+       reduzido): régua cheia, marcos acesos, numerais sólidos, tudo visível.
+       Com JavaScript a seção recebe .how-armed e o progresso passa a vir da rolagem.
+    ============================================================ */
+    #como-trabalhamos { scroll-margin-top: var(--space-24); overflow: hidden; }
+    /* Emenda com a dobra 4 (paper): fio dourado e régua de ticks pendurada na borda */
+    .how::before {
+      content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; z-index: 3;
+      background: linear-gradient(90deg, transparent, var(--gold-deep) 20%, var(--gold) 50%, var(--gold-deep) 80%, transparent);
+    }
+    .how::after {
+      content: ''; position: absolute; left: 0; right: 0; top: 1px; height: 14px; z-index: 3; pointer-events: none;
+      background:
+        repeating-linear-gradient(90deg, var(--gold-deep) 0 1px, transparent 1px 60px) left top / 100% 14px no-repeat,
+        repeating-linear-gradient(90deg, var(--line-dark) 0 1px, transparent 1px 12px) left top / 100% 7px no-repeat;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+    }
+    /* Planta técnica de fundo (decorativa) */
+    .how-plan { position: absolute; inset: -6% 0; z-index: 0; pointer-events: none; color: var(--gold); opacity: 0.16; }
+    .how-plan svg { display: block; width: 100%; height: 100%; }
+    .how-plan path { fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+    .cota { stroke-dasharray: 1; stroke-dashoffset: 0; }
+    .how-armed .cota { stroke-dashoffset: 1; transition: stroke-dashoffset 1.8s var(--ease-smooth) calc(var(--d, 0) * 0.14s); }
+    .how-armed.is-in .cota { stroke-dashoffset: 0; }
+    .how-inner { position: relative; z-index: 2; }
+    .how-head { max-width: 800px; margin-bottom: var(--space-16); }
+    .how-head .eyebrow { justify-content: flex-start; margin-bottom: var(--space-6); }
+    .how-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-3xl), 3.6vw, var(--text-5xl));
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--paper); margin-bottom: var(--space-6);
+    }
+    .how-lede { max-width: 40rem; font-size: var(--text-lg); font-weight: 300; line-height: 1.6; color: var(--text-lede); }
+
+    /* Trilho: régua horizontal no topo, etapas em quatro colunas */
+    .how-track { position: relative; padding-top: var(--space-16); }
+    .how-ruler { position: absolute; top: 0; left: 0; right: 0; height: var(--space-16); pointer-events: none; }
+    .how-ruler-ticks {
+      position: absolute; inset: 0; opacity: 0.55;
+      background:
+        linear-gradient(var(--navy-3), var(--navy-3)) left bottom / 100% 2px no-repeat,
+        repeating-linear-gradient(90deg, var(--stone) 0 1px, transparent 1px 50px) left calc(100% - 2px) / 100% 16px no-repeat,
+        repeating-linear-gradient(90deg, var(--stone) 0 1px, transparent 1px 10px) left calc(100% - 2px) / 100% 8px no-repeat;
+    }
+    .how-ruler-fill {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 2px; transform-origin: left center;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold) 60%, var(--gold-2));
+      box-shadow: var(--glow-gold);
+    }
+    .how-armed .how-ruler-fill { transform: scaleX(0); }
+    .how-dim { position: absolute; top: 0; left: 0; width: 100%; height: auto; display: block; opacity: 0.7; }
+    .how-dim path { fill: none; stroke: var(--stone); stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+    .how-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gap); }
+    .how-step { position: relative; min-width: 0; padding-top: var(--space-8); }
+    /* Marco na régua, alinhado ao topo do cartão */
+    .how-node {
+      position: absolute; top: -11px; left: var(--space-8); z-index: 3;
+      width: 20px; height: 20px; border-radius: var(--radius-full);
+      background: var(--gold); border: 2px solid var(--gold-2);
+    }
+    .how-node::after { content: ''; position: absolute; inset: -2px; border-radius: inherit; border: 2px solid var(--gold); opacity: 0; }
+    .how-stem { position: absolute; top: 9px; left: calc(var(--space-8) + 9px); width: 1px; height: 23px; background: var(--gold); transform-origin: top center; }
+    .how-cota {
+      position: absolute; top: -46px; left: var(--space-8);
+      font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--gold-2); white-space: nowrap;
+    }
+    .how-armed .how-node { background: var(--navy); border-color: var(--stone); transition: background-color 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth), transform 0.5s var(--ease-elastic); }
+    .how-armed .how-stem { transform: scaleY(0); transition: transform 0.45s var(--ease-spring); }
+    .how-armed .how-cota { color: var(--stone); transition: color 0.4s var(--ease-smooth); }
+    .how-armed .how-step.is-lit .how-node { background: var(--gold); border-color: var(--gold-2); transform: scale(1.1); }
+    .how-armed .how-step.is-lit .how-node::after { animation: how-ping 1s var(--ease-smooth) 1; }
+    .how-armed .how-step.is-lit .how-stem { transform: scaleY(1); }
+    .how-armed .how-step.is-lit .how-cota { color: var(--gold-2); }
+    @keyframes how-ping { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+    /* Cartão da etapa */
+    .how-card {
+      position: relative; isolation: isolate; overflow: hidden; height: 100%;
+      padding: var(--space-8);
+      background: var(--navy-2); border: 1px solid var(--line-dark); border-radius: var(--radius-xl);
+      transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+      transition: transform 0.3s var(--ease-smooth), border-color 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+    }
+    .how-card > * { position: relative; z-index: 1; }
+    .how-card::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+      background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), var(--line-dark), transparent 70%);
+      transition: opacity 0.3s var(--ease-smooth);
+    }
+    .how-armed .how-step.is-lit .how-card { border-color: var(--gold); box-shadow: var(--glow-gold); }
+    .how-num {
+      display: block; margin-bottom: var(--space-4);
+      font-family: var(--font-display); font-size: var(--text-6xl); font-weight: 700; line-height: 1;
+      letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+      color: var(--gold); -webkit-text-stroke: 1px var(--gold);
+    }
+    .how-armed .how-num { color: transparent; transition: color 0.6s var(--ease-smooth); }
+    .how-armed .how-step.is-lit .how-num { color: var(--gold); }
+    .how-tag { margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold-2); }
+    .how-step-title { margin-bottom: var(--space-3); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; color: var(--paper); }
+    .how-step-text { font-size: var(--text-base); line-height: 1.6; color: var(--text-lede); overflow-wrap: break-word; }
+    @media (hover: hover) and (pointer: fine) {
+      .how-card:hover::after { opacity: 1; }
+    }
+    /* Fechamento */
+    .how-close {
+      display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-6); align-items: center;
+      margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--line-dark);
+    }
+    .how-close-text { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: var(--paper); }
+    .how-close-cta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+    .how-close-note { font-size: var(--text-sm); line-height: 1.5; color: var(--text-lede); }
+    html.js:not(.rm) #como-trabalhamos .reveal { transition-delay: calc(var(--i, 0) * 0.08s); }
+    @media (min-width: 1025px) {
+      .how-close { grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--space-16); }
+    }
+    /* Até 1024 px: régua vertical à esquerda, etapas empilhadas à direita */
+    @media (max-width: 1024px) {
+      .how-dim, .how-cota { display: none; }
+      .how-track { padding-top: 0; padding-left: var(--space-16); }
+      .how-ruler { top: 0; bottom: 0; right: auto; width: 40px; height: auto; }
+      .how-ruler-ticks {
+        background:
+          linear-gradient(var(--navy-3), var(--navy-3)) right top / 2px 100% no-repeat,
+          repeating-linear-gradient(180deg, var(--stone) 0 1px, transparent 1px 50px) calc(100% - 2px) top / 16px 100% no-repeat,
+          repeating-linear-gradient(180deg, var(--stone) 0 1px, transparent 1px 10px) calc(100% - 2px) top / 8px 100% no-repeat;
+      }
+      .how-ruler-fill { left: auto; top: 0; bottom: 0; right: 0; width: 2px; height: auto; transform-origin: center top; background: linear-gradient(180deg, var(--gold-deep), var(--gold) 60%, var(--gold-2)); }
+      .how-armed .how-ruler-fill { transform: scaleY(0); }
+      .how-steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+      .how-step { padding-top: 0; }
+      .how-node { top: 22px; left: -35px; }
+      .how-stem { top: 31px; left: -15px; width: 15px; height: 1px; transform-origin: left center; }
+      .how-armed .how-stem { transform: scaleX(0); }
+      .how-armed .how-step.is-lit .how-stem { transform: scaleX(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .how-card, .how-node, .how-stem, .how-num, .how-cota, .cota { transition: none; }
+      .how-node::after { animation: none !important; }
+    }
+
+    /* ============================================================
+       RESPONSIVO (mesmos pontos de quebra da referência)
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .hero-split-grid { grid-template-columns: 1fr; gap: 1.75rem; text-align: center; }
+      .hero-visual-col { order: -1; justify-self: center; margin-inline: auto; max-width: min(640px, calc((100vh - 7rem) * 16 / 9)); max-width: min(640px, calc((100svh - 7rem) * 16 / 9)); }
+      .video-wrapper { max-width: 640px; margin-inline: auto; }
+      .hero-text-col { align-items: center; }
+      .eyebrow { justify-content: center; }
+      .hero-actions { justify-content: center; }
+      .hero-sub { max-width: 40em; }
+      .hero-main { padding-top: 5.25rem; }
+    }
+    @media (max-width: 768px) {
+      .max-w { padding-inline: 1.5rem; }
+      .hero-grid-lines { padding-inline: 1.5rem; grid-template-columns: repeat(4, 1fr); }
+      .grid-line:nth-child(n+5) { display: none; }
+      .header-inner { padding: var(--space-3) var(--space-6); }
+      .brand img { height: 36px; }
+      .hero-main { padding-top: 4.75rem; padding-bottom: 2.5rem; }
+      .hero-split-grid { gap: 1.25rem; }
+      .eyebrow { margin-bottom: var(--space-3); font-size: 0.625rem; }
+      .hero-title { font-size: clamp(1.625rem, 7.2vw, 2rem); margin-bottom: var(--space-3); }
+      .hero-sub { font-size: var(--text-sm); line-height: 1.5; margin-bottom: var(--space-4); }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: var(--space-2); width: 100%; max-width: 400px; }
+      .actions-break { display: none; }
+      .hero-actions .mag { display: flex; }
+      .hero-actions .btn { width: 100%; padding: 0.7rem var(--space-4); }
+    }
+    /* Telas baixas na horizontal (ex.: celular deitado): duas colunas, texto à esquerda e vídeo à direita, espaços menores.
+       O quadro mantém 16:9 e a largura máxima acompanha a altura disponível. */
+    @media (max-width: 1024px) and (max-height: 500px) and (orientation: landscape) {
+      .header-inner { padding-block: var(--space-2); }
+      .brand img { height: 36px; }
+      .hero-main { padding-top: 3.75rem; padding-bottom: 1rem; }
+      .hero-split-grid {
+        grid-template-columns: minmax(0, 1fr) min(42vw, calc((100vh - 7rem) * 16 / 9));
+        grid-template-columns: minmax(0, 1fr) min(42vw, calc((100svh - 7rem) * 16 / 9));
+        gap: 1.5rem; text-align: left;
+      }
+      .hero-visual-col { order: 0; justify-self: end; margin-inline: 0; max-width: none; }
+      .hero-text-col { align-items: flex-start; }
+      .eyebrow { justify-content: flex-start; margin-bottom: var(--space-2); font-size: 0.625rem; }
+      .hero-title { font-size: clamp(1.25rem, 3.2vw, 1.75rem); margin-bottom: var(--space-3); }
+      .hero-sub { max-width: 100%; font-size: var(--text-sm); line-height: 1.5; margin-bottom: var(--space-3); }
+      .hero-actions { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 0.5rem; width: auto; max-width: none; }
+      .actions-break { display: block; }
+      .hero-actions .mag { display: inline-flex; }
+      .hero-actions .btn { width: auto; padding: 0.45rem 1.1rem; }
+    }
+    /* Tablet na horizontal (ex.: 1024 x 768): layout empilhado mais compacto para texto e botões caberem sem rolar.
+       Os três botões ficam em uma linha, as margens verticais diminuem e a largura do quadro acompanha a altura (16:9 sempre). */
+    @media (min-width: 769px) and (max-width: 1024px) and (min-height: 501px) and (max-height: 900px) {
+      .hero-main { padding-top: 4.5rem; padding-bottom: 1.5rem; }
+      .hero-split-grid { gap: 1.25rem; }
+      .hero-visual-col { max-width: min(640px, calc((100vh - 27rem) * 16 / 9)); max-width: min(640px, calc((100svh - 27rem) * 16 / 9)); }
+      .eyebrow { margin-bottom: var(--space-4); }
+      .hero-title { margin-bottom: var(--space-4); }
+      .hero-sub { margin-bottom: var(--space-6); }
+      .actions-break { display: none; }
+    }
+
+    /* ============================================================
+       MODO MOVIMENTO REDUZIDO: mostra o poster e o texto estáticos
+    ============================================================ */
+    html.rm .hero-video { display: none; }
+    html.rm .header-cta, html.rm .header-cta.is-on { transform: none; transition: none !important; }
+    html.rm .site-header, html.rm .site-header::before { transition: none !important; }
+    html.rm .preloader { display: none; }
+    html.rm *, html.rm *::before, html.rm *::after { animation: none !important; transition-duration: 0.01ms !important; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#hero">Ir para o conteúdo</a>
+
+  <!-- Pré-carregamento -->
+  <div class="preloader" id="preloader" role="status" aria-label="Carregando a página">
+    <div class="preloader-inner">
+      <img class="preloader-logo" src="assets/logo_1234_sm.png" alt="1234 Solution" width="200" height="104" />
+      <div class="preloader-bar" aria-hidden="true"><span class="preloader-fill" id="preloaderFill"></span></div>
+    </div>
+  </div>
+
+  <!-- Cabeçalho mínimo: só o logo e o botão de diagnóstico (o botão só aparece quando o botão principal do Hero sai da tela) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand intro" href="#hero" aria-label="1234 Solution, voltar ao topo">
+        <img src="assets/logo_1234_sm.png" alt="1234 Solution" width="85" height="44" />
+      </a>
+      <div class="header-cta" id="headerCta" inert>
+        <span class="mag">
+          <a class="btn btn-primary btn-sm" href="#contato" aria-label="Diagnóstico técnico gratuito: ir para o contato">
+            <span class="btn-inner-track" aria-hidden="true"><span class="btn-conic"></span><span class="btn-bg"><span class="btn-shimmer"></span><span class="btn-glow"></span></span></span>
+            <span class="btn-label">Diagnóstico técnico gratuito</span>
+          </a>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================
+         HERO: única dobra desta etapa
+         Texto à esquerda, vídeo à direita, como na landing de referência.
+    ========================================================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+
+      <!-- Linhas decorativas de fundo -->
+      <div class="hero-grid-lines" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+
+      <div class="hero-main">
+        <div class="max-w hero-split-grid">
+
+          <!-- Coluna de texto (esquerda) -->
+          <div class="hero-text-col">
+            <p class="eyebrow intro">Consultoria de engenharia</p>
+            <h1 class="hero-title" id="hero-title">Engenharia que comprova, regulariza e <em>protege o seu patrimônio.</em></h1>
+            <p class="hero-sub intro">Gestão de ativos e serviços técnicos para saneamento, autarquias e indústrias de capital intensivo.</p>
+            <div class="hero-actions intro">
+              <span class="mag">
+                <a class="btn btn-primary" href="#contato" aria-label="Diagnóstico técnico gratuito: ir para o contato">
+                  <span class="btn-inner-track" aria-hidden="true"><span class="btn-conic"></span><span class="btn-bg"><span class="btn-shimmer"></span><span class="btn-glow"></span></span></span>
+                  <span class="btn-label">Diagnóstico técnico gratuito</span>
+                  <svg class="btn-label btn-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </span>
+              <span class="actions-break" aria-hidden="true"></span>
+              <span class="mag">
+                <a class="btn btn-ghost" href="#caminho-ativos" aria-label="Gestão de ativos e patrimonial: conhecer o caminho">Gestão de ativos e patrimonial</a>
+              </span>
+              <span class="mag">
+                <a class="btn btn-ghost" href="#caminho-servicos" aria-label="Serviços técnicos de engenharia: conhecer o caminho">Serviços técnicos de engenharia</a>
+              </span>
+            </div>
+          </div>
+
+          <!-- Coluna visual (direita): vídeo decorativo que toca ao carregar -->
+          <div class="hero-visual-col" aria-hidden="true">
+            <div class="video-glow-backdrop"></div>
+            <div class="video-wrapper" id="heroWrap">
+              <!-- O poster fica por baixo e é o fallback se o vídeo não carregar -->
+              <img class="hero-poster" src="assets/hero_poster.jpg" alt="" width="1280" height="720" fetchpriority="high" decoding="async" />
+              <video class="hero-video" id="heroVideo" muted playsinline preload="auto" tabindex="-1" aria-hidden="true" disablepictureinpicture disableremoteplayback poster="assets/hero_poster.jpg"></video>
+              <div class="video-overlay"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DOBRA 2: faixa de prova (fundo paper) -->
+    <section class="section-light section-strip" id="prova" aria-label="Credenciais da 1234 Solution">
+      <div class="max-w">
+        <ul class="proof-list" id="proof-list">
+          <li class="proof-item">
+            <span class="proof-label">Registro</span>
+            <span class="proof-text">Empresa registrada no CREA-SP</span>
+          </li>
+          <li class="proof-item">
+            <span class="proof-label">Formação</span>
+            <span class="proof-text">Mestre em Engenharia Civil (Saneamento) pela Poli/USP</span>
+          </li>
+          <li class="proof-item">
+            <span class="proof-label">Conselho</span>
+            <span class="proof-text">Conselheiro Curador da Fundação Nacional da Qualidade</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- DOBRA 3: dois caminhos (fundo navy), seletor com duas abas -->
+    <section class="section-dark paths" id="caminhos" data-reveal aria-labelledby="paths-title">
+      <div class="hero-grid-lines" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <div class="max-w paths-inner">
+        <header class="paths-head reveal">
+          <p class="eyebrow">Como podemos ajudar</p>
+          <h2 class="paths-title" id="paths-title">Dois caminhos, conforme a sua demanda.</h2>
+          <p class="paths-lede">Escolha por onde começar. Nos dois casos, o primeiro passo é o diagnóstico técnico gratuito.</p>
+        </header>
+
+        <!-- Seletor: escondido sem JavaScript (os dois painéis aparecem um abaixo do outro) -->
+        <div class="path-tabs reveal reveal-2" role="tablist" aria-label="Caminhos para começar">
+          <button type="button" class="path-tab" role="tab" id="tab-ativos" aria-selected="true" aria-controls="caminho-ativos" tabindex="0">
+            <span class="path-tab-label">Caminho 01</span>
+            <span class="path-tab-title">Gestão de ativos e patrimonial</span>
+            <span class="path-tab-note">Concessionárias, autarquias e indústrias</span>
+          </button>
+          <button type="button" class="path-tab" role="tab" id="tab-servicos" aria-selected="false" aria-controls="caminho-servicos" tabindex="-1">
+            <span class="path-tab-label">Caminho 02</span>
+            <span class="path-tab-title">Serviços técnicos de engenharia</span>
+            <span class="path-tab-note">Condomínios, indústrias, propriedades e empresas</span>
+          </button>
+        </div>
+
+        <div class="path-panels reveal reveal-3">
+          <article class="path-panel is-active" id="caminho-ativos" role="tabpanel" aria-labelledby="tab-ativos">
+            <div class="path-panel-head">
+              <p class="path-label">Caminho 01</p>
+              <h3 class="path-title">Gestão de ativos e patrimonial</h3>
+            </div>
+            <div class="path-col-main">
+              <p class="path-desc">Para concessionárias, autarquias e indústrias que precisam comprovar, organizar e proteger o patrimônio.</p>
+              <!-- TROCAR pelo link da página própria quando existir -->
+              <a class="path-link" href="#contato">Pedir diagnóstico de ativos <span class="path-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="path-col-fronts">
+              <p class="path-fronts-title">Principais frentes</p>
+              <div class="path-groups">
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-ativos-1">Inventário e controle</p>
+                  <ul class="path-list" aria-labelledby="grp-ativos-1">
+                    <li>Inventário físico e conciliação contábil</li>
+                    <li>Controle patrimonial com RFID e sistemas de gestão de ativos</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-ativos-2">Avaliação e regulação</p>
+                  <ul class="path-list" aria-labelledby="grp-ativos-2">
+                    <li>Avaliação de ativos e base regulatória (BAR)</li>
+                    <li>Atendimento à regulação (ARSESP e ANA)</li>
+                    <li>Laudos e processos de baixa de ativos</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-ativos-3">Sistemas de gestão</p>
+                  <ul class="path-list" aria-labelledby="grp-ativos-3">
+                    <li>Gestão de ativos conforme a ISO 55000</li>
+                    <li>Planejamento estratégico e políticas de gestão e qualidade</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-ativos-4">Governança e capacitação</p>
+                  <ul class="path-list" aria-labelledby="grp-ativos-4">
+                    <li>Apoio a conselhos em finanças, riscos e conformidade</li>
+                    <li>Capacitação de equipes e lideranças</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <p class="path-panel-foot">Sua demanda não aparece aqui? Conte o caso no diagnóstico e dizemos se conseguimos atender.</p>
+          </article>
+
+          <article class="path-panel" id="caminho-servicos" role="tabpanel" aria-labelledby="tab-servicos">
+            <div class="path-panel-head">
+              <p class="path-label">Caminho 02</p>
+              <h3 class="path-title">Serviços técnicos de engenharia</h3>
+            </div>
+            <div class="path-col-main">
+              <p class="path-desc">Para condomínios, indústrias, propriedades e empresas que precisam regularizar, inspecionar ou projetar.</p>
+              <!-- TROCAR pelo link da página própria quando existir -->
+              <a class="path-link" href="#contato">Pedir diagnóstico técnico <span class="path-arrow" aria-hidden="true">→</span></a>
+            </div>
+            <div class="path-col-fronts">
+              <p class="path-fronts-title">Principais frentes</p>
+              <div class="path-groups">
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-serv-1">Avaliações e laudos</p>
+                  <ul class="path-list" aria-labelledby="grp-serv-1">
+                    <li>Avaliação de imóveis (NBR 14.653)</li>
+                    <li>Laudos e pareceres técnicos de engenharia</li>
+                    <li>Inspeção predial e patologias, como infiltrações</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-serv-2">Regularização</p>
+                  <ul class="path-list" aria-labelledby="grp-serv-2">
+                    <li>Regularização de imóveis e áreas</li>
+                    <li>Regularização de barramentos, poços e outorgas</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-serv-3">Projetos e estudos</p>
+                  <ul class="path-list" aria-labelledby="grp-serv-3">
+                    <li>Estudos hidrológico-hidráulicos e drenagem urbana</li>
+                    <li>Projetos de instalações hidráulicas e sanitárias</li>
+                    <li>Instalações elétricas e pareceres técnicos</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <p class="path-panel-foot">Sua demanda não aparece aqui? Conte o caso no diagnóstico e dizemos se conseguimos atender.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOBRA 4: o problema (fundo paper) -->
+    <section class="section-light problem" id="problema" data-reveal aria-labelledby="problem-title">
+      <div class="max-w">
+        <header class="problem-head reveal">
+          <p class="eyebrow eyebrow-light">O problema</p>
+          <h2 class="problem-title" id="problem-title">Quanto do seu patrimônio você consegue comprovar sob pressão?</h2>
+          <p class="problem-lede">A pressão chega de formas diferentes: da agência reguladora, da auditoria, da seguradora, do conselho ou de uma fiscalização. O risco é o mesmo: o que existe, mas não está comprovado do jeito que alguém vai exigir.</p>
+        </header>
+
+        <div class="problem-row" role="group" aria-labelledby="problem-row-1">
+          <p class="problem-row-label reveal" id="problem-row-1" style="--i:1">Em gestão de ativos e patrimonial</p>
+          <div class="problem-grid">
+            <div class="problem-cell reveal" style="--i:2">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Risco de glosa ou de auditoria</h3>
+                <p class="problem-card-text">Investimento que a ARSESP ou a ANA podem não reconhecer na base regulatória. Em outros setores, a mesma lacuna aparece em auditorias, seguros e certificações.</p>
+              </div>
+            </div>
+            <div class="problem-cell reveal" style="--i:3">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Ativos ocultos</h3>
+                <p class="problem-card-text">Redes enterradas, equipamentos legados e instalações antigas sem documentação. Sem mapeamento e valoração, esse patrimônio não sustenta indenização, seguro nem composição de custo.</p>
+              </div>
+            </div>
+            <div class="problem-cell reveal" style="--i:4">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Dado fragmentado</h3>
+                <p class="problem-card-text">A engenharia usa um sistema e a contabilidade outro. Cada auditoria ou revisão tarifária vira uma corrida para reconciliar planilhas.</p>
+              </div>
+            </div>
+            <div class="problem-cell reveal" style="--i:5">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Pressão normativa constante</h3>
+                <p class="problem-card-text">Resoluções e normas internas mudam mais rápido do que a equipe consegue acompanhar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="problem-row" role="group" aria-labelledby="problem-row-2">
+          <p class="problem-row-label reveal" id="problem-row-2" style="--i:1">Em serviços técnicos de engenharia</p>
+          <div class="problem-grid">
+            <div class="problem-cell reveal" style="--i:2">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Prazo legal correndo</h3>
+                <p class="problem-card-text">Notificação de fiscalização, exigência de um órgão ou prazo para apresentar documentos técnicos que a equipe não sabe como atender.</p>
+              </div>
+            </div>
+            <div class="problem-cell reveal" style="--i:3">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Instalação sem respaldo</h3>
+                <p class="problem-card-text">Imóvel, obra ou instalação que existe, mas sem o laudo, o projeto ou a autorização que a sustente.</p>
+              </div>
+            </div>
+            <div class="problem-cell reveal" style="--i:4">
+              <div class="problem-card">
+                <h3 class="problem-card-title">Problema sem diagnóstico</h3>
+                <p class="problem-card-text">Infiltração, vazamento ou patologia recorrente, com várias tentativas de reparo e nenhuma causa identificada.</p>
+              </div>
+            </div>
+            <div class="problem-cell problem-close reveal" style="--i:5">
+              <p class="problem-close-text">Se alguma dessas situações é familiar, você já sabe o tamanho do risco que carrega.</p>
+              <a class="problem-link" href="#contato">Pedir diagnóstico técnico gratuito <span class="problem-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOBRA 5: como trabalhamos (fundo navy). Régua de engenharia sobre uma planta. -->
+    <section class="section-dark how" id="como-trabalhamos" data-reveal aria-labelledby="how-title">
+      <div class="hero-grid-lines" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <!-- Planta técnica decorativa: paredes, portas, cotas, tampa de poço, marca de nível e tubulação -->
+      <div class="how-plan" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <path class="cota" pathLength="1" style="--d:0" d="M120 140H1100V700H120Z"/>
+          <path class="cota" pathLength="1" style="--d:1" d="M120 420H520M520 140V420M520 420V700M820 140V560H1100"/>
+          <path class="cota" pathLength="1" style="--d:2" d="M420 420A70 70 0 0 0 490 350M820 470A70 70 0 0 1 750 540"/>
+          <path class="cota" pathLength="1" style="--d:3" d="M120 100H1100M120 88V112M1100 88V112M138 94L120 100L138 106M1082 94L1100 100L1082 106"/>
+          <path class="cota" pathLength="1" style="--d:4" d="M80 140V700M68 140H92M68 700H92M74 158L80 140L86 158M74 682L80 700L86 682"/>
+          <path class="cota" pathLength="1" style="--d:5" d="M1210 300A40 40 0 1 0 1290 300A40 40 0 1 0 1210 300M1210 300H1290M1250 260V340"/>
+          <path class="cota" pathLength="1" style="--d:6" d="M1180 600H1260M1190 600L1220 600L1205 626Z"/>
+          <path class="cota" pathLength="1" style="--d:7" d="M1100 520H1300V780H700"/>
+          <path class="cota" pathLength="1" style="--d:8" d="M170 640L230 580M200 660L290 570M240 670L330 580M280 680L350 610"/>
+        </svg>
+      </div>
+      <div class="max-w how-inner">
+        <header class="how-head">
+          <p class="eyebrow reveal">Como trabalhamos</p>
+          <h2 class="how-title" id="how-title">Do diagnóstico à entrega, em quatro etapas.</h2>
+          <p class="how-lede reveal" style="--i:1">Um processo simples e previsível. Antes de começar, você sabe o que será feito, em quanto tempo e qual o valor.</p>
+        </header>
+
+        <div class="how-track" id="howTrack">
+          <div class="how-ruler" aria-hidden="true">
+            <div class="how-ruler-ticks"></div>
+            <svg class="how-dim" viewBox="0 0 1200 12" focusable="false">
+              <path class="cota" pathLength="1" style="--d:0" d="M0 6H1200M0.5 0V12M1199.5 0V12M14 1L1 6L14 11M1186 1L1199 6L1186 11"/>
+            </svg>
+            <div class="how-ruler-fill" id="howFill"></div>
+          </div>
+          <ol class="how-steps" role="list">
+            <li class="how-step reveal" data-step="1" style="--i:1">
+              <span class="how-cota" aria-hidden="true">Etapa 01</span>
+              <span class="how-node" aria-hidden="true"></span>
+              <span class="how-stem" aria-hidden="true"></span>
+              <div class="how-card">
+                <span class="how-num" aria-hidden="true">01</span>
+                <p class="how-tag">Gratuito</p>
+                <h3 class="how-step-title">Diagnóstico</h3>
+                <p class="how-step-text">Conversa de 30 minutos e leitura dos documentos que você já tem. Entendemos a demanda, o prazo e o que está em jogo.</p>
+              </div>
+            </li>
+            <li class="how-step reveal" data-step="2" style="--i:2">
+              <span class="how-cota" aria-hidden="true">Etapa 02</span>
+              <span class="how-node" aria-hidden="true"></span>
+              <span class="how-stem" aria-hidden="true"></span>
+              <div class="how-card">
+                <span class="how-num" aria-hidden="true">02</span>
+                <p class="how-tag">Por escrito</p>
+                <h3 class="how-step-title">Proposta</h3>
+                <p class="how-step-text">Escopo, prazo e valor definidos por escrito, antes de qualquer trabalho começar.</p>
+              </div>
+            </li>
+            <li class="how-step reveal" data-step="3" style="--i:3">
+              <span class="how-cota" aria-hidden="true">Etapa 03</span>
+              <span class="how-node" aria-hidden="true"></span>
+              <span class="how-stem" aria-hidden="true"></span>
+              <div class="how-card">
+                <span class="how-num" aria-hidden="true">03</span>
+                <p class="how-tag">Com marcos</p>
+                <h3 class="how-step-title">Execução</h3>
+                <p class="how-step-text">Levantamentos, análises e projetos conduzidos por engenheiro habilitado, com atualização a cada marco combinado.</p>
+              </div>
+            </li>
+            <li class="how-step reveal" data-step="4" style="--i:4">
+              <span class="how-cota" aria-hidden="true">Etapa 04</span>
+              <span class="how-node" aria-hidden="true"></span>
+              <span class="how-stem" aria-hidden="true"></span>
+              <div class="how-card">
+                <span class="how-num" aria-hidden="true">04</span>
+                <p class="how-tag">Documentada</p>
+                <h3 class="how-step-title">Entrega</h3>
+                <p class="how-step-text">Laudo, projeto ou relatório entregue e explicado, com orientação sobre os próximos passos.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="how-close reveal" style="--i:1">
+          <p class="how-close-text">Comece pelo diagnóstico técnico gratuito.</p>
+          <div class="how-close-cta">
+            <span class="mag">
+              <a class="btn btn-primary" href="#contato" aria-label="Diagnóstico técnico gratuito: ir para o contato">
+                <span class="btn-inner-track" aria-hidden="true"><span class="btn-conic"></span><span class="btn-bg"><span class="btn-shimmer"></span><span class="btn-glow"></span></span></span>
+                <span class="btn-label">Diagnóstico técnico gratuito</span>
+                <svg class="btn-label btn-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </span>
+            <p class="how-close-note">Resposta em até 1 dia útil.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMPORÁRIO, SERÁ SUBSTITUÍDO: âncora sem altura, só para os botões não ficarem quebrados.
+         As dobras reais virão em etapas futuras. -->
+    <div class="anchor-temp" id="contato" aria-hidden="true"></div>
+  </main>
+
+  <!-- Bibliotecas via CDN, versões fixadas -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+  <!-- Plugin do próprio GSAP, mesma versão e mesmo CDN: scrub da régua da dobra 5 (há fallback sem ele) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    /* ============================================================
+       CONSTANTES (CONFIRMAR)
+       Nesta etapa só ficam declaradas, ainda sem uso.
+    ============================================================ */
+    const WHATSAPP_NUMERO = "5511933607230"; // CONFIRMAR
+    const AGENDA_URL = "";                   // CONFIRMAR
+    const FORM_ENDPOINT = "";                // CONFIRMAR
+
+    (function () {
+      'use strict';
+
+      const VIDEO_DESKTOP = 'assets/hero.mp4';
+      const VIDEO_MOBILE = 'assets/hero_mobile.mp4';
+      const MOBILE_QUERY = '(max-width: 768px)';
+      const PRELOADER_MIN_MS = 800;
+      const PRELOADER_MAX_MS = 4000; // limite para não travar o acesso
+
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const preloader = $('#preloader');
+      const preloaderFill = $('#preloaderFill');
+      const video = $('#heroVideo');
+      const wrap = $('#heroWrap');
+      const title = $('#hero-title');
+      const headerCta = $('#headerCta');
+      const heroCta = $('.hero-actions .btn-primary');
+      const siteHeader = $('.site-header');
+
+      /* Cabeçalho: fundo sólido só com a página rolada (mais de 8 px). Listener passivo, vale também no movimento reduzido (o CSS tira a transição). */
+      const syncHeader = () => siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+      window.addEventListener('scroll', syncHeader, { passive: true });
+      syncHeader();
+
+      /* ----------------------------------------------------------
+         Botão do cabeçalho: aparece só quando o botão principal do Hero
+         sai da área visível, e some quando ele volta.
+         Escondido: inert (fora do foco e dos leitores de tela). Sem IntersectionObserver ou
+         sem JavaScript, continua escondido (o botão do Hero já está na tela).
+         No movimento reduzido o CSS tira a transição, a lógica é a mesma.
+      ---------------------------------------------------------- */
+      if ('IntersectionObserver' in window && heroCta) {
+        /* A margem superior é a altura do cabeçalho: o botão do Hero atrás dele conta como fora da tela. */
+        let heroCtaObs = null;
+        const watchHeroCta = function () {
+          if (heroCtaObs) heroCtaObs.disconnect();
+          const headerH = Math.ceil(siteHeader.getBoundingClientRect().height);
+          heroCtaObs = new IntersectionObserver(function (entries) {
+            const heroCtaVisible = entries[entries.length - 1].isIntersecting;
+            headerCta.classList.toggle('is-on', !heroCtaVisible);
+            headerCta.inert = heroCtaVisible;
+          }, { rootMargin: '-' + headerH + 'px 0px 0px 0px' });
+          heroCtaObs.observe(heroCta);
+        };
+        watchHeroCta();
+        window.addEventListener('resize', watchHeroCta);
+      }
+
+      /* ----------------------------------------------------------
+         Faixa de prova: os itens entram quando a faixa aparece na tela.
+         Só adiciona a classe; o fade e os 12 px são CSS transition.
+         Sem IntersectionObserver, mostra direto.
+      ---------------------------------------------------------- */
+      const proofList = $('#proof-list');
+      if (proofList) {
+        if ('IntersectionObserver' in window) {
+          const proofObs = new IntersectionObserver(function (entries) {
+            if (entries.some(function (e) { return e.isIntersecting; })) {
+              proofList.classList.add('is-in');
+              proofObs.disconnect();
+            }
+          }, { threshold: 0.35 });
+          proofObs.observe(proofList);
+        } else {
+          proofList.classList.add('is-in');
+        }
+      }
+
+      /* ----------------------------------------------------------
+         Entrada das seções marcadas com data-reveal (hoje: dobras 3 e 4):
+         cabeçalho e cartões entram quando a seção aparece.
+         Limiar de 0,25 da seção, ou 25% da altura da janela se a seção
+         for mais alta que 4 telas (celular deitado). Só adiciona a classe;
+         o fade e os 16 px são CSS transition. Sem IntersectionObserver, mostra direto.
+      ---------------------------------------------------------- */
+      $$('[data-reveal]').forEach(function (revealSec) {
+        if ('IntersectionObserver' in window) {
+          const revealSteps = [];
+          for (let i = 0; i <= 20; i++) revealSteps.push(i / 20);
+          const revealObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              const enough = e.intersectionRatio >= 0.25 ||
+                (e.rootBounds && e.intersectionRect.height >= e.rootBounds.height * 0.25);
+              if (e.isIntersecting && enough) {
+                revealSec.classList.add('is-in');
+                revealObs.disconnect();
+              }
+            });
+          }, { threshold: revealSteps });
+          revealObs.observe(revealSec);
+        } else {
+          revealSec.classList.add('is-in');
+        }
+      });
+
+      /* ----------------------------------------------------------
+         Dois caminhos: seletor de abas. Teclado (setas, Home, End), hash na
+         URL (carregamento e hashchange) e botões do Hero. Só alterna classes
+         e atributos; o fade e os 8 px do painel são CSS transition.
+         Fica antes do retorno do movimento reduzido, para valer nos dois casos.
+      ---------------------------------------------------------- */
+      const pathTabs = $$('.path-tab');
+      const pathPanels = $$('.path-panel');
+      const pathTablist = $('.path-tabs');
+      if (pathTabs.length === 2 && pathPanels.length === 2 && pathTablist) {
+        const PATH_HASH = ['#caminho-ativos', '#caminho-servicos'];
+        const prefersReduced = function () {
+          return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        };
+        const hashIndex = function () {
+          return PATH_HASH.indexOf(window.location.hash);
+        };
+
+        function selectPath(i, moveFocus) {
+          pathTabs.forEach(function (tab, k) {
+            const on = k === i;
+            tab.setAttribute('aria-selected', on ? 'true' : 'false');
+            tab.tabIndex = on ? 0 : -1;
+            pathPanels[k].classList.toggle('is-active', on);
+            pathPanels[k].inert = !on;
+          });
+          if (moveFocus) pathTabs[i].focus({ preventScroll: true });
+        }
+        /* Posição real no documento, sem o deslocamento do transform da entrada */
+        function absTop(el) {
+          let y = 0;
+          while (el) {
+            y += el.offsetTop;
+            el = el.offsetParent;
+          }
+          return y;
+        }
+        function scrollToTabs(smooth) {
+          const margin = parseFloat(getComputedStyle(pathTablist).scrollMarginTop) || 0;
+          window.scrollTo({
+            top: Math.max(0, absTop(pathTablist) - margin),
+            behavior: (smooth && !prefersReduced()) ? 'smooth' : 'auto'
+          });
+        }
+        /* Só atualiza a URL se ela já aponta para um dos caminhos */
+        function syncUrl(i) {
+          if (hashIndex() !== -1) history.replaceState(null, '', PATH_HASH[i]);
+        }
+
+        pathTabs.forEach(function (tab, i) {
+          tab.addEventListener('click', function () {
+            selectPath(i, false);
+            syncUrl(i);
+          });
+          tab.addEventListener('keydown', function (ev) {
+            let n = -1;
+            if (ev.key === 'ArrowRight') n = (i + 1) % pathTabs.length;
+            else if (ev.key === 'ArrowLeft') n = (i - 1 + pathTabs.length) % pathTabs.length;
+            else if (ev.key === 'Home') n = 0;
+            else if (ev.key === 'End') n = pathTabs.length - 1;
+            if (n < 0) return;
+            ev.preventDefault();
+            selectPath(n, true);
+            syncUrl(n);
+          });
+        });
+
+        /* Botões do Hero: ativa a aba, rola até o seletor, atualiza a URL e foca a aba */
+        PATH_HASH.forEach(function (h, i) {
+          $$('a[href="' + h + '"]').forEach(function (a) {
+            a.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              selectPath(i, false);
+              scrollToTabs(true);
+              history.replaceState(null, '', h);
+              pathTabs[i].focus({ preventScroll: true });
+            });
+          });
+        });
+
+        /* Botões voltar e avançar do navegador */
+        window.addEventListener('hashchange', function () {
+          const i = hashIndex();
+          if (i === -1) return;
+          selectPath(i, false);
+          scrollToTabs(true);
+        });
+
+        /* Abertura da página: com hash ativa a aba e rola até o seletor (depois do pré-carregamento); sem hash, a primeira */
+        const startIndex = hashIndex();
+        if (startIndex === -1) {
+          selectPath(0, false);
+        } else {
+          selectPath(startIndex, false);
+          if (root.classList.contains('is-loading')) {
+            const loadObs = new MutationObserver(function () {
+              if (!root.classList.contains('is-loading')) {
+                loadObs.disconnect();
+                scrollToTabs(false);
+              }
+            });
+            loadObs.observe(root, { attributes: true, attributeFilter: ['class'] });
+          } else {
+            scrollToTabs(false);
+          }
+        }
+      }
+
+      /* Easings idênticos aos do design_system2.html */
+      function cubicBezier(x1, y1, x2, y2) {
+        const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+        const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+        const sx = t => ((ax * t + bx) * t + cx) * t;
+        const sy = t => ((ay * t + by) * t + cy) * t;
+        const dx = t => (3 * ax * t + 2 * bx) * t + cx;
+        return function (x) {
+          if (x <= 0) return 0;
+          if (x >= 1) return 1;
+          let t = x;
+          for (let i = 0; i < 8; i++) {
+            const e = sx(t) - x;
+            if (Math.abs(e) < 1e-5) return sy(t);
+            const d = dx(t);
+            if (Math.abs(d) < 1e-6) break;
+            t -= e / d;
+          }
+          let lo = 0, hi = 1;
+          t = x;
+          while (lo < hi) {
+            const e = sx(t);
+            if (Math.abs(e - x) < 1e-5) break;
+            if (x > e) lo = t; else hi = t;
+            t = (hi - lo) / 2 + lo;
+            if (hi - lo < 1e-6) break;
+          }
+          return sy(t);
+        };
+      }
+      const EASE_SPRING = cubicBezier(0.23, 1, 0.32, 1);
+
+      /* Movimento reduzido ou biblioteca indisponível: poster e texto estáticos */
+      const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      reduceMq.addEventListener('change', () => window.location.reload());
+      if (reduceMq.matches || !window.gsap || !window.SplitText) {
+        root.classList.add('rm');
+        root.classList.remove('is-loading');
+        return;
+      }
+      gsap.registerPlugin(SplitText);
+
+      /* ----------------------------------------------------------
+         Vídeo: carrega em paralelo ao pré-carregamento e toca sozinho
+      ---------------------------------------------------------- */
+      let videoReady = false;
+      function loadVideo() {
+        return new Promise(resolve => {
+          let done = false;
+          const finish = ok => { if (!done) { done = true; videoReady = ok; resolve(ok); } };
+          video.muted = true;
+          video.defaultMuted = true;
+          video.playsInline = true;
+          video.loop = false;
+          video.addEventListener('loadeddata', () => finish(true), { once: true });
+          video.addEventListener('error', () => finish(false), { once: true });
+          video.src = window.matchMedia(MOBILE_QUERY).matches ? VIDEO_MOBILE : VIDEO_DESKTOP;
+          video.load();
+        });
+      }
+      function playVideo() {
+        if (!videoReady) return;
+        const p = video.play();
+        video.classList.add('is-playing');
+        /* Se o navegador bloquear o autoplay, o poster continua visível */
+        if (p && p.catch) p.catch(() => video.classList.remove('is-playing'));
+      }
+
+      /* ----------------------------------------------------------
+         Título com SplitText: linhas com máscara e stagger
+      ---------------------------------------------------------- */
+      let split = null;
+      let introDone = false;
+      function doSplit() {
+        if (split) split.revert();
+        split = SplitText.create(title, { type: 'lines', linesClass: 'ln', mask: 'lines' });
+        if (!introDone) gsap.set(split.lines, { yPercent: 110 });
+      }
+      let lastW = window.innerWidth;
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth === lastW) return; /* ignora a barra de endereço no celular */
+          lastW = window.innerWidth;
+          doSplit();
+        }, 200);
+      });
+
+      function runIntro() {
+        const tl = gsap.timeline({ defaults: { ease: EASE_SPRING }, onComplete: () => { introDone = true; } });
+        tl.to(split.lines, { yPercent: 0, duration: 1.2, stagger: 0.13 }, 0.05)
+          .fromTo('.hero .eyebrow', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8 }, 0)
+          .fromTo('.hero .hero-sub', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8 }, 0.52)
+          .fromTo('.hero .hero-actions', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.8 }, 0.68)
+          .fromTo(wrap, { opacity: 0, y: 30, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1.2 }, 0.3)
+          .fromTo('.brand', { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.8 }, 0.2)
+          .call(playVideo, null, 0.5);
+      }
+
+      /* ----------------------------------------------------------
+         Efeito magnético leve: só com mouse
+      ---------------------------------------------------------- */
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        $$('.mag').forEach(el => {
+          const xTo = gsap.quickTo(el, 'x', { duration: 0.6, ease: EASE_SPRING });
+          const yTo = gsap.quickTo(el, 'y', { duration: 0.6, ease: EASE_SPRING });
+          el.addEventListener('pointermove', e => {
+            const r = el.getBoundingClientRect();
+            xTo((e.clientX - (r.left + r.width / 2)) * 0.22);
+            yTo((e.clientY - (r.top + r.height / 2)) * 0.28);
+          });
+          el.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
+        });
+      }
+
+      /* ----------------------------------------------------------
+         Pré-carregamento: sai quando o vídeo estiver pronto (máximo de 4 s)
+      ---------------------------------------------------------- */
+      const t0 = performance.now();
+      let finished = false;
+      let shown = 0;
+      function paintPreloader() {
+        if (finished) return;
+        const timed = Math.min(1, (performance.now() - t0) / PRELOADER_MAX_MS) * 0.85;
+        shown = Math.max(shown, Math.min(0.96, videoReady ? 0.96 : timed));
+        preloaderFill.style.transform = 'scaleX(' + shown.toFixed(3) + ')';
+        requestAnimationFrame(paintPreloader);
+      }
+      function finishPreloader() {
+        if (finished) return;
+        finished = true;
+        preloaderFill.style.transform = 'scaleX(1)';
+        preloader.classList.add('is-leaving');
+        setTimeout(() => {
+          root.classList.remove('is-loading');
+          runIntro();
+        }, 450);
+        setTimeout(() => { preloader.style.display = 'none'; }, 1500);
+      }
+
+      const wait = ms => new Promise(r => setTimeout(r, ms));
+      const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      requestAnimationFrame(paintPreloader);
+
+      const videoPromise = loadVideo();
+      const fontsAndSplit = Promise.race([fontsReady, wait(PRELOADER_MAX_MS)]).then(() => doSplit());
+
+      Promise.race([
+        Promise.all([videoPromise, fontsAndSplit, wait(PRELOADER_MIN_MS)]),
+        wait(PRELOADER_MAX_MS)
+      ]).then(() => {
+        if (!split) doSplit();
+        finishPreloader();
+      });
+    })();
+  </script>
+
+  <script>
+    /* ============================================================
+       DOBRA 5: COMO TRABALHAMOS
+       Script independente do restante da página. Sem JavaScript, ou com movimento
+       reduzido, nada é armado: régua cheia, marcos acesos e numerais sólidos (CSS base).
+       Progresso da régua: ScrollTrigger (scrub). Se ele não carregar, um listener
+       passivo de rolagem com requestAnimationFrame calcula o mesmo progresso.
+       Os marcos acendem pelo progresso real da linha. A rolagem não lê layout:
+       as posições são medidas só na carga, no resize e no refresh.
+    ============================================================ */
+    (function () {
+      'use strict';
+      const sec = document.getElementById('como-trabalhamos');
+      if (!sec) return;
+      const track = sec.querySelector('.how-track');
+      const ruler = sec.querySelector('.how-ruler');
+      const fill = sec.querySelector('.how-ruler-fill');
+      const steps = Array.prototype.slice.call(sec.querySelectorAll('.how-step'));
+      const title = sec.querySelector('.how-title');
+      const plan = sec.querySelector('.how-plan');
+      if (!track || !ruler || !fill || !steps.length) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const hasGsap = !!window.gsap;
+      const hasST = hasGsap && !!window.ScrollTrigger;
+      const mqV = window.matchMedia('(max-width: 1024px)');
+      const nums = steps.map(function (li) { return li.querySelector('.how-num'); });
+      const nodes = steps.map(function (li) { return li.querySelector('.how-node'); });
+      let vertical = mqV.matches;
+      let thr = steps.map(function (_, i) { return (i + 1) / (steps.length + 1); });
+      let cache = { top: 0, h: 1, max: 0 };
+      const lit = steps.map(function () { return false; });
+      const countToken = steps.map(function () { return 0; });
+
+      /* Medidas de layout: só aqui, nunca dentro do handler de rolagem */
+      function measure() {
+        vertical = mqV.matches;
+        const r = ruler.getBoundingClientRect();
+        const len = (vertical ? r.height : r.width) || 1;
+        thr = nodes.map(function (n) {
+          const b = n.getBoundingClientRect();
+          const c = vertical ? (b.top + b.height / 2 - r.top) : (b.left + b.width / 2 - r.left);
+          return Math.min(1, Math.max(0, c / len));
+        });
+        const t = track.getBoundingClientRect();
+        cache = {
+          top: t.top + window.pageYOffset,
+          h: t.height || 1,
+          max: document.documentElement.scrollHeight - window.innerHeight
+        };
+      }
+
+      /* Contagem curta de 00 até o número da etapa (só texto, 0,5 s) */
+      function count(i) {
+        const el = nums[i];
+        const n = i + 1;
+        const token = ++countToken[i];
+        const t0 = performance.now();
+        el.textContent = '00';
+        (function tick(now) {
+          if (token !== countToken[i]) return;
+          const k = Math.min(1, ((now || performance.now()) - t0) / 500);
+          el.textContent = '0' + Math.round(n * k);
+          if (k < 1) requestAnimationFrame(tick);
+        })(t0);
+      }
+
+      function update(p) {
+        p = Math.min(1, Math.max(0, p || 0));
+        fill.style.transform = (vertical ? 'scaleY(' : 'scaleX(') + p.toFixed(4) + ')';
+        steps.forEach(function (li, i) {
+          const on = p >= thr[i] - 0.0001;
+          if (on === lit[i]) return;
+          lit[i] = on;
+          li.classList.toggle('is-lit', on);
+          if (on) {
+            count(i);
+          } else {
+            countToken[i]++;
+            nums[i].textContent = '00';
+          }
+        });
+      }
+
+      /* Título: SplitText em linhas com máscara e stagger, como no Hero */
+      let split = null;
+      let titlePlayed = false;
+      const canSplit = hasGsap && !!window.SplitText && !!title;
+      function doSplit() {
+        if (!canSplit) return;
+        if (split) split.revert();
+        split = SplitText.create(title, { type: 'lines', linesClass: 'ln', mask: 'lines' });
+        gsap.set(split.lines, { yPercent: titlePlayed ? 0 : 110 });
+      }
+      function playTitle() {
+        if (titlePlayed) return;
+        titlePlayed = true;
+        if (split) gsap.to(split.lines, { yPercent: 0, duration: 1.2, stagger: 0.13, ease: 'power4.out' });
+      }
+
+      /* Spotlight e inclinação: só com mouse */
+      function bindCards() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        steps.forEach(function (li) {
+          const card = li.querySelector('.how-card');
+          if (!card) return;
+          let raf = 0;
+          let ev = null;
+          card.addEventListener('pointermove', function (e) {
+            ev = e;
+            if (raf) return;
+            raf = requestAnimationFrame(function () {
+              raf = 0;
+              const r = card.getBoundingClientRect();
+              const x = ev.clientX - r.left;
+              const y = ev.clientY - r.top;
+              card.style.setProperty('--mx', x.toFixed(0) + 'px');
+              card.style.setProperty('--my', y.toFixed(0) + 'px');
+              card.style.setProperty('--ry', ((x / r.width - 0.5) * 6).toFixed(2) + 'deg');
+              card.style.setProperty('--rx', ((0.5 - y / r.height) * 6).toFixed(2) + 'deg');
+            });
+          });
+          card.addEventListener('pointerleave', function () {
+            if (raf) { cancelAnimationFrame(raf); raf = 0; }
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+          });
+        });
+      }
+
+      /* Fallback sem ScrollTrigger: mesmo intervalo (de 'top 75%' a 'bottom 70%') */
+      function fallbackProgress() {
+        const vh = window.innerHeight;
+        const start = cache.top - vh * 0.75;
+        /* O fim nunca passa do máximo de rolagem, senão a régua não fecha em telas altas */
+        const end = Math.min(cache.top + cache.h - vh * 0.70, cache.max);
+        update((window.pageYOffset - start) / Math.max(1, end - start));
+      }
+
+      /* Arma: a partir daqui o CSS passa a usar o estado "apagado" até a linha chegar */
+      measure();
+      nums.forEach(function (el) { el.textContent = '00'; });
+      sec.classList.add('how-armed');
+      update(0);
+      bindCards();
+
+      if (hasST) {
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.create({
+          trigger: track,
+          start: 'top 75%',
+          end: function () {
+            /* 'bottom 70%', limitado ao máximo de rolagem (só roda no refresh) */
+            const natural = track.getBoundingClientRect().bottom + window.pageYOffset - window.innerHeight * 0.70;
+            return Math.min(natural, ScrollTrigger.maxScroll(window));
+          },
+          invalidateOnRefresh: true,
+          onUpdate: function (self) { update(self.progress); },
+          onRefresh: function (self) { measure(); update(self.progress); }
+        });
+        if (plan) {
+          /* Parallax leve da planta: só transform */
+          gsap.fromTo(plan, { yPercent: -3 }, {
+            yPercent: 3, ease: 'none',
+            scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true }
+          });
+        }
+      } else {
+        let queued = false;
+        const queue = function () {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(function () { queued = false; fallbackProgress(); });
+        };
+        let rt = 0;
+        window.addEventListener('scroll', queue, { passive: true });
+        window.addEventListener('resize', function () {
+          clearTimeout(rt);
+          rt = setTimeout(function () { measure(); fallbackProgress(); }, 150);
+        });
+        window.addEventListener('load', function () { measure(); fallbackProgress(); });
+        fallbackProgress();
+      }
+
+      /* Título e fontes */
+      const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+      fontsReady.then(function () {
+        doSplit();
+        if (hasST) {
+          ScrollTrigger.refresh();
+        } else {
+          measure();
+          fallbackProgress();
+        }
+        if ('IntersectionObserver' in window && split) {
+          const io = new IntersectionObserver(function (entries) {
+            if (entries.some(function (e) { return e.isIntersecting; })) {
+              playTitle();
+              io.disconnect();
+            }
+          }, { threshold: 0.4 });
+          io.observe(title);
+        } else if (split) {
+          playTitle();
+        }
+      });
+      if (hasST) window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+
+      /* Re-quebra do título quando a largura muda (ignora a barra de endereço no celular) */
+      let lastW = window.innerWidth;
+      let st = 0;
+      window.addEventListener('resize', function () {
+        clearTimeout(st);
+        st = setTimeout(function () {
+          if (window.innerWidth === lastW) return;
+          lastW = window.innerWidth;
+          doSplit();
+        }, 200);
+      });
+    })();
+  </script>
+</body>
+</html>
