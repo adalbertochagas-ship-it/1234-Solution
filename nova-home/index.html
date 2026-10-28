@@ -803,7 +803,682 @@
       .how-node::after { animation: none !important; }
     }
 
+    
     /* ============================================================
+       DOBRA 6: CREDENCIAIS (fundo paper)
+       Ficha técnica no formato de um carimbo de prancha de engenharia.
+    ============================================================ */
+    .cred {
+      position: relative;
+      background-color: var(--paper);
+      color: var(--ink);
+      overflow: hidden;
+      scroll-margin-top: 5rem;
+    }
+    .cred-bg-plan {
+      position: absolute;
+      inset: -5% 0;
+      pointer-events: none;
+      color: var(--stone);
+      opacity: 0.14;
+      z-index: 0;
+    }
+    .cred-bg-plan svg { display: block; width: 100%; height: 100%; }
+    .cred-inner { position: relative; z-index: 1; }
+    .cred-head { max-width: 800px; margin-bottom: var(--space-12); }
+    .cred-head .eyebrow { justify-content: flex-start; margin-bottom: var(--space-6); }
+    .cred-title {
+      margin-bottom: var(--space-6);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .cred-lede {
+      max-width: 44rem;
+      font-size: var(--text-lg);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--stone-2);
+    }
+
+    /* Moldura do carimbo: borda dupla e marcas de corte */
+    .cred-sheet {
+      position: relative;
+      border: 2px solid var(--ink);
+      background-color: var(--paper);
+      margin-bottom: var(--space-12);
+      box-shadow: 0 4px 24px rgba(23,33,46,0.04);
+    }
+    .cred-sheet::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 1px solid var(--line-light);
+      pointer-events: none;
+      z-index: 3;
+    }
+    /* Marcas de corte nos 4 cantos */
+    .cred-crop {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .crop-tl { top: -2px; left: -2px; border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+    .crop-tr { top: -2px; right: -2px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+    .crop-bl { bottom: -2px; left: -2px; border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+    .crop-br { bottom: -2px; right: -2px; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+
+    /* Cotas decorativas SVG nas margens da moldura */
+    .cred-dim { position: absolute; pointer-events: none; z-index: 2; color: var(--stone-2); opacity: 0.6; }
+    .cred-dim-top { top: -20px; left: 10px; right: 10px; width: calc(100% - 20px); height: 16px; }
+    .cred-dim-left { left: -20px; top: 10px; bottom: 10px; height: calc(100% - 20px); width: 16px; }
+
+    /* Grade interna de 12 colunas */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      position: relative;
+      z-index: 2;
+    }
+    .cred-cell {
+      position: relative;
+      padding: var(--space-8);
+      background-color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      transform-style: preserve-3d;
+      transition: transform 0.25s var(--ease-spring);
+    }
+    .cred-cell-spotlight {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(400px circle at var(--mx, -500px) var(--my, -500px), rgba(156, 124, 60, 0.08), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .cred-cell:hover .cred-cell-spotlight { opacity: 1; }
+    }
+
+    /* Linhas divisórias que se desenham */
+    .cred-cell-border-b {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: var(--line-light);
+      transform-origin: left center;
+      z-index: 2;
+    }
+    .cred-cell-border-r {
+      position: absolute; top: 0; bottom: 0; right: 0; width: 1px;
+      background: var(--line-light);
+      transform-origin: top center;
+      z-index: 2;
+    }
+    .cred-armed .cred-cell-border-b { transform: scaleX(0); transition: transform 0.8s var(--ease-smooth) calc(var(--ci, 0) * 0.08s); }
+    .cred-armed .cred-cell-border-r { transform: scaleY(0); transition: transform 0.8s var(--ease-smooth) calc(var(--ci, 0) * 0.08s); }
+    .cred-armed.is-in .cred-cell-border-b { transform: scaleX(1); }
+    .cred-armed.is-in .cred-cell-border-r { transform: scaleY(1); }
+
+    /* Distribuição no desktop (>= 1200px) */
+    @media (min-width: 1200px) {
+      .cred-cell-lead { grid-column: span 8; }
+      .cred-cell-reg { grid-column: span 4; }
+      .cred-cell-formacao { grid-column: span 7; }
+      .cred-cell-conselhos { grid-column: span 5; }
+      .cred-cell-docencia { grid-column: span 7; }
+      .cred-cell-pubs { grid-column: span 5; }
+    }
+
+    /* Tablet (769px a 1199px): 2 colunas, Formação ocupa a largura inteira */
+    @media (min-width: 769px) and (max-width: 1199px) {
+      .cred-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cred-cell-lead { grid-column: span 1; }
+      .cred-cell-reg { grid-column: span 1; }
+      .cred-cell-formacao { grid-column: span 2; }
+      .cred-cell-conselhos { grid-column: span 1; }
+      .cred-cell-pubs { grid-column: span 1; }
+      .cred-cell-docencia { grid-column: span 2; }
+    }
+
+    /* Mobile (<= 768px): 1 coluna */
+    @media (max-width: 768px) {
+      .cred-grid { grid-template-columns: 1fr; }
+      .cred-cell-lead, .cred-cell-reg, .cred-cell-formacao,
+      .cred-cell-conselhos, .cred-cell-docencia, .cred-cell-pubs {
+        grid-column: span 1;
+      }
+      .cred-cell { padding: var(--space-6); }
+      .cred-cell-border-r { display: none; }
+    }
+
+    /* Tipografia e elementos das células */
+    .cred-label {
+      margin-bottom: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--stone-2);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+    .cred-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: var(--space-3);
+    }
+    .cred-lead-lines { display: flex; flex-direction: column; gap: var(--space-1); }
+    .cred-text-lead { font-size: var(--text-base); font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .cred-text-sub { font-size: var(--text-base); color: var(--stone-2); line-height: 1.5; }
+
+    /* Célula Registro */
+    .cred-badge-reg {
+      font-family: var(--font-mono);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--ink);
+      margin-bottom: var(--space-2);
+    }
+
+    /* Célula Formação */
+    .cred-form-wrapper { position: relative; padding-left: var(--space-8); }
+    .cred-form-ruler {
+      position: absolute;
+      top: var(--space-2);
+      bottom: var(--space-2);
+      left: 10px;
+      width: 2px;
+      pointer-events: none;
+    }
+    .cred-form-ruler-track {
+      position: absolute; inset: 0;
+      background: var(--line-light);
+    }
+    .cred-form-ruler-fill {
+      position: absolute; top: 0; left: 0; right: 0; height: 100%;
+      background: var(--gold-deep);
+      transform-origin: top center;
+    }
+    .cred-armed .cred-form-ruler-fill { transform: scaleY(0); }
+    .cred-form-groups { display: flex; flex-direction: column; gap: var(--space-6); }
+    .cred-group-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: var(--space-3);
+    }
+    .cred-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+    .cred-form-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: var(--space-3);
+      font-size: var(--text-base);
+      line-height: 1.45;
+    }
+    @media (max-width: 540px) {
+      .cred-form-item { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
+    .cred-node {
+      position: absolute;
+      left: calc(-1 * var(--space-8) + 7px);
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 1.5px solid var(--stone);
+      transition: all 0.3s var(--ease-spring);
+    }
+    .cred-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--stone-2);
+      transition: color 0.3s ease;
+    }
+    .cred-desc { color: var(--ink); }
+    .cred-tag-status {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-style: normal;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.1rem 0.4rem;
+      border-radius: var(--radius-sm);
+      background: rgba(156, 124, 60, 0.12);
+      color: var(--gold-deep);
+      margin-left: 0.35rem;
+    }
+    /* Quando a linha de formação acende */
+    .cred-form-item.is-lit .cred-node {
+      border-color: var(--gold-deep);
+      background: var(--gold-deep);
+      box-shadow: 0 0 0 3px rgba(156, 124, 60, 0.2);
+    }
+    .cred-form-item.is-lit .cred-year {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Célula Conselhos */
+    .cred-board-list { gap: var(--space-4); }
+    .cred-board-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-2);
+      font-size: var(--text-base);
+      line-height: 1.45;
+    }
+    .cred-board-role { font-weight: 600; color: var(--ink); }
+    .cred-board-sep { color: var(--gold-deep); font-weight: 300; }
+    .cred-board-org { color: var(--stone-2); }
+
+    /* Célula Docência */
+    .cred-stats-grid { display: flex; flex-direction: column; gap: var(--space-4); }
+    .cred-stat-card { display: flex; flex-direction: column; gap: 0.25rem; }
+    .cred-stat-num {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .cred-num-suf { font-size: var(--text-xl); font-weight: 600; color: var(--gold-deep); margin-left: 0.15rem; }
+    .cred-stat-label { font-size: var(--text-base); color: var(--stone-2); line-height: 1.45; }
+
+    /* Célula Publicações */
+    .cred-pubs-list { gap: var(--space-4); }
+    .cred-pub-item { font-size: var(--text-base); line-height: 1.6; color: var(--ink); }
+    .cred-num-inline { font-weight: 700; color: var(--ink); }
+
+    /* Fechamento */
+    .cred-close { display: flex; justify-content: flex-start; }
+
+    /* Redução de movimento */
+    @media (prefers-reduced-motion: reduce) {
+      .cred-cell-border-b, .cred-cell-border-r { transform: none !important; transition: none !important; }
+      .cred-form-ruler-fill { transform: scaleY(1) !important; transition: none !important; }
+      .cred-node { transition: none !important; }
+      .cred-cell { transform: none !important; }
+    }
+
+
+    /* ============================================================
+       DOBRA 7: PERGUNTAS FREQUENTES (fundo navy)
+       Índice de especificações técnicas em prancha de engenharia.
+    ============================================================ */
+    .faq {
+      position: relative;
+      background-color: var(--navy);
+      color: var(--paper);
+      border-top: 1px solid var(--line-dark);
+      scroll-margin-top: 5rem;
+      overflow: hidden;
+    }
+    .faq-inner { position: relative; z-index: 1; }
+    .faq-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr);
+      gap: var(--space-12);
+      align-items: start;
+    }
+    @media (max-width: 1024px) {
+      .faq-layout { grid-template-columns: 1fr; gap: var(--space-8); }
+    }
+
+    /* Coluna esquerda fixa no desktop */
+    .faq-sticky {
+      position: sticky;
+      top: calc(var(--space-16) + 3rem);
+    }
+    @media (max-width: 1024px) {
+      .faq-sticky { position: static; }
+    }
+    .faq-head .eyebrow { justify-content: flex-start; margin-bottom: var(--space-6); }
+    .faq-title {
+      margin-bottom: var(--space-6);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--paper);
+    }
+    .faq-lede {
+      max-width: 32rem;
+      font-size: var(--text-lg);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-lede);
+    }
+
+    /* Ponto de interrogação decorativo */
+    .faq-decor-mark {
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 14vw, 13rem);
+      font-weight: 800;
+      line-height: 0.85;
+      -webkit-text-stroke: 1.5px var(--gold);
+      color: transparent;
+      user-select: none;
+      pointer-events: none;
+      margin-top: var(--space-8);
+      opacity: 0.35;
+      clip-path: inset(0 0 0 0);
+      transition: opacity 0.8s ease;
+    }
+    @media (max-width: 1024px) {
+      .faq-decor-mark { display: none; }
+    }
+
+    /* Lista de itens acordeão */
+    .faq-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .faq-item {
+      position: relative;
+      border-bottom: 1px solid var(--line-dark);
+      overflow: hidden;
+      transition: background-color 0.25s ease;
+    }
+    .faq-item:first-child {
+      border-top: 1px solid var(--line-dark);
+    }
+    .faq-spotlight {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(350px circle at var(--mx, -500px) var(--my, -500px), rgba(198, 164, 90, 0.08), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .faq-item:hover .faq-spotlight { opacity: 1; }
+    }
+
+    /* Botão de pergunta */
+    .faq-item-title { margin: 0; font-size: inherit; font-weight: inherit; }
+    .faq-btn {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: var(--space-6) 0;
+      color: var(--paper);
+      cursor: pointer;
+      gap: var(--space-4);
+      font-size: var(--text-lg);
+      font-family: var(--font-body);
+      font-weight: 500;
+      line-height: 1.4;
+      transition: color 0.2s ease;
+    }
+    .faq-btn:hover { color: var(--gold-2); }
+    .faq-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+    .faq-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--gold-2);
+      flex-shrink: 0;
+      min-width: 2.2rem;
+    }
+    .faq-q-text { flex: 1; min-width: 0; }
+
+    /* Indicador + / x */
+    .faq-icon {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.35s var(--ease-spring);
+    }
+    .faq-icon::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+    .faq-icon::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: 2px;
+      height: 18px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+    .faq-item.is-open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* Linha dourada progressiva na base do item */
+    .faq-line-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold) 60%, var(--gold-2));
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.4s var(--ease-spring);
+      z-index: 3;
+    }
+    .faq-item.is-open .faq-line-fill {
+      transform: scaleX(1);
+    }
+
+    /* Painel de resposta com animação de grid-template-rows */
+    .faq-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s var(--ease-spring);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+    .faq-item.is-open .faq-panel {
+      grid-template-rows: 1fr;
+    }
+    .faq-panel-inner {
+      min-height: 0;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--text-lede);
+      padding-left: 2.2rem;
+    }
+    .faq-item.is-open .faq-panel-inner {
+      opacity: 1;
+      transform: translateY(0);
+      padding-bottom: var(--space-6);
+    }
+
+    /* Fechamento da seção */
+    .faq-close {
+      margin-top: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+    .faq-close-text {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--paper);
+    }
+
+    /* Sem JavaScript: todas as respostas abertas */
+    html:not(.js) .faq-panel {
+      grid-template-rows: 1fr !important;
+    }
+    html:not(.js) .faq-panel-inner {
+      opacity: 1 !important;
+      transform: none !important;
+      padding-bottom: var(--space-6);
+    }
+    html:not(.js) .faq-line-fill {
+      transform: scaleX(1) !important;
+    }
+    html:not(.js) .faq-icon {
+      display: none !important;
+    }
+
+    /* Movimento reduzido */
+    @media (prefers-reduced-motion: reduce) {
+      .faq-panel, .faq-panel-inner, .faq-line-fill, .faq-icon, .faq-decor-mark {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+
+    /* ============================================================
+       DOBRA 8: CONTATO (fundo paper) E FOOTER
+    ============================================================ */
+    .contato {
+      position: relative;
+      background-color: var(--paper);
+      color: var(--ink);
+      border-top: 1px solid var(--line-light);
+      scroll-margin-top: 5rem;
+    }
+    .contato-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: var(--space-12);
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .contato-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+    }
+    .contato-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: var(--space-6);
+    }
+    .contato-body {
+      font-size: var(--text-lg);
+      line-height: 1.6;
+      color: var(--stone-2);
+      margin-bottom: var(--space-8);
+      max-width: 36rem;
+    }
+    .contato-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .contato-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--ink);
+      padding: 0.85rem 1.5rem;
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-sm);
+      background: var(--paper-2);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .contato-wa-btn:hover {
+      background: var(--paper);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+    .contato-panel {
+      background-color: var(--paper-2);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone-2);
+    }
+    .contact-value {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--ink);
+      transition: color 0.2s ease;
+    }
+    a.contact-value:hover { color: var(--gold-deep); }
+
+    /* FOOTER */
+    .site-footer {
+      background-color: var(--navy);
+      color: var(--paper);
+      padding: var(--space-8) 0;
+      border-top: 1px solid var(--line-dark);
+    }
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .footer-brand, .footer-copy {
+      font-size: var(--text-xs);
+      color: var(--text-lede);
+    }
+
+/* ============================================================
        RESPONSIVO (mesmos pontos de quebra da referência)
     ============================================================ */
     @media (max-width: 1024px) {
@@ -1267,9 +1942,476 @@
       </div>
     </section>
 
-    <!-- TEMPORÁRIO, SERÁ SUBSTITUÍDO: âncora sem altura, só para os botões não ficarem quebrados.
-         As dobras reais virão em etapas futuras. -->
-    <div class="anchor-temp" id="contato" aria-hidden="true"></div>
+    
+    <!-- ==========================================================
+         DOBRA 6: CREDENCIAIS (fundo paper)
+         Ficha técnica no formato de um carimbo de prancha de engenharia.
+    ========================================================== -->
+    <section class="section-light cred" id="credenciais" data-reveal aria-labelledby="cred-title">
+      <!-- Textura sutil de planta técnica ao fundo em paper-2, com parallax leve -->
+      <div class="cred-bg-plan" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <g stroke="currentColor" stroke-width="1" fill="none">
+            <line x1="80" y1="120" x2="1360" y2="120" stroke-dasharray="8 6"/>
+            <line x1="80" y1="800" x2="1360" y2="800" stroke-dasharray="8 6"/>
+            <circle cx="200" cy="300" r="120"/>
+            <circle cx="200" cy="300" r="4"/>
+            <path d="M160 300 H240 M200 260 V340"/>
+            <rect x="900" y="240" width="380" height="420"/>
+            <path d="M900 360 H1280 M900 480 H1280 M1090 240 V660"/>
+            <!-- Cotas de referência decorativas -->
+            <path d="M860 240 V660 M850 240 H870 M850 660 H870 M855 255 L860 240 L865 255 M855 645 L860 660 L865 645"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="max-w cred-inner">
+        <header class="cred-head">
+          <p class="eyebrow eyebrow-light reveal">Credenciais</p>
+          <h2 class="cred-title" id="cred-title">Quem conduz o seu projeto.</h2>
+          <p class="cred-lede reveal" style="--i:1">Formação em engenharia e gestão, atuação em conselhos e docência, reunidas na ficha técnica do responsável.</p>
+        </header>
+
+        <!-- Moldura do Carimbo de Engenharia -->
+        <div class="cred-sheet reveal" style="--i:2">
+          <!-- Marcas de corte nos 4 cantos -->
+          <div class="cred-crop crop-tl" aria-hidden="true"></div>
+          <div class="cred-crop crop-tr" aria-hidden="true"></div>
+          <div class="cred-crop crop-bl" aria-hidden="true"></div>
+          <div class="cred-crop crop-br" aria-hidden="true"></div>
+
+          <!-- Cotas decorativas SVG nas margens da moldura -->
+          <svg class="cred-dim cred-dim-top" viewBox="0 0 1200 16" aria-hidden="true" focusable="false">
+            <line x1="20" y1="8" x2="1180" y2="8" stroke="currentColor"/>
+            <line x1="20" y1="2" x2="20" y2="14" stroke="currentColor"/>
+            <line x1="1180" y1="2" x2="1180" y2="14" stroke="currentColor"/>
+            <path d="M32 5 L20 8 L32 11 M1168 5 L1180 8 L1168 11" fill="none" stroke="currentColor"/>
+          </svg>
+          <svg class="cred-dim cred-dim-left" viewBox="0 0 16 800" aria-hidden="true" focusable="false">
+            <line x1="8" y1="20" x2="8" y2="780" stroke="currentColor"/>
+            <line x1="2" y1="20" x2="14" y2="20" stroke="currentColor"/>
+            <line x1="2" y1="780" x2="14" y2="780" stroke="currentColor"/>
+            <path d="M5 32 L8 20 L11 32 M5 768 L8 780 L11 768" fill="none" stroke="currentColor"/>
+          </svg>
+
+          <!-- Grade de Células: 12 colunas no desktop -->
+          <div class="cred-grid">
+
+            <!-- Célula 1: Responsável técnico (col-span-8) -->
+            <article class="cred-cell cred-cell-lead" data-cell="1" style="--ci:1">
+              <span class="cred-cell-border-b" aria-hidden="true"></span>
+              <span class="cred-cell-border-r" aria-hidden="true"></span>
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+              <p class="cred-label">Responsável técnico</p>
+              <h3 class="cred-name" id="cred-lead-name">Adalberto Francisco Chagas</h3>
+              <div class="cred-lead-lines">
+                <p class="cred-text-lead">Engenheiro Civil e Engenheiro de Segurança do Trabalho</p>
+                <p class="cred-text-sub">Fundador da 1234 Solution</p>
+              </div>
+            </article>
+
+            <!-- Célula 2: Registro profissional (col-span-4) -->
+            <article class="cred-cell cred-cell-reg" data-cell="2" style="--ci:2">
+              <span class="cred-cell-border-b" aria-hidden="true"></span>
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+              <p class="cred-label">Registro profissional</p>
+              <p class="cred-badge-reg" aria-label="CREA-SP">CREA-SP</p>
+              <p class="cred-text-sub">Profissional e empresa registrados no CREA-SP</p>
+            </article>
+
+            <!-- Célula 3: Formação (col-span-7) -->
+            <article class="cred-cell cred-cell-formacao" data-cell="3" style="--ci:3">
+              <span class="cred-cell-border-b" aria-hidden="true"></span>
+              <span class="cred-cell-border-r" aria-hidden="true"></span>
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+              <p class="cred-label">Formação</p>
+
+              <div class="cred-form-wrapper">
+                <!-- Régua vertical de formação que se preenche com o scroll -->
+                <div class="cred-form-ruler" aria-hidden="true">
+                  <div class="cred-form-ruler-track"></div>
+                  <div class="cred-form-ruler-fill" id="credRulerFill"></div>
+                </div>
+
+                <div class="cred-form-groups">
+                  <!-- Grupo Engenharia e gestão -->
+                  <div class="cred-form-group">
+                    <h4 class="cred-group-title">Engenharia e gestão</h4>
+                    <ul class="cred-list cred-form-list" role="list">
+                      <li class="cred-form-item" data-form-item="1">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">1994 a 1999</span>
+                        <span class="cred-desc">Engenharia Civil, Universidade Paulista</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="2">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">2001 a 2002</span>
+                        <span class="cred-desc">Especialização em Gestão Ambiental, USP</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="3">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">2003 a 2006</span>
+                        <span class="cred-desc">Mestrado em Engenharia Civil (Saneamento), Poli/USP</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="4">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">2018 a 2020</span>
+                        <span class="cred-desc">MBA em Gestão de Projetos, USP/Esalq</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="5">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">2020 a 2021</span>
+                        <span class="cred-desc">Engenharia de Segurança do Trabalho</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="6">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">2021 a dez 2023</span>
+                        <span class="cred-desc">MBA em Gestão de Ativos, Fundação Gorceix</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Grupo Negócios, governança e liderança -->
+                  <div class="cred-form-group">
+                    <h4 class="cred-group-title">Negócios, governança e liderança</h4>
+                    <ul class="cred-list cred-form-list" role="list">
+                      <li class="cred-form-item" data-form-item="7">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">out 2023</span>
+                        <span class="cred-desc">Board Starter, Board Academy</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="8">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">abr 2024 a abr 2026</span>
+                        <span class="cred-desc">MBA em Gestão de Negócios, USP/Esalq</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="9">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">mai 2024 a dez 2025</span>
+                        <span class="cred-desc">Pós-graduação em Gestão Exponencial, FIA Online</span>
+                      </li>
+                      <li class="cred-form-item" data-form-item="10">
+                        <span class="cred-node" aria-hidden="true"></span>
+                        <span class="cred-year">fev 2026 a fev 2027 <em class="cred-tag-status">em andamento</em></span>
+                        <span class="cred-desc">Pós-graduação em Liderança e Gestão Estratégica de Pessoas, FIA Online</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Célula 4: Conselhos e governança (col-span-5) -->
+            <article class="cred-cell cred-cell-conselhos" data-cell="4" style="--ci:4">
+              <span class="cred-cell-border-b" aria-hidden="true"></span>
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+              <p class="cred-label">Conselhos e governança</p>
+              <ul class="cred-list cred-board-list" role="list">
+                <li class="cred-board-item">
+                  <span class="cred-board-role">Conselheiro Curador</span>
+                  <span class="cred-board-sep" aria-hidden="true">|</span>
+                  <span class="cred-board-org">Fundação Nacional da Qualidade</span>
+                </li>
+                <li class="cred-board-item">
+                  <span class="cred-board-role">Conselheiro</span>
+                  <span class="cred-board-sep" aria-hidden="true">|</span>
+                  <span class="cred-board-org">Salute</span>
+                </li>
+                <li class="cred-board-item">
+                  <span class="cred-board-role">Conselheiro Consultivo Certificado</span>
+                  <span class="cred-board-sep" aria-hidden="true">|</span>
+                  <span class="cred-board-org">Board Academy/CNP</span>
+                </li>
+              </ul>
+            </article>
+
+            <!-- Célula 5: Docência (col-span-7) -->
+            <article class="cred-cell cred-cell-docencia" data-cell="5" style="--ci:5">
+              <span class="cred-cell-border-r" aria-hidden="true"></span>
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+              <p class="cred-label">Docência</p>
+              <div class="cred-stats-grid">
+                <div class="cred-stat-card">
+                  <p class="cred-stat-num">
+                    <span class="cred-num-val" data-val="300">300</span><span class="cred-num-suf">+</span>
+                  </p>
+                  <p class="cred-stat-label">conselheiros e executivos capacitados em finanças, Board Academy</p>
+                </div>
+                <div class="cred-stat-card">
+                  <p class="cred-stat-num">
+                    <span class="cred-num-val" data-val="10">10</span><span class="cred-num-suf">+</span>
+                  </p>
+                  <p class="cred-stat-label">turmas de Valuation e Finanças, Board Academy</p>
+                </div>
+                <div class="cred-stat-card">
+                  <p class="cred-stat-num">
+                    <span class="cred-num-val" data-val="10">10</span><span class="cred-num-suf">+ anos</span>
+                  </p>
+                  <p class="cred-stat-label">como professor universitário e coordenador acadêmico de Engenharia Civil</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Célula 6: Publicações (col-span-5) -->
+            <article class="cred-cell cred-cell-pubs" data-cell="6" style="--ci:6">
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+              <p class="cred-label">Publicações</p>
+              <ul class="cred-list cred-pubs-list" role="list">
+                <li class="cred-pub-item">
+                  Capítulos em <span class="cred-num-val cred-num-inline" data-val="5">5</span> livros publicados sobre ESG, diversidade, governança e liderança.
+                </li>
+                <li class="cred-pub-item">
+                  Artigos técnicos sobre o uso de drones na gestão de ativos imobiliários, apresentados no 37º Congresso Brasileiro de Manutenção.
+                </li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Fechamento, abaixo da ficha -->
+        <div class="cred-close reveal" style="--i:3">
+          <a class="problem-link" href="#contato">Pedir diagnóstico técnico gratuito <span class="problem-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- ==========================================================
+         DOBRA 7: PERGUNTAS FREQUENTES (fundo navy)
+         Índice de especificações técnicas em prancha de engenharia.
+    ========================================================== -->
+    <section class="section-dark faq" id="perguntas" data-reveal aria-labelledby="faq-title">
+      <div class="hero-grid-lines" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+
+      <div class="max-w faq-inner">
+        <div class="faq-layout">
+          <!-- Coluna esquerda fixa com título, lede e marca decorativa -->
+          <div class="faq-sticky">
+            <header class="faq-head">
+              <p class="eyebrow reveal">Perguntas frequentes</p>
+              <h2 class="faq-title" id="faq-title">As dúvidas que costumam surgir antes de começar.</h2>
+              <p class="faq-lede reveal" style="--i:1">Respostas diretas, sem rodeio.</p>
+            </header>
+            <div class="faq-decor-mark" aria-hidden="true">?</div>
+          </div>
+
+          <!-- Coluna direita com a lista de acordeões -->
+          <div class="faq-content-col">
+            <ol class="faq-list" role="list">
+              <!-- Item 01 (aberto por padrão) -->
+              <li class="faq-item is-open reveal" style="--i:1">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-1" aria-expanded="true" aria-controls="faq-panel-1">
+                    <span class="faq-num">01.</span>
+                    <span class="faq-q-text">Vocês são especialistas em saneamento ou uma consultoria genérica?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+                  <div class="faq-panel-inner">
+                    Especialistas. A atuação é em gestão de ativos e em engenharia para o setor regulado, com mestrado em Engenharia Civil (Saneamento) pela Poli/USP. A mesma base técnica atende outros setores de capital intensivo.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 02 -->
+              <li class="faq-item reveal" style="--i:2">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-2" aria-expanded="false" aria-controls="faq-panel-2">
+                    <span class="faq-num">02.</span>
+                    <span class="faq-q-text">Vocês atendem só saneamento ou também indústria?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
+                  <div class="faq-panel-inner">
+                    Os dois. A base técnica é a mesma: gestão de ativos, comprovação de investimento e conciliação físico-contábil. Muda quem exige a comprovação: uma agência reguladora, uma auditoria, uma seguradora ou o seu conselho. No caminho de serviços técnicos, atendemos também condomínios, propriedades e empresas.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 03 -->
+              <li class="faq-item reveal" style="--i:3">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-3" aria-expanded="false" aria-controls="faq-panel-3">
+                    <span class="faq-num">03.</span>
+                    <span class="faq-q-text">Como isso se integra aos sistemas que minha equipe já usa?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
+                  <div class="faq-panel-inner">
+                    O diagnóstico mapeia onde a engenharia (cadastro técnico, GIS) e a contabilidade (ERP) divergem, antes de qualquer mudança de sistema. O trabalho se conecta ao que já existe, não o substitui, e é planejado para não parar a sua operação.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 04 -->
+              <li class="faq-item reveal" style="--i:4">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-4" aria-expanded="false" aria-controls="faq-panel-4">
+                    <span class="faq-num">04.</span>
+                    <span class="faq-q-text">O diagnóstico é mesmo gratuito? O que acontece depois?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
+                  <div class="faq-panel-inner">
+                    É gratuito e sem compromisso: uma conversa de 30 minutos e a leitura dos documentos que você já tem. Se fizer sentido seguir, enviamos uma proposta por escrito com escopo, prazo e valor. Se não fizer, você sai da conversa sabendo qual é o próximo passo.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 05 -->
+              <li class="faq-item reveal" style="--i:5">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-5" aria-expanded="false" aria-controls="faq-panel-5">
+                    <span class="faq-num">05.</span>
+                    <span class="faq-q-text">Quanto tempo leva um serviço?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5">
+                  <div class="faq-panel-inner">
+                    Depende do tipo de demanda e dos documentos disponíveis, por isso o prazo é definido na proposta, por escrito, antes de começar. Se há um prazo legal correndo, como uma notificação de fiscalização, informe no diagnóstico: isso define a prioridade.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 06 -->
+              <li class="faq-item reveal" style="--i:6">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-6" aria-expanded="false" aria-controls="faq-panel-6">
+                    <span class="faq-num">06.</span>
+                    <span class="faq-q-text">O que não está incluído nos serviços técnicos?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-btn-6">
+                  <div class="faq-panel-inner">
+                    Taxas de órgãos e conselhos (inclusive a taxa da ART), serviços de terceiros, como laboratórios e execução de obras, e revisões além das combinadas não estão incluídos, salvo se constarem na proposta. A proposta deixa isso explícito antes do início.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 07 -->
+              <li class="faq-item reveal" style="--i:7">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-7" aria-expanded="false" aria-controls="faq-panel-7">
+                    <span class="faq-num">07.</span>
+                    <span class="faq-q-text">Quem conduz o trabalho?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-7" role="region" aria-labelledby="faq-btn-7">
+                  <div class="faq-panel-inner">
+                    O trabalho é conduzido diretamente pelo engenheiro responsável, Adalberto Chagas, o que mantém o contato direto e a responsabilidade técnica em uma só pessoa. Em levantamentos de campo ou estudos específicos, pode haver profissionais parceiros, sempre informados na proposta.
+                  </div>
+                </div>
+              </li>
+
+              <!-- Item 08 -->
+              <li class="faq-item reveal" style="--i:8">
+                <span class="faq-line-fill" aria-hidden="true"></span>
+                <div class="faq-spotlight" aria-hidden="true"></div>
+                <h3 class="faq-item-title">
+                  <button type="button" class="faq-btn" id="faq-btn-8" aria-expanded="false" aria-controls="faq-panel-8">
+                    <span class="faq-num">08.</span>
+                    <span class="faq-q-text">Como são tratados os documentos e as informações que eu compartilhar?</span>
+                    <span class="faq-icon" aria-hidden="true"></span>
+                  </button>
+                </h3>
+                <div class="faq-panel" id="faq-panel-8" role="region" aria-labelledby="faq-btn-8">
+                  <div class="faq-panel-inner">
+                    Como confidenciais, usados apenas para a finalidade do trabalho. Se você preferir, assinamos um termo de confidencialidade antes de qualquer troca de documentos.
+                  </div>
+                </div>
+              </li>
+            </ol>
+
+            <!-- Fechamento -->
+            <div class="faq-close reveal" style="--i:9">
+              <p class="faq-close-text">Sua pergunta não está aqui?</p>
+              <a class="path-link" href="#contato">Conte o caso no diagnóstico técnico gratuito <span class="path-arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================================
+         DOBRA 8: CONTATO (fundo paper)
+    ========================================================== -->
+    <section class="section-light contato" id="contato" data-reveal aria-labelledby="contato-title">
+      <div class="max-w contato-grid">
+        <div class="contato-content">
+          <p class="eyebrow reveal">Contato</p>
+          <h2 class="contato-title" id="contato-title">Vamos conversar sobre o seu patrimônio.</h2>
+          <p class="contato-body reveal" style="--i:1">
+            Inicie com o diagnóstico técnico gratuito respondendo ao questionário rápido ou entre em contato diretamente pelos nossos canais.
+          </p>
+          <div class="contato-actions reveal" style="--i:2">
+            <a class="btn btn-primary" id="btn-questionario" href="https://form.respondi.app/qpSgEpty" target="_blank" rel="noopener">
+              <span class="btn-inner-track" aria-hidden="true"><span class="btn-conic"></span><span class="btn-bg"><span class="btn-shimmer"></span><span class="btn-glow"></span></span></span>
+              <span class="btn-label">Responder o questionário</span>
+              <svg class="btn-label btn-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="contato-wa-btn" id="link-whatsapp" href="https://wa.me/5511933607230" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <span>Conversar pelo WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contato-panel reveal" style="--i:2">
+          <div class="contact-item">
+            <span class="contact-label">Canal direto</span>
+            <a class="contact-value" href="https://wa.me/5511933607230" target="_blank" rel="noopener">+55 11 93360-7230</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">E-mail</span>
+            <a class="contact-value" href="mailto:contato@1234solution.com.br">contato@1234solution.com.br</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">LinkedIn</span>
+            <a class="contact-value" href="https://www.linkedin.com/in/adalbertofchagas" target="_blank" rel="noopener">linkedin.com/in/adalbertofchagas</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Base</span>
+            <span class="contact-value">São Paulo, SP, Brasil</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="max-w footer-flex">
+        <div class="footer-brand">1234 SOLUTION · Estratégia, Gestão e Governança</div>
+        <div class="footer-copy">&copy; 2026 1234 Solution. Todos os direitos reservados</div>
+      </div>
+    </footer>
+
   </main>
 
   <!-- Bibliotecas via CDN, versões fixadas -->
@@ -1280,9 +2422,10 @@
 
   <script>
     /* ============================================================
-       CONSTANTES (CONFIRMAR)
-       Nesta etapa só ficam declaradas, ainda sem uso.
+       CONSTANTES
+       Configuração de endpoints e integrações.
     ============================================================ */
+    const RESPONDI_URL = "https://form.respondi.app/qpSgEpty";
     const WHATSAPP_NUMERO = "5511933607230"; // CONFIRMAR
     const AGENDA_URL = "";                   // CONFIRMAR
     const FORM_ENDPOINT = "";                // CONFIRMAR
@@ -1308,6 +2451,32 @@
       const headerCta = $('#headerCta');
       const heroCta = $('.hero-actions .btn-primary');
       const siteHeader = $('.site-header');
+
+
+      /* ----------------------------------------------------------
+         Dobra de Contato: Questionário e Fallback do WhatsApp
+      ---------------------------------------------------------- */
+      const btnQuestionario = $('#btn-questionario');
+      const linkWhatsapp = $('#link-whatsapp');
+      const waUrl = (typeof WHATSAPP_NUMERO !== 'undefined' && WHATSAPP_NUMERO) ? ('https://wa.me/' + WHATSAPP_NUMERO) : '#';
+
+      if (btnQuestionario) {
+        if (typeof RESPONDI_URL === 'string' && RESPONDI_URL.trim() !== '') {
+          btnQuestionario.href = RESPONDI_URL;
+          btnQuestionario.target = '_blank';
+          btnQuestionario.rel = 'noopener';
+        } else {
+          // Fallback para o WhatsApp se RESPONDI_URL estiver vazio
+          btnQuestionario.href = waUrl;
+          btnQuestionario.target = '_blank';
+          btnQuestionario.rel = 'noopener';
+        }
+      }
+      if (linkWhatsapp) {
+        linkWhatsapp.href = waUrl;
+        linkWhatsapp.target = '_blank';
+        linkWhatsapp.rel = 'noopener';
+      }
 
       /* Cabeçalho: fundo sólido só com a página rolada (mais de 8 px). Listener passivo, vale também no movimento reduzido (o CSS tira a transição). */
       const syncHeader = () => siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
@@ -1871,6 +3040,372 @@
         }, 200);
       });
     })();
+
+    /* ============================================================
+       DOBRA 6: CREDENCIAIS (Função Isolada / IIFE)
+    ============================================================ */
+    (function () {
+      'use strict';
+
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const credSec = $('#credenciais');
+      if (!credSec) return;
+
+      const isReduced = root.classList.contains('rm') ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      // Em movimento reduzido ou sem JavaScript, nada da dobra 6 é armado e os números finais já estão no HTML
+      if (isReduced) return;
+
+      credSec.classList.add('cred-armed');
+
+      const hasGsap = typeof window.gsap !== 'undefined';
+      const hasST = hasGsap && typeof window.ScrollTrigger !== 'undefined';
+
+      // 1. Régua de formação (scrub com ScrollTrigger / fallback)
+      const credRuler = $('#credRulerFill');
+      const credFormItems = $$('.cred-form-item');
+      if (credRuler && hasST) {
+        ScrollTrigger.create({
+          trigger: '.cred-form-wrapper',
+          start: 'top 75%',
+          end: 'bottom 60%',
+          scrub: true,
+          onUpdate: function (self) {
+            const p = self.progress;
+            credRuler.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+            const total = credFormItems.length;
+            credFormItems.forEach(function (item, idx) {
+              const th = (idx + 0.3) / total;
+              item.classList.toggle('is-lit', p >= th);
+            });
+          }
+        });
+      } else if (credRuler) {
+        if ('IntersectionObserver' in window) {
+          const credIo = new IntersectionObserver(function (entries) {
+            if (entries.some(function (e) { return e.isIntersecting; })) {
+              credRuler.style.transform = 'scaleY(1)';
+              credFormItems.forEach(function (i) { i.classList.add('is-lit'); });
+              credIo.disconnect();
+            }
+          }, { threshold: 0.2 });
+          const fw = $('.cred-form-wrapper');
+          if (fw) credIo.observe(fw);
+        } else {
+          credRuler.style.transform = 'scaleY(1)';
+          credFormItems.forEach(function (i) { i.classList.add('is-lit'); });
+        }
+      }
+
+      // 2. Parallax sutil na planta técnica de fundo
+      const credBg = $('.cred-bg-plan');
+      if (credBg && hasST) {
+        gsap.to(credBg, {
+          yPercent: 12,
+          ease: 'none',
+          scrollTrigger: { trigger: credSec, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      }
+
+      // 3. SplitText no nome do responsável com mask: 'lines'
+      const credLeadName = $('#cred-lead-name');
+      if (credLeadName && hasGsap && window.SplitText) {
+        const splitLead = SplitText.create(credLeadName, { type: 'lines', linesClass: 'ln', mask: 'lines' });
+        gsap.set(splitLead.lines, { yPercent: 110 });
+        if (hasST) {
+          ScrollTrigger.create({
+            trigger: credLeadName,
+            start: 'top 85%',
+            once: true,
+            onEnter: function () {
+              gsap.to(splitLead.lines, {
+                yPercent: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power3.out'
+              });
+            }
+          });
+        } else {
+          gsap.to(splitLead.lines, { yPercent: 0, duration: 0.8 });
+        }
+      }
+
+      // 4. Contadores animados: do 0 ao valor e garantia exata no onComplete
+      const credCounters = $$('.cred-num-val');
+      if (credCounters.length) {
+        let credCounted = false;
+        const runCredCounters = function () {
+          if (credCounted) return;
+          credCounted = true;
+          credCounters.forEach(function (el) {
+            const target = parseInt(el.getAttribute('data-val'), 10);
+            if (isNaN(target)) return;
+            el.textContent = '0';
+            if (hasGsap) {
+              const obj = { val: 0 };
+              gsap.to(obj, {
+                val: target,
+                duration: 1.8,
+                ease: 'power2.out',
+                onUpdate: function () {
+                  el.textContent = Math.round(obj.val);
+                },
+                onComplete: function () {
+                  el.textContent = String(target);
+                }
+              });
+            } else {
+              el.textContent = String(target);
+            }
+          });
+        };
+        if (hasST) {
+          ScrollTrigger.create({
+            trigger: credSec,
+            start: 'top 75%',
+            once: true,
+            onEnter: runCredCounters
+          });
+        } else if ('IntersectionObserver' in window) {
+          const counterIo = new IntersectionObserver(function (entries) {
+            if (entries.some(function (e) { return e.isIntersecting; })) {
+              runCredCounters();
+              counterIo.disconnect();
+            }
+          }, { threshold: 0.2 });
+          counterIo.observe(credSec);
+        }
+      }
+
+      // 5. Spotlight e inclinação 3D sutil nas células (apenas com mouse)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        $$('.cred-cell').forEach(function (cell) {
+          cell.addEventListener('mousemove', function (e) {
+            const rect = cell.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            cell.style.setProperty('--mx', x + 'px');
+            cell.style.setProperty('--my', y + 'px');
+            const tiltX = (((y / rect.height) - 0.5) * -3).toFixed(2);
+            const tiltY = (((x / rect.width) - 0.5) * 3).toFixed(2);
+            cell.style.transform = 'perspective(800px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) translateY(-2px)';
+          });
+          cell.addEventListener('mouseleave', function () {
+            cell.style.removeProperty('--mx');
+            cell.style.removeProperty('--my');
+            cell.style.transform = '';
+          });
+        });
+      }
+    })();
+
+    /* ============================================================
+       DOBRA 7: PERGUNTAS FREQUENTES (Função Isolada / IIFE)
+    ============================================================ */
+    (function () {
+      'use strict';
+
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const faqSec = $('#perguntas');
+      if (!faqSec) return;
+
+      const isReduced = root.classList.contains('rm') ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      const hasGsap = typeof window.gsap !== 'undefined';
+      const hasST = hasGsap && typeof window.ScrollTrigger !== 'undefined';
+
+      // 1. Título com SplitText (mask: 'lines' e stagger)
+      const faqTitle = $('#faq-title');
+      if (faqTitle && hasGsap && window.SplitText && !isReduced) {
+        const splitFaq = SplitText.create(faqTitle, { type: 'lines', linesClass: 'ln', mask: 'lines' });
+        gsap.set(splitFaq.lines, { yPercent: 110 });
+        if (hasST) {
+          ScrollTrigger.create({
+            trigger: faqTitle,
+            start: 'top 85%',
+            once: true,
+            onEnter: function () {
+              gsap.to(splitFaq.lines, {
+                yPercent: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power3.out'
+              });
+            }
+          });
+        } else {
+          gsap.to(splitFaq.lines, { yPercent: 0, duration: 0.8 });
+        }
+      }
+
+      // 2. Ponto de interrogação decorativo: revelação por clip-path e parallax leve
+      const faqMark = $('.faq-decor-mark');
+      if (faqMark && hasST && !isReduced) {
+        gsap.fromTo(faqMark, { clipPath: 'inset(100% 0 0 0)', opacity: 0 }, {
+          clipPath: 'inset(0% 0 0 0)',
+          opacity: 0.35,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: faqSec, start: 'top 70%', once: true }
+        });
+        gsap.to(faqMark, {
+          yPercent: -15,
+          ease: 'none',
+          scrollTrigger: { trigger: faqSec, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
+      }
+
+      // 3. Acordeão: WAI-ARIA, apenas um aberto por vez, suporte a teclado completo
+      const items = $$('.faq-item');
+      const buttons = $$('.faq-btn');
+
+      function setItemOpen(targetItem, open) {
+        const btn = $('.faq-btn', targetItem);
+        if (open) {
+          // Fecha os outros
+          items.forEach(function (it) {
+            if (it !== targetItem && it.classList.contains('is-open')) {
+              it.classList.remove('is-open');
+              const b = $('.faq-btn', it);
+              if (b) b.setAttribute('aria-expanded', 'false');
+            }
+          });
+          targetItem.classList.add('is-open');
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+        } else {
+          targetItem.classList.remove('is-open');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+        if (hasST) ScrollTrigger.refresh();
+      }
+
+      buttons.forEach(function (btn, idx) {
+        const item = btn.closest('.faq-item');
+
+        btn.addEventListener('click', function () {
+          const isOpen = item.classList.contains('is-open');
+          setItemOpen(item, !isOpen);
+        });
+
+        btn.addEventListener('keydown', function (e) {
+          let targetIdx = -1;
+          if (e.key === 'ArrowDown') {
+            targetIdx = (idx + 1) % buttons.length;
+          } else if (e.key === 'ArrowUp') {
+            targetIdx = (idx - 1 + buttons.length) % buttons.length;
+          } else if (e.key === 'Home') {
+            targetIdx = 0;
+          } else if (e.key === 'End') {
+            targetIdx = buttons.length - 1;
+          }
+          if (targetIdx !== -1) {
+            e.preventDefault();
+            buttons[targetIdx].focus();
+          }
+        });
+      });
+
+      // 4. Spotlight discreto que segue o cursor em cada item (só com mouse)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        items.forEach(function (item) {
+          item.addEventListener('mousemove', function (e) {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            item.style.setProperty('--mx', x + 'px');
+            item.style.setProperty('--my', y + 'px');
+          });
+          item.addEventListener('mouseleave', function () {
+            item.style.removeProperty('--mx');
+            item.style.removeProperty('--my');
+          });
+        });
+      }
+    })();
+
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Vocês são especialistas em saneamento ou uma consultoria genérica?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Especialistas. A atuação é em gestão de ativos e em engenharia para o setor regulado, com mestrado em Engenharia Civil (Saneamento) pela Poli/USP. A mesma base técnica atende outros setores de capital intensivo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vocês atendem só saneamento ou também indústria?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Os dois. A base técnica é a mesma: gestão de ativos, comprovação de investimento e conciliação físico-contábil. Muda quem exige a comprovação: uma agência reguladora, uma auditoria, uma seguradora ou o seu conselho. No caminho de serviços técnicos, atendemos também condomínios, propriedades e empresas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como isso se integra aos sistemas que minha equipe já usa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O diagnóstico mapeia onde a engenharia (cadastro técnico, GIS) e a contabilidade (ERP) divergem, antes de qualquer mudança de sistema. O trabalho se conecta ao que já existe, não o substitui, e é planejado para não parar a sua operação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O diagnóstico é mesmo gratuito? O que acontece depois?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "É gratuito e sem compromisso: uma conversa de 30 minutos e a leitura dos documentos que você já tem. Se fizer sentido seguir, enviamos uma proposta por escrito com escopo, prazo e valor. Se não fizer, você sai da conversa sabendo qual é o próximo passo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quanto tempo leva um serviço?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende do tipo de demanda e dos documentos disponíveis, por isso o prazo é definido na proposta, por escrito, antes de começar. Se há um prazo legal correndo, como uma notificação de fiscalização, informe no diagnóstico: isso define a prioridade."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O que não está incluído nos serviços técnicos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Taxas de órgãos e conselhos (inclusive a taxa da ART), serviços de terceiros, como laboratórios e execução de obras, e revisões além das combinadas não estão incluídos, salvo se constarem na proposta. A proposta deixa isso explícito antes do início."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quem conduz o trabalho?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O trabalho é conduzido diretamente pelo engenheiro responsável, Adalberto Chagas, o que mantém o contato direto e a responsabilidade técnica em uma só pessoa. Em levantamentos de campo ou estudos específicos, pode haver profissionais parceiros, sempre informados na proposta."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como são tratados os documentos e as informações que eu compartilhar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Como confidenciais, usados apenas para a finalidade do trabalho. Se você preferir, assinamos um termo de confidencialidade antes de qualquer troca de documentos."
+        }
+      }
+    ]
+  }
+  </script>
+
 </body>
 </html>
