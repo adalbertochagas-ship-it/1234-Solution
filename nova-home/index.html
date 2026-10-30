@@ -949,12 +949,252 @@
     /* Mobile (<= 768px): 1 coluna */
     @media (max-width: 768px) {
       .cred-grid { grid-template-columns: 1fr; }
-      .cred-cell-lead, .cred-cell-reg, .cred-cell-formacao,
+      .cred-cell-lead, .cred-cell-reg, .cred-cell-exp, .cred-cell-formacao,
       .cred-cell-conselhos, .cred-cell-docencia, .cred-cell-pubs {
         grid-column: span 1;
       }
       .cred-cell { padding: var(--space-6); }
       .cred-cell-border-r { display: none; }
+    }
+
+    /* Célula Experiência (Dobra 6) */
+    .cred-cell-exp {
+      grid-column: span 12;
+      padding: var(--space-8);
+      position: relative;
+    }
+    .cred-exp-header {
+      margin-bottom: var(--space-6);
+    }
+    .cred-exp-wrapper {
+      position: relative;
+    }
+
+    /* Desktop (a partir de 1025px): régua horizontal com derivação para o item 3 */
+    @media (min-width: 1025px) {
+      .cred-exp-ruler {
+        position: absolute;
+        top: 6px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .cred-exp-ruler-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--line-light);
+      }
+      .cred-exp-ruler-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background: var(--gold-deep);
+        transform-origin: left center;
+        transform: scaleX(1);
+      }
+      .cred-armed .cred-exp-ruler-fill {
+        transform: scaleX(0);
+      }
+      /* Ramal de derivação para a competência paralela */
+      .cred-exp-branch {
+        position: absolute;
+        right: calc(33.333% / 2);
+        top: 2px;
+        width: 24px;
+        height: 16px;
+        pointer-events: none;
+      }
+      .cred-exp-branch-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 12px;
+        background: var(--gold-deep);
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+      .cred-exp-item.is-lit .cred-exp-branch-line {
+        opacity: 1;
+      }
+
+      .cred-exp-items {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-8);
+        position: relative;
+        z-index: 2;
+      }
+      .cred-exp-item {
+        position: relative;
+        padding-top: var(--space-6);
+        display: flex;
+        flex-direction: column;
+      }
+      .cred-exp-node {
+        position: absolute;
+        top: 1px;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 2px solid var(--stone);
+        transition: all 0.3s var(--ease-spring);
+        z-index: 3;
+      }
+      .cred-exp-item-branch {
+        padding-left: var(--space-4);
+        border-left: 1px dashed var(--line-light);
+      }
+      .cred-exp-item-branch .cred-exp-node {
+        left: var(--space-4);
+      }
+    }
+
+    /* Tablet e Celular (até 1024px): régua na vertical à esquerda */
+    @media (max-width: 1024px) {
+      .cred-exp-wrapper {
+        padding-left: var(--space-8);
+      }
+      .cred-exp-ruler {
+        position: absolute;
+        top: var(--space-2);
+        bottom: var(--space-2);
+        left: 10px;
+        width: 2px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .cred-exp-ruler-track {
+        position: absolute;
+        inset: 0;
+        background: var(--line-light);
+      }
+      .cred-exp-ruler-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: var(--gold-deep);
+        transform-origin: top center;
+        transform: scaleY(1);
+      }
+      .cred-armed .cred-exp-ruler-fill {
+        transform: scaleY(0);
+      }
+      .cred-exp-branch {
+        display: none;
+      }
+      .cred-exp-items {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+        position: relative;
+        z-index: 2;
+      }
+      .cred-exp-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .cred-exp-node {
+        position: absolute;
+        left: calc(-1 * var(--space-8) + 7px);
+        top: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 1.5px solid var(--stone);
+        transition: all 0.3s var(--ease-spring);
+        z-index: 3;
+      }
+      .cred-exp-item-branch {
+        position: relative;
+      }
+      .cred-exp-item-branch::before {
+        content: '';
+        position: absolute;
+        left: calc(-1 * var(--space-8) + 11px);
+        top: 10px;
+        width: 12px;
+        height: 1px;
+        border-top: 1px dashed var(--stone);
+      }
+    }
+
+    /* Tipografia e elementos da célula experiência */
+    .cred-exp-year {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--stone-2);
+      margin-bottom: var(--space-2);
+      transition: color 0.3s ease;
+    }
+    .cred-exp-badge {
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--stone-2);
+      font-weight: 600;
+    }
+    .cred-exp-role {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.45;
+      margin: 0 0 var(--space-1);
+    }
+    .cred-exp-org {
+      font-size: var(--text-base);
+      color: var(--stone-2);
+      margin: 0;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .cred-exp-desc {
+      font-size: var(--text-base);
+      color: var(--ink);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Iluminação pelo scroll */
+    .cred-exp-item.is-lit .cred-exp-node {
+      border-color: var(--gold-deep);
+      background: var(--gold-deep);
+      box-shadow: 0 0 0 3px rgba(156, 124, 60, 0.2);
+    }
+    .cred-exp-item.is-lit .cred-exp-year {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .cred-exp-item.is-lit .cred-exp-badge {
+      color: var(--gold-deep);
+    }
+    .cred-exp-item.is-lit .cred-exp-org {
+      color: var(--ink);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cred-exp-ruler-fill {
+        transform: none !important;
+      }
+      .cred-exp-node,
+      .cred-exp-year {
+        transition: none !important;
+      }
     }
 
     /* Tipografia e elementos das células */
@@ -1477,50 +1717,216 @@
     }
     a.contact-value:hover { color: var(--gold-deep); }
 
-    /* FOOTER (DOBRA 9) */
+        /* FOOTER COMPLETO */
     .site-footer {
       background-color: var(--navy);
       color: var(--paper);
-      padding: var(--space-8) 0;
+      position: relative;
+      overflow: hidden;
       border-top: 1px solid var(--line-dark);
+      padding: 0;
     }
-    .footer-flex {
+    .footer-ruler {
+      position: relative;
+      width: 100%;
+      height: 20px;
+      overflow: hidden;
+    }
+    .footer-ruler-ticks {
+      position: absolute;
+      inset: 0;
+      opacity: 0.45;
+      background:
+        repeating-linear-gradient(90deg, var(--stone) 0 1px, transparent 1px 48px) left bottom / 100% 14px no-repeat,
+        repeating-linear-gradient(90deg, var(--stone) 0 1px, transparent 1px 8px) left bottom / 100% 7px no-repeat;
+    }
+    .footer-ruler-fill {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      transform-origin: left center;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold) 60%, var(--gold-2));
+      box-shadow: var(--glow-gold);
+      transform: scaleX(1);
+    }
+    html.js .footer-ruler-fill {
+      transform: scaleX(0);
+    }
+    .rm .footer-ruler-fill,
+    html:not(.js) .footer-ruler-fill {
+      transform: scaleX(1) !important;
+    }
+    .footer-watermark {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 11vw, 8.5rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(198, 164, 90, 0.08);
+      text-stroke: 1px rgba(198, 164, 90, 0.08);
+      opacity: 0.8;
+    }
+    .footer-container {
+      position: relative;
+      z-index: 1;
+      padding-top: var(--space-12);
+      padding-bottom: var(--space-12);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+    .footer-brand-header {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--space-4);
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
     }
-    .footer-brand, .footer-copy {
+    .footer-logo {
+      display: block;
+      width: 85px;
+      height: auto;
+    }
+    .footer-company-name {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--paper);
+      line-height: 1.3;
+    }
+    .footer-company-sub {
+      font-size: var(--text-sm);
+      color: var(--text-lede);
+      line-height: 1.4;
+    }
+    .footer-meta-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .footer-meta {
+      font-family: var(--font-mono);
       font-size: var(--text-xs);
       color: var(--text-lede);
+      line-height: 1.6;
+      margin: 0;
     }
-    .footer-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: var(--space-6);
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold-2);
+      margin-bottom: var(--space-3);
+    }
+    .footer-contact-list,
+    .footer-links-list {
       list-style: none;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-contact-list {
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .footer-contact-link,
+    .footer-link {
+      font-size: var(--text-sm);
+      text-decoration: none;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      transition: color 0.2s var(--ease-smooth);
+    }
+    .footer-contact-link {
+      color: var(--paper);
     }
     .footer-link {
-      font-size: var(--text-xs);
       color: var(--text-lede);
-      text-decoration: none;
-      transition: color 0.2s ease;
     }
+    .footer-contact-link:hover,
     .footer-link:hover {
       color: var(--gold-2);
     }
-    @media (max-width: 768px) {
-      .footer-flex {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-4);
+    .footer-contact-link:focus-visible,
+    .footer-link:focus-visible,
+    .footer-back-top:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+    .footer-resp {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--text-lede);
+      margin: 0 0 var(--space-6);
+    }
+    .footer-top-wrap {
+      display: flex;
+      align-items: center;
+    }
+    .footer-back-top {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      min-height: 44px;
+      padding: 0 var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--paper);
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      background: rgba(22, 40, 63, 0.4);
+      transition: all 0.2s var(--ease-smooth);
+    }
+    .footer-back-top:hover {
+      color: var(--gold-2);
+      border-color: var(--gold);
+      background: rgba(22, 40, 63, 0.8);
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--line-dark);
+      padding: var(--space-6) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-bottom-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-lede);
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
       }
-      .footer-links {
-        gap: var(--space-3) var(--space-5);
+      .footer-container {
+        padding-top: var(--space-8);
+        padding-bottom: var(--space-8);
       }
     }
 
@@ -2498,6 +2904,52 @@
               <p class="cred-text-sub">Profissional e empresa registrados no CREA-SP</p>
             </article>
 
+            <!-- Célula Nova: Experiência (col-span-12) -->
+            <article class="cred-cell cred-cell-exp" data-cell="exp" style="--ci:2.5">
+              <span class="cred-cell-border-b" aria-hidden="true"></span>
+              <div class="cred-cell-spotlight" aria-hidden="true"></div>
+
+              <div class="cred-exp-header">
+                <p class="cred-label">Experiência</p>
+              </div>
+
+              <div class="cred-exp-wrapper">
+                <!-- Régua técnica da experiência -->
+                <div class="cred-exp-ruler" aria-hidden="true">
+                  <div class="cred-exp-ruler-track"></div>
+                  <div class="cred-exp-ruler-fill" id="credExpRulerFill"></div>
+                  <div class="cred-exp-branch">
+                    <span class="cred-exp-branch-line"></span>
+                  </div>
+                </div>
+
+                <div class="cred-exp-items">
+                  <!-- Item 1: 2020 a 2023 -->
+                  <div class="cred-exp-item" data-exp-item="1">
+                    <span class="cred-exp-node" aria-hidden="true"></span>
+                    <span class="cred-exp-year">2020 a 2023</span>
+                    <h4 class="cred-exp-role">Gerente do Departamento de Ativos Imobilizados</h4>
+                    <p class="cred-exp-org">Sabesp</p>
+                  </div>
+
+                  <!-- Item 2: 2023 a 2024 -->
+                  <div class="cred-exp-item" data-exp-item="2">
+                    <span class="cred-exp-node" aria-hidden="true"></span>
+                    <span class="cred-exp-year">2023 a 2024</span>
+                    <h4 class="cred-exp-role">Gerente de Divisão de Gestão do Imobiliário</h4>
+                    <p class="cred-exp-org">Sabesp</p>
+                  </div>
+
+                  <!-- Item 3: Competência (ramal / derivação) -->
+                  <div class="cred-exp-item cred-exp-item-branch" data-exp-item="3">
+                    <span class="cred-exp-node" aria-hidden="true"></span>
+                    <span class="cred-exp-year cred-exp-badge">Competência</span>
+                    <p class="cred-exp-desc">Equipe de implantação do SAP, módulo de ativo imobilizado (FI-AA)</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
             <!-- Célula 3: Formação (col-span-7) -->
             <article class="cred-cell cred-cell-formacao" data-cell="3" style="--ci:3">
               <span class="cred-cell-border-b" aria-hidden="true"></span>
@@ -2887,21 +3339,74 @@
 
     </main>
 
-  <!-- FOOTER (DOBRA 9) -->
-    <footer class="site-footer" id="rodape">
-      <div class="max-w footer-flex">
-        <div class="footer-brand">1234 Solution Ltda · Consultoria de engenharia · CNPJ 56.364.941/0001-69</div>
-        <ul class="footer-links" role="list">
-          <li><a class="footer-link" href="https://www.linkedin.com/in/adalbertofchagas" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a class="footer-link" href="https://www.instagram.com/adalbertoch" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a class="footer-link" href="https://www.youtube.com/@adalbertofchagas" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-          <li><a class="footer-link" href="privacidade.html">Política de privacidade</a></li>
-          <!-- Academy: reativar quando a página existir dentro do site -->
-          <!-- <li><a class="footer-link" href="https://adalbertochagas.com.br" target="_blank" rel="noopener noreferrer">Adalberto Chagas Academy</a></li> -->
-        </ul>
-        <div class="footer-copy">&copy; 2026 1234 Solution. Todos os direitos reservados</div>
+    <!-- FOOTER (DOBRA 9) -->
+  <footer class="site-footer" id="rodape">
+    <!-- Regua tecnica de cotas no topo do rodape -->
+    <div class="footer-ruler" aria-hidden="true">
+      <div class="footer-ruler-ticks"></div>
+      <div class="footer-ruler-fill" id="footerRulerFill"></div>
+    </div>
+
+    <!-- Assinatura tecnica de fundo com parallax leve -->
+    <div class="footer-watermark" aria-hidden="true">1234 SOLUTION</div>
+
+    <div class="max-w footer-container">
+      <div class="footer-grid">
+        <!-- Coluna 1: Marca e dados da empresa -->
+        <div class="footer-col footer-col-brand">
+          <div class="footer-brand-header">
+            <img src="assets/logo_1234_sm.png" alt="1234 Solution" width="85" height="44" class="footer-logo" />
+            <div class="footer-brand-titles">
+              <div class="footer-company-name">1234 Solution Ltda</div>
+              <div class="footer-company-sub">Consultoria de engenharia</div>
+            </div>
+          </div>
+          <div class="footer-meta-group">
+            <p class="footer-meta">CNPJ 56.364.941/0001-69</p>
+            <p class="footer-meta">Registro no CREA-SP nº 2868083</p>
+            <p class="footer-meta">São Paulo, SP</p>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Contato e links -->
+        <div class="footer-col footer-col-links">
+          <div class="footer-col-title">Contato e canais</div>
+          <ul class="footer-contact-list" role="list">
+            <li><a class="footer-contact-link" href="mailto:contato@1234solution.com.br">contato@1234solution.com.br</a></li>
+            <li><a class="footer-contact-link" href="tel:+5511933607230">(11) 93360-7230</a></li>
+          </ul>
+          <ul class="footer-links-list" role="list">
+            <li><a class="footer-link" href="https://www.linkedin.com/in/adalbertofchagas" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a class="footer-link" href="https://www.instagram.com/adalbertoch" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a class="footer-link" href="https://www.youtube.com/@adalbertofchagas" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a class="footer-link" href="privacidade.html">Política de privacidade</a></li>
+            <!-- TROCAR: link da página da Academy quando existir -->
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Responsavel tecnico -->
+        <div class="footer-col footer-col-tech">
+          <div class="footer-col-title">Responsabilidade técnica</div>
+          <p class="footer-resp">Responsável técnico: Adalberto Francisco Chagas, Engenheiro Civil e de Segurança do Trabalho</p>
+          <div class="footer-top-wrap">
+            <a class="footer-back-top" href="#hero">
+              <span>Voltar ao topo</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 11V3M7 3L3 7M7 3L11 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
-    </footer>
+    </div>
+
+    <!-- Linha final na base -->
+    <div class="footer-bottom">
+      <div class="max-w footer-bottom-inner">
+        <p class="footer-copy">© 2026 1234 Solution Ltda. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Bibliotecas via CDN, versões fixadas -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
@@ -3751,6 +4256,51 @@
         }
       }
 
+      // 1b. Régua de experiência (scrub com ScrollTrigger / fallback)
+      const credExpRuler = $('#credExpRulerFill');
+      const credExpItems = $$('.cred-exp-item');
+
+      if (credExpRuler && hasST) {
+        ScrollTrigger.create({
+          trigger: '.cred-cell-exp',
+          start: 'top 75%',
+          end: 'bottom 60%',
+          scrub: true,
+          onUpdate: function (self) {
+            const p = self.progress;
+            if (window.matchMedia('(min-width: 1025px)').matches) {
+              credExpRuler.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+            } else {
+              credExpRuler.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+            }
+            const total = credExpItems.length;
+            credExpItems.forEach(function (item, idx) {
+              const th = (idx + 0.3) / total;
+              item.classList.toggle('is-lit', p >= th);
+            });
+          }
+        });
+      } else if (credExpRuler) {
+        if ('IntersectionObserver' in window) {
+          const expIo = new IntersectionObserver(function (entries) {
+            if (entries.some(function (e) { return e.isIntersecting; })) {
+              if (window.matchMedia('(min-width: 1025px)').matches) {
+                credExpRuler.style.transform = 'scaleX(1)';
+              } else {
+                credExpRuler.style.transform = 'scaleY(1)';
+              }
+              credExpItems.forEach(function (i) { i.classList.add('is-lit'); });
+              expIo.disconnect();
+            }
+          }, { threshold: 0.2 });
+          const expCell = $('.cred-cell-exp');
+          if (expCell) expIo.observe(expCell);
+        } else {
+          credExpRuler.style.transform = 'scaleX(1)';
+          credExpItems.forEach(function (i) { i.classList.add('is-lit'); });
+        }
+      }
+
       // 2. Parallax sutil na planta técnica de fundo
       const credBg = $('.cred-bg-plan');
       if (credBg && hasST) {
@@ -4002,6 +4552,70 @@
       }
     })();
 
+
+    /* ============================================================
+       RODAPÉ: RÉGUA DE COTAS E ASSINATURA TÉCNICA COM PARALLAX
+       Função isolada com const root, $ e $$ definidos internamente.
+    ============================================================ */
+    (function () {
+      function initFooter() {
+        const root = document.querySelector('.site-footer');
+        if (!root) return;
+        const $ = (s, ctx = root) => ctx.querySelector(s);
+        const $$ = (s, ctx = root) => Array.prototype.slice.call(ctx.querySelectorAll(s));
+
+        const fill = $('.footer-ruler-fill');
+        const watermark = $('.footer-watermark');
+        const isRm = window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+                     document.documentElement.classList.contains('rm');
+
+        if (isRm) {
+          if (fill) fill.style.transform = 'scaleX(1)';
+          return;
+        }
+
+        if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+          if (fill) {
+            gsap.fromTo(fill,
+              { scaleX: 0 },
+              {
+                scaleX: 1,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: root,
+                  start: 'top bottom',
+                  end: 'bottom bottom',
+                  scrub: 0.2
+                }
+              }
+            );
+          }
+          if (watermark) {
+            gsap.fromTo(watermark,
+              { y: 30 },
+              {
+                y: -20,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: root,
+                  start: 'top bottom',
+                  end: 'bottom bottom',
+                  scrub: 0.5
+                }
+              }
+            );
+          }
+        } else {
+          if (fill) fill.style.transform = 'scaleX(1)';
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFooter);
+      } else {
+        initFooter();
+      }
+    })();
   </script>
 
   <script type="application/ld+json">
