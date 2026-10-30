@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidade · 1234 Solution</title>
+  <meta name="description" content="Política de Privacidade da 1234 Solution Ltda, em conformidade com a LGPD (Lei 13.709/2018)." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://1234solution.com.br/privacidade.html" />
+
+  <!-- SITE_URL: https://1234solution.com.br -->
+  <meta property="og:title" content="Política de Privacidade · 1234 Solution" />
+  <meta property="og:description" content="Como a 1234 Solution trata os dados pessoais de visitantes e clientes em conformidade com a LGPD." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://1234solution.com.br/privacidade.html" />
+  <meta property="og:image" content="https://1234solution.com.br/assets/hero_poster.jpg" />
+
+  <link rel="icon" type="image/png" href="assets/favicon_1234.png" />
+
+  <!-- Fontes do projeto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS (Idênticos ao index.html)
+    ============================================================ */
+    :root {
+      --navy: #0E1B2B;  --navy-2: #16283F;  --navy-3: #1E3350;
+      --gold: #C6A45A;  --gold-2: #E4C787;  --gold-deep: #9C7C3C;
+      --paper: #F4EFE4; --paper-2: #ECE4D3; --paper-3: #DFD9CB;
+      --ink: #17212E;   --ink-2: #243242;   --stone: #7C8798;   --stone-2: #6E6552;
+      --line-dark: rgba(198,164,90,0.18);
+      --line-light: rgba(23,33,46,0.12);
+      --text-lede: #B9C2CF;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+      --text-xs: 0.6875rem;  --text-sm: 0.8125rem; --text-base: 1rem;
+      --text-lg: 1.125rem;   --text-xl: 1.25rem;   --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;  --text-4xl: 2.25rem;  --text-5xl: 3rem;
+      --text-6xl: 3.75rem;   --text-7xl: 4.5rem;   --text-8xl: 6rem;
+
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem;
+      --space-6: 1.5rem;  --space-8: 2rem;   --space-12: 3rem;   --space-16: 4rem;
+      --space-20: 5rem;   --space-24: 6rem;
+
+      --radius-sm: 3px; --radius-md: 6px; --radius-lg: 10px; --radius-xl: 16px;
+      --radius-2xl: 24px; --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(14,27,43,0.35);
+      --shadow-md: 0 8px 28px rgba(14,27,43,0.45);
+      --shadow-lg: 0 20px 60px rgba(14,27,43,0.55);
+
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.23, 1, 0.32, 1);
+
+      --grid-max: 1280px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cabeçalho superior */
+    .site-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background-color: var(--navy);
+      border-bottom: 1px solid var(--line-dark);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding: var(--space-4) 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .brand {
+      display: inline-flex;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+    }
+    .brand img {
+      height: 40px;
+      width: auto;
+      border-radius: var(--radius-md);
+    }
+    .header-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--paper);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius-sm);
+      transition: background-color 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth), color 0.2s var(--ease-smooth);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .header-back-btn:hover {
+        background-color: rgba(255, 255, 255, 0.06);
+        border-color: var(--gold-2);
+        color: var(--gold-2);
+      }
+    }
+
+    /* Hero / Título da página */
+    .privacy-hero {
+      background-color: var(--navy);
+      color: var(--paper);
+      padding: var(--space-12) 2.5rem var(--space-16);
+      border-bottom: 1px solid var(--line-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .privacy-hero-inner {
+      max-width: var(--grid-max);
+      margin-inline: auto;
+    }
+    .privacy-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--gold-2);
+      margin-bottom: var(--space-4);
+    }
+    .privacy-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-4);
+      color: var(--paper);
+    }
+    .privacy-meta {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      color: var(--stone);
+      margin: 0;
+    }
+
+    /* Layout principal: índice lateral + leitura */
+    .privacy-layout-wrap {
+      flex: 1;
+      max-width: var(--grid-max);
+      width: 100%;
+      margin-inline: auto;
+      padding: var(--space-12) 2.5rem var(--space-16);
+    }
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: var(--space-12);
+      align-items: start;
+    }
+
+    /* Índice lateral (desktop sticky) */
+    .privacy-aside {
+      position: sticky;
+      top: 6rem;
+      background: var(--paper-2);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .privacy-aside-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--stone-2);
+      margin: 0 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--line-light);
+    }
+    .privacy-nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .privacy-nav-link {
+      display: block;
+      padding: 0.35rem 0.6rem;
+      font-size: var(--text-sm);
+      color: var(--ink-2);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: color 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth), background-color 0.2s var(--ease-smooth);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .privacy-nav-link:hover {
+        color: var(--ink);
+        background-color: var(--paper-3);
+      }
+    }
+    .privacy-nav-link[aria-current="true"] {
+      color: var(--gold-deep);
+      border-left-color: var(--gold-2);
+      font-weight: 600;
+      background-color: var(--paper-3);
+    }
+
+    /* Conteúdo textual */
+    .privacy-content {
+      max-width: 68ch;
+      color: var(--ink);
+    }
+
+    /* Caixa de resumo executivo */
+    .privacy-summary-box {
+      background: var(--paper-2);
+      border: 1px solid var(--line-light);
+      border-left: 4px solid var(--gold);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      margin-bottom: var(--space-12);
+      box-shadow: var(--shadow-sm);
+    }
+    .privacy-summary-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold-deep);
+      margin: 0 0 var(--space-2);
+      font-weight: 700;
+    }
+    .privacy-summary-text {
+      margin: 0;
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* Introdução */
+    .privacy-intro-text {
+      font-size: var(--text-lg);
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: var(--space-12);
+      font-weight: 400;
+    }
+
+    /* Seções numeradas */
+    .privacy-section {
+      margin-bottom: var(--space-12);
+      scroll-margin-top: 6rem;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--line-light);
+    }
+    .privacy-section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+    .privacy-section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 var(--space-4);
+    }
+    .privacy-section p {
+      margin: 0 0 var(--space-4);
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+    .privacy-section ul {
+      margin: 0 0 var(--space-4);
+      padding-left: 0;
+      list-style: none;
+    }
+    .privacy-section li {
+      position: relative;
+      padding-left: var(--space-6);
+      margin-bottom: var(--space-2);
+      font-size: var(--text-base);
+      line-height: 1.65;
+      color: var(--ink-2);
+    }
+    .privacy-section li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 8px;
+      height: 2px;
+      background-color: var(--gold);
+    }
+    .privacy-section a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s var(--ease-smooth);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .privacy-section a:hover {
+        color: var(--gold-deep);
+      }
+    }
+
+    /* Rodapé (idêntico ao index.html) */
+    .site-footer {
+      background-color: var(--navy);
+      border-top: 1px solid var(--line-dark);
+      padding: var(--space-8) 0;
+      margin-top: auto;
+    }
+    .footer-flex {
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding: 0 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--stone);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-6);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .footer-link {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--stone);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s var(--ease-smooth);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .footer-link:hover { color: var(--paper); }
+    }
+    .footer-link[aria-current="page"] {
+      color: var(--gold-2);
+    }
+    .footer-copy {
+      width: 100%;
+      font-size: var(--text-xs);
+      color: var(--stone-2);
+      margin-top: var(--space-4);
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .privacy-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      .privacy-aside {
+        position: relative;
+        top: 0;
+      }
+      .header-inner, .privacy-hero, .privacy-layout-wrap, .footer-flex {
+        padding-inline: 1.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .privacy-hero { padding-block: var(--space-8); }
+      .privacy-hero-title { font-size: 2rem; }
+      .privacy-intro-text { font-size: var(--text-base); }
+      .privacy-section-title { font-size: var(--text-lg); }
+    }
+
+    /* Movimento reduzido */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="1234 Solution, voltar à página inicial">
+        <img src="assets/logo_1234_sm.png" alt="1234 Solution" width="85" height="44" />
+      </a>
+      <a class="header-back-btn" href="index.html">
+        <span aria-hidden="true">←</span> Início
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero / Cabeçalho da página -->
+  <header class="privacy-hero">
+    <div class="privacy-hero-inner">
+      <p class="privacy-eyebrow">Transparência e Conformidade</p>
+      <h1 class="privacy-hero-title">Política de Privacidade</h1>
+      <p class="privacy-meta">Última atualização: 28 de outubro de 2026</p>
+    </div>
+  </header>
+
+  <!-- Layout Principal -->
+  <div class="privacy-layout-wrap">
+    <div class="privacy-grid">
+
+      <!-- Índice lateral fixo (desktop) -->
+      <aside class="privacy-aside" aria-label="Índice da política de privacidade">
+        <p class="privacy-aside-title">Seções</p>
+        <nav>
+          <ul class="privacy-nav-list" role="list">
+            <li><a class="privacy-nav-link" href="#controlador">1. Controlador</a></li>
+            <li><a class="privacy-nav-link" href="#dados-coletados">2. Dados coletados</a></li>
+            <li><a class="privacy-nav-link" href="#finalidades">3. Finalidades</a></li>
+            <li><a class="privacy-nav-link" href="#bases-legais">4. Bases legais</a></li>
+            <li><a class="privacy-nav-link" href="#retencao">5. Retenção</a></li>
+            <li><a class="privacy-nav-link" href="#compartilhamento">6. Compartilhamento</a></li>
+            <li><a class="privacy-nav-link" href="#direitos">7. Seus direitos</a></li>
+            <li><a class="privacy-nav-link" href="#seguranca">8. Segurança</a></li>
+            <li><a class="privacy-nav-link" href="#cookies">9. Cookies</a></li>
+            <li><a class="privacy-nav-link" href="#menores">10. Menores</a></li>
+            <li><a class="privacy-nav-link" href="#alteracoes">11. Alterações</a></li>
+            <li><a class="privacy-nav-link" href="#contato">12. Contato</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Conteúdo da Política -->
+      <main class="privacy-content">
+
+        <!-- Resumo executivo -->
+        <div class="privacy-summary-box">
+          <p class="privacy-summary-label">Em resumo</p>
+          <p class="privacy-summary-text">
+            Usamos os dados que você informa apenas para responder ao seu pedido e, se fizer sentido, preparar uma proposta. Não vendemos dados, não usamos cookies de publicidade e você pode pedir a exclusão quando quiser.
+          </p>
+        </div>
+
+        <p class="privacy-intro-text">
+          Esta política explica como a 1234 Solution Ltda trata os dados pessoais de quem visita este site, responde ao questionário do diagnóstico técnico gratuito ou entra em contato conosco, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018, a LGPD).
+        </p>
+
+        <!-- 1. Quem é o controlador -->
+        <section class="privacy-section" id="controlador">
+          <h2 class="privacy-section-title">1. Quem é o controlador</h2>
+          <p>
+            1234 Solution Ltda, CNPJ 56.364.941/0001-69, São Paulo, SP.
+          </p>
+          <p>
+            Canal de comunicação sobre privacidade: <a href="mailto:contato@1234solution.com.br">contato@1234solution.com.br</a>. O responsável pelo atendimento é Adalberto Francisco Chagas.
+          </p>
+        </section>
+
+        <!-- 2. Quais dados coletamos -->
+        <section class="privacy-section" id="dados-coletados">
+          <h2 class="privacy-section-title">2. Quais dados coletamos</h2>
+          <ul>
+            <li><strong>Dados que você informa:</strong> nome, empresa, condomínio ou organização, cargo, WhatsApp, e-mail e as respostas do questionário (perfil, localização do imóvel ou da operação, situação da demanda, existência de prazo ou notificação, documentos que você já possui e papel na decisão).</li>
+            <li><strong>Dados das conversas:</strong> as mensagens que você trocar conosco por WhatsApp ou e-mail.</li>
+            <li><strong>Dados técnicos de navegação:</strong> endereço IP, tipo de navegador, dispositivo e páginas acessadas, registrados automaticamente pelos serviços que fazem o site funcionar.</li>
+          </ul>
+          <p>
+            Pedimos que você não envie documentos nem dados sensíveis pelo questionário. Os documentos necessários, se houver, são combinados por canal próprio, depois do primeiro contato.
+          </p>
+        </section>
+
+        <!-- 3. Para que usamos os dados -->
+        <section class="privacy-section" id="finalidades">
+          <h2 class="privacy-section-title">3. Para que usamos os dados</h2>
+          <ul>
+            <li>Responder à sua solicitação e agendar a conversa do diagnóstico técnico.</li>
+            <li>Preparar e enviar uma proposta, se fizer sentido seguir.</li>
+            <li>Executar o contrato, emitir notas fiscais e cumprir obrigações legais e fiscais, quando houver contratação.</li>
+            <li>Manter a segurança do site e prevenir abusos.</li>
+            <li>Enviar conteúdo técnico, somente se você tiver consentido. Você pode cancelar a qualquer momento.</li>
+          </ul>
+        </section>
+
+        <!-- 4. Bases legais -->
+        <section class="privacy-section" id="bases-legais">
+          <h2 class="privacy-section-title">4. Bases legais</h2>
+          <p>
+            Tratamos os dados com base no seu consentimento (por exemplo, ao enviar o questionário), em procedimentos preliminares a um contrato que você pediu, no cumprimento de obrigações legais e no exercício regular de direitos. Os dados técnicos de segurança são tratados com base no legítimo interesse de proteger o site.
+          </p>
+        </section>
+
+        <!-- 5. Por quanto tempo guardamos -->
+        <section class="privacy-section" id="retencao">
+          <h2 class="privacy-section-title">5. Por quanto tempo guardamos</h2>
+          <ul>
+            <li><strong>Solicitações sem contratação (questionário, e-mails e mensagens):</strong> por até 24 meses contados do último contato. Depois, eliminamos os dados. Se você pedir a exclusão antes, eliminamos em até 15 dias, salvo obrigação legal de guarda.</li>
+            <li><strong>Contratos, propostas aceitas, notas fiscais e documentos técnicos:</strong> por 5 anos contados do término do contrato, ou por mais tempo se a lei exigir.</li>
+            <li><strong>Registros técnicos de acesso ao site:</strong> pelo prazo previsto em lei, mantidos pelos serviços de hospedagem.</li>
+          </ul>
+          <p>
+            Ao fim de cada prazo, os dados são eliminados ou anonimizados de forma segura.
+          </p>
+        </section>
+
+        <!-- 6. Com quem compartilhamos -->
+        <section class="privacy-section" id="compartilhamento">
+          <h2 class="privacy-section-title">6. Com quem compartilhamos</h2>
+          <p>
+            Não vendemos nem alugamos dados pessoais. Usamos serviços de terceiros que operam o contato e o site:
+          </p>
+          <ul>
+            <li>Respondi, para o questionário;</li>
+            <li>WhatsApp, para as conversas;</li>
+            <li>Titan, para o e-mail corporativo;</li>
+            <li>HostGator, para a hospedagem do site.</li>
+          </ul>
+          <p>
+            Esses prestadores tratam os dados apenas para nos prestar o serviço. Também podemos compartilhar dados com a nossa contabilidade, quando necessário para obrigações fiscais, e com autoridades, quando a lei exigir.
+          </p>
+          <p>
+            Alguns desses serviços podem armazenar dados em servidores fora do Brasil. Nesses casos, a transferência observa as salvaguardas previstas na LGPD.
+          </p>
+          <p>
+            O site carrega fontes de letra e bibliotecas de provedores externos (Google Fonts e jsDelivr), que recebem o seu endereço IP ao exibir a página.
+          </p>
+        </section>
+
+        <!-- 7. Seus direitos -->
+        <section class="privacy-section" id="direitos">
+          <h2 class="privacy-section-title">7. Seus direitos</h2>
+          <p>
+            Nos termos do art. 18 da LGPD, você pode, a qualquer momento, pedir:
+          </p>
+          <ul>
+            <li>confirmação de que tratamos seus dados e acesso a eles;</li>
+            <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+            <li>anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade;</li>
+            <li>portabilidade dos dados;</li>
+            <li>informação sobre as entidades com quem compartilhamos;</li>
+            <li>revogação do consentimento, sem prejuízo do tratamento já realizado.</li>
+          </ul>
+          <p>
+            Para exercer esses direitos, escreva para <a href="mailto:contato@1234solution.com.br">contato@1234solution.com.br</a>. Respondemos em até 15 dias. Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).
+          </p>
+        </section>
+
+        <!-- 8. Segurança -->
+        <section class="privacy-section" id="seguranca">
+          <h2 class="privacy-section-title">8. Segurança</h2>
+          <p>
+            Adotamos medidas técnicas e organizacionais razoáveis para proteger os dados contra acesso não autorizado, perda, alteração ou divulgação indevida. Nenhum sistema é totalmente imune a falhas. Se houver um incidente que possa trazer risco relevante a você, avisaremos você e a ANPD, conforme a lei.
+          </p>
+        </section>
+
+        <!-- 9. Cookies -->
+        <section class="privacy-section" id="cookies">
+          <h2 class="privacy-section-title">9. Cookies</h2>
+          <p>
+            Este site não usa cookies de publicidade nem ferramentas de análise de audiência. O questionário é operado pelo Respondi e a conversa, pelo WhatsApp, e ambos seguem as próprias políticas de privacidade e de cookies. Se passarmos a usar cookies ou análise de audiência, atualizaremos esta política e pediremos o seu consentimento quando necessário.
+          </p>
+        </section>
+
+        <!-- 10. Crianças e adolescentes -->
+        <section class="privacy-section" id="menores">
+          <h2 class="privacy-section-title">10. Crianças e adolescentes</h2>
+          <p>
+            O site e o diagnóstico se destinam a profissionais e organizações, e não a menores de 18 anos.
+          </p>
+        </section>
+
+        <!-- 11. Alterações desta política -->
+        <section class="privacy-section" id="alteracoes">
+          <h2 class="privacy-section-title">11. Alterações desta política</h2>
+          <p>
+            Podemos atualizar esta política para refletir mudanças no site ou na lei. A data no topo indica a última revisão, e alterações relevantes serão destacadas no site.
+          </p>
+        </section>
+
+        <!-- 12. Contato -->
+        <section class="privacy-section" id="contato">
+          <h2 class="privacy-section-title">12. Contato</h2>
+          <p>
+            Dúvidas, pedidos ou reclamações sobre privacidade: <a href="mailto:contato@1234solution.com.br">contato@1234solution.com.br</a>.
+          </p>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="site-footer" id="rodape">
+    <div class="footer-flex">
+      <div class="footer-brand">1234 Solution Ltda · Consultoria de engenharia · CNPJ 56.364.941/0001-69</div>
+      <ul class="footer-links" role="list">
+        <li><a class="footer-link" href="https://www.linkedin.com/in/adalbertofchagas" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a class="footer-link" href="https://www.instagram.com/adalbertoch" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a class="footer-link" href="https://www.youtube.com/@adalbertofchagas" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        <li><a class="footer-link" href="privacidade.html" aria-current="page">Política de privacidade</a></li>
+      </ul>
+      <div class="footer-copy">&copy; 2026 1234 Solution. Todos os direitos reservados</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      // Destaque da seção ativa no índice lateral
+      if ('IntersectionObserver' in window) {
+        var links = Array.from(document.querySelectorAll('.privacy-nav-link'));
+        var sections = Array.from(document.querySelectorAll('.privacy-section'));
+        var activeIds = new Set();
+
+        function updateNav() {
+          var activeId = null;
+          for (var i = sections.length - 1; i >= 0; i--) {
+            if (activeIds.has(sections[i].id)) {
+              activeId = sections[i].id;
+              break;
+            }
+          }
+          links.forEach(function (link) {
+            var match = activeId && (link.getAttribute('href') === ('#' + activeId));
+            if (match) {
+              link.setAttribute('aria-current', 'true');
+            } else {
+              link.removeAttribute('aria-current');
+            }
+          });
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              activeIds.add(entry.target.id);
+            } else {
+              activeIds.delete(entry.target.id);
+            }
+          });
+          updateNav();
+        }, {
+          rootMargin: '-15% 0px -60% 0px'
+        });
+
+        sections.forEach(function (sec) { observer.observe(sec); });
+      }
+    })();
+  </script>
+</body>
+</html>
