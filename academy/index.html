@@ -1,0 +1,4095 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Adalberto Chagas Academy</title>
+  <meta name="description" content="Mentoria, Diagnóstico de Liderança, palestras e treinamentos in company para líderes e empresas." />
+  <meta name="theme-color" content="#0E1B2B" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Detecção de redução de movimento e suporte a JS -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        d.classList.add('rm');
+      }
+    })();
+  </script>
+
+  <!-- Google Fonts: Fraunces, IBM Plex Sans, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- GSAP 3.15.0 com SplitText e ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+
+  <noscript>
+    <style>
+      .header-cta { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+      .hero-showcase { clip-path: none !important; opacity: 1 !important; transform: none !important; }
+      .screen-corner path { stroke-dashoffset: 0 !important; }
+      .hero-video { display: none !important; }
+      .hero-poster { opacity: 1 !important; display: block !important; }
+      .hero-title .ln { opacity: 1 !important; transform: none !important; }
+      .beam-rotor { animation: none !important; }
+      .exemplo-toggle-btn { display: none !important; }
+      .exemplo-collapse-wrap { display: block !important; grid-template-rows: 1fr !important; }
+      .exemplo-collapse-inner { opacity: 1 !important; clip-path: none !important; }
+      .exemplos-carousel-controls { display: none !important; }
+    </style>
+  </noscript>
+
+  <style>
+    /* ============================================================
+       TOKENS OFICIAIS (Design System v2, sem --space-5)
+    ============================================================ */
+    :root {
+      /* Paleta Navy */
+      --navy:           #0E1B2B;
+      --navy-2:         #16283F;
+      --navy-3:         #1E3350;
+
+      /* Paleta Gold */
+      --gold:           #C6A45A;
+      --gold-2:         #E4C787;
+      --gold-deep:      #9C7C3C;
+
+      /* Paleta Paper */
+      --paper:          #F4EFE4;
+      --paper-2:        #ECE4D3;
+
+      /* Texto */
+      --ink:            #17212E;
+      --stone:          #7C8798;
+      --stone-2:        #6E6552;
+      --text-lede:      #B9C2CF;
+
+      /* Bordas */
+      --line-dark:      rgba(198, 164, 90, 0.18);
+      --line-light:     rgba(23, 33, 46, 0.12);
+
+      /* Tipografia */
+      --font-display:   'Fraunces', Georgia, serif;
+      --font-body:      'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --font-mono:      'IBM Plex Mono', 'Courier New', monospace;
+
+      /* Escala Tipográfica */
+      --text-xs:        0.6875rem; /* 11px */
+      --text-sm:        0.8125rem; /* 13px */
+      --text-base:      1rem;      /* 16px */
+      --text-lg:        1.125rem;  /* 18px */
+      --text-xl:        1.25rem;   /* 20px */
+      --text-2xl:       1.5rem;    /* 24px */
+      --text-3xl:       1.875rem;  /* 30px */
+      --text-4xl:       2.25rem;   /* 36px */
+      --text-5xl:       3rem;      /* 48px */
+      --text-6xl:       3.75rem;   /* 60px */
+      --text-7xl:       4.5rem;    /* 72px */
+      --text-8xl:       6rem;      /* 96px */
+
+      /* Espaçamento Base-8 (sem --space-5) */
+      --space-1:        0.25rem; /*  4px */
+      --space-2:        0.5rem;  /*  8px */
+      --space-3:        0.75rem; /* 12px */
+      --space-4:        1rem;    /* 16px */
+      --space-6:        1.5rem;  /* 24px */
+      --space-8:        2rem;    /* 32px */
+      --space-12:       3rem;    /* 48px */
+      --space-16:       4rem;    /* 64px */
+      --space-20:       5rem;    /* 80px */
+      --space-24:       6rem;    /* 96px */
+
+      /* Raios */
+      --radius-sm:      3px;
+      --radius-md:      6px;
+      --radius-lg:      10px;
+      --radius-xl:      16px;
+      --radius-2xl:     24px;
+      --radius-full:    9999px;
+
+      /* Sombras */
+      --shadow-sm:      0 2px 8px rgba(14, 27, 43, 0.35);
+      --shadow-md:      0 8px 28px rgba(14, 27, 43, 0.45);
+      --shadow-lg:      0 20px 60px rgba(14, 27, 43, 0.55);
+      --glow-gold:      0 0 32px rgba(198, 164, 90, 0.28);
+      --glow-gold-lg:   0 0 60px rgba(198, 164, 90, 0.20);
+
+      /* Easings */
+      --ease-smooth:    cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring:    cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-elastic:   cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* Grid */
+      --grid-cols:      12;
+      --grid-max:       1280px;
+      --grid-gap:       24px;
+    }
+
+    /* Reset e Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--navy);
+      color: var(--text-lede);
+      font-size: 16px;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--navy);
+      color: var(--text-lede);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img, video, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .max-w {
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding-inline: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .max-w {
+        padding-inline: 1.5rem;
+      }
+    }
+
+    /* ============================================================
+       CABEÇALHO FIXO
+    ============================================================ */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      pointer-events: none;
+      background-color: transparent;
+      border-bottom: 1px solid transparent;
+      -webkit-backdrop-filter: blur(0px);
+      backdrop-filter: blur(0px);
+      transition: background-color 0.35s var(--ease-smooth),
+                  border-color 0.35s var(--ease-smooth),
+                  -webkit-backdrop-filter 0.35s var(--ease-smooth),
+                  backdrop-filter 0.35s var(--ease-smooth);
+    }
+
+    .site-header::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 140%;
+      background: linear-gradient(to bottom, rgba(14, 27, 43, 0.75), rgba(14, 27, 43, 0));
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-smooth);
+    }
+
+    .site-header.is-scrolled {
+      pointer-events: auto;
+      background-color: rgba(14, 27, 43, 0.94);
+      border-bottom-color: var(--line-dark);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(12px) saturate(140%);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .site-header.is-scrolled::before {
+      opacity: 0;
+    }
+
+    .header-inner {
+      position: relative;
+      max-width: var(--grid-max);
+      margin-inline: auto;
+      padding: var(--space-4) 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        padding: var(--space-3) 1.5rem;
+      }
+    }
+
+    /* Marca no cabeçalho */
+    .brand {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      border-radius: var(--radius-sm);
+      transition: opacity 0.25s var(--ease-smooth);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .brand:hover {
+        opacity: 0.88;
+      }
+    }
+
+    .brand-symbol {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--paper);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 480px) {
+      .header-inner {
+        padding: 0.5rem 1rem;
+        gap: 0.5rem;
+      }
+      .brand {
+        gap: 0.5rem;
+      }
+      .brand-text {
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+      }
+      .brand-symbol {
+        width: 28px;
+        height: 28px;
+      }
+      .header-btn-wa {
+        padding: 0.45rem 0.8rem;
+        font-size: 0.625rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .brand-text {
+        font-size: 0.55rem;
+        letter-spacing: 0.05em;
+      }
+      .header-btn-wa span {
+        display: none;
+      }
+      .header-btn-wa {
+        padding: 0.45rem;
+        border-radius: var(--radius-full);
+      }
+    }
+
+    /* CTA WhatsApp no Cabeçalho */
+    .header-cta {
+      pointer-events: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      max-width: 0;
+      overflow: clip;
+      transition: opacity 0.4s var(--ease-spring),
+                  transform 0.4s var(--ease-spring),
+                  max-width 0.4s var(--ease-spring),
+                  visibility 0s linear 0.4s;
+    }
+
+    .header-cta.is-on {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      max-width: 280px;
+      overflow: visible;
+      transition: opacity 0.4s var(--ease-spring),
+                  transform 0.4s var(--ease-spring),
+                  visibility 0s linear 0s;
+    }
+
+    .header-btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 0.55rem 1.15rem;
+      font-size: var(--text-xs);
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .header-btn-wa svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    .header-btn-wa-text {
+      display: inline;
+    }
+
+    @media (max-width: 480px) {
+      .header-btn-wa {
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        min-width: 44px;
+        max-width: 44px;
+        padding: 0 !important;
+        gap: 0;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+      .header-btn-wa svg {
+        width: 20px;
+        height: 20px;
+        margin: 0;
+      }
+      .header-btn-wa-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .header-cta.is-on {
+        max-width: 44px;
+      }
+    }
+
+    /* ============================================================
+       SISTEMA DE BOTÕES (.btn, .btn-primary, .btn-ghost)
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      position: relative;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: var(--text-sm);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: transform 0.3s var(--ease-elastic), box-shadow 0.3s;
+      white-space: nowrap;
+    }
+
+    /* .btn-primary */
+    .btn-primary {
+      padding: 0.95rem 2.2rem;
+      color: var(--navy);
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .btn-primary .btn-inner-track {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: inherit;
+      overflow: hidden;
+      overflow: clip;
+      padding: 1px;
+    }
+
+    .btn-primary .btn-conic {
+      position: absolute;
+      inset: -100%;
+      background: conic-gradient(from 0deg, transparent 0deg 270deg, var(--gold) 360deg);
+      animation: conic-spin 3.5s linear infinite;
+    }
+
+    @keyframes conic-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .btn-primary .btn-bg {
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, var(--gold), #d6b772);
+      overflow: hidden;
+    }
+
+    .btn-primary .btn-shimmer {
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
+      mix-blend-mode: plus-lighter;
+      background-image: repeating-linear-gradient(90deg, #fff, #fff 1px, transparent 1px, transparent 8px);
+      background-size: 24px 100%;
+      animation: lines-slide 2s linear infinite;
+    }
+
+    @keyframes lines-slide {
+      from { background-position: 0 0; }
+      to   { background-position: 24px 0; }
+    }
+
+    .btn-primary .btn-glow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 60%;
+      background: rgba(198, 164, 90, 0.35);
+      border-radius: 50%;
+      transition: background 0.4s;
+    }
+
+    .btn-primary .btn-label {
+      position: relative;
+      z-index: 2;
+      color: var(--navy);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover {
+        transform: scale(1.025);
+        box-shadow: var(--glow-gold);
+      }
+      .btn-primary:hover .btn-glow {
+        background: rgba(198, 164, 90, 0.6);
+      }
+      .btn-primary:active {
+        transform: scale(0.98);
+      }
+    }
+
+    /* .btn-ghost */
+    .btn-ghost {
+      padding: 0.92rem 2rem;
+      color: var(--gold-2);
+      background: rgba(198, 164, 90, 0.05);
+      border: 1px solid rgba(198, 164, 90, 0.32);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .btn-ghost:hover {
+        background: rgba(198, 164, 90, 0.12);
+        border-color: var(--gold);
+        color: var(--paper);
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(198, 164, 90, 0.2);
+      }
+      .btn-ghost:active {
+        transform: scale(0.98);
+      }
+    }
+
+    /* ============================================================
+       DOBRA HERO
+    ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--navy);
+      overflow: hidden;
+      padding-top: calc(var(--space-16) + var(--space-8));
+      padding-bottom: var(--space-16);
+    }
+
+    /* Linhas decorativas da grade de fundo */
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      max-width: var(--grid-max);
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      pointer-events: none;
+    }
+
+    .grid-line {
+      border-left: 1px solid rgba(198, 164, 90, 0.04);
+      height: 100%;
+    }
+
+    .grid-line:last-child {
+      border-right: 1px solid rgba(198, 164, 90, 0.04);
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid-lines {
+        padding: 0 1.5rem;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .grid-line:nth-child(n+5) {
+        display: none;
+      }
+    }
+
+    /* Textura sutil de metal escovado dourado no fundo da dobra */
+    .hero-brushed-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.035;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(198, 164, 90, 0.4) 0px,
+        rgba(198, 164, 90, 0.4) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      mix-blend-mode: overlay;
+    }
+
+    /* Conteúdo principal do Hero */
+    .hero-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    /* Coluna de texto */
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    /* Eyebrow */
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      background: rgba(198, 164, 90, 0.08);
+      border: 1px solid rgba(198, 164, 90, 0.22);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: var(--space-6);
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+    }
+
+    /* H1 (Fraunces com destaque em itálico dourado) */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4.8vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--paper);
+      margin-bottom: var(--space-6);
+      width: 100%;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold-2);
+      display: inline;
+    }
+
+    .hero-title .ln {
+      display: block;
+      overflow: hidden;
+      padding-bottom: 0.06em;
+      margin-bottom: -0.06em;
+    }
+
+    /* Subtítulo */
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.25vw, 1.1875rem);
+      line-height: 1.65;
+      color: var(--text-lede);
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: var(--space-8);
+    }
+
+    /* Ações / Botões */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+      width: 100%;
+    }
+
+    .hero-actions .btn {
+      font-size: var(--text-base);
+      padding: 1.05rem 2.25rem;
+      letter-spacing: 0.01em;
+    }
+
+    @media (min-width: 1025px) {
+      .hero-actions .btn {
+        font-size: 1.0625rem;
+        padding: 1.1rem 2.45rem;
+      }
+    }
+
+    /* Linha de apoio do YouTube */
+    .hero-support-line {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--text-lede);
+      line-height: 1.5;
+    }
+
+    @media (min-width: 1025px) {
+      .hero-support-line {
+        font-size: 0.875rem;
+      }
+    }
+
+    .hero-support-link {
+      color: var(--gold-2);
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 1px dotted rgba(228, 199, 135, 0.45);
+      padding-bottom: 1px;
+      transition: color 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth);
+    }
+
+    .hero-support-link svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      transition: transform 0.25s var(--ease-smooth);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hero-support-link:hover {
+        color: var(--paper);
+        border-bottom-color: var(--paper);
+      }
+      .hero-support-link:hover svg {
+        transform: translateX(2px);
+      }
+    }
+
+    /* ============================================================
+       MOLDURA HIGH-END DE SHOWCASE (Com Conic Beam e Flashlight)
+       Inspirado em Finex SaaS e Gemini Monotone Animation Guides
+    ============================================================ */
+    .hero-visual-col {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Estrutura principal do Showcase Frame */
+    .hero-showcase {
+      position: relative;
+      width: 100%;
+      max-width: clamp(480px, 42vw, 620px);
+      padding: 9px;
+      border-radius: calc(var(--radius-xl) + 8px);
+      background: rgba(14, 27, 43, 0.88);
+      box-shadow: 0 24px 60px rgba(7, 14, 23, 0.9),
+                  0 0 40px rgba(198, 164, 90, 0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: box-shadow 0.4s var(--ease-smooth);
+      will-change: clip-path, opacity;
+      z-index: 5;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hero-showcase:hover {
+        box-shadow: 0 28px 70px rgba(7, 14, 23, 0.95),
+                    0 0 50px rgba(198, 164, 90, 0.22);
+      }
+    }
+
+    /* Conic Beam: feixe dourado que percorre todo o perímetro externo da moldura */
+    .showcase-beam-track {
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      overflow: hidden;
+      overflow: clip;
+      padding: 1px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .beam-rotor {
+      position: absolute;
+      inset: -100%;
+      background: conic-gradient(from 0deg, transparent 0deg 280deg, rgba(198, 164, 90, 0.3) 320deg, var(--gold) 350deg, #fff 360deg);
+      animation: beam-spin 5s linear infinite;
+    }
+
+    @keyframes beam-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .showcase-inner-base {
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: linear-gradient(145deg, rgba(22, 40, 63, 0.95), rgba(14, 27, 43, 0.98));
+      z-index: 1;
+    }
+
+    /* Flashlight interativo: ilumina a moldura conforme o ponteiro do mouse se move */
+    .showcase-flashlight {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      background: radial-gradient(
+        380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(198, 164, 90, 0.18),
+        transparent 70%
+      );
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hero-showcase:hover .showcase-flashlight {
+        opacity: 1;
+      }
+    }
+
+    /* Tela interna que acomoda o vídeo 16:9 */
+    .showcase-screen {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background-color: #03080e;
+      border: 1px solid rgba(198, 164, 90, 0.2);
+      box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.8),
+                  0 1px 0 rgba(255, 255, 255, 0.05);
+      isolation: isolate;
+    }
+
+    .hero-poster,
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-poster {
+      z-index: 1;
+    }
+
+    .hero-video {
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.5s var(--ease-smooth);
+    }
+
+    .hero-video.is-active {
+      opacity: 1;
+    }
+
+    /* Gradiente sutil interno na tela para conforto visual */
+    .screen-ambient-grade {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(14, 27, 43, 0.12) 0%, transparent 40%, rgba(14, 27, 43, 0.22) 100%);
+    }
+
+    /* Cantoneiras douradas finas estilizadas nos 4 cantos internos da tela */
+    .screen-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .sc-tl { top: 8px; left: 8px; }
+    .sc-tr { top: 8px; right: 8px; }
+    .sc-bl { bottom: 8px; left: 8px; }
+    .sc-br { bottom: 8px; right: 8px; }
+
+    .screen-corner path {
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 26;
+      stroke-dashoffset: 26;
+      will-change: stroke-dashoffset;
+    }
+
+    /* ============================================================
+       RESPONSIVIDADE (Celular e Tablet)
+    ============================================================ */
+    @media (max-width: 980px) {
+      .hero {
+        padding-top: calc(var(--space-16) + var(--space-4));
+        padding-bottom: var(--space-12);
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      .hero-copy {
+        order: 1;
+      }
+      .hero-visual-col {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+        margin-top: var(--space-4);
+      }
+      .hero-showcase {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-3);
+      }
+      .hero-actions .btn {
+        width: 100%;
+        padding: 0.95rem 1.5rem;
+        font-size: var(--text-base);
+      }
+      .hero-support-line {
+        font-size: var(--text-xs);
+        flex-wrap: wrap;
+      }
+      .hero-showcase {
+        padding: 6px;
+        border-radius: var(--radius-xl);
+      }
+    }
+
+    /* ============================================================
+       ACESSIBILIDADE: MOVIMENTO REDUZIDO
+    ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-showcase {
+        clip-path: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .screen-corner path {
+        stroke-dashoffset: 0 !important;
+      }
+      .beam-rotor {
+        animation: none !important;
+      }
+      .hero-video {
+        display: none !important;
+      }
+      .hero-poster {
+        opacity: 1 !important;
+        display: block !important;
+      }
+      .btn-primary .btn-conic,
+      .btn-primary .btn-shimmer {
+        animation: none !important;
+      }
+    }
+
+    html.rm *, html.rm *::before, html.rm *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html.rm .hero-showcase { clip-path: none !important; opacity: 1 !important; transform: none !important; }
+    html.rm .screen-corner path { stroke-dashoffset: 0 !important; }
+    html.rm .beam-rotor { animation: none !important; }
+    html.rm .hero-video { display: none !important; }
+    html.rm .hero-poster { opacity: 1 !important; display: block !important; }
+
+    /* ============================================================
+       DOBRA 2: DIAGNÓSTICO DE LIDERANÇA (Fundo Paper)
+    ============================================================ */
+    .section-light {
+      background-color: var(--paper);
+      color: var(--ink);
+      position: relative;
+      padding-block: var(--space-20);
+      border-top: 1px solid var(--line-light);
+    }
+
+    @media (min-width: 1025px) {
+      .section-light {
+        padding-block: var(--space-24);
+      }
+    }
+
+    /* Grid principal em 2 colunas no desktop */
+    .diag-layout {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: clamp(2.5rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+
+    /* Coluna esquerda com chamada e CTA (fixa no desktop) */
+    .diag-sticky-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    @media (min-width: 981px) {
+      .diag-sticky-col {
+        position: sticky;
+        top: calc(var(--space-16) + 24px);
+        align-self: start;
+      }
+    }
+
+    .diag-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 3.8vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: var(--space-5);
+    }
+
+    .diag-lead {
+      font-family: var(--font-body);
+      font-size: clamp(1.125rem, 1.35vw, 1.275rem);
+      line-height: 1.65;
+      color: var(--stone-2);
+      font-weight: 400;
+      margin-bottom: var(--space-8);
+      max-width: 540px;
+    }
+
+    .diag-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .diag-cta-main {
+      padding: 1.1rem 2.4rem;
+      font-size: 1.0625rem;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .diag-cta-main .btn-label {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .diag-free-note {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--stone-2);
+      font-weight: 500;
+      margin-top: var(--space-3);
+      margin-bottom: 0;
+    }
+
+    .diag-secondary-link {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: var(--space-4);
+      line-height: 1.5;
+      border-bottom: 1.5px solid var(--gold-deep);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .diag-secondary-link:hover {
+        color: var(--gold-deep);
+        border-color: var(--gold);
+      }
+    }
+
+    /* Coluna direita: Etapas e Cartoes */
+    .diag-content-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Linha do tempo dos 3 passos conectados */
+    .diag-timeline {
+      position: relative;
+      margin-bottom: var(--space-6);
+      width: 100%;
+    }
+
+    .diag-timeline-track {
+      position: absolute;
+      top: 30px;
+      bottom: 30px;
+      left: 45px;
+      width: 2px;
+      background: rgba(156, 124, 60, 0.22);
+      z-index: 1;
+    }
+
+    .diag-timeline-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold-deep), var(--gold));
+      transform-origin: top center;
+      transform: scaleY(0);
+      will-change: transform;
+    }
+
+    .diag-timeline-steps {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      width: 100%;
+    }
+
+    .diag-step-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: var(--space-4);
+      align-items: start;
+      background: #FCFAF6;
+      border: 1px solid rgba(23, 33, 46, 0.09);
+      border-left: 3px solid rgba(23, 33, 46, 0.12);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 4px 16px rgba(23, 33, 46, 0.03);
+      overflow: hidden;
+      transition: transform 0.3s var(--ease-spring), border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .diag-step-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(198, 164, 90, 0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .diag-step-card:hover::after {
+        opacity: 1;
+      }
+      .diag-step-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(156, 124, 60, 0.4);
+        box-shadow: 0 10px 24px rgba(23, 33, 46, 0.06), 0 0 20px rgba(198, 164, 90, 0.1);
+      }
+    }
+
+    .diag-step-node {
+      position: relative;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--paper);
+      border: 1.5px solid rgba(156, 124, 60, 0.32);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+    }
+
+    .diag-step-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--gold-deep);
+      letter-spacing: -0.02em;
+    }
+
+    .diag-step-card.is-lit {
+      border-left-color: var(--gold);
+    }
+
+    .diag-step-card.is-lit .diag-step-node {
+      background: linear-gradient(135deg, var(--gold), #d6b772);
+      border-color: var(--gold-deep);
+      box-shadow: 0 4px 14px rgba(156, 124, 60, 0.35);
+      transform: scale(1.05);
+    }
+
+    .diag-step-card.is-lit .diag-step-num {
+      color: var(--navy);
+    }
+
+    .diag-step-body {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .diag-step-title {
+      font-family: var(--font-body);
+      font-size: 1.1875rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .diag-step-desc {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--stone-2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Dois cartoes de enquadramento */
+    .diag-audience-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      width: 100%;
+      box-sizing: border-box;
+      align-items: stretch;
+    }
+
+    @media (max-width: 680px) {
+      .diag-audience-cards {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+    }
+
+    .diag-audience-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+      transition: transform 0.35s var(--ease-spring), box-shadow 0.35s, border-color 0.35s;
+    }
+
+    .diag-audience-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(198, 164, 90, 0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .diag-audience-card:hover::after {
+        opacity: 1;
+      }
+      .diag-audience-card:hover {
+        transform: translateY(-3px);
+      }
+    }
+
+    .diag-audience-card.is-target {
+      background: linear-gradient(180deg, #FCFAF5 0%, #F5EFE3 100%);
+      border: 1px solid rgba(156, 124, 60, 0.3);
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 4px 18px rgba(156, 124, 60, 0.06);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .diag-audience-card.is-target:hover {
+        border-color: rgba(156, 124, 60, 0.5);
+        box-shadow: 0 10px 26px rgba(156, 124, 60, 0.12);
+      }
+    }
+
+    .diag-audience-card.is-filter {
+      background: linear-gradient(180deg, #F9F7F2 0%, #EFEBE2 100%);
+      border: 1px solid rgba(23, 33, 46, 0.14);
+      border-top: 3px solid rgba(23, 33, 46, 0.35);
+      box-shadow: 0 4px 18px rgba(23, 33, 46, 0.03);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .diag-audience-card.is-filter:hover {
+        border-color: rgba(23, 33, 46, 0.25);
+        box-shadow: 0 10px 26px rgba(23, 33, 46, 0.08);
+      }
+    }
+
+    .diag-card-title {
+      font-family: var(--font-body);
+      font-size: 1.1875rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: var(--space-4);
+      line-height: 1.3;
+    }
+
+    .diag-card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex-grow: 1;
+    }
+
+    .diag-card-list li {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .diag-audience-card.is-filter .diag-card-list li {
+      color: var(--stone-2);
+    }
+
+    .diag-card-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .diag-audience-card.is-target .diag-card-icon {
+      background: rgba(156, 124, 60, 0.14);
+      color: var(--gold-deep);
+    }
+
+    .diag-audience-card.is-filter .diag-card-icon {
+      background: rgba(23, 33, 46, 0.08);
+      color: var(--stone-2);
+    }
+
+    @media (max-width: 980px) {
+      .diag-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .diag-sticky-col,
+      .diag-content-col {
+        position: static;
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .diag-sticky-col {
+        margin-bottom: var(--space-4);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .diag-step-card {
+        grid-template-columns: 40px 1fr;
+        gap: var(--space-3);
+        padding: 1.15rem 1.25rem;
+      }
+      .diag-step-node {
+        width: 40px;
+        height: 40px;
+      }
+      .diag-step-num {
+        font-size: var(--text-sm);
+      }
+      .diag-timeline-track {
+        left: 39px;
+      }
+      .diag-cta-main {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .diag-timeline-bar {
+        transform: scaleY(1) !important;
+      }
+      .diag-step-card {
+        transform: none !important;
+      }
+      .diag-audience-card {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    html.rm .diag-timeline-bar { transform: scaleY(1) !important; }
+    html.rm .diag-step-card { transform: none !important; }
+    html.rm .diag-audience-card { transform: none !important; opacity: 1 !important; }
+    /* ============================================================
+       DOBRA 3: DORES (Fundo Navy)
+    ============================================================ */
+    .section-dores {
+      background-color: var(--navy);
+      color: var(--text-lede);
+      position: relative;
+      padding-block: var(--space-20);
+      border-top: 1px solid var(--line-dark);
+      overflow: hidden;
+    }
+
+    @media (min-width: 1025px) {
+      .section-dores {
+        padding-block: var(--space-24);
+      }
+    }
+
+    #dores,
+    #dores-lider,
+    #dores-empresa {
+      scroll-margin-top: calc(72px + 24px);
+    }
+
+    /* Marca d'agua sutil rotativa de fundo */
+    .dores-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(85vw, 720px);
+      height: auto;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 0;
+      animation: watermark-spin 90s linear infinite;
+    }
+
+    @keyframes watermark-spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .dores-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Seletor de Perfil (Tablist) */
+    .dores-tablist-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .dores-tablist {
+      position: relative;
+      display: inline-flex;
+      background: rgba(22, 40, 63, 0.85);
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius-full);
+      padding: 4px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(7, 14, 23, 0.4);
+      max-width: 100%;
+    }
+
+    .dores-tab-indicator {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 0;
+      width: 50%;
+      background: linear-gradient(135deg, var(--gold), #d6b772);
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 10px rgba(198, 164, 90, 0.35);
+      transition: transform 0.35s var(--ease-spring), width 0.35s var(--ease-spring);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .dores-tab {
+      position: relative;
+      z-index: 2;
+      background: transparent;
+      border: none;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--stone);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.3s;
+      outline: none;
+    }
+
+    .dores-tab:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .dores-tab.is-active {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .dores-tab:not(.is-active):hover {
+        color: var(--paper);
+      }
+    }
+
+    /* Painéis de Conteúdo */
+    .dores-panel {
+      position: relative;
+      width: 100%;
+    }
+
+    .js .dores-panel[hidden] {
+      display: none !important;
+    }
+
+    .dores-panel-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--paper);
+      text-align: center;
+      max-width: 820px;
+      margin-inline: auto;
+      margin-bottom: var(--space-12);
+    }
+
+    /* Grade 2 x 2 de Dores */
+    .dores-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+      align-items: stretch;
+    }
+
+    @media (max-width: 860px) {
+      .dores-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+    }
+
+    .dor-card {
+      position: relative;
+      background: rgba(22, 40, 63, 0.72);
+      border: 1px solid var(--line-dark);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 1.85rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(7, 14, 23, 0.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.35s var(--ease-spring), border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .dor-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(350px circle at var(--mx, 50%) var(--my, 50%), rgba(198, 164, 90, 0.14), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .dor-card:hover::before {
+        opacity: 1;
+      }
+      .dor-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(198, 164, 90, 0.45);
+        box-shadow: 0 14px 36px rgba(7, 14, 23, 0.6), 0 0 28px rgba(198, 164, 90, 0.14);
+      }
+    }
+
+    .dor-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .dor-num {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold);
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+      display: inline-block;
+      user-select: none;
+    }
+
+    .dor-title {
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--paper);
+      margin-top: 2px;
+    }
+
+    /* Linhas Hoje vs Com acompanhamento com conector vertical SVG */
+    .dor-compare {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 14px 1fr;
+      column-gap: var(--space-4);
+      flex-grow: 1;
+      padding-top: var(--space-4);
+      border-top: 1px solid rgba(198, 164, 90, 0.12);
+    }
+
+    .dor-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+
+    .dor-node {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+      box-sizing: border-box;
+      transition: transform 0.3s var(--ease-spring), box-shadow 0.3s, opacity 0.3s;
+    }
+
+    .dor-node.is-hoje {
+      border: 1.5px solid var(--stone);
+      background: #142439;
+    }
+
+    .dor-node.is-depois {
+      background: var(--gold);
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 10px rgba(198, 164, 90, 0.65);
+    }
+
+    .dor-connector-svg {
+      flex: 1 1 0%;
+      width: 2px;
+      margin: 4px 0;
+      overflow: visible;
+    }
+
+    .dor-conn-line {
+      stroke: rgba(198, 164, 90, 0.35);
+      stroke-width: 1.5;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 0;
+    }
+
+    .dor-rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .dor-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .dor-pill {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-full);
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dor-pill.is-hoje {
+      color: var(--text-lede);
+      background: rgba(185, 194, 207, 0.14);
+      border: 1px solid rgba(185, 194, 207, 0.28);
+    }
+
+    .dor-pill.is-depois {
+      color: var(--gold-2);
+      background: rgba(198, 164, 90, 0.14);
+      border: 1px solid rgba(198, 164, 90, 0.32);
+    }
+
+    .dor-text {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .dor-text.is-hoje {
+      color: var(--text-lede);
+    }
+
+    .dor-text.is-depois {
+      color: var(--paper);
+    }
+
+    /* Ação ao fim do painel */
+    .dores-panel-action {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      margin-top: var(--space-4);
+    }
+
+    .dores-cta-btn {
+      padding: 1.15rem 2.6rem;
+      font-size: 1.0625rem;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Fallback sem JavaScript */
+    html:not(.js) .dores-tablist-wrap {
+      display: none;
+    }
+
+    html:not(.js) .dores-panel {
+      display: block !important;
+      margin-bottom: var(--space-16);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--line-dark);
+    }
+
+    @media (max-width: 540px) {
+      .dores-tab {
+        padding: 0.65rem 0.95rem;
+        font-size: var(--text-sm);
+      }
+      .dor-card {
+        padding: 1.35rem 1.25rem;
+      }
+      .dores-cta-btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dores-watermark {
+        animation: none !important;
+      }
+      .dor-card {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .dores-tab-indicator {
+        transition: none !important;
+      }
+      .dor-num {
+        clip-path: none !important;
+      }
+      .dor-conn-line {
+        stroke-dashoffset: 0 !important;
+      }
+    }
+
+    html.rm .dores-watermark { animation: none !important; }
+    html.rm .dor-card { transform: none !important; opacity: 1 !important; }
+    html.rm .dores-tab-indicator { transition: none !important; }
+    html.rm .dor-num { clip-path: none !important; }
+    html.rm .dor-conn-line { stroke-dashoffset: 0 !important; }
+    /* ============================================================
+       DOBRA 4: EXEMPLOS (Fundo Paper)
+    ============================================================ */
+    .section-exemplos {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #exemplos {
+      scroll-margin-top: calc(72px + 24px);
+    }
+
+    .exemplos-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .exemplos-header {
+      text-align: center;
+      max-width: 820px;
+      margin-inline: auto;
+      margin-bottom: var(--space-12);
+    }
+
+    .exemplos-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: var(--space-3);
+    }
+
+    .exemplos-lead {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.6;
+      color: var(--stone-2);
+      margin: 0;
+    }
+
+    /* Grade de 6 cartões (3 colunas desktop, 2 tablet, 1 celular) */
+    .exemplos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+      align-items: stretch;
+    }
+
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .exemplos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-exemplos {
+        padding-block: var(--space-6);
+      }
+      .exemplos-header {
+        margin-bottom: var(--space-3);
+      }
+      .exemplos-title {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin-bottom: 0.25rem;
+      }
+      .exemplos-lead {
+        font-size: 0.875rem;
+        line-height: 1.45;
+      }
+      .exemplos-grid {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 1rem;
+        padding-inline: 1rem;
+        padding-bottom: 0.25rem;
+        margin-inline: -1rem;
+        gap: 0.75rem;
+        align-items: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .exemplos-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .exemplo-card {
+        flex: 0 0 85%;
+        width: 85%;
+        max-width: 85%;
+        scroll-snap-align: center;
+        box-sizing: border-box;
+        height: auto;
+        padding: 1rem 1rem;
+      }
+      .exemplo-header {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.35rem;
+        gap: 0.5rem;
+      }
+      .exemplo-num {
+        font-size: 1.6rem;
+      }
+      .exemplo-title {
+        font-size: 0.9375rem;
+        line-height: 1.3;
+      }
+      .exemplo-rows {
+        gap: 0.35rem;
+      }
+      .exemplo-row {
+        padding-bottom: 0.35rem;
+      }
+      .exemplo-text {
+        font-size: 0.8125rem;
+        line-height: 1.45;
+      }
+      .exemplo-toggle-btn {
+        margin-top: 0.1rem;
+        padding: 0.2rem 0;
+      }
+      .exemplo-card-footer {
+        padding-top: 0.5rem;
+        margin-top: auto;
+      }
+      .exemplos-disclaimer {
+        margin-top: 0.25rem;
+        margin-bottom: var(--space-3);
+        font-size: 0.75rem;
+        line-height: 1.4;
+      }
+      .exemplos-actions {
+        gap: var(--space-2);
+      }
+      .exemplos-btn-main,
+      .exemplos-btn-secondary {
+        min-height: 44px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.875rem;
+      }
+    }
+
+    .exemplo-card {
+      position: relative;
+      background: #FFFFFF;
+      border: 1px solid rgba(23, 33, 46, 0.09);
+      border-radius: var(--radius-xl);
+      padding: 1.65rem 1.65rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 4px 18px rgba(23, 33, 46, 0.03);
+      overflow: hidden;
+      transition: transform 0.35s var(--ease-spring), border-color 0.35s, box-shadow 0.35s;
+    }
+
+    .exemplo-card-top-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-deep), var(--gold));
+      transform-origin: left center;
+    }
+
+    .exemplo-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(198, 164, 90, 0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .exemplo-card:hover::after {
+        opacity: 1;
+      }
+      .exemplo-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(156, 124, 60, 0.35);
+        box-shadow: 0 12px 32px rgba(23, 33, 46, 0.08);
+      }
+    }
+
+    .exemplo-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid rgba(23, 33, 46, 0.08);
+    }
+
+    .exemplo-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--gold-deep);
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .exemplo-title {
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .exemplo-rows {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      flex-grow: 1;
+    }
+
+    .exemplo-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid rgba(23, 33, 46, 0.06);
+    }
+
+    .exemplo-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .exemplo-row.is-destaque {
+      position: relative;
+      padding-left: 0.85rem;
+      border-left: 3px solid var(--gold-deep);
+      background: rgba(156, 124, 60, 0.04);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding-top: 0.45rem;
+      padding-bottom: 0.45rem;
+    }
+
+    .exemplo-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--stone-2);
+    }
+
+    .exemplo-text {
+      font-family: var(--font-body);
+      font-size: 0.90625rem;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .exemplos-disclaimer {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--stone-2);
+      text-align: center;
+      max-width: 680px;
+      margin-inline: auto;
+      margin-bottom: var(--space-6);
+      line-height: 1.5;
+    }
+
+    .exemplos-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .exemplos-btn-main {
+      padding: 1.1rem 2.4rem;
+      font-size: 1.0625rem;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .exemplos-btn-secondary {
+      color: var(--ink);
+      background: rgba(23, 33, 46, 0.04);
+      border: 1.5px solid rgba(23, 33, 46, 0.22);
+      min-height: 52px;
+      padding: 1.1rem 2.2rem;
+      font-size: 1.0625rem;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .exemplos-btn-secondary:hover {
+        background: rgba(23, 33, 46, 0.08);
+        border-color: var(--gold-deep);
+        color: var(--gold-deep);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .exemplos-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .exemplos-btn-main,
+      .exemplos-btn-secondary {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .exemplo-card {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .exemplo-card-top-line {
+        transform: none !important;
+      }
+      .exemplo-num {
+        clip-path: none !important;
+      }
+      .js .exemplo-collapse-wrap,
+      .js .exemplo-collapse-inner,
+      .exemplo-toggle-arrow,
+      .exemplo-channel-link {
+        transition: none !important;
+      }
+    }
+
+    html.rm .exemplo-card { transform: none !important; opacity: 1 !important; }
+    html.rm .exemplo-card-top-line { transform: none !important; }
+    html.rm .exemplo-num { clip-path: none !important; }
+    html.rm .exemplo-collapse-wrap,
+    html.rm .exemplo-collapse-inner,
+    html.rm .exemplo-toggle-arrow,
+    html.rm .exemplo-channel-link {
+      transition: none !important;
+    }
+
+    /* Dobra 4B-1 e 4C: Botoes recolhiveis, espaco zero e link para canal */
+    .exemplo-toggle-btn {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      background: transparent;
+      border: none;
+      padding: 0.4rem 0.2rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0;
+      color: var(--stone-2);
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s ease;
+      align-self: flex-start;
+      line-height: 1;
+    }
+
+    .exemplo-toggle-btn:hover {
+      color: var(--ink);
+    }
+
+    .exemplo-toggle-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .exemplo-toggle-arrow {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--gold-deep);
+      flex-shrink: 0;
+    }
+
+    .exemplo-toggle-btn[aria-expanded="true"] .exemplo-toggle-arrow {
+      transform: rotate(180deg);
+    }
+
+    .exemplo-collapse-wrap {
+      display: block;
+    }
+
+    .exemplo-collapse-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      padding-top: var(--space-4);
+    }
+
+    .js .exemplo-toggle-btn {
+      display: inline-flex;
+    }
+
+    .js .exemplo-collapse-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .js .exemplo-collapse-wrap:not(.is-open) {
+      visibility: hidden;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+
+    .js .exemplo-collapse-wrap.is-open {
+      visibility: visible;
+      grid-template-rows: 1fr;
+    }
+
+    .js .exemplo-collapse-inner {
+      min-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      padding-top: 0;
+      clip-path: inset(0 0 100% 0);
+      transition: opacity 0.28s ease, clip-path 0.38s cubic-bezier(0.16, 1, 0.3, 1), padding-top 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .js .exemplo-collapse-wrap.is-open .exemplo-collapse-inner {
+      opacity: 1;
+      padding-top: var(--space-4);
+      clip-path: inset(0 0 0% 0);
+    }
+
+    .exemplo-card-footer {
+      position: relative;
+      z-index: 2;
+      margin-top: auto;
+      padding-top: var(--space-4);
+      border-top: 1px solid rgba(23, 33, 46, 0.08);
+    }
+
+    .exemplo-channel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--stone-2);
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      border-radius: var(--radius-sm);
+    }
+
+    .exemplo-channel-link:hover {
+      color: var(--ink);
+      transform: translateX(2px);
+    }
+
+    .exemplo-channel-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .exemplo-play-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(198, 164, 90, 0.16);
+      color: var(--gold-deep);
+      flex-shrink: 0;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .exemplo-channel-link:hover .exemplo-play-icon {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    /* Controles do carrossel (setas e pontos) */
+    .exemplos-carousel-controls {
+      display: none;
+    }
+
+    .carousel-arrow {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1px solid rgba(23, 33, 46, 0.14);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s, opacity 0.2s;
+    }
+
+    .carousel-arrow:hover:not([aria-disabled="true"]) {
+      background: var(--paper);
+      border-color: var(--gold);
+      transform: scale(1.05);
+    }
+
+    .carousel-arrow:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .carousel-arrow[aria-disabled="true"] {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .carousel-dots {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .carousel-dot {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      background: transparent;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      border-radius: var(--radius-sm);
+    }
+
+    .carousel-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(23, 33, 46, 0.28);
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .carousel-dot:hover::after {
+      background: var(--gold-deep);
+    }
+
+    .carousel-dot.is-active::after {
+      background: var(--gold-deep);
+      transform: scale(1.35);
+    }
+
+    .carousel-dot:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .exemplos-carousel-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        margin-top: 0.25rem;
+        margin-bottom: var(--space-3);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       CABEÇALHO FIXO
+  ============================================================ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#" class="brand" aria-label="Adalberto Chagas Academy">
+        <img src="assets/ac-symbol.png" alt="" class="brand-symbol" width="36" height="36" />
+        <span class="brand-text">ADALBERTO CHAGAS ACADEMY</span>
+      </a>
+
+      <div class="header-cta" id="headerCta" inert>
+        <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20quero%20conversar%20sobre%20lideran%C3%A7a." class="btn btn-ghost header-btn-wa" id="headerCtaLink" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+          <span class="header-btn-wa-text">Falar no WhatsApp</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       DOBRA HERO
+  ============================================================ -->
+  <main>
+    <section class="hero" id="hero">
+      <!-- Linhas de fundo -->
+      <div class="hero-grid-lines" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+
+      <!-- Textura sutil de metal escovado dourado de fundo -->
+      <div class="hero-brushed-bg" aria-hidden="true"></div>
+
+      <div class="max-w hero-container">
+        <div class="hero-grid">
+          <!-- Coluna 1: Conteúdo de Autoridade -->
+          <div class="hero-copy">
+            <div class="hero-eyebrow">
+              <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+              <span>Mentoria e treinamento de liderança</span>
+            </div>
+
+            <h1 class="hero-title" id="heroTitle">Lidere com respeito, clareza e <em>estratégia.</em></h1>
+
+            <p class="hero-subtitle">
+              Mentoria, Diagnóstico de Liderança, palestras e treinamentos in company para líderes e empresas.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#dores-lider" class="btn btn-primary" id="heroPrimaryBtn">
+                <span class="btn-inner-track">
+                  <span class="btn-conic"></span>
+                  <span class="btn-bg">
+                    <span class="btn-shimmer"></span>
+                    <span class="btn-glow"></span>
+                  </span>
+                </span>
+                <span class="btn-label">Sou líder</span>
+              </a>
+
+              <a href="#dores-empresa" class="btn btn-ghost" id="heroSecondaryBtn">
+                Represento uma empresa
+              </a>
+            </div>
+
+            <p class="hero-support-line">
+              <span>Conteúdo completo no canal do</span>
+              <a href="https://www.youtube.com/@adalbertofchagas" class="hero-support-link" target="_blank" rel="noopener">
+                <span>YouTube</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </p>
+          </div>
+
+          <!-- Coluna 2: Moldura High-End Showcase do Vídeo -->
+          <div class="hero-visual-col">
+            <div class="hero-showcase" id="heroShowcase">
+              <!-- Rotação do feixe de luz dourado periférico (Conic Beam) -->
+              <div class="showcase-beam-track" aria-hidden="true">
+                <div class="beam-rotor"></div>
+              </div>
+
+              <!-- Base interna de vidro navy escurecido -->
+              <div class="showcase-inner-base" aria-hidden="true"></div>
+
+              <!-- Efeito flashlight com seguimento do ponteiro -->
+              <div class="showcase-flashlight" id="showcaseFlashlight" aria-hidden="true"></div>
+
+              <!-- Tela interna integrada do vídeo -->
+              <div class="showcase-screen">
+                <img src="assets/hero_poster.jpg" alt="" class="hero-poster" width="1280" height="720" fetchpriority="high" />
+                <video class="hero-video" id="heroVideo" muted playsinline preload="metadata" poster="assets/hero_poster.jpg" aria-hidden="true" disablepictureinpicture disableremoteplayback>
+                  <source src="assets/hero_mobile.mp4" media="(max-width: 768px)" type="video/mp4" />
+                  <source src="assets/hero.mp4" type="video/mp4" />
+                </video>
+                <div class="screen-ambient-grade" aria-hidden="true"></div>
+
+                <!-- Cantoneiras internas sutis de precisão -->
+                <svg class="screen-corner sc-tl" viewBox="0 0 16 16" aria-hidden="true"><path d="M 2 14 L 2 2 L 14 2" /></svg>
+                <svg class="screen-corner sc-tr" viewBox="0 0 16 16" aria-hidden="true"><path d="M 2 2 L 14 2 L 14 14" /></svg>
+                <svg class="screen-corner sc-bl" viewBox="0 0 16 16" aria-hidden="true"><path d="M 2 2 L 2 14 L 14 14" /></svg>
+                <svg class="screen-corner sc-br" viewBox="0 0 16 16" aria-hidden="true"><path d="M 2 14 L 14 14 L 14 2" /></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 2: DIAGNÓSTICO DE LIDERANÇA
+    ============================================================ -->
+    <section id="diagnostico" class="section-light">
+      <div class="max-w diag-container">
+        <div class="diag-layout">
+          <!-- Coluna esquerda: Chamada, Texto de Apoio e Acoes -->
+          <div class="diag-sticky-col">
+            <h2 class="diag-title" id="diagTitle">Uma conversa de 30 minutos para entender onde a sua liderança trava.</h2>
+            <p class="diag-lead">Responda ao questionário em menos de 2 minutos. Seu perfil é analisado e, se houver enquadramento, você recebe o acesso à agenda da sessão gratuita.</p>
+
+            <div class="diag-actions">
+              <a href="https://adalbertochagas.com.br/diagnostico/" class="btn btn-primary diag-cta-main" id="diagPrimaryBtn">
+                <span class="btn-inner-track" aria-hidden="true">
+                  <span class="btn-conic"></span>
+                  <span class="btn-bg">
+                    <span class="btn-shimmer"></span>
+                    <span class="btn-glow"></span>
+                  </span>
+                </span>
+                <span class="btn-label">
+                  <span>Quero o Diagnóstico de Liderança</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                    <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+
+              <p class="diag-free-note">Participar é gratuito.</p>
+
+              <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20quero%20saber%20mais%20sobre%20o%20Diagn%C3%B3stico%20de%20Lideran%C3%A7a." class="diag-secondary-link" id="diagWaLink" target="_blank" rel="noopener">Prefere conversar antes? Fale pelo WhatsApp.</a>
+            </div>
+          </div>
+
+          <!-- Coluna direita: Etapas e Cartoes de Enquadramento -->
+          <div class="diag-content-col">
+            <!-- Linha do tempo dos 3 passos conectados -->
+            <div class="diag-timeline">
+              <div class="diag-timeline-track" aria-hidden="true">
+                <div class="diag-timeline-bar" id="diagTimelineBar"></div>
+              </div>
+              <div class="diag-timeline-steps" id="diagTimelineSteps">
+                <div class="diag-step-card" data-step="1">
+                  <div class="diag-step-node" aria-hidden="true">
+                    <span class="diag-step-num">01</span>
+                  </div>
+                  <div class="diag-step-body">
+                    <h3 class="diag-step-title">Responda ao questionário</h3>
+                    <p class="diag-step-desc">Leva menos de 2 minutos e ajuda a entender a sua situação como líder.</p>
+                  </div>
+                </div>
+
+                <div class="diag-step-card" data-step="2">
+                  <div class="diag-step-node" aria-hidden="true">
+                    <span class="diag-step-num">02</span>
+                  </div>
+                  <div class="diag-step-body">
+                    <h3 class="diag-step-title">Perfil analisado</h3>
+                    <p class="diag-step-desc">Os horários são limitados. Cada perfil é analisado e não há aprovação automática.</p>
+                  </div>
+                </div>
+
+                <div class="diag-step-card" data-step="3">
+                  <div class="diag-step-node" aria-hidden="true">
+                    <span class="diag-step-num">03</span>
+                  </div>
+                  <div class="diag-step-body">
+                    <h3 class="diag-step-title">Sessão gratuita de 30 minutos</h3>
+                    <p class="diag-step-desc">Por vídeo, com o Adalberto. Conversamos sobre o seu cenário e o próximo passo mais adequado ao seu caso.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dois cartoes de enquadramento -->
+            <div class="diag-audience-cards" id="diagAudienceCards">
+              <div class="diag-audience-card is-target">
+                <h3 class="diag-card-title">Para quem é</h3>
+                <ul class="diag-card-list">
+                  <li>
+                    <span class="diag-card-icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="12" height="12">
+                        <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Lidera pessoas, mesmo sem cargo formal de gestor</span>
+                  </li>
+                  <li>
+                    <span class="diag-card-icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="12" height="12">
+                        <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Está em transição ou quer estruturar a gestão</span>
+                  </li>
+                  <li>
+                    <span class="diag-card-icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="12" height="12">
+                        <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Está sobrecarregado e quer resolver de forma prática</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="diag-audience-card is-filter">
+                <h3 class="diag-card-title">Para quem não é</h3>
+                <ul class="diag-card-list">
+                  <li>
+                    <span class="diag-card-icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="12" height="12">
+                        <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                    <span>Quem busca apenas conteúdo gratuito</span>
+                  </li>
+                  <li>
+                    <span class="diag-card-icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="12" height="12">
+                        <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                    <span>Quem não quer mudar</span>
+                  </li>
+                  <li>
+                    <span class="diag-card-icon" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" width="12" height="12">
+                        <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </span>
+                    <span>Quem não está comprometido com o processo</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 3: DORES (LÍDER E EMPRESA)
+    ============================================================ -->
+    <section id="dores" class="section-dores">
+      <img src="assets/ac-symbol.png" alt="" class="dores-watermark" width="720" height="720" loading="lazy" aria-hidden="true" />
+      <div class="max-w dores-container">
+        <!-- Seletor de Perfil (Tablist) -->
+        <div class="dores-tablist-wrap">
+          <div class="dores-tablist" role="tablist" aria-label="Selecione o seu perfil">
+            <div class="dores-tab-indicator" id="doresTabIndicator" aria-hidden="true"></div>
+            <button type="button" class="dores-tab is-active" id="tab-lider" role="tab" aria-selected="true" aria-controls="dores-lider" tabindex="0">
+              <span>Sou líder</span>
+            </button>
+            <button type="button" class="dores-tab" id="tab-empresa" role="tab" aria-selected="false" aria-controls="dores-empresa" tabindex="-1">
+              <span>Represento uma empresa</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PAINEL DO LÍDER -->
+        <div class="dores-panel" id="dores-lider" role="tabpanel" aria-labelledby="tab-lider">
+          <h2 class="dores-panel-title">O funcionário difícil que consome a sua energia.</h2>
+          <div class="dores-grid">
+            <!-- Dor 1 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">01</span>
+                <h3 class="dor-title">Você já explicou, já conversou, e o comportamento continua.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">a mesma situação se repete, e o restante da equipe percebe e passa a medir o que é tolerado.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">você entende o padrão da pessoa e define o que dizer, o que combinar e quando agir.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dor 2 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">02</span>
+                <h3 class="dor-title">Você evita a conversa por medo de piorar.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">o feedback é adiado, e o problema cresce enquanto você contorna.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">você prepara a conversa e se posiciona com firmeza e respeito.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dor 3 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">03</span>
+                <h3 class="dor-title">Sua autoridade é testada.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">há falta de respeito, e nos momentos de tensão você reage no calor e depois se arrepende.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">autocontrole e comunicação executiva para manter a postura.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dor 4 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">04</span>
+                <h3 class="dor-title">O resto da equipe paga o preço.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">as tarefas voltam incompletas, as pessoas competentes travam e tudo acaba passando por você.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">delegação clara, prioridades definidas e combinados explícitos.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dores-panel-action">
+            <a href="https://adalbertochagas.com.br/diagnostico/" class="btn btn-primary dores-cta-btn">
+              <span class="btn-inner-track" aria-hidden="true">
+                <span class="btn-conic"></span>
+                <span class="btn-bg">
+                  <span class="btn-shimmer"></span>
+                  <span class="btn-glow"></span>
+                </span>
+              </span>
+              <span class="btn-label">
+                <span>Quero o Diagnóstico de Liderança</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PAINEL DA EMPRESA -->
+        <div class="dores-panel" id="dores-empresa" role="tabpanel" aria-labelledby="tab-empresa" hidden>
+          <h2 class="dores-panel-title">Quando a equipe tem idades, estilos e expectativas diferentes.</h2>
+          <div class="dores-grid">
+            <!-- Empresa 1 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">01</span>
+                <h3 class="dor-title">Faixas etárias que não se entendem.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">formas diferentes de trabalhar viram ruído, ressentimento e pouca cooperação.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">expectativas são alinhadas e os combinados ficam claros para todos.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empresa 2 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">02</span>
+                <h3 class="dor-title">A tecnologia chega, mas nem todos acompanham.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">ferramentas novas são adotadas por parte do time, e a gestão se distancia dos mais jovens.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">a experiência de uns e a inovação de outros passam a se complementar.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empresa 3 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">03</span>
+                <h3 class="dor-title">Há pouco engajamento e a rotatividade preocupa.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">nem todos participam das discussões, e há quem se sinta pouco ouvido.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">o trabalho abre espaço de voz para todas as faixas etárias.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empresa 4 -->
+            <div class="dor-card">
+              <div class="dor-header">
+                <span class="dor-num" aria-hidden="true">04</span>
+                <h3 class="dor-title">A empresa cresce mais rápido do que a estrutura.</h3>
+              </div>
+              <div class="dor-compare">
+                <div class="dor-connector" aria-hidden="true">
+                  <span class="dor-node is-hoje"></span>
+                  <svg class="dor-connector-svg" viewBox="0 0 2 100" preserveAspectRatio="none">
+                    <line x1="1" y1="0" x2="1" y2="100" class="dor-conn-line" vector-effect="non-scaling-stroke" />
+                  </svg>
+                  <span class="dor-node is-depois"></span>
+                </div>
+                <div class="dor-rows">
+                  <div class="dor-row">
+                    <span class="dor-pill is-hoje">Hoje</span>
+                    <p class="dor-text is-hoje">novas contratações chegam sem regras de convivência nem responsabilidades claras.</p>
+                  </div>
+                  <div class="dor-row">
+                    <span class="dor-pill is-depois">Com acompanhamento</span>
+                    <p class="dor-text is-depois">tarefas e responsabilidades são organizadas antes que o conflito apareça.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dores-panel-action">
+            <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20represento%20uma%20empresa.%20Gostaria%20de%20conversar%20sobre%20o%20cen%C3%A1rio%20da%20nossa%20equipe." class="btn btn-primary dores-cta-btn" id="doresEmpresaCta" target="_blank" rel="noopener">
+              <span class="btn-inner-track" aria-hidden="true">
+                <span class="btn-conic"></span>
+                <span class="btn-bg">
+                  <span class="btn-shimmer"></span>
+                  <span class="btn-glow"></span>
+                </span>
+              </span>
+              <span class="btn-label">
+                <span>Conversar sobre a minha empresa</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 4: EXEMPLOS (SITUAÇÕES ANONIMIZADAS)
+    ============================================================ -->
+    <section id="exemplos" class="section-light section-exemplos">
+      <div class="max-w exemplos-container">
+        <div class="exemplos-header">
+          <h2 class="exemplos-title">Situações que aparecem nas equipes.</h2>
+          <p class="exemplos-lead">Situações recorrentes, descritas de forma anonimizada e sem promessa de resultado.</p>
+        </div>
+
+        <div class="exemplos-grid" id="exemplosGrid" role="region" aria-label="Situações que aparecem nas equipes" tabindex="0">
+          <!-- Cartão 01 -->
+          <article class="exemplo-card">
+            <div class="exemplo-card-top-line" aria-hidden="true"></div>
+            <div class="exemplo-header">
+              <span class="exemplo-num" aria-hidden="true">01</span>
+              <h3 class="exemplo-title">O colaborador que resiste e forma um grupo à sua volta</h3>
+            </div>
+            <div class="exemplo-rows">
+              <div class="exemplo-row">
+                <span class="exemplo-label">A situação</span>
+                <p class="exemplo-text">um profissional tecnicamente forte questiona cada orientação e passa a ter influência sobre os colegas.</p>
+              </div>
+              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-01">
+                <span class="exemplo-toggle-text">Ver mais</span>
+                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-01">
+                <div class="exemplo-collapse-inner">
+                  <div class="exemplo-row">
+                    <span class="exemplo-label">O que costuma acontecer</span>
+                    <p class="exemplo-text">as decisões são discutidas nos bastidores antes de chegarem a você, e a equipe passa a responder mais a ele do que ao líder.</p>
+                  </div>
+                  <div class="exemplo-row is-destaque">
+                    <span class="exemplo-label">O que se trabalha</span>
+                    <p class="exemplo-text">identificar o padrão, definir limites e responsabilidades claros e recuperar a unidade da equipe.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="exemplo-card-footer">
+              <a href="https://www.youtube.com/watch?v=bkT5gc7P--M" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: Sua equipe respeita mais outro funcionário do que você?">
+                <span class="exemplo-play-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                <span>Assistir no canal</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Cartão 02 -->
+          <article class="exemplo-card">
+            <div class="exemplo-card-top-line" aria-hidden="true"></div>
+            <div class="exemplo-header">
+              <span class="exemplo-num" aria-hidden="true">02</span>
+              <h3 class="exemplo-title">O colaborador que reclama de tudo</h3>
+            </div>
+            <div class="exemplo-rows">
+              <div class="exemplo-row">
+                <span class="exemplo-label">A situação</span>
+                <p class="exemplo-text">ele reclama com frequência, quase sempre no lugar errado e sem trazer solução.</p>
+              </div>
+              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-02">
+                <span class="exemplo-toggle-text">Ver mais</span>
+                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-02">
+                <div class="exemplo-collapse-inner">
+                  <div class="exemplo-row">
+                    <span class="exemplo-label">O que costuma acontecer</span>
+                    <p class="exemplo-text">outros começam a imitá-lo, toda novidade nasce sob desconfiança e o líder passa a decidir com receio da reação dele.</p>
+                  </div>
+                  <div class="exemplo-row is-destaque">
+                    <span class="exemplo-label">O que se trabalha</span>
+                    <p class="exemplo-text">separar crítica útil de ruído, conversar com fato e impacto e parar de ceder só para evitar desgaste.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="exemplo-card-footer">
+              <a href="https://www.youtube.com/watch?v=_z2gxv_Ll0A" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: Funcionário reclamão: 5 sinais de que ele está destruindo sua equipe">
+                <span class="exemplo-play-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                <span>Assistir no canal</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Cartão 03 -->
+          <article class="exemplo-card">
+            <div class="exemplo-card-top-line" aria-hidden="true"></div>
+            <div class="exemplo-header">
+              <span class="exemplo-num" aria-hidden="true">03</span>
+              <h3 class="exemplo-title">A conversa difícil que fica para depois</h3>
+            </div>
+            <div class="exemplo-rows">
+              <div class="exemplo-row">
+                <span class="exemplo-label">A situação</span>
+                <p class="exemplo-text">o feedback é adiado por medo de piorar o clima, ou sai vago, ou em tom duro demais.</p>
+              </div>
+              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-03">
+                <span class="exemplo-toggle-text">Ver mais</span>
+                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-03">
+                <div class="exemplo-collapse-inner">
+                  <div class="exemplo-row">
+                    <span class="exemplo-label">O que costuma acontecer</span>
+                    <p class="exemplo-text">o problema se repete, a pessoa não sabe o que precisa mudar e o restante da equipe observa.</p>
+                  </div>
+                  <div class="exemplo-row is-destaque">
+                    <span class="exemplo-label">O que se trabalha</span>
+                    <p class="exemplo-text">preparar a conversa com o fato, o impacto e uma pergunta, e fechar com um compromisso que possa ser verificado.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="exemplo-card-footer">
+              <a href="https://www.youtube.com/watch?v=JMKms9QRzwk" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: Como conduzir uma conversa difícil sem perder o controle">
+                <span class="exemplo-play-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                <span>Assistir no canal</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Cartão 04 -->
+          <article class="exemplo-card">
+            <div class="exemplo-card-top-line" aria-hidden="true"></div>
+            <div class="exemplo-header">
+              <span class="exemplo-num" aria-hidden="true">04</span>
+              <h3 class="exemplo-title">A autoridade que se perde nos pequenos combinados</h3>
+            </div>
+            <div class="exemplo-rows">
+              <div class="exemplo-row">
+                <span class="exemplo-label">A situação</span>
+                <p class="exemplo-text">o líder promete um retorno e esquece, volta atrás na primeira pressão ou fala demais para compensar a insegurança.</p>
+              </div>
+              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-04">
+                <span class="exemplo-toggle-text">Ver mais</span>
+                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-04">
+                <div class="exemplo-collapse-inner">
+                  <div class="exemplo-row">
+                    <span class="exemplo-label">O que costuma acontecer</span>
+                    <p class="exemplo-text">os pedidos viram cobrança e a equipe passa a duvidar da palavra dele.</p>
+                  </div>
+                  <div class="exemplo-row is-destaque">
+                    <span class="exemplo-label">O que se trabalha</span>
+                    <p class="exemplo-text">cumprir combinados pequenos, comunicar com intenção clara e sustentar decisões.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="exemplo-card-footer">
+              <a href="https://www.youtube.com/watch?v=4rODntScXb8" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: Como ser respeitado sem precisar falar demais em 5 passos fáceis">
+                <span class="exemplo-play-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                <span>Assistir no canal</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Cartão 05 -->
+          <article class="exemplo-card">
+            <div class="exemplo-card-top-line" aria-hidden="true"></div>
+            <div class="exemplo-header">
+              <span class="exemplo-num" aria-hidden="true">05</span>
+              <h3 class="exemplo-title">O líder que acabou de assumir</h3>
+            </div>
+            <div class="exemplo-rows">
+              <div class="exemplo-row">
+                <span class="exemplo-label">A situação</span>
+                <p class="exemplo-text">ele foi promovido pela competência técnica e agora precisa fazer outras pessoas executarem.</p>
+              </div>
+              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-05">
+                <span class="exemplo-toggle-text">Ver mais</span>
+                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-05">
+                <div class="exemplo-collapse-inner">
+                  <div class="exemplo-row">
+                    <span class="exemplo-label">O que costuma acontecer</span>
+                    <p class="exemplo-text">tenta fazer tudo sozinho, oscila entre ser amigo e ser rígido e chega à sobrecarga.</p>
+                  </div>
+                  <div class="exemplo-row is-destaque">
+                    <span class="exemplo-label">O que se trabalha</span>
+                    <p class="exemplo-text">delegar com clareza, comunicar expectativas e decidir com base em fatos.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="exemplo-card-footer">
+              <a href="https://www.youtube.com/watch?v=GsN9EGH5eeE" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: Como se tornar um líder respeitado: 5 passos para iniciantes">
+                <span class="exemplo-play-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                <span>Assistir no canal</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Cartão 06 -->
+          <article class="exemplo-card">
+            <div class="exemplo-card-top-line" aria-hidden="true"></div>
+            <div class="exemplo-header">
+              <span class="exemplo-num" aria-hidden="true">06</span>
+              <h3 class="exemplo-title">A equipe com idades e estilos diferentes</h3>
+            </div>
+            <div class="exemplo-rows">
+              <div class="exemplo-row">
+                <span class="exemplo-label">A situação</span>
+                <p class="exemplo-text">profissionais mais novos e mais experientes dividem o mesmo time, com ritmos e formas de comunicar distintos.</p>
+              </div>
+              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-06">
+                <span class="exemplo-toggle-text">Ver mais</span>
+                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-06">
+                <div class="exemplo-collapse-inner">
+                  <div class="exemplo-row">
+                    <span class="exemplo-label">O que costuma acontecer</span>
+                    <p class="exemplo-text">há ruído de comunicação, pouca cooperação e a leitura de que o problema é pessoal, quando é de estilo de trabalho.</p>
+                  </div>
+                  <div class="exemplo-row is-destaque">
+                    <span class="exemplo-label">O que se trabalha</span>
+                    <p class="exemplo-text">alinhar propósito e expectativas, criar combinados claros e dar voz a todas as faixas etárias.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="exemplo-card-footer">
+              <a href="https://www.youtube.com/watch?v=JuCRf8TFe6c" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: 6 dicas para melhorar trabalho em equipe com diferentes gerações">
+                <span class="exemplo-play-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </span>
+                <span>Assistir no canal</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="exemplos-carousel-controls" aria-label="Navegação do carrossel">
+          <button type="button" class="carousel-arrow carousel-arrow-prev" id="exemploPrevBtn" aria-label="Cartão anterior" aria-disabled="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+
+          <div class="carousel-dots" role="group" aria-label="Indicadores dos cartões">
+            <button type="button" class="carousel-dot is-active" data-index="0" aria-label="Ir para o cartão 1"></button>
+            <button type="button" class="carousel-dot" data-index="1" aria-label="Ir para o cartão 2"></button>
+            <button type="button" class="carousel-dot" data-index="2" aria-label="Ir para o cartão 3"></button>
+            <button type="button" class="carousel-dot" data-index="3" aria-label="Ir para o cartão 4"></button>
+            <button type="button" class="carousel-dot" data-index="4" aria-label="Ir para o cartão 5"></button>
+            <button type="button" class="carousel-dot" data-index="5" aria-label="Ir para o cartão 6"></button>
+          </div>
+
+          <button type="button" class="carousel-arrow carousel-arrow-next" id="exemploNextBtn" aria-label="Próximo cartão" aria-disabled="false">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+
+        <p class="exemplos-disclaimer">Situações recorrentes, descritas de forma anonimizada. Cada caso é único e não há promessa de resultado.</p>
+
+        <div class="exemplos-actions">
+          <a href="https://adalbertochagas.com.br/diagnostico/" class="btn btn-primary exemplos-btn-main">
+            <span class="btn-inner-track" aria-hidden="true">
+              <span class="btn-conic"></span>
+              <span class="btn-bg">
+                <span class="btn-shimmer"></span>
+                <span class="btn-glow"></span>
+              </span>
+            </span>
+            <span class="btn-label">
+              <span>Quero o Diagnóstico de Liderança</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+
+          <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20represento%20uma%20empresa.%20Gostaria%20de%20conversar%20sobre%20o%20cen%C3%A1rio%20da%20nossa%20equipe." class="btn btn-ghost exemplos-btn-secondary" id="exemplosEmpresaLink" target="_blank" rel="noopener">
+            <span>Represento uma empresa</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       SCRIPTS: CABEÇALHO (FUNÇÃO ISOLADA)
+  ============================================================ -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const WHATSAPP = "5511933607230";
+      const WA_MENSAGEM = "Olá, Adalberto. Vim pelo site da Academy e quero conversar sobre liderança.";
+      const waUrl = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MENSAGEM);
+
+      const siteHeader = $('.site-header');
+      const headerCta = $('#headerCta');
+      const headerCtaLink = $('#headerCtaLink');
+
+      if (headerCtaLink) {
+        headerCtaLink.href = waUrl;
+        headerCtaLink.target = '_blank';
+        headerCtaLink.rel = 'noopener';
+      }
+
+      const syncHeader = () => {
+        if (siteHeader) {
+          siteHeader.classList.toggle('is-scrolled', window.scrollY > 8);
+        }
+      };
+      window.addEventListener('scroll', syncHeader, { passive: true });
+      syncHeader();
+
+      const heroPrimaryBtn = $('#heroPrimaryBtn');
+      if ('IntersectionObserver' in window && heroPrimaryBtn && headerCta) {
+        let heroObserver = null;
+        const watchHeroBtn = () => {
+          if (heroObserver) heroObserver.disconnect();
+          const headerH = siteHeader ? Math.ceil(siteHeader.getBoundingClientRect().height) : 60;
+          heroObserver = new IntersectionObserver((entries) => {
+            const isVisible = entries[entries.length - 1].isIntersecting;
+            headerCta.classList.toggle('is-on', !isVisible);
+            headerCta.inert = isVisible;
+          }, { rootMargin: '-' + headerH + 'px 0px 0px 0px' });
+          heroObserver.observe(heroPrimaryBtn);
+        };
+        watchHeroBtn();
+        window.addEventListener('resize', watchHeroBtn);
+      }
+    })();
+  </script>
+
+  <!-- ============================================================
+       SCRIPTS: HERO E VÍDEO (FUNÇÃO ISOLADA)
+  ============================================================ -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = root.classList.contains('rm') ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      const hasGsap = typeof window.gsap !== 'undefined';
+      const hasSplit = hasGsap && typeof window.SplitText !== 'undefined';
+
+      /* 1. Animação de entrada do H1 em linhas com expo.out */
+      const heroTitle = $('#heroTitle');
+      if (heroTitle && !isReduced && hasSplit) {
+        try {
+          const split = SplitText.create(heroTitle, { type: 'lines', linesClass: 'ln', mask: 'lines' });
+          gsap.set(split.lines, { yPercent: 110 });
+          gsap.to(split.lines, {
+            yPercent: 0,
+            duration: 1.1,
+            stagger: 0.12,
+            ease: 'expo.out',
+            delay: 0.1
+          });
+        } catch (e) {
+          heroTitle.style.opacity = '1';
+        }
+      }
+
+      /* 2. Entrada do quadro: abertura por clip-path da esquerda para a direita (inset) */
+      const showcase = $('#heroShowcase');
+      const cornerPaths = $$('.screen-corner path');
+
+      if (showcase && !isReduced && hasGsap) {
+        gsap.fromTo(showcase,
+          { clipPath: 'inset(0% 100% 0% 0%)', opacity: 1 },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            opacity: 1,
+            duration: 1.25,
+            ease: 'expo.out',
+            delay: 0.35
+          }
+        );
+
+        /* Cantoneiras douradas desenham-se com stroke-dashoffset logo após a abertura */
+        if (cornerPaths.length > 0) {
+          gsap.fromTo(cornerPaths,
+            { strokeDashoffset: 26 },
+            {
+              strokeDashoffset: 0,
+              duration: 0.9,
+              stagger: 0.08,
+              ease: 'expo.out',
+              delay: 0.55
+            }
+          );
+        }
+      } else {
+        if (showcase) {
+          showcase.style.clipPath = 'none';
+          showcase.style.opacity = '1';
+        }
+        cornerPaths.forEach(p => { p.style.strokeDashoffset = '0'; });
+      }
+
+      /* 3. Efeito Flashlight que segue o ponteiro (sem inclinação 3D) */
+      if (showcase && !isReduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const flashlight = $('#showcaseFlashlight');
+
+        showcase.addEventListener('mousemove', (e) => {
+          const rect = showcase.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          if (flashlight) {
+            flashlight.style.setProperty('--mouse-x', `${x}px`);
+            flashlight.style.setProperty('--mouse-y', `${y}px`);
+          }
+        });
+      }
+
+      /* 4. Reprodução do vídeo: fonte exclusiva do HTML via tags <source>, sem loop, para no último quadro */
+      const video = $('#heroVideo');
+      if (video && !isReduced) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.loop = false;
+
+        video.addEventListener('ended', () => {
+          video.pause();
+        });
+
+        const startVideo = () => {
+          video.classList.add('is-active');
+          const p = video.play();
+          if (p && p.catch) {
+            p.catch(() => {
+              video.classList.remove('is-active');
+            });
+          }
+        };
+
+        if (hasGsap) {
+          gsap.delayedCall(0.35, startVideo);
+        } else {
+          setTimeout(startVideo, 350);
+        }
+      }
+    })();
+  </script>
+
+  <!-- ============================================================
+       SCRIPTS: DIAGNÓSTICO DE LIDERANÇA (FUNÇÃO ISOLADA)
+  ============================================================ -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const WHATSAPP = "5511933607230";
+      const WA_MENSAGEM = "Olá, Adalberto. Vim pelo site da Academy e quero saber mais sobre o Diagnóstico de Liderança.";
+      const waUrl = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MENSAGEM);
+
+      const waLink = $('#diagWaLink');
+      if (waLink) {
+        waLink.href = waUrl;
+        waLink.target = '_blank';
+        waLink.rel = 'noopener';
+      }
+
+      const isReduced = root.classList.contains('rm') ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      const hasGsap = typeof window.gsap !== 'undefined';
+      if (hasGsap && typeof window.ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      const timelineBar = $('#diagTimelineBar');
+      const stepCards = $$('.diag-step-card');
+      const audienceCards = $$('.diag-audience-card');
+      const diagTitle = $('#diagTitle');
+
+      if (isReduced || !hasGsap || !window.ScrollTrigger) {
+        if (timelineBar) {
+          timelineBar.style.transform = 'scaleY(1)';
+        }
+        stepCards.forEach((c) => c.classList.add('is-lit'));
+        audienceCards.forEach((c) => { c.style.opacity = '1'; c.style.transform = 'none'; });
+        return;
+      }
+
+      /* 1. Revelacao suave do H2 com clip-path */
+      if (diagTitle) {
+        gsap.fromTo(diagTitle,
+          { clipPath: 'inset(0% 0% 100% 0%)', y: 24, opacity: 0 },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            y: 0,
+            opacity: 1,
+            duration: 1.1,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: '#diagnostico',
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      }
+
+      /* 2. Linha vertical do pipeline conectando os 3 passos */
+      const timelineSteps = $('#diagTimelineSteps');
+      if (timelineSteps && timelineBar && stepCards.length > 0) {
+        gsap.set(timelineBar, { scaleY: 0 });
+
+        const totalSteps = stepCards.length;
+
+        ScrollTrigger.create({
+          trigger: timelineSteps,
+          start: 'top 78%',
+          end: 'bottom 60%',
+          scrub: 0.5,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            gsap.set(timelineBar, { scaleY: progress });
+
+            stepCards.forEach((card, idx) => {
+              const threshold = (idx + 0.15) / totalSteps;
+              if (progress >= threshold) {
+                card.classList.add('is-lit');
+              } else {
+                card.classList.remove('is-lit');
+              }
+            });
+          }
+        });
+
+        gsap.from(stepCards, {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          stagger: 0.14,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: timelineSteps,
+            start: 'top 82%',
+            toggleActions: 'play none none none'
+          }
+        });
+      }
+
+      /* 3. Animacao de entrada e efeito lanterna (flashlight) nos cartoes */
+      const allCards = stepCards.concat(audienceCards);
+      if (allCards.length > 0 && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        allCards.forEach((card) => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            card.style.setProperty('--mx', mx + 'px');
+            card.style.setProperty('--my', my + 'px');
+          });
+        });
+      }
+
+      if (audienceCards.length > 0) {
+        gsap.from(audienceCards, {
+          opacity: 0,
+          y: 24,
+          duration: 0.85,
+          stagger: 0.14,
+          ease: 'expo.out',
+          scrollTrigger: {
+            trigger: '#diagAudienceCards',
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- ============================================================
+       SCRIPTS: DORES (LÍDER E EMPRESA) FUNÇÃO ISOLADA
+  ============================================================ -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const WHATSAPP = "5511933607230";
+      const WA_MENSAGEM = "Olá, Adalberto. Vim pelo site da Academy e represento uma empresa. Gostaria de conversar sobre o cenário da nossa equipe.";
+      const waUrl = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MENSAGEM);
+
+      const empresaCta = $('#doresEmpresaCta');
+      if (empresaCta) {
+        empresaCta.href = waUrl;
+        empresaCta.target = '_blank';
+        empresaCta.rel = 'noopener';
+      }
+
+      const tablist = $('.dores-tablist');
+      const tabs = $$('.dores-tab');
+      const panels = $$('.dores-panel');
+      const indicator = $('#doresTabIndicator');
+
+      const isReduced = root.classList.contains('rm') ||
+        (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      const hasGsap = typeof window.gsap !== 'undefined';
+      if (hasGsap && typeof window.ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      function updateIndicator(targetTab) {
+        if (!indicator || !tablist || !targetTab) return;
+        const tabRect = targetTab.getBoundingClientRect();
+        const listRect = tablist.getBoundingClientRect();
+        const leftOffset = tabRect.left - listRect.left;
+        indicator.style.transform = 'translateX(' + leftOffset + 'px)';
+        indicator.style.width = tabRect.width + 'px';
+      }
+
+      const animatedPanels = new Set();
+
+      function animatePanelCards(panel) {
+        if (!panel || isReduced || !hasGsap) return;
+        const cards = $$('.dor-card', panel);
+        if (cards.length === 0) return;
+        const nums = $$('.dor-num', panel);
+        const lines = $$('.dor-conn-line', panel);
+        const nodes = $$('.dor-node.is-depois', panel);
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            gsap.set(cards, { clearProps: 'transform,opacity' });
+            gsap.set(nums, { clearProps: 'clipPath' });
+            gsap.set(lines, { clearProps: 'strokeDashoffset' });
+            gsap.set(nodes, { clearProps: 'opacity,transform' });
+          }
+        });
+
+        tl.fromTo(cards,
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'expo.out' },
+          0
+        );
+
+        if (nums.length > 0) {
+          tl.fromTo(nums,
+            { clipPath: 'inset(0% 0% 100% 0%)' },
+            { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.7, stagger: 0.1, ease: 'expo.out' },
+            0.1
+          );
+        }
+
+        if (lines.length > 0) {
+          tl.fromTo(lines,
+            { strokeDashoffset: 200 },
+            { strokeDashoffset: 0, duration: 0.85, stagger: 0.1, ease: 'power2.out' },
+            0.15
+          );
+        }
+
+        if (nodes.length > 0) {
+          tl.fromTo(nodes,
+            { opacity: 0.3, scale: 0.6 },
+            { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(2)' },
+            0.35
+          );
+        }
+      }
+
+      function setTab(targetId, animate) {
+        const targetTab = $('[aria-controls="' + targetId + '"]');
+        const activePanel = $('#' + targetId);
+        if (!targetTab || !activePanel) return;
+
+        tabs.forEach(t => {
+          const isCur = t === targetTab;
+          t.classList.toggle('is-active', isCur);
+          t.setAttribute('aria-selected', isCur ? 'true' : 'false');
+          t.tabIndex = isCur ? 0 : -1;
+        });
+
+        panels.forEach(p => {
+          const isCur = p === activePanel;
+          if (isCur) {
+            p.removeAttribute('hidden');
+          } else {
+            p.setAttribute('hidden', '');
+          }
+        });
+
+        updateIndicator(targetTab);
+
+        if (hasGsap && window.ScrollTrigger) {
+          ScrollTrigger.refresh();
+        }
+
+        if (activePanel) {
+          if (!animatedPanels.has(activePanel.id)) {
+            const rect = activePanel.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.95 || animate) {
+              animatePanelCards(activePanel);
+              animatedPanels.add(activePanel.id);
+            }
+          }
+        }
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.getAttribute('aria-controls');
+          setTab(targetId, true);
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', '#' + targetId);
+          }
+        });
+      });
+
+      if (tablist) {
+        tablist.addEventListener('keydown', (e) => {
+          const currentIdx = tabs.findIndex(t => t.classList.contains('is-active'));
+          let newIdx = -1;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            newIdx = (currentIdx + 1) % tabs.length;
+          } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            newIdx = (currentIdx-1+tabs.length) % tabs.length;
+          } else if (e.key === 'Home') {
+            newIdx = 0;
+          } else if (e.key === 'End') {
+            newIdx = tabs.length-1;
+          }
+          if (newIdx !== -1) {
+            e.preventDefault();
+            const newTab = tabs[newIdx];
+            const ctrl = newTab.getAttribute('aria-controls');
+            setTab(ctrl, true);
+            newTab.focus();
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, '', '#' + ctrl);
+            }
+          }
+        });
+      }
+
+      function scrollToDores(smooth) {
+        const doresSection = $('#dores');
+        const header = $('#siteHeader');
+        if (!doresSection) return;
+        const headerHeight = header ? header.getBoundingClientRect().height : 72;
+        const sectionRect = doresSection.getBoundingClientRect();
+        const targetScrollY = (window.scrollY + sectionRect.top)-(headerHeight + 24);
+        window.scrollTo({
+          top: Math.max(0, targetScrollY),
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      }
+
+      /* Integracao com os botoes do Hero */
+      const heroPrimaryBtn = $('#heroPrimaryBtn');
+      const heroSecondaryBtn = $('#heroSecondaryBtn');
+
+      const handleHeroNavigation = (targetId) => {
+        setTab(targetId, false);
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', '#' + targetId);
+        }
+        scrollToDores(true);
+      };
+
+      if (heroPrimaryBtn) {
+        heroPrimaryBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleHeroNavigation('dores-lider');
+        });
+      }
+
+      if (heroSecondaryBtn) {
+        heroSecondaryBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleHeroNavigation('dores-empresa');
+        });
+      }
+
+      /* Sincronizacao de hash na carga da pagina e rolagem estavel */
+      const currentHash = window.location.hash.replace('#', '');
+      if (currentHash === 'dores-empresa') {
+        setTab('dores-empresa', false);
+      } else {
+        setTab('dores-lider', false);
+      }
+
+      if (currentHash.startsWith('dores')) {
+        const performInitialScroll = () => scrollToDores(false);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(performInitialScroll);
+        });
+        window.addEventListener('load', performInitialScroll, { once: true });
+      }
+
+      /* Listener para historico e navegacao por hash */
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash.startsWith('dores')) return;
+        if (hash === 'dores-empresa') {
+          setTab('dores-empresa', true);
+        } else {
+          setTab('dores-lider', true);
+        }
+        scrollToDores(true);
+      });
+
+      window.addEventListener('resize', () => {
+        const curTab = $('.dores-tab.is-active');
+        if (curTab) updateIndicator(curTab);
+      });
+
+      /* Efeito lanterna interativo nos cards */
+      const dorCards = $$('.dor-card');
+      if (dorCards.length > 0 && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        dorCards.forEach((card) => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            card.style.setProperty('--mx', mx + 'px');
+            card.style.setProperty('--my', my + 'px');
+          });
+        });
+      }
+
+      /* Animacao de entrada e desenho de linhas com ScrollTrigger */
+      if (!isReduced && hasGsap && window.ScrollTrigger) {
+        panels.forEach(panel => {
+          ScrollTrigger.create({
+            trigger: panel,
+            start: 'top 80%',
+            once: true,
+            onEnter: () => {
+              if (!panel.hasAttribute('hidden') && !animatedPanels.has(panel.id)) {
+                animatePanelCards(panel);
+                animatedPanels.add(panel.id);
+              }
+            }
+          });
+        });
+      }
+    })();
+  </script>
+  <!-- ============================================================
+       SCRIPTS: DOBRA 4: EXEMPLOS (FUNÇÃO ISOLADA)
+  ============================================================ -->
+  <script>
+    (function initExemplos() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined';
+      if (hasGsap && typeof window.ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      /* Controle dos cartoes recolhiveis */
+      const toggleButtons = $$('.exemplo-toggle-btn');
+      toggleButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('aria-controls');
+          const panel = targetId ? $('#' + targetId) : null;
+          if (!panel) return;
+
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          const nextState = !isExpanded;
+
+          btn.setAttribute('aria-expanded', String(nextState));
+          panel.classList.toggle('is-open', nextState);
+
+          const textSpan = $('.exemplo-toggle-text', btn);
+          if (textSpan) {
+            textSpan.textContent = nextState ? 'Ver menos' : 'Ver mais';
+          }
+        });
+      });
+
+      /* Configuracao dinamica do link do WhatsApp para empresa */
+      const WHATSAPP = "5511933607230";
+      const WA_MENSAGEM = "Olá, Adalberto. Vim pelo site da Academy e represento uma empresa. Gostaria de conversar sobre o cenário da nossa equipe.";
+      const empresaBtn = $('#exemplosEmpresaLink');
+      if (empresaBtn) {
+        empresaBtn.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(WA_MENSAGEM);
+      }
+
+      /* Efeito lanterna interativo nos cartoes */
+      const cards = $$('.exemplo-card');
+      if (cards.length > 0 && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cards.forEach((card) => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const mx = e.clientX-rect.left;
+            const my = e.clientY-rect.top;
+            card.style.setProperty('--mx', mx + 'px');
+            card.style.setProperty('--my', my + 'px');
+          });
+        });
+      }
+
+      /* Carrossel mobile (ate 768px) */
+      const grid = $('#exemplosGrid');
+      const dots = $$('.carousel-dot');
+      const prevBtn = $('#exemploPrevBtn');
+      const nextBtn = $('#exemploNextBtn');
+      let currentCarouselIndex = 0;
+
+      function updateCarouselControls(idx) {
+        currentCarouselIndex = Math.max(0, Math.min(cards.length-1, idx));
+        dots.forEach((d, i) => {
+          d.classList.toggle('is-active', i === currentCarouselIndex);
+        });
+        if (prevBtn) {
+          prevBtn.setAttribute('aria-disabled', String(currentCarouselIndex === 0));
+        }
+        if (nextBtn) {
+          nextBtn.setAttribute('aria-disabled', String(currentCarouselIndex === cards.length-1));
+        }
+      }
+
+      function scrollToCarouselCard(idx, smooth) {
+        if (!grid || idx < 0 || idx >= cards.length) return;
+        const card = cards[idx];
+        if (!card) return;
+        const behavior = (smooth && !isReduced()) ? 'smooth' : 'auto';
+        const cardLeft = card.offsetLeft;
+        const cardWidth = card.offsetWidth;
+        const gridWidth = grid.clientWidth;
+        const scrollTarget = cardLeft - (gridWidth - cardWidth) / 2;
+
+        grid.scrollTo({
+          left: Math.max(0, scrollTarget),
+          behavior: behavior
+        });
+        updateCarouselControls(idx);
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-index'), 10);
+          scrollToCarouselCard(idx, true);
+        });
+      });
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (currentCarouselIndex > 0) {
+            scrollToCarouselCard(currentCarouselIndex-1, true);
+          }
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentCarouselIndex < cards.length-1) {
+            scrollToCarouselCard(currentCarouselIndex + 1, true);
+          }
+        });
+      }
+
+      if (grid) {
+        grid.addEventListener('keydown', (e) => {
+          if (window.innerWidth > 768) return;
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentCarouselIndex < cards.length-1) scrollToCarouselCard(currentCarouselIndex + 1, true);
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (currentCarouselIndex > 0) scrollToCarouselCard(currentCarouselIndex-1, true);
+          }
+        });
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (window.innerWidth > 768) return;
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                const idx = cards.indexOf(entry.target);
+                if (idx !== -1) {
+                  updateCarouselControls(idx);
+                }
+              }
+            });
+          }, {
+            root: grid,
+            threshold: 0.5
+          });
+
+          cards.forEach((card) => observer.observe(card));
+        }
+      }
+
+      /* Animacoes com GSAP e ScrollTrigger */
+      const isCarousel = () => window.innerWidth <= 768;
+
+      if (!isReduced() && hasGsap && window.ScrollTrigger) {
+        const section = $('#exemplos');
+        const lines = $$('.exemplo-card-top-line');
+        const nums = $$('.exemplo-num');
+        const destaques = $$('.exemplo-row.is-destaque');
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 75%',
+            once: true
+          },
+          onComplete: () => {
+            gsap.set(cards, { clearProps: 'transform,opacity' });
+            gsap.set(lines, { clearProps: 'transform' });
+            gsap.set(nums, { clearProps: 'clipPath' });
+            gsap.set(destaques, { clearProps: 'transform,opacity' });
+          }
+        });
+
+        if (!isCarousel()) {
+          tl.fromTo(cards,
+            { opacity: 0, y: 26 },
+            { opacity: 1, y: 0, duration: 0.75, stagger: 0.1, ease: 'expo.out' },
+            0
+          );
+        } else {
+          gsap.set(cards, { opacity: 1, y: 0 });
+        }
+
+        if (lines.length > 0) {
+          tl.fromTo(lines,
+            { scaleX: 0 },
+            { scaleX: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' },
+            0.1
+          );
+        }
+
+        if (nums.length > 0 && !isCarousel()) {
+          tl.fromTo(nums,
+            { clipPath: 'inset(0% 0% 100% 0%)' },
+            { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.7, stagger: 0.1, ease: 'expo.out' },
+            0.15
+          );
+        }
+
+        if (destaques.length > 0 && !isCarousel()) {
+          tl.fromTo(destaques,
+            { opacity: 0.5, x: -6 },
+            { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
+            0.3
+          );
+        }
+      }
+
+      /* Transicao responsiva entre modo carrossel e modo grade */
+      let lastWidth = window.innerWidth;
+      window.addEventListener('resize', () => {
+        const currentWidth = window.innerWidth;
+        if ((lastWidth <= 768 && currentWidth > 768) || (lastWidth > 768 && currentWidth <= 768)) {
+          lastWidth = currentWidth;
+          if (hasGsap) {
+            gsap.set(cards, { clearProps: 'transform,opacity' });
+            if (window.ScrollTrigger) {
+              ScrollTrigger.refresh();
+            }
+          }
+          if (currentWidth <= 768) {
+            updateCarouselControls(currentCarouselIndex);
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
