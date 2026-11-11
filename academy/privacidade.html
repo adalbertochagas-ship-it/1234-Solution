@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Política de Privacidade | Adalberto Chagas Academy</title>
+  <meta name="description" content="Como a 1234 Solution Ltda trata os dados pessoais de quem visita o site da Adalberto Chagas Academy, responde ao questionário do Diagnóstico de Liderança ou entra em contato." />
+  <link rel="canonical" href="https://adalbertochagas.com.br/privacidade.html" />
+  <meta name="theme-color" content="#0E1B2B" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #0E1B2B;
+      --navy-2: #16283F;
+      --navy-3: #1E3350;
+      --gold: #C6A45A;
+      --gold-2: #E4C787;
+      --gold-deep: #9C7C3C;
+      --gold-text-on-paper: #6F5620;
+      --paper: #F4EFE4;
+      --paper-2: #ECE4D3;
+      --ink: #17212E;
+      --text-lede: #B9C2CF;
+      --line-light: rgba(23, 33, 46, 0.12);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; border-radius: 3px; }
+    .skip { position: absolute; left: -9999px; top: 8px; background: var(--gold); color: var(--ink); padding: 8px 14px; border-radius: 6px; z-index: 10; font-weight: 600; }
+    .skip:focus { left: 16px; }
+
+    .wrap { width: min(1120px, 100% - 48px); margin-inline: auto; }
+
+    /* Cabeçalho */
+    .top {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(198, 164, 90, 0.18);
+    }
+    .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--paper); }
+    .brand img { width: 32px; height: 32px; display: block; }
+    .brand span { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; }
+    .back {
+      font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold-2); text-decoration: none; border: 1px solid rgba(198, 164, 90, 0.32);
+      padding: 10px 14px; border-radius: 6px; white-space: nowrap;
+    }
+    @media (hover: hover) { .back:hover { background: var(--gold); color: var(--ink); } }
+
+    /* Abertura */
+    .intro {
+      background: var(--navy);
+      color: var(--paper);
+      padding: 64px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .intro::after {
+      content: ""; position: absolute; inset: auto 0 0 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.6;
+    }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold-2); margin: 0 0 16px;
+    }
+    h1 {
+      font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.01em;
+    }
+    .updated { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--text-lede); margin: 0; }
+    .summary {
+      margin: 28px 0 0; max-width: 62ch; padding: 20px 24px; border-left: 3px solid var(--gold);
+      background: var(--navy-2); color: var(--paper); border-radius: 0 10px 10px 0; font-size: 1.0625rem;
+    }
+    .summary strong { color: var(--gold-2); font-weight: 600; }
+
+    /* Conteúdo */
+    .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 56px; padding: 64px 0 96px; align-items: start; }
+    .toc { position: sticky; top: 24px; font-size: 0.875rem; }
+    .toc p { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-text-on-paper); margin: 0 0 12px; }
+    .toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line-light); }
+    .toc li a { display: block; padding: 7px 0 7px 16px; margin-left: -1px; border-left: 2px solid transparent; text-decoration: none; color: var(--ink); }
+    @media (hover: hover) { .toc li a:hover { border-left-color: var(--gold-deep); background: var(--paper-2); } }
+    .toc-details { display: none; }
+
+    article section { padding: 0 0 36px; margin: 0 0 36px; border-bottom: 1px solid var(--line-light); }
+    article section:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+    h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.375rem, 2.6vw, 1.75rem); line-height: 1.2; margin: 0 0 14px; display: flex; gap: 14px; align-items: baseline; }
+    h2 .n { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--gold-text-on-paper); letter-spacing: 0.1em; flex: none; }
+    article p { margin: 0 0 14px; max-width: 70ch; }
+    article ul { margin: 0 0 14px; padding-left: 20px; max-width: 70ch; }
+    article li { margin-bottom: 6px; }
+    article a { color: var(--gold-text-on-paper); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+
+    /* Rodapé */
+    .foot { background: var(--navy); color: var(--text-lede); padding: 40px 0; font-size: 0.8125rem; }
+    .foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 32px; align-items: center; }
+    .foot p { margin: 0; font-family: var(--font-mono); }
+    .foot a { color: var(--gold-2); text-decoration: none; border-bottom: 1px solid rgba(228, 199, 135, 0.4); }
+
+    @media (max-width: 860px) {
+      .wrap { width: min(1120px, 100% - 32px); }
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 40px 0 64px; }
+      article { min-width: 0; }
+      .toc { display: none; }
+      .toc-details { display: block; border: 1px solid var(--line-light); border-radius: 10px; background: var(--paper-2); }
+      .toc-details summary { cursor: pointer; padding: 14px 16px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
+      .toc-details ol { list-style: none; margin: 0; padding: 0 16px 12px; }
+      .toc-details li a { display: block; padding: 8px 0; text-decoration: none; }
+      .intro { padding: 44px 0 40px; }
+      .brand span { display: none; }
+    }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .table-wrap { overflow-x: auto; margin: 4px 0 18px; border: 1px solid var(--line-light); border-radius: 10px; background: var(--paper-2); }
+    table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 0.875rem; line-height: 1.5; }
+    th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line-light); }
+    th { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-text-on-paper); }
+    tr:last-child td { border-bottom: 0; }
+    .acc-link-open { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--gold-text-on-paper); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+  <link rel="stylesheet" href="assets/consent.css" />
+</head>
+<body>
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="Adalberto Chagas Academy, página inicial">
+        <img src="assets/favicon-48.png" alt="" width="32" height="32" />
+        <span>Adalberto Chagas Academy</span>
+      </a>
+      <a class="back" href="index.html">Voltar ao site</a>
+    </div>
+  </header>
+
+  <section class="intro" aria-labelledby="titulo">
+    <div class="wrap">
+      <p class="eyebrow">Privacidade</p>
+      <h1 id="titulo">Política de Privacidade</h1>
+      <p class="updated">Última atualização: 9 de novembro de 2026</p>
+      <p class="summary"><strong>Em resumo:</strong> usamos os dados que você informa apenas para responder ao seu pedido, conduzir a conversa e, se fizer sentido, preparar uma proposta. Não vendemos dados. Cookies de análise e de publicidade só são ativados se você permitir, você pode mudar a sua escolha quando quiser e pode pedir a exclusão dos seus dados a qualquer momento.</p>
+    </div>
+  </section>
+
+  <main id="conteudo">
+    <div class="wrap layout">
+      <nav class="toc" aria-label="Índice da política">
+        <p>Nesta página</p>
+        <ol>
+          <li><a href="#s1">1. Quem é o controlador</a></li>
+          <li><a href="#s2">2. Quais dados coletamos</a></li>
+          <li><a href="#s3">3. Para que usamos os dados</a></li>
+          <li><a href="#s4">4. Bases legais</a></li>
+          <li><a href="#s5">5. Por quanto tempo guardamos</a></li>
+          <li><a href="#s6">6. Com quem compartilhamos</a></li>
+          <li><a href="#s7">7. Seus direitos</a></li>
+          <li><a href="#s8">8. Segurança</a></li>
+          <li><a href="#s9">9. Cookies e vídeo</a></li>
+          <li><a href="#s10">10. Crianças e adolescentes</a></li>
+          <li><a href="#s11">11. Alterações</a></li>
+          <li><a href="#s12">12. Contato</a></li>
+        </ol>
+      </nav>
+
+      <article>
+        <details class="toc-details">
+          <summary>Índice da política</summary>
+          <ol>
+            <li><a href="#s1">1. Quem é o controlador</a></li>
+            <li><a href="#s2">2. Quais dados coletamos</a></li>
+            <li><a href="#s3">3. Para que usamos os dados</a></li>
+            <li><a href="#s4">4. Bases legais</a></li>
+            <li><a href="#s5">5. Por quanto tempo guardamos</a></li>
+            <li><a href="#s6">6. Com quem compartilhamos</a></li>
+            <li><a href="#s7">7. Seus direitos</a></li>
+            <li><a href="#s8">8. Segurança</a></li>
+            <li><a href="#s9">9. Cookies e vídeo</a></li>
+            <li><a href="#s10">10. Crianças e adolescentes</a></li>
+            <li><a href="#s11">11. Alterações</a></li>
+            <li><a href="#s12">12. Contato</a></li>
+          </ol>
+        </details>
+
+        <section>
+          <p>Esta política explica como a 1234 Solution Ltda trata os dados pessoais de quem visita o site da Adalberto Chagas Academy, responde ao questionário do Diagnóstico de Liderança ou entra em contato conosco, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018, a LGPD).</p>
+        </section>
+
+        <section id="s1">
+          <h2><span class="n">01</span>Quem é o controlador</h2>
+          <p>1234 Solution Ltda, CNPJ 56.364.941/0001-69, São Paulo, SP. A Adalberto Chagas Academy é uma marca da 1234 Solution Ltda. O responsável pelo atendimento é Adalberto Francisco Chagas. Canal de comunicação sobre privacidade: <a href="mailto:adalberto@adalbertochagas.com.br">adalberto@adalbertochagas.com.br</a>.</p>
+        </section>
+
+        <section id="s2">
+          <h2><span class="n">02</span>Quais dados coletamos</h2>
+          <ul>
+            <li><strong>Dados que você informa:</strong> nome, e-mail, WhatsApp, empresa e cargo (quando informados) e as respostas do questionário do Diagnóstico de Liderança, que é hospedado no Respondi.</li>
+            <li><strong>Dados das conversas:</strong> mensagens trocadas por WhatsApp ou e-mail e as informações que você compartilha na sessão gratuita de 30 minutos e, se contratar, nas mentorias, no Mapa de Liderança, nas palestras e nos treinamentos.</li>
+            <li><strong>Dados de contratação:</strong> dados cadastrais e de cobrança necessários para o contrato, o pagamento e a emissão de nota fiscal, quando houver contratação.</li>
+            <li><strong>Dados técnicos de navegação:</strong> endereço IP, tipo de navegador, dispositivo e páginas acessadas, registrados automaticamente pelos serviços que fazem o site funcionar.</li>
+            <li><strong>Dados de cookies e identificadores</strong> (somente se você permitir): identificadores do navegador, páginas acessadas, origem da visita, interações com o site (como cliques em botões e o envio do questionário) e dados aproximados do dispositivo e da localização, registrados por ferramentas de análise e de publicidade.</li>
+          </ul>
+          <p>Pedimos que você não envie dados sensíveis (como saúde, religião ou opinião política) e que descreva situações da sua equipe sem identificar as pessoas envolvidas. Documentos necessários, se houver, são combinados por canal próprio, depois do primeiro contato.</p>
+        </section>
+
+        <section id="s3">
+          <h2><span class="n">03</span>Para que usamos os dados</h2>
+          <ul>
+            <li>Responder à sua solicitação, analisar o seu perfil a partir do questionário e agendar a sessão gratuita de 30 minutos.</li>
+            <li>Conduzir os serviços contratados (mentorias, Mapa de Liderança, palestras e treinamentos) e preparar e enviar uma proposta.</li>
+            <li>Executar o contrato, receber pagamentos, emitir notas fiscais e cumprir obrigações legais e fiscais, quando houver contratação.</li>
+            <li>Manter a segurança do site e prevenir abusos.</li>
+            <li>Medir a audiência do site e o resultado das campanhas de anúncios e, se você permitir, mostrar anúncios relevantes em plataformas do Google, da Meta e do LinkedIn.</li>
+            <li>Enviar conteúdo e comunicações sobre os serviços, somente se você tiver consentido.</li>
+          </ul>
+        </section>
+
+        <section id="s4">
+          <h2><span class="n">04</span>Bases legais</h2>
+          <p>Consentimento (por exemplo, ao enviar o questionário), procedimentos preliminares a um contrato que você pediu, execução do contrato, cumprimento de obrigações legais e exercício regular de direitos. Os cookies e identificadores de análise e de publicidade são tratados com base no seu consentimento, que você pode revogar a qualquer momento. Os dados técnicos de segurança são tratados com base no legítimo interesse de proteger o site.</p>
+        </section>
+
+        <section id="s5">
+          <h2><span class="n">05</span>Por quanto tempo guardamos</h2>
+          <ul>
+            <li><strong>Solicitações sem contratação</strong> (questionário, e-mails e mensagens): até 24 meses contados do último contato. Depois, eliminamos. Se você pedir a exclusão antes, eliminamos em até 15 dias, salvo obrigação legal de guarda.</li>
+            <li><strong>Contratos, propostas aceitas, notas fiscais e documentos dos serviços:</strong> 5 anos contados do término do contrato, ou mais, se a lei exigir.</li>
+            <li><strong>Registros técnicos de acesso ao site:</strong> pelo prazo previsto em lei, mantidos pelos serviços de hospedagem.</li>
+            <li><strong>Dados de cookies e identificadores:</strong> pelos prazos definidos por cada ferramenta, ou até você revogar o consentimento.</li>
+          </ul>
+          <p>Ao fim de cada prazo, os dados são eliminados ou anonimizados de forma segura.</p>
+        </section>
+
+        <section id="s6">
+          <h2><span class="n">06</span>Com quem compartilhamos</h2>
+          <p>Não vendemos nem alugamos dados pessoais. Usamos serviços de terceiros, que tratam os dados apenas para nos prestar o serviço: Respondi (questionário), WhatsApp (conversas), serviços de e-mail e de hospedagem do site e, quando houver contratação, plataforma de pagamento. Podemos compartilhar dados com a nossa contabilidade, quando necessário para obrigações fiscais, e com autoridades, quando a lei exigir. Alguns serviços podem armazenar dados fora do Brasil, com as salvaguardas previstas na LGPD.</p>
+          <p>Se você permitir os cookies de análise e de publicidade, o Google (Tag Manager, Analytics e Ads), a Meta (Facebook e Instagram) e o LinkedIn recebem dados do seu acesso e podem tratá-los para as próprias finalidades, conforme as políticas de cada empresa. Sem o seu consentimento, essas ferramentas não são carregadas.</p>
+          <p>O site carrega fontes de letra (Google Fonts) e uma biblioteca de animação (jsDelivr) de provedores externos, que recebem o seu endereço IP ao exibir a página. Os links para YouTube, Instagram e LinkedIn levam a sites de terceiros, com políticas próprias.</p>
+        </section>
+
+        <section id="s7">
+          <h2><span class="n">07</span>Seus direitos</h2>
+          <p>Nos termos do art. 18 da LGPD, você pode pedir: confirmação do tratamento e acesso; correção de dados incompletos, inexatos ou desatualizados; anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade; portabilidade; informação sobre com quem compartilhamos; revogação do consentimento. Escreva para <a href="mailto:adalberto@adalbertochagas.com.br">adalberto@adalbertochagas.com.br</a>. Respondemos em até 15 dias. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+        </section>
+
+        <section id="s8">
+          <h2><span class="n">08</span>Segurança</h2>
+          <p>Adotamos medidas técnicas e organizacionais razoáveis contra acesso não autorizado, perda, alteração ou divulgação indevida. Nenhum sistema é totalmente imune a falhas. Em caso de incidente com risco relevante a você, avisaremos você e a ANPD, conforme a lei.</p>
+        </section>
+
+        <section id="s9">
+          <h2><span class="n">09</span>Cookies e vídeo</h2>
+          <p>Sem a sua permissão, o site guarda apenas a sua escolha sobre cookies, para não perguntar de novo. Os cookies de análise e de publicidade só são ativados depois do seu aceite, no aviso exibido na primeira visita. Você pode aceitar, recusar ou escolher por categoria, e mudar a decisão a qualquer momento. <button type="button" class="acc-link-open" data-consent-open>Gerenciar cookies</button></p>
+          <div class="table-wrap">
+            <table>
+              <caption class="sr">Categorias de cookies e ferramentas</caption>
+              <thead><tr><th scope="col">Categoria</th><th scope="col">Ferramenta</th><th scope="col">Para que serve</th><th scope="col">Cookies mais comuns</th></tr></thead>
+              <tbody>
+                <tr><td>Necessário</td><td>Armazenamento do navegador, no próprio site</td><td>Guarda a sua escolha sobre cookies (por até 12 meses)</td><td>ac_consent_v1</td></tr>
+                <tr><td>Análise</td><td>Google Analytics, via Google Tag Manager</td><td>Mostra, de forma agregada, como o site é usado</td><td>_ga, _ga_ e o identificador da propriedade</td></tr>
+                <tr><td>Publicidade</td><td>Google Ads</td><td>Mede conversões e permite remarketing</td><td>_gcl_au, _gcl_aw e cookies do Google</td></tr>
+                <tr><td>Publicidade</td><td>Pixel da Meta (Facebook e Instagram)</td><td>Mede resultados e permite remarketing</td><td>_fbp, _fbc</td></tr>
+                <tr><td>Publicidade</td><td>LinkedIn Insight Tag</td><td>Mede conversões e permite remarketing</td><td>li_fat_id e cookies do LinkedIn</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Os nomes e os prazos dos cookies são definidos por cada fornecedor e podem mudar. Veja as políticas do <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Google</a>, da <a href="https://www.facebook.com/privacy/policies/cookies/" target="_blank" rel="noopener">Meta</a> e do <a href="https://www.linkedin.com/legal/cookie-policy" target="_blank" rel="noopener">LinkedIn</a>. Ao revogar o consentimento, removemos os cookies que conseguimos e deixamos de carregar as ferramentas; os demais podem ser apagados nas configurações do navegador.</p>
+          <p>Os vídeos do YouTube só são carregados depois que você clica neles, pelo modo de privacidade aprimorado (youtube-nocookie.com); a partir do clique, o YouTube (Google) recebe dados do seu acesso, conforme a política dele. O questionário é operado pelo Respondi e a conversa, pelo WhatsApp, e ambos seguem as próprias políticas. Se passarmos a usar outras ferramentas, atualizaremos esta política antes disso.</p>
+        </section>
+
+        <section id="s10">
+          <h2><span class="n">10</span>Crianças e adolescentes</h2>
+          <p>O site e os serviços se destinam a profissionais e organizações, e não a menores de 18 anos.</p>
+        </section>
+
+        <section id="s11">
+          <h2><span class="n">11</span>Alterações desta política</h2>
+          <p>Podemos atualizá-la. A data no topo indica a última revisão, e alterações relevantes serão destacadas no site.</p>
+        </section>
+
+        <section id="s12">
+          <h2><span class="n">12</span>Contato</h2>
+          <p>Dúvidas, pedidos ou reclamações sobre privacidade: <a href="mailto:adalberto@adalbertochagas.com.br">adalberto@adalbertochagas.com.br</a>.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p>Uma marca da 1234 Solution Ltda. CNPJ 56.364.941/0001-69.</p>
+      <p><button type="button" class="acc-link-open" data-consent-open style="color:#E4C787">Gerenciar cookies</button> &nbsp; <a href="index.html">Voltar ao site</a></p>
+    </div>
+  </footer>
+  <script src="assets/consent.js" defer></script>
+</body>
+</html>

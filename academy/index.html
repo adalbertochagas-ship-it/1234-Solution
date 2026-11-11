@@ -3,9 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Adalberto Chagas Academy</title>
+  <title>Adalberto Chagas Academy | Mentoria de liderança</title>
   <meta name="description" content="Mentoria, Diagnóstico de Liderança, palestras e treinamentos in company para líderes e empresas." />
+  <link rel="canonical" href="https://adalbertochagas.com.br/">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Adalberto Chagas Academy">
+  <meta property="og:title" content="Adalberto Chagas Academy | Mentoria de liderança">
+  <meta property="og:description" content="Mentoria, Diagnóstico de Liderança, palestras e treinamentos in company para líderes e empresas.">
+  <meta property="og:url" content="https://adalbertochagas.com.br/">
+  <meta property="og:image" content="https://adalbertochagas.com.br/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Adalberto Chagas e a frase Lidere com respeito, clareza e estratégia.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Adalberto Chagas Academy | Mentoria de liderança">
+  <meta name="twitter:description" content="Mentoria, Diagnóstico de Liderança, palestras e treinamentos in company para líderes e empresas.">
+  <meta name="twitter:image" content="https://adalbertochagas.com.br/assets/og-image.jpg">
   <meta name="theme-color" content="#0E1B2B" />
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta name="color-scheme" content="dark" />
 
   <!-- Detecção de redução de movimento e suporte a JS -->
@@ -23,6 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/consent.css">
 
   <!-- GSAP 3.15.0 com SplitText e ScrollTrigger -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
@@ -66,6 +88,8 @@
       --gold:           #C6A45A;
       --gold-2:         #E4C787;
       --gold-deep:      #9C7C3C;
+      --gold-text-on-paper: #6F5620;
+      --gold-large-on-paper: #8A6C2F;
 
       /* Paleta Paper */
       --paper:          #F4EFE4;
@@ -105,8 +129,10 @@
       --space-2:        0.5rem;  /*  8px */
       --space-3:        0.75rem; /* 12px */
       --space-4:        1rem;    /* 16px */
+      --space-5:        1.25rem; /* 20px */
       --space-6:        1.5rem;  /* 24px */
       --space-8:        2rem;    /* 32px */
+      --space-10:       2.5rem;  /* 40px */
       --space-12:       3rem;    /* 48px */
       --space-16:       4rem;    /* 64px */
       --space-20:       5rem;    /* 80px */
@@ -2688,19 +2714,41 @@
       margin: 0;
     }
 
-    /* Grade de 6 cartões (3 colunas desktop, 2 tablet, 1 celular) */
+    /* Grade de 4 cartões (4 colunas desktop >= 1200px, 2 colunas tablet 769-1199px, carrossel celular <= 768px) */
     .exemplos-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-6);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-4);
       margin-bottom: var(--space-8);
       align-items: stretch;
     }
 
-    @media (max-width: 1024px) and (min-width: 769px) {
+    @media (max-width: 1199px) and (min-width: 769px) {
       .exemplos-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 1.25rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .exemplo-card {
+        padding: 1.25rem 1.15rem;
+      }
+      .exemplo-header {
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+        padding-bottom: var(--space-3);
+      }
+      .exemplo-num {
+        font-size: 1.85rem;
+      }
+      .exemplo-title {
+        font-size: 0.98rem;
+        line-height: 1.35;
+      }
+      .exemplo-text {
+        font-size: 0.90625rem;
+        line-height: 1.5;
       }
     }
 
@@ -5972,6 +6020,2225 @@
     html:not(.js) .rodape-regua-active {
       transform: none !important;
     }
+  
+    /* ============================================================
+       DOBRA 8: QUEM CONDUZ (Fundo Navy, id="quem-conduz")
+    ============================================================ */
+    .section-quemconduz {
+      background-color: var(--navy);
+      background-image:
+        radial-gradient(circle, rgba(198, 164, 90, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      padding-block: var(--space-20);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--navy-3);
+    }
+
+    .quemconduz-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Cabeçalho */
+    .quemconduz-header {
+      margin-bottom: var(--space-12);
+    }
+
+    .quemconduz-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-3);
+    }
+
+    .quemconduz-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--paper);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    /* Grade Principal */
+    .quemconduz-main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 38%) minmax(0, 62%);
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    /* Coluna do Retrato */
+    .quemconduz-portrait-col {
+      min-width: 0;
+    }
+
+    .quemconduz-portrait-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .quemconduz-frame {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: var(--navy-2);
+      border: 1px solid rgba(198, 164, 90, 0.28);
+      box-shadow: 0 12px 36px rgba(10, 19, 31, 0.45);
+      padding: 10px;
+    }
+
+    .quemconduz-corners-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .quemconduz-corner-path {
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: square;
+      stroke-dasharray: 40;
+      stroke-dashoffset: 0;
+    }
+
+    .quemconduz-cota {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--navy);
+      padding: 0 0.5rem;
+      border: 1px solid rgba(198, 164, 90, 0.3);
+      border-radius: 2px;
+      z-index: 4;
+    }
+
+    .quemconduz-cota-val {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .quemconduz-portrait-inner {
+      position: relative;
+      overflow: hidden;
+      border-radius: calc(var(--radius-lg) - 4px);
+      background: var(--navy);
+    }
+
+    .quemconduz-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 546 / 726;
+      border-radius: calc(var(--radius-lg) - 4px);
+    }
+
+    /* Placa de Identificação Técnica */
+    .quemconduz-id-card {
+      background: var(--navy-2);
+      border: 1px solid rgba(198, 164, 90, 0.25);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      box-shadow: 0 4px 16px rgba(10, 19, 31, 0.25);
+    }
+
+    .quemconduz-id-name {
+      font-family: var(--font-title);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--paper);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .quemconduz-id-title {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .quemconduz-id-sub {
+      font-family: var(--font-body);
+      font-size: 0.90625rem;
+      color: rgba(244, 239, 228, 0.78);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Coluna da Ficha Técnica (Carimbo de Prancha) */
+    .quemconduz-prancha-col {
+      min-width: 0;
+    }
+
+    .quemconduz-prancha {
+      background: var(--navy-2);
+      border: 2px solid rgba(198, 164, 90, 0.35);
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 8px 32px rgba(10, 19, 31, 0.35),
+        inset 0 0 0 1px rgba(198, 164, 90, 0.15);
+    }
+
+    .quemconduz-prancha-header {
+      background: rgba(14, 27, 43, 0.75);
+      border-bottom: 1px solid rgba(198, 164, 90, 0.25);
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .quemconduz-stamp-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .quemconduz-stamp-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .quemconduz-stamp-code {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: rgba(244, 239, 228, 0.55);
+      letter-spacing: 0.06em;
+    }
+
+    .quemconduz-stamp-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--paper);
+      text-transform: uppercase;
+    }
+
+    /* Grade de Células do Carimbo */
+    .quemconduz-cells-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(198, 164, 90, 0.20);
+    }
+
+    .quemconduz-cell {
+      background: var(--navy-2);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      transition: background-color 0.2s ease;
+      min-width: 0;
+    }
+
+    @media (hover: hover) {
+      .quemconduz-cell:hover {
+        background: rgba(24, 43, 68, 1);
+      }
+    }
+
+    .quemconduz-cell-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .quemconduz-cell-num {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--gold);
+      font-weight: 600;
+      padding: 1px 5px;
+      background: rgba(198, 164, 90, 0.12);
+      border-radius: 2px;
+      border: 1px solid rgba(198, 164, 90, 0.2);
+    }
+
+    .quemconduz-cell-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .quemconduz-cell-text {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--paper);
+      margin: 0;
+    }
+
+    /* Célula de Formação em Largura Total */
+    .quemconduz-cell-full {
+      grid-column: 1 / -1;
+    }
+
+    .quemconduz-formacao-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .quemconduz-formacao-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.90625rem;
+      line-height: 1.45;
+      color: var(--paper);
+    }
+
+    .quemconduz-bullet {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    /* Bloco Recolhível de Formação */
+    .quemconduz-formacao-collapse {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s var(--ease-out);
+    }
+
+    .quemconduz-formacao-collapse.is-open {
+      grid-template-rows: 1fr;
+    }
+
+    .quemconduz-formacao-inner {
+      overflow: hidden;
+    }
+
+    .quemconduz-formacao-extra {
+      padding-top: 0.55rem;
+    }
+
+    .quemconduz-formacao-toggle-wrap {
+      margin-top: var(--space-2);
+    }
+
+    .quemconduz-formacao-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(14, 27, 43, 0.6);
+      border: 1px solid rgba(198, 164, 90, 0.35);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.9rem;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    @media (hover: hover) {
+      .quemconduz-formacao-btn:hover {
+        background: rgba(198, 164, 90, 0.15);
+        border-color: var(--gold);
+        color: #FFFFFF;
+      }
+    }
+
+    .quemconduz-formacao-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .quemconduz-btn-icon {
+      transition: transform 0.3s ease;
+      stroke: currentColor;
+    }
+
+    .quemconduz-formacao-btn[aria-expanded="true"] .quemconduz-btn-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Régua Dourada com Scrub */
+    .quemconduz-regua-wrap {
+      margin-top: var(--space-12);
+      margin-bottom: var(--space-8);
+      width: 100%;
+      height: 16px;
+      overflow: hidden;
+      border-top: 1px solid var(--navy-3);
+      padding-top: 3px;
+    }
+
+    .quemconduz-regua-svg {
+      width: 100%;
+      height: 16px;
+      display: block;
+    }
+
+    .quemconduz-regua-base {
+      stroke: var(--navy-3);
+      stroke-width: 1;
+    }
+
+    .quemconduz-regua-active {
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      transition: stroke-dashoffset 0.1s linear;
+    }
+
+    /* Faixa de Contadores Animados */
+    .quemconduz-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
+    }
+
+    .quemconduz-stat-card {
+      background: var(--navy-2);
+      border: 1px solid rgba(198, 164, 90, 0.25);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(10, 19, 31, 0.2);
+    }
+
+    .quemconduz-stat-val {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1.1;
+    }
+
+    .quemconduz-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: rgba(244, 239, 228, 0.82);
+      letter-spacing: 0.04em;
+      max-width: 180px;
+      margin: 0 auto;
+      line-height: 1.35;
+    }
+
+    /* Fechamento: Botão Primário */
+    .quemconduz-action {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .quemconduz-btn-primary {
+      display: inline-flex;
+    }
+
+    /* Responsividade */
+    @media (max-width: 1023px) {
+      .quemconduz-main-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      .quemconduz-portrait-card {
+        max-width: 480px;
+        margin-inline: auto;
+      }
+      .quemconduz-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-quemconduz {
+        padding-block: var(--space-12);
+      }
+      .quemconduz-header {
+        margin-bottom: var(--space-8);
+      }
+      .quemconduz-title {
+        font-size: 1.875rem;
+      }
+      .quemconduz-portrait-card {
+        width: 70%;
+        max-width: 340px;
+        margin-inline: auto;
+      }
+      .quemconduz-cells-grid {
+        grid-template-columns: 1fr;
+      }
+      .quemconduz-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+      }
+      .quemconduz-stat-card {
+        padding: var(--space-3);
+      }
+      .quemconduz-stat-val {
+        font-size: 1.875rem;
+      }
+      .quemconduz-stat-label {
+        font-size: 0.6875rem;
+      }
+      .quemconduz-btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Fallback sem JS e Movimento Reduzido */
+    @media (prefers-reduced-motion: reduce) {
+      .quemconduz-corner-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .quemconduz-regua-active {
+        stroke-dashoffset: 0 !important;
+      }
+      .quemconduz-portrait-inner {
+        transform: none !important;
+      }
+    }
+
+    html.rm .quemconduz-corner-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .quemconduz-regua-active {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .quemconduz-portrait-inner {
+      transform: none !important;
+    }
+
+    html:not(.js) .quemconduz-formacao-collapse {
+      grid-template-rows: 1fr !important;
+    }
+    html:not(.js) .quemconduz-formacao-btn {
+      display: none !important;
+    }
+    html:not(.js) .quemconduz-corner-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html:not(.js) .quemconduz-regua-active {
+      stroke-dashoffset: 0 !important;
+    }
+
+  
+    /* ============================================================
+       DOBRA 9: YOUTUBE (Fundo Paper, id="youtube") - AJUSTADO 9B
+    ============================================================ */
+    .section-youtube {
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(circle, rgba(156, 124, 60, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      padding-block: var(--space-20);
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(156, 124, 60, 0.22);
+    }
+
+    .youtube-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Cabeçalho */
+    .youtube-header {
+      margin-bottom: var(--space-12);
+      max-width: 760px;
+    }
+
+    .youtube-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: var(--space-3);
+    }
+
+    .youtube-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 var(--space-3) 0;
+      letter-spacing: -0.01em;
+    }
+
+    .youtube-lead {
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: #334050;
+      margin: 0;
+    }
+
+    /* Grade Principal (Destaque à esquerda ~58% + 3 à direita ~42%) */
+    .youtube-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 58%) minmax(0, 42%);
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    /* Moldura do Vídeo Destaque */
+    .youtube-card-featured {
+      background: var(--paper-2);
+      border: 1px solid rgba(156, 124, 60, 0.28);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      box-shadow: 0 10px 32px rgba(23, 33, 46, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      min-width: 0;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      .youtube-card-featured:hover {
+        box-shadow: 0 14px 40px rgba(23, 33, 46, 0.12);
+      }
+    }
+
+    .youtube-player-frame {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #000000;
+    }
+
+    /* Cantoneiras Decorativas */
+    .youtube-corners-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .youtube-corner-path {
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: square;
+      stroke-dasharray: 40;
+      stroke-dashoffset: 0;
+    }
+
+    /* Container do Player / Fachada */
+    .youtube-player-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: #0A131F;
+    }
+
+    .youtube-facade {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      text-decoration: none;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .youtube-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s var(--ease-out);
+    }
+
+    @media (hover: hover) {
+      .youtube-facade:hover .youtube-thumb {
+        transform: scale(1.04);
+      }
+    }
+
+    .youtube-facade:focus-visible {
+      outline: 3px solid var(--gold-deep);
+      outline-offset: -3px;
+    }
+
+    /* Selo de Duração */
+    .youtube-duration {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(14, 27, 43, 0.90);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      border: 1px solid rgba(198, 164, 90, 0.35);
+      z-index: 2;
+    }
+
+    /* Botão Play no Destaque: CENTRAL */
+    .youtube-card-featured .youtube-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(14, 27, 43, 0.85);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s var(--ease-spring), background-color 0.25s ease;
+      z-index: 2;
+    }
+
+    .youtube-play-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .youtube-play-ring-bg {
+      fill: none;
+      stroke: rgba(198, 164, 90, 0.25);
+      stroke-width: 2.5;
+    }
+
+    .youtube-play-ring-active {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      stroke-dasharray: 151;
+      stroke-dashoffset: 151;
+      transition: stroke-dashoffset 0.35s ease;
+    }
+
+    .youtube-play-icon {
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 2px;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    @media (hover: hover) {
+      .youtube-card-featured .youtube-facade:hover .youtube-play-btn {
+        transform: translate(-50%, -50%) scale(1.1);
+        background: rgba(14, 27, 43, 0.95);
+      }
+      .youtube-card-featured .youtube-facade:hover .youtube-play-ring-active {
+        stroke-dashoffset: 0;
+      }
+      .youtube-card-featured .youtube-facade:hover .youtube-play-icon {
+        color: #FFFFFF;
+      }
+    }
+
+    .youtube-card-featured .youtube-facade:focus-visible .youtube-play-ring-active {
+      stroke-dashoffset: 0;
+    }
+
+    /* Botão Play nos 3 Cards Secundários (ITEM 1): FIXO NO CANTO INFERIOR ESQUERDO */
+    .youtube-card-side .youtube-play-btn {
+      position: absolute;
+      top: auto;
+      bottom: 8px;
+      left: 8px;
+      transform: none;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(14, 27, 43, 0.88);
+      border: 1px solid rgba(198, 164, 90, 0.35);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s var(--ease-spring), background-color 0.25s ease, border-color 0.25s ease;
+      z-index: 2;
+    }
+
+    .youtube-card-side .youtube-play-btn .youtube-play-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (hover: hover) {
+      .youtube-card-side .youtube-facade:hover .youtube-play-btn {
+        transform: scale(1.14);
+        background: rgba(14, 27, 43, 0.98);
+        border-color: var(--gold);
+      }
+      .youtube-card-side .youtube-facade:hover .youtube-play-ring-active {
+        stroke-dashoffset: 0;
+      }
+      .youtube-card-side .youtube-facade:hover .youtube-play-icon {
+        color: #FFFFFF;
+      }
+    }
+
+    .youtube-card-side .youtube-facade:focus-visible .youtube-play-ring-active {
+      stroke-dashoffset: 0;
+    }
+
+    /* Iframe Inserido Dinamicamente */
+    .youtube-iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: var(--radius-md);
+      background: #000000;
+      animation: youtubeFadeIn 0.35s ease-out;
+    }
+
+    @keyframes youtubeFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Informações dos Vídeos */
+    .youtube-info-featured {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .youtube-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      font-weight: 600;
+    }
+
+    .youtube-card-title {
+      font-family: var(--font-title);
+      font-size: 1.0625rem;
+      line-height: 1.35;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .youtube-card-title-lg {
+      font-size: 1.3125rem;
+      line-height: 1.3;
+    }
+
+    /* Coluna Lateral (Fita de Vídeos) */
+    .youtube-side-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      min-width: 0;
+    }
+
+    /* Fita Perfurada Decorativa */
+    .youtube-sprocket-wrap {
+      overflow: hidden;
+      padding: 4px 0;
+      width: 100%;
+    }
+
+    .youtube-sprocket-strip {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+    }
+
+    .youtube-sprocket {
+      width: 16px;
+      height: 7px;
+      border-radius: 2px;
+      background: rgba(156, 124, 60, 0.28);
+      border: 1px solid rgba(156, 124, 60, 0.35);
+      flex-shrink: 0;
+    }
+
+    .youtube-side-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    /* Cartão Lateral Horizontal (Desktop) */
+    .youtube-card-side {
+      background: var(--paper-2);
+      border: 1px solid rgba(156, 124, 60, 0.22);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: var(--space-4);
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(23, 33, 46, 0.04);
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease, border-color 0.25s ease;
+      min-width: 0;
+    }
+
+    @media (hover: hover) {
+      .youtube-card-side:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(23, 33, 46, 0.08);
+        border-color: rgba(156, 124, 60, 0.45);
+      }
+    }
+
+    .youtube-player-side {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    .youtube-info-side {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    /* Fechamento: Botão Secundário */
+    .youtube-action {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: var(--space-12);
+    }
+
+    .youtube-btn-channel {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+    }
+
+    .youtube-btn-channel svg {
+      transition: transform 0.2s ease;
+    }
+
+    @media (hover: hover) {
+      .youtube-btn-channel:hover svg {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Responsividade */
+    @media (max-width: 1023px) {
+      .youtube-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      .youtube-card-featured {
+        max-width: 680px;
+        margin-inline: auto;
+        width: 100%;
+      }
+      .youtube-side-col {
+        max-width: 680px;
+        margin-inline: auto;
+        width: 100%;
+      }
+    }
+
+    /* CELULAR (ITEM 2): Layout horizontal compacto e redução de altura > 30% */
+    @media (max-width: 640px) {
+      .section-youtube {
+        padding-block: var(--space-10);
+      }
+      .youtube-header {
+        margin-bottom: var(--space-6);
+      }
+      .youtube-title {
+        font-size: 1.75rem;
+        margin-bottom: var(--space-2);
+      }
+      .youtube-lead {
+        font-size: 0.9375rem;
+        line-height: 1.5;
+      }
+      .youtube-grid {
+        gap: var(--space-6);
+      }
+      .youtube-card-featured {
+        padding: var(--space-3);
+        gap: var(--space-3);
+      }
+      .youtube-card-title-lg {
+        font-size: 1.0625rem;
+        line-height: 1.35;
+      }
+      .youtube-sprocket-wrap {
+        display: none;
+      }
+      .youtube-side-list {
+        gap: var(--space-3);
+      }
+      /* Layout horizontal compacto para os 3 cards secundários */
+      .youtube-card-side {
+        grid-template-columns: 38% 1fr;
+        gap: var(--space-3);
+        padding: var(--space-2) var(--space-3);
+        align-items: center;
+        min-height: 44px;
+      }
+      .youtube-player-side {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: var(--radius-sm);
+      }
+      .youtube-card-side .youtube-card-title {
+        font-size: 0.84375rem;
+        line-height: 1.32;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .youtube-card-side .youtube-play-btn {
+        width: 24px;
+        height: 24px;
+        bottom: 5px;
+        left: 5px;
+      }
+      .youtube-card-side .youtube-play-btn .youtube-play-icon svg {
+        width: 10px;
+        height: 10px;
+      }
+      .youtube-card-side .youtube-duration {
+        font-size: 0.625rem;
+        padding: 2px 5px;
+        bottom: 5px;
+        right: 5px;
+      }
+      .youtube-action {
+        margin-top: var(--space-8);
+      }
+      .youtube-btn-channel {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+      }
+    }
+
+    /* Fallback sem JS e Movimento Reduzido */
+    @media (prefers-reduced-motion: reduce) {
+      .youtube-corner-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .youtube-thumb {
+        transform: none !important;
+      }
+      .youtube-play-btn {
+        transform: translate(-50%, -50%) !important;
+      }
+      .youtube-play-ring-active {
+        stroke-dashoffset: 0 !important;
+      }
+    }
+
+    html.rm .youtube-corner-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .youtube-thumb {
+      transform: none !important;
+    }
+    html.rm .youtube-play-btn {
+      transform: translate(-50%, -50%) !important;
+    }
+    html.rm .youtube-play-ring-active {
+      stroke-dashoffset: 0 !important;
+    }
+
+  
+    /* ============================================================
+       PROMPT 10: SOBREPOSIÇÃO DE TEMA: DORES (PAPER) E EXEMPLOS (NAVY)
+    ============================================================ */
+
+    /* 1. DOBRA 3: DORES EM FUNDO PAPER */
+    section#dores.section-dores {
+      background-color: var(--paper) !important;
+      background-image:
+        radial-gradient(circle, rgba(156, 124, 60, 0.08) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
+      color: var(--ink) !important;
+      border-top: 1px solid rgba(156, 124, 60, 0.25) !important;
+    }
+
+    #dores .dores-watermark {
+      opacity: 0.025 !important;
+      filter: invert(1) brightness(0.2) !important;
+    }
+
+    /* Seletor de Perfil (Tablist) em Paper */
+    #dores .dores-tablist {
+      background: var(--paper-2) !important;
+      border: 1px solid rgba(156, 124, 60, 0.28) !important;
+      box-shadow: 0 4px 16px rgba(23, 33, 46, 0.04) !important;
+    }
+
+    #dores .dores-tab {
+      color: rgba(23, 33, 46, 0.72) !important;
+    }
+
+    #dores .dores-tab.is-active {
+      color: var(--ink) !important;
+      font-weight: 600 !important;
+    }
+
+    #dores .dores-tab-indicator {
+      background: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(23, 33, 46, 0.12) !important;
+      border: 1px solid rgba(156, 124, 60, 0.25) !important;
+    }
+
+    #dores .dores-panel-title {
+      color: var(--ink) !important;
+    }
+
+    /* Figuras / Ilustrações em Dores */
+    #dores .dores-figure {
+      background: var(--paper-2) !important;
+      border: 1px solid rgba(156, 124, 60, 0.28) !important;
+      border-radius: var(--radius-lg) !important;
+      box-shadow: 0 8px 24px rgba(23, 33, 46, 0.06) !important;
+    }
+
+    /* Alternador Hoje / Com acompanhamento em Paper */
+    #dores .dores-toggle {
+      background: var(--paper-2) !important;
+      border: 1px solid rgba(156, 124, 60, 0.28) !important;
+      box-shadow: 0 2px 10px rgba(23, 33, 46, 0.04) !important;
+    }
+
+    #dores .dores-toggle-btn {
+      color: rgba(23, 33, 46, 0.72) !important;
+    }
+
+    #dores .dores-toggle-btn.is-active {
+      color: var(--ink) !important;
+      font-weight: 600 !important;
+    }
+
+    #dores .dores-toggle-indicator {
+      background: #FFFFFF !important;
+      box-shadow: 0 2px 8px rgba(23, 33, 46, 0.12) !important;
+      border: 1px solid rgba(156, 124, 60, 0.25) !important;
+    }
+
+    /* Cartões de Dor em Paper-2 */
+    #dores .dor-card {
+      background: var(--paper-2) !important;
+      border: 1px solid rgba(156, 124, 60, 0.25) !important;
+      border-radius: var(--radius-md) !important;
+      box-shadow: 0 4px 18px rgba(23, 33, 46, 0.05) !important;
+    }
+
+    @media (hover: hover) {
+      #dores .dor-card:hover {
+        border-color: rgba(156, 124, 60, 0.45) !important;
+        box-shadow: 0 8px 24px rgba(23, 33, 46, 0.08) !important;
+      }
+    }
+
+    #dores .dor-num {
+      color: var(--gold-deep) !important;
+      background: rgba(156, 124, 60, 0.12) !important;
+      border: 1px solid rgba(156, 124, 60, 0.25) !important;
+    }
+
+    #dores .dor-title {
+      color: var(--ink) !important;
+    }
+
+    #dores .dor-pill.is-hoje {
+      background: rgba(23, 33, 46, 0.08) !important;
+      color: var(--ink) !important;
+      border: 1px solid rgba(23, 33, 46, 0.12) !important;
+    }
+
+    #dores .dor-pill.is-depois {
+      background: rgba(156, 124, 60, 0.18) !important;
+      color: var(--gold-deep) !important;
+      border: 1px solid rgba(156, 124, 60, 0.32) !important;
+    }
+
+    #dores .dor-text {
+      color: var(--ink) !important;
+    }
+
+    #dores .dor-node.is-hoje {
+      border-color: rgba(23, 33, 46, 0.4) !important;
+      background: var(--paper-2) !important;
+    }
+
+    #dores .dor-node.is-depois {
+      border-color: var(--gold-deep) !important;
+      background: var(--gold-deep) !important;
+    }
+
+    #dores .dor-conn-line {
+      stroke: rgba(156, 124, 60, 0.35) !important;
+    }
+
+    /* 2. DOBRA 4: EXEMPLOS EM FUNDO NAVY */
+    section#exemplos.section-exemplos {
+      background-color: var(--navy) !important;
+      background-image:
+        radial-gradient(circle, rgba(198, 164, 90, 0.06) 1px, transparent 1px) !important;
+      background-size: 24px 24px !important;
+      color: var(--paper) !important;
+      border-top: 1px solid var(--navy-3) !important;
+    }
+
+    #exemplos .exemplos-title {
+      color: var(--paper) !important;
+    }
+
+    #exemplos .exemplos-lead {
+      color: rgba(244, 239, 228, 0.82) !important;
+    }
+
+    #exemplos .exemplos-faixa {
+      background: var(--navy-2) !important;
+      border: 1px solid rgba(198, 164, 90, 0.35) !important;
+      border-radius: var(--radius-md) !important;
+      box-shadow: 0 8px 32px rgba(10, 19, 31, 0.4) !important;
+    }
+
+    /* Cartões de Exemplo em Navy-2 */
+    #exemplos .exemplo-card {
+      background: var(--navy-2) !important;
+      border: 1px solid rgba(198, 164, 90, 0.25) !important;
+      border-radius: var(--radius-xl) !important;
+      box-shadow: 0 8px 24px rgba(10, 19, 31, 0.35) !important;
+    }
+
+    @media (hover: hover) {
+      #exemplos .exemplo-card:hover {
+        border-color: rgba(198, 164, 90, 0.45) !important;
+        box-shadow: 0 12px 36px rgba(10, 19, 31, 0.5) !important;
+      }
+    }
+
+    #exemplos .exemplo-card-top-line {
+      background: linear-gradient(90deg, var(--gold), transparent) !important;
+    }
+
+    #exemplos .exemplo-num {
+      color: var(--gold) !important;
+    }
+
+    #exemplos .exemplo-title {
+      color: var(--paper) !important;
+    }
+
+    #exemplos .exemplo-label {
+      color: var(--gold) !important;
+    }
+
+    #exemplos .exemplo-text {
+      color: rgba(244, 239, 228, 0.88) !important;
+    }
+
+    #exemplos .exemplo-row.is-destaque {
+      background: rgba(198, 164, 90, 0.09) !important;
+      border-left: 2px solid var(--gold) !important;
+    }
+
+    #exemplos .exemplo-row.is-destaque .exemplo-label {
+      color: var(--gold-2) !important;
+    }
+
+    #exemplos .exemplo-row.is-destaque .exemplo-text {
+      color: var(--paper) !important;
+    }
+
+    #exemplos .exemplo-toggle-btn {
+      color: var(--gold) !important;
+      background: rgba(14, 27, 43, 0.5) !important;
+      border: 1px solid rgba(198, 164, 90, 0.3) !important;
+    }
+
+    @media (hover: hover) {
+      #exemplos .exemplo-toggle-btn:hover {
+        background: rgba(198, 164, 90, 0.15) !important;
+        border-color: var(--gold) !important;
+        color: #FFFFFF !important;
+      }
+    }
+
+    #exemplos .exemplo-channel-link {
+      color: var(--gold) !important;
+      border-top: 1px solid var(--navy-3) !important;
+    }
+
+    @media (hover: hover) {
+      #exemplos .exemplo-channel-link:hover {
+        color: #FFFFFF !important;
+      }
+    }
+
+    /* Controles do Carrossel em Navy */
+    #exemplos .carousel-arrow {
+      background: var(--navy-2) !important;
+      color: var(--gold) !important;
+      border: 1px solid rgba(198, 164, 90, 0.35) !important;
+    }
+
+    @media (hover: hover) {
+      #exemplos .carousel-arrow:hover {
+        background: rgba(198, 164, 90, 0.18) !important;
+        border-color: var(--gold) !important;
+        color: #FFFFFF !important;
+      }
+    }
+
+    #exemplos .carousel-dot {
+      background: rgba(198, 164, 90, 0.3) !important;
+    }
+
+    #exemplos .carousel-dot.is-active {
+      background: var(--gold) !important;
+    }
+
+    /* Botão Secundário de Exemplos em Ghost Dourado */
+    #exemplos .exemplos-btn-secondary {
+      color: var(--gold) !important;
+      border-color: rgba(198, 164, 90, 0.4) !important;
+      background: rgba(14, 27, 43, 0.4) !important;
+    }
+
+    @media (hover: hover) {
+      #exemplos .exemplos-btn-secondary:hover {
+        background: rgba(198, 164, 90, 0.15) !important;
+        border-color: var(--gold) !important;
+        color: #FFFFFF !important;
+      }
+    }
+
+    /* ============================================================
+       PARTE 1: ESPAÇAMENTO VERTICAL DE #exemplos
+    ============================================================ */
+    section#exemplos.section-exemplos {
+      padding-block: var(--space-20);
+    }
+
+    @media (min-width: 1025px) {
+      section#exemplos.section-exemplos {
+        padding-block: var(--space-24);
+      }
+    }
+
+    @media (max-width: 768px) {
+      section#exemplos.section-exemplos {
+        padding-block: var(--space-12) !important;
+      }
+    }
+
+    /* ============================================================
+       ESPAÇAMENTO VERTICAL DE #dores (DOBRA 2)
+    ============================================================ */
+    section#dores.section-dores {
+      padding-block: var(--space-20) !important;
+    }
+
+    @media (min-width: 1025px) {
+      section#dores.section-dores {
+        padding-block: var(--space-24) !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section#dores.section-dores {
+        padding-block: var(--space-12) !important;
+      }
+    }
+
+    /* ============================================================
+       PARTE 3: CONTRASTE DO DOURADO EM TEXTO PEQUENO SOBRE PAPER
+    ============================================================ */
+    /* Dobra 2: Dores (rotulo Com acompanhamento) */
+    #dores .dor-pill.is-depois {
+      color: var(--gold-text-on-paper) !important;
+    }
+
+    /* Dobra 4: Diagnostico (eyebrows/kickers se adicionados) */
+    .diag-kicker,
+    .diag-eyebrow {
+      color: var(--gold-text-on-paper) !important;
+    }
+
+    /* Dobra 6: Temas (eyebrow e tag de modulo) */
+    .temas-eyebrow,
+    .temas-grupo-tag {
+      color: var(--gold-text-on-paper) !important;
+    }
+
+    /* Dobra 8: YouTube (kicker e badge de destaque) */
+    .youtube-kicker,
+    .youtube-badge {
+      color: var(--gold-text-on-paper) !important;
+    }
+
+    /* Dobra 10: Contato (eyebrow) */
+    .contato-eyebrow {
+      color: var(--gold-text-on-paper) !important;
+    }
+
+    /* ============================================================
+       PROMPT 13: TRES CONTRASTES QUE SOBRARAM
+    ============================================================ */
+    /* 1. Botao Ver o canal no YouTube */
+    #youtube .youtube-btn-channel {
+      color: var(--ink) !important;
+      background: transparent !important;
+      border: 1.5px solid var(--gold-deep) !important;
+    }
+
+    #youtube .youtube-btn-channel svg {
+      color: var(--ink) !important;
+      fill: currentColor !important;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      #youtube .youtube-btn-channel:hover {
+        background: var(--gold) !important;
+        color: var(--ink) !important;
+        border-color: var(--gold) !important;
+      }
+      #youtube .youtube-btn-channel:hover svg {
+        color: var(--ink) !important;
+      }
+    }
+
+    #youtube .youtube-btn-channel:focus-visible {
+      outline: 2px solid var(--gold-deep) !important;
+      outline-offset: 3px !important;
+    }
+
+    /* 2. Numeros dos temas (01 a 10) */
+    .tema-num,
+    .tema-card:hover .tema-num {
+      color: var(--gold-text-on-paper) !important;
+    }
+
+    /* 3. Numeros grandes de #dores (01 a 04) */
+    #dores .dor-num {
+      color: var(--gold-large-on-paper) !important;
+    }
+
+    /* ============================================================
+       PROMPT 14: POLÍTICA DE PRIVACIDADE (RODAPÉ E FAQ)
+    ============================================================ */
+    .rodape-legal-link {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      color: rgba(244, 239, 228, 0.65);
+      text-decoration: underline;
+      text-decoration-color: rgba(198, 164, 90, 0.6);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      line-height: 1.45;
+      display: inline-block;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .rodape-legal-link:hover {
+        color: var(--paper);
+        text-decoration-color: var(--gold);
+      }
+    }
+
+    .rodape-legal-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    .faq-answer-text a,
+    .faq-answer-link {
+      color: var(--gold-2);
+      text-decoration: underline;
+      text-decoration-color: var(--gold-2);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .faq-answer-text a:hover,
+      .faq-answer-link:hover {
+        color: #FFFFFF;
+        text-decoration-color: #FFFFFF;
+      }
+    }
+
+    .faq-answer-text a:focus-visible,
+    .faq-answer-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* ============================================================
+       PROMPT 15: BOTAO GERENCIAR COOKIES NO RODAPE
+    ============================================================ */
+    .rodape-legal-links {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    button.rodape-cookies-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: rgba(244, 239, 228, 0.65);
+      text-decoration: underline;
+      text-decoration-color: rgba(198, 164, 90, 0.6);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    /* ============================================================
+       PROMPT 17: ENXUGAR QUEM CONDUZ NO CELULAR (<= 768px)
+    ============================================================ */
+    @media (max-width: 768px) {
+      #quem-conduz .quemconduz-stats-grid {
+        display: none;
+      }
+      #quem-conduz .quemconduz-portrait-card {
+        width: 58%;
+        max-width: 250px;
+        margin-inline: auto;
+      }
+      #quem-conduz .quemconduz-action {
+        margin-top: 0;
+      }
+    }
+
+    /* ============================================================
+       PROMPT 18: COMPACTAR BLOCO C (PARA EMPRESAS) NO CELULAR (<= 768px)
+    ============================================================ */
+    @media (max-width: 768px) {
+      #entregas .bloco-c-card {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        align-items: center;
+        column-gap: 0.75rem;
+        padding: 0.5rem;
+      }
+      #entregas .bloco-c-panel {
+        width: 96px;
+        aspect-ratio: 4 / 3;
+        max-height: none;
+      }
+      #entregas .bloco-c-content {
+        padding: 0;
+      }
+    }
+
+    /* ============================================================
+       PROMPT 19: TEMAS NO CELULAR COM DESCRICAO RECOLHIVEL (<= 768px)
+    ============================================================ */
+    @media (max-width: 768px) {
+      #temas .tema-card {
+        cursor: pointer;
+        padding: 0.65rem 0.85rem;
+        min-height: 44px;
+        box-sizing: border-box;
+      }
+
+      #temas .tema-card:focus,
+      #temas .tema-card:focus-within {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+        border-left-color: var(--gold);
+      }
+
+      #temas .tema-card::after {
+        display: none;
+      }
+
+      #temas .tema-card-top {
+        margin-bottom: 0;
+        width: 100%;
+      }
+
+      #temas .tema-card-top::after {
+        content: "+" / "";
+        margin-left: auto;
+        color: var(--gold-text-on-paper);
+        font-family: var(--font-mono);
+        font-size: 1.125rem;
+        font-weight: 600;
+        line-height: 1;
+        display: inline-block;
+        transition: transform .3s ease;
+      }
+
+      #temas .tema-card:focus .tema-card-top::after,
+      #temas .tema-card:focus-within .tema-card-top::after {
+        transform: rotate(45deg);
+      }
+
+      #temas .tema-sep {
+        display: none;
+      }
+
+      #temas .tema-desc {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin: 0;
+        transition: max-height .3s ease, opacity .25s ease, margin .3s ease;
+      }
+
+      #temas .tema-card:focus .tema-desc,
+      #temas .tema-card:focus-within .tema-desc {
+        max-height: 12em;
+        opacity: 1;
+        margin-top: 0.4rem;
+      }
+    }
+
+    @media (max-width: 768px) and (prefers-reduced-motion: reduce) {
+      #temas .tema-desc {
+        transition: none !important;
+      }
+      #temas .tema-card-top::after {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+
+    /* ============================================================
+       DOBRA: DEPOIMENTOS (Fundo Paper-2, id="depoimentos")
+    ============================================================ */
+    .section-depoimentos {
+      background-color: var(--paper-2) !important;
+      background-image:
+        radial-gradient(circle, rgba(156, 124, 60, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      padding-block: var(--space-16);
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(156, 124, 60, 0.22);
+      border-bottom: 1px solid rgba(156, 124, 60, 0.22);
+    }
+
+    .dep-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .dep-header {
+      margin-bottom: var(--space-8);
+      max-width: 820px;
+    }
+
+    .dep-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: var(--space-3);
+    }
+
+    .dep-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    /* Layout Desktop: 2 Colunas */
+    .dep-layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: var(--space-10);
+      align-items: start;
+    }
+
+    /* Coluna de Midia */
+    .dep-col-media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dep-video-figure {
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dep-player-frame {
+      position: relative;
+      width: 100%;
+      max-width: 260px;
+      aspect-ratio: 9 / 16;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--navy);
+      border: 1px solid rgba(156, 124, 60, 0.35);
+      box-shadow: 0 12px 36px rgba(23, 33, 46, 0.12);
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      .dep-player-frame:hover {
+        box-shadow: 0 16px 44px rgba(23, 33, 46, 0.16);
+      }
+    }
+
+    .dep-corners-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .dep-corner-path {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+    }
+
+    .dep-player-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .dep-facade {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .dep-facade:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
+
+    /* Poster do Video com Foto Real e Grade de Reserva */
+    .dep-poster-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #16283F 0%, #0E1B2B 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-4);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .dep-poster-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(198, 164, 90, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(198, 164, 90, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dep-poster-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 1;
+      transform: scale(1);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @media (hover: hover) {
+      .dep-facade:hover .dep-poster-img {
+        transform: scale(1.03);
+      }
+    }
+
+    .dep-poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(14, 27, 43, 0.78) 0%, transparent 55%),
+                  linear-gradient(to bottom, rgba(14, 27, 43, 0.55) 0%, transparent 25%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .dep-poster-badge {
+      position: relative;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(14, 27, 43, 0.85);
+      border: 1px solid rgba(198, 164, 90, 0.45);
+      border-radius: var(--radius-full);
+      color: var(--gold-2);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      align-self: flex-start;
+    }
+
+    .dep-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #E53E3E;
+      display: inline-block;
+    }
+
+    .dep-poster-meta {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dep-poster-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: rgba(244, 239, 228, 0.85);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Botao de Play Central / Posicionado a 62% */
+    .dep-play-btn {
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .dep-play-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .dep-play-ring-bg {
+      fill: rgba(14, 27, 43, 0.75);
+      stroke: rgba(198, 164, 90, 0.4);
+      stroke-width: 1.5;
+    }
+
+    .dep-play-ring-active {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2;
+      transform-origin: center;
+      animation: depPlayPulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes depPlayPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.85;
+      }
+      50% {
+        transform: scale(1.12);
+        opacity: 0.35;
+      }
+    }
+
+    .dep-play-icon {
+      position: relative;
+      z-index: 2;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 3px;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    @media (hover: hover) {
+      .dep-facade:hover .dep-play-icon {
+        color: var(--gold-2);
+        transform: scale(1.08);
+      }
+      .dep-facade:hover .dep-play-ring-bg {
+        fill: rgba(14, 27, 43, 0.9);
+        stroke: var(--gold);
+      }
+    }
+
+    .dep-iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 4;
+    }
+
+    /* Legendas */
+    .dep-caption {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dep-video-caption {
+      margin-top: var(--space-3);
+      text-align: center;
+      align-items: center;
+    }
+
+    .dep-author-name {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .dep-author-role {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(23, 33, 46, 0.72);
+      letter-spacing: 0.04em;
+    }
+
+    /* Coluna de Citacoes */
+    .dep-col-quotes {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    /* Cartao de Ficha com Trilho */
+    .dep-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 20px minmax(0, 1fr);
+      column-gap: var(--space-4);
+      background: rgba(244, 239, 228, 0.75);
+      border: 1px solid rgba(156, 124, 60, 0.28);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      box-shadow: 0 4px 20px rgba(23, 33, 46, 0.04);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    @media (hover: hover) {
+      .dep-card:hover {
+        border-color: rgba(156, 124, 60, 0.45);
+        box-shadow: 0 8px 24px rgba(23, 33, 46, 0.08);
+      }
+    }
+
+    .dep-card-rail {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .dep-card-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(156, 124, 60, 0.25));
+      transform-origin: top center;
+    }
+
+    .dep-quote-figure {
+      margin: 0;
+      position: relative;
+    }
+
+    .dep-quote-mark {
+      position: absolute;
+      top: -12px;
+      right: var(--space-2);
+      font-family: var(--font-title);
+      font-size: 4.5rem;
+      line-height: 1;
+      color: rgba(156, 124, 60, 0.14);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .dep-blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .dep-quote {
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 1.25vw, 1.15rem);
+      line-height: 1.48;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--ink);
+      margin: 0 0 var(--space-2) 0;
+    }
+
+    .dep-quote:last-of-type {
+      margin-bottom: var(--space-3);
+    }
+
+    .dep-mobile-only-caption {
+      display: none;
+    }
+
+    /* Divisor entre fichas */
+    .dep-divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(156, 124, 60, 0.3) 20%, rgba(156, 124, 60, 0.3) 80%, transparent);
+      margin-block: 0;
+    }
+
+    /* Link Externo para o YouTube (Guilherme) */
+    .dep-link-wrap {
+      margin-top: var(--space-3);
+      padding-top: var(--space-2);
+      border-top: 1px dashed rgba(156, 124, 60, 0.25);
+    }
+
+    .dep-ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--gold-text-on-paper);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(111, 86, 32, 0.4);
+      min-height: 44px;
+      box-sizing: border-box;
+      padding-block: 0.35rem;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    @media (hover: hover) {
+      .dep-ext-link:hover {
+        color: var(--ink);
+        text-decoration-color: var(--ink);
+      }
+    }
+
+    .dep-ext-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .dep-layout {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+      .dep-col-media {
+        width: 100%;
+      }
+      .dep-video-figure {
+        max-width: 260px;
+        margin-inline: auto;
+      }
+      .dep-video-caption {
+        display: none;
+      }
+      .dep-mobile-only-caption {
+        display: flex;
+        margin-top: var(--space-2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-depoimentos {
+        padding-block: var(--space-12);
+      }
+      .dep-header {
+        margin-bottom: var(--space-6);
+      }
+      .dep-title {
+        font-size: 1.875rem;
+      }
+      .dep-player-frame {
+        max-width: 240px;
+        margin-inline: auto;
+      }
+      .dep-card {
+        padding: 0.875rem 1rem;
+        grid-template-columns: 14px minmax(0, 1fr);
+        column-gap: var(--space-3);
+      }
+      .dep-quote {
+        font-size: 1rem;
+        line-height: 1.45;
+        margin: 0 0 var(--space-2) 0;
+      }
+      .dep-quote:last-of-type {
+        margin-bottom: var(--space-2);
+      }
+    }
+
+    /* Fallback Movimento Reduzido */
+    @media (prefers-reduced-motion: reduce) {
+      .dep-poster-img {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+      .dep-play-ring-active {
+        animation: none !important;
+      }
+      .dep-corner-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .dep-card-line {
+        transform: scaleY(1) !important;
+      }
+    }
+
+    html.rm .dep-poster-img {
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    html.rm .dep-play-ring-active {
+      animation: none !important;
+    }
+    html.rm .dep-corner-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .dep-card-line {
+      transform: scaleY(1) !important;
+    }
+
   </style>
 </head>
 <body>
@@ -6091,203 +8358,9 @@
     </section>
 
     <!-- ============================================================
-         DOBRA 2: DIAGNÓSTICO DE LIDERANÇA
-    ============================================================ -->
-    <section id="diagnostico" class="section-light">
-      <div class="max-w diag-container">
-        <div class="diag-layout">
-          <!-- Coluna esquerda: Chamada, Texto de Apoio e Acoes -->
-          <div class="diag-sticky-col">
-            <h2 class="diag-title" id="diagTitle">Uma conversa de 30 minutos para entender onde a sua liderança trava.</h2>
-            <p class="diag-lead">Responda ao questionário em menos de 2 minutos. Se o seu perfil se enquadrar, você recebe o acesso à agenda da sessão gratuita.</p>
-
-            <div class="diag-actions">
-              <a href="https://adalbertochagas.com.br/diagnostico/" class="btn btn-primary diag-cta-main" id="diagPrimaryBtn">
-                <span class="btn-inner-track" aria-hidden="true">
-                  <span class="btn-conic"></span>
-                  <span class="btn-bg">
-                    <span class="btn-shimmer"></span>
-                    <span class="btn-glow"></span>
-                  </span>
-                </span>
-                <span class="btn-label">
-                  <span>Quero o Diagnóstico de Liderança</span>
-                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
-                    <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              </a>
-
-              <p class="diag-free-note">Participar é gratuito.</p>
-
-              <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20quero%20saber%20mais%20sobre%20o%20Diagn%C3%B3stico%20de%20Lideran%C3%A7a." class="diag-secondary-link" id="diagWaLink" target="_blank" rel="noopener">
-              <span>Prefere conversar antes? Fale pelo WhatsApp.</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="currentColor">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                </svg>
-            </a>
-            </div>
-          </div>
-
-          <!-- Coluna direita: Etapas e Cartoes de Enquadramento -->
-          <div class="diag-content-col">
-            <!-- Linha do tempo dos 3 passos conectados -->
-            <!-- Ilustracao tecnica com cantoneiras de engenharia, scanline e no de contorno -->
-            <figure class="diag-figure" id="diagFigure" aria-label="Ilustração do diagnóstico de liderança">
-              <!-- Moldura dourada deslocada com cantoneiras tecnicas -->
-              <div class="diag-figure-frame" id="diagFigureFrame" aria-hidden="true">
-                <svg class="diag-corner dc-tl" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 0 14 L 0 0 L 14 0" fill="none" stroke="currentColor" stroke-width="2" /></svg>
-                <svg class="diag-corner dc-tr" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 0 0 L 14 0 L 14 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
-                <svg class="diag-corner dc-bl" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 0 0 L 0 14 L 14 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
-                <svg class="diag-corner dc-br" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 14 0 L 14 14 L 0 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
-              </div>
-
-              <!-- Traco de contorno tecnico conectando a imagem ao Passo 01 -->
-              <svg class="diag-figure-contour" viewBox="0 0 600 405" preserveAspectRatio="none" aria-hidden="true">
-                <defs>
-                  <filter id="diagGlow" x="-30%" y="-30%" width="160%" height="160%">
-                    <feGaussianBlur stdDeviation="2.5" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
-                </defs>
-                <path d="M 600 0 L 0 0 L 0 375 L 45 375 L 45 405" class="diag-contour-line" id="diagContourLine" />
-                <circle cx="600" cy="0" r="4.5" class="diag-pulse-node" id="diagPulseNode" filter="url(#diagGlow)" />
-              </svg>
-
-              <!-- Imagem com feixe de varredura (scanline), feixes de borda e fusao multiply -->
-              <div class="diag-img-wrap" id="diagImgWrap">
-                <div class="beam-border-h" aria-hidden="true"></div>
-                <div class="beam-border-v" aria-hidden="true"></div>
-                <div class="image-shimmer-layer" aria-hidden="true"></div>
-                <div class="diag-scanline" id="diagScanline" aria-hidden="true"></div>
-                <img src="assets/ilu-diagnostico.webp" width="1232" height="770" loading="lazy" decoding="async" alt="Ilustração em estilo mangá: um mentor em videochamada com uma líder, com um gráfico de cinco dimensões na tela do laptop." class="diag-img" id="diagImg">
-              </div>
-            </figure>
-
-            <div class="diag-timeline">
-              <div class="diag-timeline-track" aria-hidden="true">
-                <div class="diag-timeline-bar" id="diagTimelineBar"></div>
-              </div>
-              <div class="diag-timeline-steps" id="diagTimelineSteps">
-                <div class="diag-step-card" data-step="1">
-                  <div class="diag-step-node" aria-hidden="true">
-                    <span class="diag-step-num">01</span>
-                  </div>
-                  <div class="diag-step-body">
-                    <h3 class="diag-step-title">Responda ao questionário</h3>
-                    <p class="diag-step-desc">Menos de 2 minutos.</p>
-                  </div>
-                </div>
-
-                <div class="diag-step-card" data-step="2">
-                  <div class="diag-step-node" aria-hidden="true">
-                    <span class="diag-step-num">02</span>
-                  </div>
-                  <div class="diag-step-body">
-                    <h3 class="diag-step-title">Perfil analisado</h3>
-                    <p class="diag-step-desc">Cada perfil é analisado, sem aprovação automática.</p>
-                  </div>
-                </div>
-
-                <div class="diag-step-card" data-step="3">
-                  <div class="diag-step-node" aria-hidden="true">
-                    <span class="diag-step-num">03</span>
-                  </div>
-                  <div class="diag-step-body">
-                    <h3 class="diag-step-title">Sessão gratuita de 30 minutos</h3>
-                    <p class="diag-step-desc">Por vídeo, com o Adalberto, sobre o seu cenário e o próximo passo.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Bloco recolhivel dos cartoes de enquadramento -->
-            <div class="diag-audience-collapse-section">
-              <button type="button" class="diag-audience-toggle-btn" id="diagAudienceToggleBtn" aria-expanded="false" aria-controls="diagAudienceCollapse">
-                <span class="diag-toggle-text">Para quem é e para quem não é</span>
-                <svg class="diag-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
-                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-
-              <div class="diag-audience-collapse-wrap" id="diagAudienceCollapse">
-                <div class="diag-audience-collapse-inner">
-                  <div class="diag-audience-cards" id="diagAudienceCards">
-                    <div class="diag-audience-card is-target">
-                      <h3 class="diag-card-title">Para quem é</h3>
-                      <ul class="diag-card-list">
-                        <li>
-                          <span class="diag-card-icon" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" width="12" height="12">
-                              <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
-                          <span>Lidera pessoas, mesmo sem cargo formal de gestor</span>
-                        </li>
-                        <li>
-                          <span class="diag-card-icon" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" width="12" height="12">
-                              <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
-                          <span>Está em transição ou quer estruturar a gestão</span>
-                        </li>
-                        <li>
-                          <span class="diag-card-icon" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" width="12" height="12">
-                              <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
-                          <span>Está sobrecarregado e quer resolver de forma prática</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="diag-audience-card is-filter">
-                      <h3 class="diag-card-title">Para quem não é</h3>
-                      <ul class="diag-card-list">
-                        <li>
-                          <span class="diag-card-icon" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" width="12" height="12">
-                              <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                          </span>
-                          <span>Quem busca apenas conteúdo gratuito</span>
-                        </li>
-                        <li>
-                          <span class="diag-card-icon" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" width="12" height="12">
-                              <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                          </span>
-                          <span>Quem não quer mudar</span>
-                        </li>
-                        <li>
-                          <span class="diag-card-icon" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" width="12" height="12">
-                              <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                          </span>
-                          <span>Quem não está comprometido com o processo</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
          DOBRA 3: DORES (LÍDER E EMPRESA)
     ============================================================ -->
-    <section id="dores" class="section-dores">
+    <section id="dores" class="section-light section-dores">
       <img src="assets/ac-symbol.png" alt="" class="dores-watermark" width="720" height="720" loading="lazy" aria-hidden="true" />
       <div class="max-w dores-container">
         <!-- Seletor de Perfil (Tablist) -->
@@ -6644,7 +8717,7 @@
     <!-- ============================================================
          DOBRA 4: EXEMPLOS (SITUAÇÕES ANONIMIZADAS)
     ============================================================ -->
-    <section id="exemplos" class="section-light section-exemplos">
+    <section id="exemplos" class="section-dark section-exemplos">
       <div class="max-w exemplos-container">
         <div class="exemplos-header">
           <h2 class="exemplos-title">Situações que aparecem nas equipes.</h2>
@@ -6834,91 +8907,6 @@
             </div>
           </article>
 
-          <!-- Cartão 05 -->
-          <article class="exemplo-card">
-            <div class="exemplo-card-top-line" aria-hidden="true"></div>
-            <div class="exemplo-header">
-              <span class="exemplo-num" aria-hidden="true">05</span>
-              <h3 class="exemplo-title">O líder que acabou de assumir</h3>
-            </div>
-            <div class="exemplo-rows">
-              <div class="exemplo-row">
-                <span class="exemplo-label">A situação</span>
-                <p class="exemplo-text">ele foi promovido pela competência técnica e agora precisa fazer outras pessoas executarem.</p>
-              </div>
-              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-05">
-                <span class="exemplo-toggle-text">Ver mais</span>
-                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
-                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-05">
-                <div class="exemplo-collapse-inner">
-                  <div class="exemplo-row">
-                    <span class="exemplo-label">O que costuma acontecer</span>
-                    <p class="exemplo-text">tenta fazer tudo sozinho, oscila entre ser amigo e ser rígido e chega à sobrecarga.</p>
-                  </div>
-                  <div class="exemplo-row is-destaque">
-                    <span class="exemplo-label">O que se trabalha</span>
-                    <p class="exemplo-text">delegar com clareza, comunicar expectativas e decidir com base em fatos.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="exemplo-card-footer">
-              <a href="https://www.youtube.com/watch?v=GsN9EGH5eeE" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: Como se tornar um líder respeitado: 5 passos para iniciantes">
-                <span class="exemplo-play-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                <span>Assistir no canal</span>
-              </a>
-            </div>
-          </article>
-
-          <!-- Cartão 06 -->
-          <article class="exemplo-card">
-            <div class="exemplo-card-top-line" aria-hidden="true"></div>
-            <div class="exemplo-header">
-              <span class="exemplo-num" aria-hidden="true">06</span>
-              <h3 class="exemplo-title">A equipe com idades e estilos diferentes</h3>
-            </div>
-            <div class="exemplo-rows">
-              <div class="exemplo-row">
-                <span class="exemplo-label">A situação</span>
-                <p class="exemplo-text">profissionais mais novos e mais experientes dividem o mesmo time, com ritmos e formas de comunicar distintos.</p>
-              </div>
-              <button type="button" class="exemplo-toggle-btn" aria-expanded="false" aria-controls="exemplo-detalhes-06">
-                <span class="exemplo-toggle-text">Ver mais</span>
-                <svg class="exemplo-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
-                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-              <div class="exemplo-collapse-wrap" id="exemplo-detalhes-06">
-                <div class="exemplo-collapse-inner">
-                  <div class="exemplo-row">
-                    <span class="exemplo-label">O que costuma acontecer</span>
-                    <p class="exemplo-text">há ruído de comunicação, pouca cooperação e a leitura de que o problema é pessoal, quando é de estilo de trabalho.</p>
-                  </div>
-                  <div class="exemplo-row is-destaque">
-                    <span class="exemplo-label">O que se trabalha</span>
-                    <p class="exemplo-text">alinhar propósito e expectativas, criar combinados claros e dar voz a todas as faixas etárias.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="exemplo-card-footer">
-              <a href="https://www.youtube.com/watch?v=JuCRf8TFe6c" class="exemplo-channel-link" target="_blank" rel="noopener" aria-label="Assistir no canal: 6 dicas para melhorar trabalho em equipe com diferentes gerações">
-                <span class="exemplo-play-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" focusable="false">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </span>
-                <span>Assistir no canal</span>
-              </a>
-            </div>
-          </article>
         </div>
 
         <div class="exemplos-carousel-controls" aria-label="Navegação do carrossel">
@@ -6933,8 +8921,6 @@
             <button type="button" class="carousel-dot" data-index="1" aria-label="Ir para o cartão 2"></button>
             <button type="button" class="carousel-dot" data-index="2" aria-label="Ir para o cartão 3"></button>
             <button type="button" class="carousel-dot" data-index="3" aria-label="Ir para o cartão 4"></button>
-            <button type="button" class="carousel-dot" data-index="4" aria-label="Ir para o cartão 5"></button>
-            <button type="button" class="carousel-dot" data-index="5" aria-label="Ir para o cartão 6"></button>
           </div>
 
           <button type="button" class="carousel-arrow carousel-arrow-next" id="exemploNextBtn" aria-label="Próximo cartão" aria-disabled="false">
@@ -6967,6 +8953,200 @@
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                 </svg>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 2: DIAGNÓSTICO DE LIDERANÇA
+    ============================================================ -->
+    <section id="diagnostico" class="section-light">
+      <div class="max-w diag-container">
+        <div class="diag-layout">
+          <!-- Coluna esquerda: Chamada, Texto de Apoio e Acoes -->
+          <div class="diag-sticky-col">
+            <h2 class="diag-title" id="diagTitle">Uma conversa de 30 minutos para entender onde a sua liderança trava.</h2>
+            <p class="diag-lead">Responda ao questionário em menos de 2 minutos. Se o seu perfil se enquadrar, você recebe o acesso à agenda da sessão gratuita.</p>
+
+            <div class="diag-actions">
+              <a href="https://adalbertochagas.com.br/diagnostico/" class="btn btn-primary diag-cta-main" id="diagPrimaryBtn">
+                <span class="btn-inner-track" aria-hidden="true">
+                  <span class="btn-conic"></span>
+                  <span class="btn-bg">
+                    <span class="btn-shimmer"></span>
+                    <span class="btn-glow"></span>
+                  </span>
+                </span>
+                <span class="btn-label">
+                  <span>Quero o Diagnóstico de Liderança</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                    <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+
+              <p class="diag-free-note">Participar é gratuito.</p>
+
+              <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20quero%20saber%20mais%20sobre%20o%20Diagn%C3%B3stico%20de%20Lideran%C3%A7a." class="diag-secondary-link" id="diagWaLink" target="_blank" rel="noopener">
+              <span>Prefere conversar antes? Fale pelo WhatsApp.</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+            </a>
+            </div>
+          </div>
+
+          <!-- Coluna direita: Etapas e Cartoes de Enquadramento -->
+          <div class="diag-content-col">
+            <!-- Linha do tempo dos 3 passos conectados -->
+            <!-- Ilustracao tecnica com cantoneiras de engenharia, scanline e no de contorno -->
+            <figure class="diag-figure" id="diagFigure" aria-label="Ilustração do diagnóstico de liderança">
+              <!-- Moldura dourada deslocada com cantoneiras tecnicas -->
+              <div class="diag-figure-frame" id="diagFigureFrame" aria-hidden="true">
+                <svg class="diag-corner dc-tl" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 0 14 L 0 0 L 14 0" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+                <svg class="diag-corner dc-tr" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 0 0 L 14 0 L 14 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+                <svg class="diag-corner dc-bl" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 0 0 L 0 14 L 14 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+                <svg class="diag-corner dc-br" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M 14 0 L 14 14 L 0 14" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+              </div>
+
+              <!-- Traco de contorno tecnico conectando a imagem ao Passo 01 -->
+              <svg class="diag-figure-contour" viewBox="0 0 600 405" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <filter id="diagGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="2.5" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <path d="M 600 0 L 0 0 L 0 375 L 45 375 L 45 405" class="diag-contour-line" id="diagContourLine" />
+                <circle cx="600" cy="0" r="4.5" class="diag-pulse-node" id="diagPulseNode" filter="url(#diagGlow)" />
+              </svg>
+
+              <!-- Imagem com feixe de varredura (scanline), feixes de borda e fusao multiply -->
+              <div class="diag-img-wrap" id="diagImgWrap">
+                <div class="beam-border-h" aria-hidden="true"></div>
+                <div class="beam-border-v" aria-hidden="true"></div>
+                <div class="image-shimmer-layer" aria-hidden="true"></div>
+                <div class="diag-scanline" id="diagScanline" aria-hidden="true"></div>
+                <img src="assets/ilu-diagnostico.webp" width="1232" height="770" loading="lazy" decoding="async" alt="Ilustração em estilo mangá: um mentor em videochamada com uma líder, com um gráfico de cinco dimensões na tela do laptop." class="diag-img" id="diagImg">
+              </div>
+            </figure>
+
+            <div class="diag-timeline">
+              <div class="diag-timeline-track" aria-hidden="true">
+                <div class="diag-timeline-bar" id="diagTimelineBar"></div>
+              </div>
+              <div class="diag-timeline-steps" id="diagTimelineSteps">
+                <div class="diag-step-card" data-step="1">
+                  <div class="diag-step-node" aria-hidden="true">
+                    <span class="diag-step-num">01</span>
+                  </div>
+                  <div class="diag-step-body">
+                    <h3 class="diag-step-title">Responda ao questionário</h3>
+                    <p class="diag-step-desc">Menos de 2 minutos.</p>
+                  </div>
+                </div>
+
+                <div class="diag-step-card" data-step="2">
+                  <div class="diag-step-node" aria-hidden="true">
+                    <span class="diag-step-num">02</span>
+                  </div>
+                  <div class="diag-step-body">
+                    <h3 class="diag-step-title">Perfil analisado</h3>
+                    <p class="diag-step-desc">Cada perfil é analisado, sem aprovação automática.</p>
+                  </div>
+                </div>
+
+                <div class="diag-step-card" data-step="3">
+                  <div class="diag-step-node" aria-hidden="true">
+                    <span class="diag-step-num">03</span>
+                  </div>
+                  <div class="diag-step-body">
+                    <h3 class="diag-step-title">Sessão gratuita de 30 minutos</h3>
+                    <p class="diag-step-desc">Por vídeo, com o Adalberto, sobre o seu cenário e o próximo passo.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bloco recolhivel dos cartoes de enquadramento -->
+            <div class="diag-audience-collapse-section">
+              <button type="button" class="diag-audience-toggle-btn" id="diagAudienceToggleBtn" aria-expanded="false" aria-controls="diagAudienceCollapse">
+                <span class="diag-toggle-text">Para quem é e para quem não é</span>
+                <svg class="diag-toggle-arrow" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+                  <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="diag-audience-collapse-wrap" id="diagAudienceCollapse">
+                <div class="diag-audience-collapse-inner">
+                  <div class="diag-audience-cards" id="diagAudienceCards">
+                    <div class="diag-audience-card is-target">
+                      <h3 class="diag-card-title">Para quem é</h3>
+                      <ul class="diag-card-list">
+                        <li>
+                          <span class="diag-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                          <span>Lidera pessoas, mesmo sem cargo formal de gestor</span>
+                        </li>
+                        <li>
+                          <span class="diag-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                          <span>Está em transição ou quer estruturar a gestão</span>
+                        </li>
+                        <li>
+                          <span class="diag-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                          <span>Está sobrecarregado e quer resolver de forma prática</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="diag-audience-card is-filter">
+                      <h3 class="diag-card-title">Para quem não é</h3>
+                      <ul class="diag-card-list">
+                        <li>
+                          <span class="diag-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                              <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                          </span>
+                          <span>Quem busca apenas conteúdo gratuito</span>
+                        </li>
+                        <li>
+                          <span class="diag-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                              <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                          </span>
+                          <span>Quem não quer mudar</span>
+                        </li>
+                        <li>
+                          <span class="diag-card-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                              <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                          </span>
+                          <span>Quem não está comprometido com o processo</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -7494,6 +9674,561 @@
     </section>
 
     <!-- ============================================================
+         DOBRA 8: QUEM CONDUZ (id="quem-conduz")
+    ============================================================ -->
+    <section id="quem-conduz" class="section-dark section-quemconduz" aria-labelledby="quemconduz-title">
+      <div class="max-w quemconduz-container">
+        
+        <!-- Cabeçalho da Dobra -->
+        <div class="quemconduz-header">
+          <span class="quemconduz-kicker"><span class="kicker-dot" aria-hidden="true"></span>Quem conduz</span>
+          <h2 class="quemconduz-title" id="quemconduz-title">Quem conduz o seu caminho.</h2>
+        </div>
+
+        <!-- Grade Principal: Retrato + Ficha de Engenharia -->
+        <div class="quemconduz-main-grid">
+
+          <!-- Coluna 1: Retrato em Moldura de Engenharia -->
+          <div class="quemconduz-portrait-col">
+            <div class="quemconduz-portrait-card">
+              <!-- Moldura com Cantoneiras em SVG -->
+              <div class="quemconduz-frame">
+                <svg class="quemconduz-corners-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <!-- Cantoneira Noroeste -->
+                  <path class="quemconduz-corner-path" d="M 0 16 L 0 0 L 16 0" />
+                  <!-- Cantoneira Nordeste -->
+                  <path class="quemconduz-corner-path" d="M 84 0 L 100 0 L 100 16" />
+                  <!-- Cantoneira Sudoeste -->
+                  <path class="quemconduz-corner-path" d="M 0 84 L 0 100 L 16 100" />
+                  <!-- Cantoneira Sudeste -->
+                  <path class="quemconduz-corner-path" d="M 84 100 L 100 100 L 100 84" />
+                </svg>
+
+                <!-- Cotas Técnicas Decorativas -->
+                <div class="quemconduz-cota quemconduz-cota-top" aria-hidden="true">
+                  <span class="quemconduz-cota-val">REF 08.QC</span>
+                </div>
+
+                <div class="quemconduz-portrait-inner">
+                  <picture class="quemconduz-picture">
+                    <source media="(max-width: 768px)" srcset="assets/retrato-adalberto-m.webp" width="400" height="532">
+                    <img src="assets/retrato-adalberto.webp" alt="Retrato de Adalberto Chagas" width="546" height="726" loading="lazy" decoding="async" class="quemconduz-img">
+                  </picture>
+                </div>
+              </div>
+
+              <!-- Placa de Identificação Técnica -->
+              <div class="quemconduz-id-card">
+                <h3 class="quemconduz-id-name">Adalberto Francisco Chagas</h3>
+                <p class="quemconduz-id-title">Engenheiro Civil e de Segurança do Trabalho</p>
+                <p class="quemconduz-id-sub">Mentoria, palestras e treinamentos em liderança.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Ficha Técnica (Carimbo de Prancha) -->
+          <div class="quemconduz-prancha-col">
+            <div class="quemconduz-prancha">
+              <!-- Topo do Carimbo Técnico -->
+              <div class="quemconduz-prancha-header">
+                <div class="quemconduz-stamp-meta">
+                  <span class="quemconduz-stamp-badge">CARIMBO TÉCNICO</span>
+                  <span class="quemconduz-stamp-code">ACADEMY &middot; FOLHA 08</span>
+                </div>
+                <div class="quemconduz-stamp-title">QUALIFICAÇÕES E ATUAÇÃO PROFISSIONAL</div>
+              </div>
+
+              <!-- Grade de Células do Carimbo -->
+              <div class="quemconduz-cells-grid">
+                
+                <!-- Célula 1: Trajetória -->
+                <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-head">
+                    <span class="quemconduz-cell-num" aria-hidden="true">01</span>
+                    <h4 class="quemconduz-cell-label">Trajetória</h4>
+                  </div>
+                  <p class="quemconduz-cell-text">Gerente em uma das maiores companhias de saneamento do país. Mais de 10 anos como professor universitário e coordenador acadêmico de Engenharia Civil.</p>
+                </article>
+
+                <!-- Célula 2: Docência e capacitação -->
+                <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-head">
+                    <span class="quemconduz-cell-num" aria-hidden="true">02</span>
+                    <h4 class="quemconduz-cell-label">Docência e capacitação</h4>
+                  </div>
+                  <p class="quemconduz-cell-text">Mais de 300 conselheiros e executivos capacitados em finanças no Board Academy, em mais de 10 turmas.</p>
+                </article>
+
+                <!-- Célula 3: Conselhos e governança -->
+                <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-head">
+                    <span class="quemconduz-cell-num" aria-hidden="true">03</span>
+                    <h4 class="quemconduz-cell-label">Conselhos e governança</h4>
+                  </div>
+                  <p class="quemconduz-cell-text">Conselheiro Curador da Fundação Nacional da Qualidade. Conselheiro Consultivo Certificado (Board Academy/CNP).</p>
+                </article>
+
+                <!-- Célula 4: Publicações -->
+                <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-head">
+                    <span class="quemconduz-cell-num" aria-hidden="true">04</span>
+                    <h4 class="quemconduz-cell-label">Publicações</h4>
+                  </div>
+                  <p class="quemconduz-cell-text">Capítulos em 5 livros sobre ESG, diversidade, governança e liderança.</p>
+                </article>
+
+                <!-- Célula 5: Formação Acadêmica (ocupa as duas colunas) -->
+                <article class="quemconduz-cell quemconduz-cell-full">
+                  <div class="quemconduz-cell-head">
+                    <span class="quemconduz-cell-num" aria-hidden="true">05</span>
+                    <h4 class="quemconduz-cell-label">Formação</h4>
+                  </div>
+                  
+                  <!-- As 3 primeiras visíveis (somente concluídas) -->
+                  <ul class="quemconduz-formacao-list">
+                    <li class="quemconduz-formacao-item">
+                      <span class="quemconduz-bullet" aria-hidden="true"></span>
+                      <span>MBA em Gestão de Negócios, USP/Esalq (2024 a 2026)</span>
+                    </li>
+                    <li class="quemconduz-formacao-item">
+                      <span class="quemconduz-bullet" aria-hidden="true"></span>
+                      <span>Pós-graduação em Gestão Exponencial, FIA Online (2024 a 2025)</span>
+                    </li>
+                    <li class="quemconduz-formacao-item">
+                      <span class="quemconduz-bullet" aria-hidden="true"></span>
+                      <span>MBA em Gestão de Ativos, Fundação Gorceix (2021 a 2023)</span>
+                    </li>
+                  </ul>
+
+                  <!-- Bloco recolhível com as demais formações (5) -->
+                  <div class="quemconduz-formacao-collapse" id="quemconduzFormacaoCollapse" aria-hidden="true">
+                    <div class="quemconduz-formacao-inner">
+                      <ul class="quemconduz-formacao-list quemconduz-formacao-extra">
+                        <li class="quemconduz-formacao-item">
+                          <span class="quemconduz-bullet" aria-hidden="true"></span>
+                          <span>Engenharia de Segurança do Trabalho (2020 a 2021)</span>
+                        </li>
+                        <li class="quemconduz-formacao-item">
+                          <span class="quemconduz-bullet" aria-hidden="true"></span>
+                          <span>MBA em Gestão de Projetos, USP/Esalq (2018 a 2020)</span>
+                        </li>
+                        <li class="quemconduz-formacao-item">
+                          <span class="quemconduz-bullet" aria-hidden="true"></span>
+                          <span>Mestrado em Engenharia Civil, Saneamento, Poli/USP (2003 a 2006)</span>
+                        </li>
+                        <li class="quemconduz-formacao-item">
+                          <span class="quemconduz-bullet" aria-hidden="true"></span>
+                          <span>Gestão Ambiental, USP (2001 a 2002)</span>
+                        </li>
+                        <li class="quemconduz-formacao-item">
+                          <span class="quemconduz-bullet" aria-hidden="true"></span>
+                          <span>Engenharia Civil, Universidade Paulista (1994 a 1999)</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Botão de Expandir / Recolher Formação -->
+                  <div class="quemconduz-formacao-toggle-wrap">
+                    <button type="button" class="quemconduz-formacao-btn" id="quemconduzFormacaoBtn" aria-expanded="false" aria-controls="quemconduzFormacaoCollapse">
+                      <span class="quemconduz-btn-text">Ver formação completa</span>
+                      <svg class="quemconduz-btn-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Régua de Engenharia com Preenchimento Scrub -->
+        <div class="quemconduz-regua-wrap" aria-hidden="true">
+          <svg class="quemconduz-regua-svg" viewBox="0 0 1200 16" preserveAspectRatio="none">
+            <line class="quemconduz-regua-base" x1="0" y1="8" x2="1200" y2="8"/>
+            <path class="quemconduz-regua-base" d="M0 3v10 M100 5v6 M200 5v6 M300 3v10 M400 5v6 M500 5v6 M600 3v10 M700 5v6 M800 5v6 M900 3v10 M1000 5v6 M1100 5v6 M1200 3v10"/>
+            <line class="quemconduz-regua-active" x1="0" y1="8" x2="1200" y2="8"/>
+          </svg>
+        </div>
+
+        <!-- Faixa de Contadores Animados (4 contadores reais na ordem solicitada) -->
+        <div class="quemconduz-stats-grid" id="quemconduzStatsGrid">
+          <div class="quemconduz-stat-card">
+            <div class="quemconduz-stat-val" data-target="300" data-suffix="+">300+</div>
+            <div class="quemconduz-stat-label">Conselheiros e executivos capacitados</div>
+          </div>
+          <div class="quemconduz-stat-card">
+            <div class="quemconduz-stat-val" data-target="10" data-suffix="+">10+</div>
+            <div class="quemconduz-stat-label">Turmas no Board Academy</div>
+          </div>
+          <div class="quemconduz-stat-card">
+            <div class="quemconduz-stat-val" data-target="10" data-suffix="+">10+</div>
+            <div class="quemconduz-stat-label">Anos de docência universitária</div>
+          </div>
+          <div class="quemconduz-stat-card">
+            <div class="quemconduz-stat-val" data-target="5" data-suffix="">5</div>
+            <div class="quemconduz-stat-label">Livros publicados</div>
+          </div>
+        </div>
+
+        <!-- Fechamento: Botão Primário Idêntico ao #diagPrimaryBtn -->
+        <div class="quemconduz-action">
+          <a href="https://adalbertochagas.com.br/diagnostico/" class="btn btn-primary quemconduz-btn-primary" id="quemconduzPrimaryBtn">
+            <span class="btn-inner-track" aria-hidden="true">
+              <span class="btn-conic"></span>
+              <span class="btn-bg">
+                <span class="btn-shimmer"></span>
+                <span class="btn-glow"></span>
+              </span>
+            </span>
+            <span class="btn-label">
+              <span>Fazer o Diagnóstico de Liderança</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                <path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA: DEPOIMENTOS (id="depoimentos")
+    ============================================================ -->
+    <section id="depoimentos" class="section-light section-depoimentos" aria-labelledby="depoimentos-title">
+      <div class="max-w dep-container">
+
+        <!-- Cabeçalho da Dobra -->
+        <div class="dep-header">
+          <span class="dep-kicker"><span class="kicker-dot" aria-hidden="true"></span>Depoimentos</span>
+          <h2 class="dep-title" id="depoimentos-title">Na voz de quem faz a mentoria.</h2>
+        </div>
+
+        <!-- Grade Principal: 2 colunas no desktop, 1 coluna no mobile -->
+        <div class="dep-layout">
+
+          <!-- Coluna 1: Vídeo da Ficha 1 (Genilson Alves) -->
+          <div class="dep-col-media">
+            <figure class="dep-video-figure">
+              <div class="dep-player-frame">
+                <!-- Cantoneiras Decorativas em SVG tipo engenharia -->
+                <svg class="dep-corners-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="dep-corner-path" d="M 0 16 L 0 0 L 16 0" />
+                  <path class="dep-corner-path" d="M 84 0 L 100 0 L 100 16" />
+                  <path class="dep-corner-path" d="M 0 84 L 0 100 L 16 100" />
+                  <path class="dep-corner-path" d="M 84 100 L 100 100 L 100 84" />
+                </svg>
+
+                <div class="dep-player-container" data-video-id="KMbdF_8NNm4" data-video-title="Depoimento de Genilson Alves">
+                  <a href="https://www.youtube.com/watch?v=KMbdF_8NNm4"
+                     class="dep-facade"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     aria-label="Reproduzir depoimento de Genilson Alves">
+                    <!-- Pôster com foto real de Genilson Alves e grade blueprint de reserva -->
+                    <div class="dep-poster-art" aria-hidden="true">
+                      <div class="dep-poster-grid"></div>
+                      <img class="dep-poster-img"
+                           src="assets/dep-genilson.jpg"
+                           alt="Genilson Alves, mentorado em liderança"
+                           width="277"
+                           height="498"
+                           loading="lazy"
+                           decoding="async"
+                           onerror="this.style.display='none'">
+                      <div class="dep-poster-overlay"></div>
+                      <div class="dep-poster-badge">
+                        <span class="dep-badge-dot"></span>
+                        <span>Shorts &bull; 0:56</span>
+                      </div>
+                      <div class="dep-poster-meta">
+                        <span class="dep-poster-tag">Mentoria Individual</span>
+                      </div>
+                    </div>
+
+                    <!-- Botão de Play com Anel Pulsante -->
+                    <span class="dep-play-btn" aria-hidden="true">
+                      <svg class="dep-play-ring-svg" viewBox="0 0 56 56">
+                        <circle class="dep-play-ring-bg" cx="28" cy="28" r="25"/>
+                        <circle class="dep-play-ring-active" cx="28" cy="28" r="25"/>
+                      </svg>
+                      <span class="dep-play-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Legenda do Genilson abaixo do quadro de vídeo -->
+              <figcaption class="dep-caption dep-video-caption">
+                <span class="dep-author-name">Genilson Alves</span>
+                <span class="dep-author-role">Mentorado em liderança</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <!-- Coluna 2: Citações das duas fichas empilhadas -->
+          <div class="dep-col-quotes">
+
+            <!-- Ficha 1: Citações de Genilson Alves -->
+            <article class="dep-card dep-card-genilson">
+              <div class="dep-card-rail" aria-hidden="true">
+                <span class="dep-card-line"></span>
+              </div>
+              <div class="dep-card-content">
+                <figure class="dep-quote-figure">
+                  <div class="dep-quote-mark" aria-hidden="true">“</div>
+                  <blockquote class="dep-blockquote">
+                    <p class="dep-quote">“O Adalberto se prepara antes das nossas conversas e ele sempre entrega muito mais do que a gente combinou.”</p>
+                    <p class="dep-quote">“Hoje eu vejo que investir numa mentoria não é custo, é investimento.”</p>
+                  </blockquote>
+                  <figcaption class="dep-caption dep-mobile-only-caption">
+                    <span class="dep-author-name">Genilson Alves</span>
+                    <span class="dep-author-role">Mentorado em liderança</span>
+                  </figcaption>
+                </figure>
+              </div>
+            </article>
+
+            <!-- Divisor sutil entre fichas -->
+            <div class="dep-divider" aria-hidden="true"></div>
+
+            <!-- Ficha 2: Guilherme Araújo (só texto) -->
+            <article class="dep-card dep-card-guilherme">
+              <div class="dep-card-rail" aria-hidden="true">
+                <span class="dep-card-line"></span>
+              </div>
+              <div class="dep-card-content">
+                <figure class="dep-quote-figure">
+                  <div class="dep-quote-mark" aria-hidden="true">“</div>
+                  <blockquote class="dep-blockquote">
+                    <p class="dep-quote">“A mentoria em si foi um verdadeiro divisor de águas.”</p>
+                    <p class="dep-quote">“Encontrei uma direção, uma clareza e confiança para atuar num cenário totalmente novo para mim, que é liderança e gestão de pessoas.”</p>
+                    <p class="dep-quote">“Recomendo fortemente essa mentoria para líderes em ascensão ou líderes mais experientes.”</p>
+                  </blockquote>
+                  <figcaption class="dep-caption">
+                    <span class="dep-author-name">Guilherme Araújo</span>
+                    <span class="dep-author-role">Mentorado em liderança</span>
+                  </figcaption>
+                </figure>
+
+                <!-- Link para o depoimento completo -->
+                <div class="dep-link-wrap">
+                  <a href="https://www.youtube.com/watch?v=P2N2oxwOpwo"
+                     class="dep-ext-link"
+                     target="_blank"
+                     rel="noopener noreferrer">
+                    <span>Assistir ao depoimento completo no YouTube (3 min)</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 9: YOUTUBE (id="youtube")
+    ============================================================ -->
+    <section id="youtube" class="section-light section-youtube" aria-labelledby="youtube-title">
+      <div class="max-w youtube-container">
+
+        <!-- Cabeçalho da Dobra -->
+        <div class="youtube-header">
+          <span class="youtube-kicker"><span class="kicker-dot" aria-hidden="true"></span>No YouTube</span>
+          <h2 class="youtube-title" id="youtube-title">Conheça o conteúdo no canal.</h2>
+          <p class="youtube-lead">Vídeos práticos sobre liderança e gestão de pessoas, para você me conhecer antes de conversar.</p>
+        </div>
+
+        <!-- Grade Principal de Vídeos (Destaque à esquerda + 3 à direita) -->
+        <div class="youtube-grid">
+
+          <!-- Vídeo 1: Destaque Principal -->
+          <article class="youtube-card youtube-card-featured" data-video-id="fvk7j56Eohs">
+            <div class="youtube-player-frame">
+              <!-- Cantoneiras Decorativas em SVG -->
+              <svg class="youtube-corners-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <path class="youtube-corner-path" d="M 0 18 L 0 0 L 18 0" />
+                <path class="youtube-corner-path" d="M 82 0 L 100 0 L 100 18" />
+                <path class="youtube-corner-path" d="M 0 82 L 0 100 L 18 100" />
+                <path class="youtube-corner-path" d="M 82 100 L 100 100 L 100 82" />
+              </svg>
+
+              <div class="youtube-player-container" data-video-id="fvk7j56Eohs" data-video-title="Como lidar com funcionários difíceis: 3 tipos que sabotam sua liderança">
+                <a href="https://www.youtube.com/watch?v=fvk7j56Eohs" class="youtube-facade" target="_blank" rel="noopener" aria-label="Reproduzir: Como lidar com funcionários difíceis: 3 tipos que sabotam sua liderança">
+                  <img src="assets/yt-fvk7j56Eohs.webp" alt="Como lidar com funcionários difíceis: 3 tipos que sabotam sua liderança" width="640" height="360" loading="lazy" decoding="async" class="youtube-thumb">
+                  <span class="youtube-duration" aria-label="Duração: 15 minutos e 15 segundos">15:15</span>
+                  <span class="youtube-play-btn" aria-hidden="true">
+                    <svg class="youtube-play-ring-svg" viewBox="0 0 54 54">
+                      <circle class="youtube-play-ring-bg" cx="27" cy="27" r="24"/>
+                      <circle class="youtube-play-ring-active" cx="27" cy="27" r="24"/>
+                    </svg>
+                    <span class="youtube-play-icon">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <div class="youtube-info youtube-info-featured">
+              <span class="youtube-badge">Vídeo em destaque</span>
+              <h3 class="youtube-card-title youtube-card-title-lg">Como lidar com funcionários difíceis: 3 tipos que sabotam sua liderança</h3>
+            </div>
+          </article>
+
+          <!-- Coluna com os Outros 3 Vídeos (Estilo Fita de Filme) -->
+          <div class="youtube-side-col">
+            
+            <!-- Fita Perfurada Superior Decorativa -->
+            <div class="youtube-sprocket-wrap" aria-hidden="true">
+              <div class="youtube-sprocket-strip">
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+              </div>
+            </div>
+
+            <div class="youtube-side-list">
+
+              <!-- Vídeo 2 -->
+              <article class="youtube-card youtube-card-side" data-video-id="0Hiun9zey80">
+                <div class="youtube-player-container youtube-player-side" data-video-id="0Hiun9zey80" data-video-title="Quando demitir um funcionário: 4 sinais de que não dá mais para esperar">
+                  <a href="https://www.youtube.com/watch?v=0Hiun9zey80" class="youtube-facade" target="_blank" rel="noopener" aria-label="Reproduzir: Quando demitir um funcionário: 4 sinais de que não dá mais para esperar">
+                    <img src="assets/yt-0Hiun9zey80.webp" alt="Quando demitir um funcionário: 4 sinais de que não dá mais para esperar" width="640" height="360" loading="lazy" decoding="async" class="youtube-thumb">
+                    <span class="youtube-duration" aria-label="Duração: 11 minutos e 14 segundos">11:14</span>
+                    <span class="youtube-play-btn youtube-play-btn-sm" aria-hidden="true">
+                      <svg class="youtube-play-ring-svg" viewBox="0 0 54 54">
+                        <circle class="youtube-play-ring-bg" cx="27" cy="27" r="24"/>
+                        <circle class="youtube-play-ring-active" cx="27" cy="27" r="24"/>
+                      </svg>
+                      <span class="youtube-play-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+                <div class="youtube-info youtube-info-side">
+                  <h3 class="youtube-card-title">Quando demitir um funcionário: 4 sinais de que não dá mais para esperar</h3>
+                </div>
+              </article>
+
+              <!-- Vídeo 3 -->
+              <article class="youtube-card youtube-card-side" data-video-id="hI4XcXYcs5M">
+                <div class="youtube-player-container youtube-player-side" data-video-id="hI4XcXYcs5M" data-video-title="Feedback para funcionários difíceis: 4 erros que todo líder precisa eliminar hoje">
+                  <a href="https://www.youtube.com/watch?v=hI4XcXYcs5M" class="youtube-facade" target="_blank" rel="noopener" aria-label="Reproduzir: Feedback para funcionários difíceis: 4 erros que todo líder precisa eliminar hoje">
+                    <img src="assets/yt-hI4XcXYcs5M.webp" alt="Feedback para funcionários difíceis: 4 erros que todo líder precisa eliminar hoje" width="640" height="360" loading="lazy" decoding="async" class="youtube-thumb">
+                    <span class="youtube-duration" aria-label="Duração: 14 minutos e 45 segundos">14:45</span>
+                    <span class="youtube-play-btn youtube-play-btn-sm" aria-hidden="true">
+                      <svg class="youtube-play-ring-svg" viewBox="0 0 54 54">
+                        <circle class="youtube-play-ring-bg" cx="27" cy="27" r="24"/>
+                        <circle class="youtube-play-ring-active" cx="27" cy="27" r="24"/>
+                      </svg>
+                      <span class="youtube-play-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+                <div class="youtube-info youtube-info-side">
+                  <h3 class="youtube-card-title">Feedback para funcionários difíceis: 4 erros que todo líder precisa eliminar hoje</h3>
+                </div>
+              </article>
+
+              <!-- Vídeo 4 -->
+              <article class="youtube-card youtube-card-side" data-video-id="fnpmkWW539I">
+                <div class="youtube-player-container youtube-player-side" data-video-id="fnpmkWW539I" data-video-title="Liderança e Inteligência Artificial: o erro que deixa líderes para trás">
+                  <a href="https://www.youtube.com/watch?v=fnpmkWW539I" class="youtube-facade" target="_blank" rel="noopener" aria-label="Reproduzir: Liderança e Inteligência Artificial: o erro que deixa líderes para trás">
+                    <img src="assets/yt-fnpmkWW539I.webp" alt="Liderança e Inteligência Artificial: o erro que deixa líderes para trás" width="640" height="360" loading="lazy" decoding="async" class="youtube-thumb">
+                    <span class="youtube-duration" aria-label="Duração: 14 minutos e 3 segundos">14:03</span>
+                    <span class="youtube-play-btn youtube-play-btn-sm" aria-hidden="true">
+                      <svg class="youtube-play-ring-svg" viewBox="0 0 54 54">
+                        <circle class="youtube-play-ring-bg" cx="27" cy="27" r="24"/>
+                        <circle class="youtube-play-ring-active" cx="27" cy="27" r="24"/>
+                      </svg>
+                      <span class="youtube-play-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+                <div class="youtube-info youtube-info-side">
+                  <h3 class="youtube-card-title">Liderança e Inteligência Artificial: o erro que deixa líderes para trás</h3>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- Fita Perfurada Inferior Decorativa -->
+            <div class="youtube-sprocket-wrap" aria-hidden="true">
+              <div class="youtube-sprocket-strip">
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+                <span class="youtube-sprocket"></span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Fechamento: Botão Secundário para o Canal -->
+        <div class="youtube-action">
+          <a href="https://www.youtube.com/@adalbertofchagas" class="btn btn-ghost youtube-btn-channel" target="_blank" rel="noopener">
+            <span>Ver o canal no YouTube</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ============================================================
          DOBRA 11: PERGUNTAS FREQUENTES (Fundo Navy)
     ============================================================ -->
     <section id="faq" class="section-dark section-faq" aria-labelledby="faq-title">
@@ -7756,7 +10491,7 @@
               <div class="faq-answer-wrap" id="faq-ans-8" role="region" aria-labelledby="faq-btn-8">
                 <div class="faq-answer-inner">
                   <div class="faq-answer-content">
-                    <p class="faq-answer-text">Eles são usados para analisar o seu perfil e combinar a conversa. Pedidos que não viram contratação são mantidos por até 24 meses, e você pode pedir a exclusão a qualquer momento, com atendimento em até 15 dias. Os detalhes estão na Política de Privacidade.</p>
+                    <p class="faq-answer-text">Eles são usados para analisar o seu perfil e combinar a conversa. Pedidos que não viram contratação são mantidos por até 24 meses, e você pode pedir a exclusão a qualquer momento, com atendimento em até 15 dias. Os detalhes estão na <a href="privacidade.html" class="faq-answer-link">Política de Privacidade</a>.</p>
                     <div class="faq-answer-action">
                       <a href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto.%20Vim%20pelo%20site%20da%20Academy%20e%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20tratamento%20dos%20meus%20dados." class="btn btn-ghost faq-btn-wa" target="_blank" rel="noopener">
                         <span>Perguntar no WhatsApp</span>
@@ -7994,8 +10729,10 @@
       <div class="rodape-legal">
         <div class="rodape-legal-meta">
           <p class="rodape-legal-p">Uma marca da 1234 Solution Ltda. CNPJ 56.364.941/0001-69.</p>
-          <!-- ativar quando a página privacidade existir -->
-          <!-- <li><a href="/privacidade/">Política de Privacidade</a></li> -->
+          <div class="rodape-legal-links">
+            <a class="rodape-legal-link" href="privacidade.html">Política de Privacidade</a>
+            <button type="button" class="rodape-legal-link rodape-cookies-btn" data-consent-open>Gerenciar cookies</button>
+          </div>
           <p class="rodape-legal-p">&copy; 2026 1234 Solution Ltda. Todos os direitos reservados.</p>
         </div>
         <a href="#hero" class="rodape-back-top" id="rodapeBackToTop" aria-label="Voltar ao topo">
@@ -8733,16 +11470,22 @@
         });
       }
 
-      function scrollToDores(smooth) {
+      function calculateDoresTargetY() {
         const doresSection = $('#dores');
         const header = $('#siteHeader');
-        if (!doresSection) return;
+        if (!doresSection) return 0;
         const headerHeight = header ? header.getBoundingClientRect().height : 72;
         const sectionRect = doresSection.getBoundingClientRect();
-        const targetScrollY = (window.scrollY + sectionRect.top)-(headerHeight + 24);
+        return Math.max(0, (window.scrollY + sectionRect.top) - (headerHeight + 24));
+      }
+
+      function scrollToDores(smooth) {
+        const targetScrollY = calculateDoresTargetY();
+        const reduced = root.classList.contains('rm') ||
+          (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
         window.scrollTo({
-          top: Math.max(0, targetScrollY),
-          behavior: smooth ? 'smooth' : 'auto'
+          top: targetScrollY,
+          behavior: (smooth && !reduced) ? 'smooth' : 'auto'
         });
       }
 
@@ -8751,11 +11494,58 @@
       const heroSecondaryBtn = $('#heroSecondaryBtn');
 
       const handleHeroNavigation = (targetId) => {
+        // 1. Troca a aba primeiro para renderizar o conteudo correto
         setTab(targetId, false);
-        if (window.history && window.history.replaceState) {
+
+        // 2. Atualiza hash no historico do navegador
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, '', '#' + targetId);
+        } else if (window.history && window.history.replaceState) {
           window.history.replaceState(null, '', '#' + targetId);
         }
-        scrollToDores(true);
+
+        // 3. Foco acessivel no painel sem disparar rolagem nativa concorrente
+        const activePanel = $('#' + targetId);
+        if (activePanel) {
+          activePanel.setAttribute('tabindex', '-1');
+          activePanel.focus({ preventScroll: true });
+        }
+
+        // 4. Aguarda dois quadros de animacao para estabilizacao do layout e updates pendentes
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            // Sincroniza triggers do ScrollTrigger antes de medir se disponivel
+            if (hasGsap && window.ScrollTrigger) {
+              ScrollTrigger.refresh();
+            }
+
+            // Recalcula o alvo no exato momento da rolagem
+            const targetY = calculateDoresTargetY();
+            const reduced = root.classList.contains('rm') ||
+              (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+            window.scrollTo({
+              top: targetY,
+              behavior: reduced ? 'auto' : 'smooth'
+            });
+
+            // 5. Se a rolagem for interrompida por ciclo subsequente, repete uma vez apos 150 ms
+            setTimeout(() => {
+              const doresEl = $('#dores');
+              const headerEl = $('#siteHeader');
+              const hHeight = headerEl ? headerEl.getBoundingClientRect().height : 72;
+              const curTop = doresEl ? doresEl.getBoundingClientRect().top : 0;
+              // Se a secao nao estiver posicionada entre 80px e 120px do topo da viewport
+              if (Math.abs(curTop - (hHeight + 24)) > 40) {
+                const retryY = calculateDoresTargetY();
+                window.scrollTo({
+                  top: retryY,
+                  behavior: reduced ? 'auto' : 'smooth'
+                });
+              }
+            }, 150);
+          });
+        });
       };
 
       if (heroPrimaryBtn) {
@@ -9649,6 +12439,26 @@
   }
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Adalberto Chagas Academy",
+    "url": "https://adalbertochagas.com.br/",
+    "logo": "https://adalbertochagas.com.br/assets/favicon-512.png",
+    "email": "adalberto@adalbertochagas.com.br",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "1234 Solution Ltda"
+    },
+    "sameAs": [
+      "https://www.youtube.com/@adalbertofchagas",
+      "https://www.instagram.com/adalbertoch",
+      "https://www.linkedin.com/in/adalbertofchagas"
+    ]
+  }
+  </script>
+
   <!-- ============================================================
        SCRIPTS: DOBRA 11: FAQ (FUNÇÃO ISOLADA)
   ============================================================ -->
@@ -9965,5 +12775,517 @@
       }
     })();
   </script>
+
+  <!-- ============================================================
+       DOBRA 8: SCRIPT QUEM CONDUZ (IIFE Isolada)
+  ============================================================ -->
+  <script>
+    (function initQuemConduz() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+      const section = $('#quem-conduz');
+      if (!section) return;
+
+      // Toggle Formação Completa
+      const toggleBtn = $('#quemconduzFormacaoBtn', section);
+      const collapse = $('#quemconduzFormacaoCollapse', section);
+      if (toggleBtn && collapse) {
+        toggleBtn.addEventListener('click', () => {
+          const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+          toggleBtn.setAttribute('aria-expanded', !isExpanded);
+          collapse.setAttribute('aria-hidden', isExpanded);
+          collapse.classList.toggle('is-open', !isExpanded);
+          const btnText = $('.quemconduz-btn-text', toggleBtn);
+          if (btnText) {
+            btnText.textContent = isExpanded ? 'Ver formação completa' : 'Recolher formação';
+          }
+          if (hasGsap) {
+            ScrollTrigger.refresh();
+          }
+        });
+      }
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Título com SplitText se disponível
+      const title = $('.quemconduz-title', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'quemconduz-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      // 2. Cantoneiras do Retrato (stroke-dashoffset)
+      const cornerPaths = $$('.quemconduz-corner-path', section);
+      if (cornerPaths.length) {
+        gsap.fromTo(cornerPaths,
+          { strokeDashoffset: 40 },
+          {
+            strokeDashoffset: 0,
+            duration: 1.0,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.quemconduz-frame',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 3. Parallax sutil no retrato (somente desktop > 768px, max 12px)
+      const portraitInner = $('.quemconduz-portrait-inner', section);
+      if (portraitInner && window.innerWidth > 768) {
+        gsap.to(portraitInner, {
+          y: 12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.quemconduz-portrait-col',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+
+      // 4. Células do Carimbo encaixam em cascata (stagger curto)
+      const cells = $$('.quemconduz-cell', section);
+      if (cells.length) {
+        gsap.from(cells, {
+          y: 16,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.quemconduz-cells-grid',
+            start: 'top 85%',
+            once: true
+          }
+        });
+      }
+
+      // 5. Régua Dourada com Scrub
+      const reguaActive = $('.quemconduz-regua-active', section);
+      if (reguaActive) {
+        gsap.fromTo(reguaActive,
+          { strokeDashoffset: 1200 },
+          {
+            strokeDashoffset: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.quemconduz-regua-wrap',
+              start: 'top 92%',
+              end: 'bottom 75%',
+              scrub: true
+            }
+          }
+        );
+      }
+
+      // 6. Contadores Animados (sobem uma única vez)
+      const statVals = $$('.quemconduz-stat-val', section);
+      if (statVals.length) {
+        ScrollTrigger.create({
+          trigger: '#quemconduzStatsGrid',
+          start: 'top 88%',
+          once: true,
+          onEnter: () => {
+            statVals.forEach(valEl => {
+              const target = parseInt(valEl.getAttribute('data-target'), 10);
+              const suffix = valEl.getAttribute('data-suffix') || '';
+              if (isNaN(target)) return;
+              const obj = { val: 0 };
+              gsap.to(obj, {
+                val: target,
+                duration: 1.4,
+                ease: 'power2.out',
+                onUpdate: () => {
+                  valEl.textContent = Math.round(obj.val) + suffix;
+                }
+              });
+            });
+          }
+        });
+      }
+    })();
+  </script>
+
+
+  <!-- ============================================================
+       DOBRA 9: SCRIPT YOUTUBE (IIFE Isolada)
+  ============================================================ -->
+  <script>
+    (function initYouTube() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+      const section = $('#youtube');
+      if (!section) return;
+
+      const containers = $$('.youtube-player-container', section);
+      let activeContainer = null;
+
+      function restoreFacade(container) {
+        if (!container) return;
+        const existingIframe = $('iframe', container);
+        if (existingIframe) {
+          existingIframe.remove();
+        }
+        const facade = $('.youtube-facade', container);
+        if (facade) {
+          facade.style.display = '';
+          facade.removeAttribute('aria-hidden');
+        }
+      }
+
+      function activateVideo(container) {
+        const videoId = container.getAttribute('data-video-id');
+        const videoTitle = container.getAttribute('data-video-title') || 'Vídeo no YouTube';
+        if (!videoId) return;
+
+        const facade = $('.youtube-facade', container);
+
+        // Se aberta localmente via file://, abre em nova aba sem instanciar iframe (evita erro 153)
+        if (window.location && window.location.protocol === 'file:') {
+          const videoUrl = facade && facade.href ? facade.href : ('https://www.youtube.com/watch?v=' + videoId);
+          window.open(videoUrl, '_blank', 'noopener');
+          return;
+        }
+
+        if (activeContainer && activeContainer !== container) {
+          restoreFacade(activeContainer);
+        }
+
+        if (facade) {
+          facade.style.display = 'none';
+          facade.setAttribute('aria-hidden', 'true');
+        }
+
+        const iframe = document.createElement('iframe');
+        iframe.className = 'youtube-iframe';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&playsinline=1';
+        iframe.title = videoTitle;
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+
+        container.appendChild(iframe);
+        activeContainer = container;
+        iframe.focus();
+      }
+
+      containers.forEach(container => {
+        const facade = $('.youtube-facade', container);
+        if (!facade) return;
+
+        facade.addEventListener('click', (e) => {
+          if (e.ctrlKey || e.metaKey || e.button === 1 || e.shiftKey) return;
+          e.preventDefault();
+          activateVideo(container);
+        });
+
+        facade.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            activateVideo(container);
+          }
+        });
+      });
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Título com SplitText se disponível
+      const title = $('.youtube-title', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'yt-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      // 2. Cantoneiras do Destaque (stroke-dashoffset)
+      const cornerPaths = $$('.youtube-corner-path', section);
+      if (cornerPaths.length) {
+        gsap.fromTo(cornerPaths,
+          { strokeDashoffset: 40 },
+          {
+            strokeDashoffset: 0,
+            duration: 1.0,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.youtube-card-featured',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 3. Fitas perfuradas com leve scrub no desktop
+      const sprocketStrips = $$('.youtube-sprocket-strip', section);
+      if (sprocketStrips.length && window.innerWidth > 768) {
+        gsap.to(sprocketStrips, {
+          x: 24,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.youtube-side-col',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+
+      // 4. Entrada em cascata das miniaturas com clip-path
+      const cards = $$('.youtube-card', section);
+      if (cards.length) {
+        gsap.from(cards, {
+          y: 24,
+          opacity: 0,
+          duration: 0.65,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.youtube-grid',
+            start: 'top 85%',
+            once: true
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- ============================================================
+       DOBRA: SCRIPT DEPOIMENTOS (IIFE Isolada)
+  ============================================================ -->
+  <script>
+    (function initDepoimentos() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+      const section = $('#depoimentos');
+      if (!section) return;
+
+      const container = $('.dep-player-container', section);
+      if (container) {
+        const facade = $('.dep-facade', container);
+        const videoId = container.getAttribute('data-video-id');
+        const videoTitle = container.getAttribute('data-video-title') || 'Depoimento de Genilson Alves';
+
+        function activateVideo() {
+          if (!videoId) return;
+
+          // Se aberta localmente via file://, abre em nova aba sem instanciar iframe (evita erro 153)
+          if (window.location && window.location.protocol === 'file:') {
+            const videoUrl = 'https://www.youtube.com/watch?v=' + videoId;
+            window.open(videoUrl, '_blank', 'noopener,noreferrer');
+            return;
+          }
+
+          if (facade) {
+            facade.style.display = 'none';
+            facade.setAttribute('aria-hidden', 'true');
+          }
+
+          const iframe = document.createElement('iframe');
+          iframe.className = 'dep-iframe';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0&playsinline=1';
+          iframe.title = videoTitle;
+          iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+          iframe.allowFullscreen = true;
+          iframe.loading = 'lazy';
+
+          container.appendChild(iframe);
+          iframe.focus();
+        }
+
+        if (facade) {
+          facade.addEventListener('click', (e) => {
+            if (e.ctrlKey || e.metaKey || e.button === 1 || e.shiftKey) return;
+            e.preventDefault();
+            activateVideo();
+          });
+
+          facade.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              activateVideo();
+            }
+          });
+        }
+      }
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Titulo com SplitText se disponivel
+      const title = $('.dep-title', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'dep-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      // 2. Cantoneiras do Video (stroke-dashoffset) e Zoom Sutil na Foto (1.04 -> 1)
+      const cornerPaths = $$('.dep-corner-path', section);
+      if (cornerPaths.length) {
+        gsap.fromTo(cornerPaths,
+          { strokeDashoffset: 40 },
+          {
+            strokeDashoffset: 0,
+            duration: 1.0,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.dep-player-frame',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      const posterImg = $('.dep-poster-img', section);
+      if (posterImg) {
+        gsap.fromTo(posterImg,
+          { scale: 1.04 },
+          {
+            scale: 1,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.dep-player-frame',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 3. Linhas verticais tecnicas nas fichas (scaleY 0 -> 1)
+      const cardLines = $$('.dep-card-line', section);
+      if (cardLines.length) {
+        cardLines.forEach((line) => {
+          gsap.fromTo(line,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: line,
+                start: 'top 88%',
+                once: true
+              }
+            }
+          );
+        });
+      }
+
+      // 4. Citacoes entram suavemente
+      const quotes = $$('.dep-quote', section);
+      if (quotes.length) {
+        gsap.from(quotes, {
+          y: 18,
+          opacity: 0,
+          duration: 0.65,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.dep-col-quotes',
+            start: 'top 85%',
+            once: true
+          }
+        });
+      }
+    })();
+  </script>
+
+  <script src="assets/consent.js" defer></script>
 </body>
 </html>
