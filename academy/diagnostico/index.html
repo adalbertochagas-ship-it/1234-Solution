@@ -45,6 +45,395 @@
     })();
   </script>
 
+  <!-- Script: Animações e Efeitos da Dobra Sinais (Dobra 2) -->
+  <script>
+    (function initSinais() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+      const section = $('#sinais');
+      if (!section) return;
+
+      const cards = $$('.sinais-card', section);
+
+      // Spotlight radial suave acompanhando ponteiro com requestAnimationFrame
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cards.forEach((card) => {
+          let rafId = null;
+          card.addEventListener('pointermove', (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              const r = card.getBoundingClientRect();
+              const mx = e.clientX - r.left;
+              const my = e.clientY - r.top;
+              card.style.setProperty('--mx', mx + 'px');
+              card.style.setProperty('--my', my + 'px');
+            });
+          });
+        });
+      }
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Cabecalho: H2 com SplitText, Kicker dot pulse, Lead fade
+      const title = $('#sinaisTitle', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'sinais-title-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      const kickerDot = $('.sinais-kicker .kicker-dot', section);
+      if (kickerDot) {
+        gsap.fromTo(kickerDot,
+          { scale: 0.6, opacity: 0.4 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: '.sinais-header',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      const lead = $('.sinais-lead', section);
+      if (lead) {
+        gsap.from(lead, {
+          y: 14,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          delay: 0.15,
+          scrollTrigger: {
+            trigger: lead,
+            start: 'top 85%',
+            once: true
+          }
+        });
+      }
+
+      // 2. Fio de Ligacao SVG (Scrub) e Nos Circulares
+      const wirePath = $('.sinais-wire-path', section);
+      const wireNodes = $$('.sinais-card-node', section);
+      if (wirePath) {
+        gsap.fromTo(wirePath,
+          { strokeDashoffset: 800 },
+          {
+            strokeDashoffset: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.sinais-grid',
+              start: 'top 80%',
+              end: 'bottom 85%',
+              scrub: 0.5
+            }
+          }
+        );
+      }
+      if (wireNodes.length) {
+        wireNodes.forEach((node, i) => {
+          gsap.fromTo(node,
+            { scale: 0.7, opacity: 0.4 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.4,
+              ease: 'back.out(2)',
+              scrollTrigger: {
+                trigger: cards[i] || '.sinais-grid',
+                start: 'top 78%',
+                once: true
+              }
+            }
+          );
+        });
+      }
+
+      // 3. Cartoes: Entrada em sequencia com stagger
+      if (cards.length) {
+        gsap.from(cards, {
+          y: 20,
+          opacity: 0,
+          duration: 0.65,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.sinais-grid',
+            start: 'top 82%',
+            once: true
+          }
+        });
+      }
+
+      const topLines = $$('.sinais-card-top-line', section);
+      if (topLines.length) {
+        gsap.fromTo(topLines,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 0.75,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.sinais-grid',
+              start: 'top 82%',
+              once: true
+            }
+          }
+        );
+      }
+
+      const nums = $$('.sinais-card-num', section);
+      if (nums.length) {
+        gsap.fromTo(nums,
+          { clipPath: 'inset(0 100% 0 0)' },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 0.6,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.sinais-grid',
+              start: 'top 82%',
+              once: true
+            }
+          }
+        );
+      }
+
+      const iconPaths = $$('.sinais-icon-path', section);
+      if (iconPaths.length) {
+        gsap.fromTo(iconPaths,
+          { strokeDashoffset: 80 },
+          {
+            strokeDashoffset: 0,
+            duration: 0.9,
+            stagger: 0.04,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.sinais-grid',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+      }
+    })();
+  </script>
+
+  <!-- Script: Animações e Efeitos de O Que Mostra (Dobra 3) -->
+  <script>
+    (function initMostra() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+      const section = $('#o-que-mostra');
+      if (!section) return;
+
+      const cards = $$('.mostra-card', section);
+
+      // Spotlight radial suave acompanhando ponteiro com requestAnimationFrame
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cards.forEach((card) => {
+          let rafId = null;
+          card.addEventListener('pointermove', (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              const r = card.getBoundingClientRect();
+              const mx = e.clientX - r.left;
+              const my = e.clientY - r.top;
+              card.style.setProperty('--mx', mx + 'px');
+              card.style.setProperty('--my', my + 'px');
+            });
+          });
+        });
+      }
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Cabecalho: H2 com SplitText, Kicker dot pulse
+      const title = $('#mostraTitle', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'mostra-title-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      const kickerDot = $('.mostra-kicker .kicker-dot', section);
+      if (kickerDot) {
+        gsap.fromTo(kickerDot,
+          { scale: 0.6, opacity: 0.4 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: '.mostra-header',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 2. Regua de leitura tecnica SVG
+      const rulerPath = $('.mostra-ruler-path', section);
+      if (rulerPath) {
+        gsap.fromTo(rulerPath,
+          { strokeDashoffset: 1800 },
+          {
+            strokeDashoffset: 0,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.mostra-ruler-svg',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 3. Linha de Varredura e Revelacao dos Cartoes
+      const scanLine = $('.mostra-scan-line', section);
+      const gridWrapper = $('.mostra-grid-wrapper', section);
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+      // Estado inicial dos cartoes e icones
+      gsap.set(cards, { opacity: 0, y: 16 });
+      const nums = $$('.mostra-card-num', section);
+      gsap.set(nums, { clipPath: 'inset(0 100% 0 0)' });
+      const iconPaths = $$('.mostra-icon-path', section);
+      gsap.set(iconPaths, { strokeDashoffset: 80 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gridWrapper || section,
+          start: 'top 80%',
+          once: true
+        }
+      });
+
+      if (scanLine && gridWrapper) {
+        const wrapRect = gridWrapper.getBoundingClientRect();
+        if (!isMobile) {
+          const travelDist = gridWrapper.offsetWidth || wrapRect.width || 1200;
+          tl.set(scanLine, { opacity: 1, x: 0 })
+            .to(scanLine, {
+              x: travelDist + 20,
+              duration: 1.4,
+              ease: 'power1.inOut'
+            }, 0);
+        } else {
+          const travelDist = gridWrapper.offsetHeight || wrapRect.height || 800;
+          tl.set(scanLine, { opacity: 1, y: 0 })
+            .to(scanLine, {
+              y: travelDist + 20,
+              duration: 1.4,
+              ease: 'power1.inOut'
+            }, 0);
+        }
+        tl.to(scanLine, { opacity: 0, duration: 0.25 }, '-=0.2');
+      }
+
+      // Cada cartao reage quando a varredura atinge seu intervalo
+      cards.forEach((card, i) => {
+        const cardDelay = 0.15 + i * 0.25;
+        tl.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          ease: 'power2.out',
+          onStart: () => card.classList.add('is-reading'),
+          onComplete: () => {
+            setTimeout(() => card.classList.remove('is-reading'), 300);
+          }
+        }, cardDelay);
+
+        const num = nums[i];
+        if (num) {
+          tl.to(num, {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 0.45,
+            ease: 'power2.out'
+          }, cardDelay + 0.05);
+        }
+
+        const cardIcons = $$('.mostra-icon-path', card);
+        if (cardIcons.length) {
+          tl.to(cardIcons, {
+            strokeDashoffset: 0,
+            duration: 0.7,
+            stagger: 0.04,
+            ease: 'power2.out'
+          }, cardDelay + 0.1);
+        }
+      });
+    })();
+  </script>
+
   <!-- Google Fonts: Fraunces, IBM Plex Sans, IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -557,8 +946,8 @@
         radial-gradient(circle, rgba(198, 164, 90, 0.08) 1px, transparent 1px),
         linear-gradient(180deg, rgba(14, 27, 43, 0.85) 0%, rgba(22, 40, 63, 0.95) 100%);
       background-size: 24px 24px, 100% 100%;
-      padding-top: calc(var(--space-16) + 1.25rem);
-      padding-bottom: var(--space-16);
+      padding-top: calc(var(--space-12) + 2rem);
+      padding-bottom: var(--space-12);
       position: relative;
       overflow: hidden;
       border-bottom: 1px solid var(--navy-3);
@@ -567,16 +956,15 @@
     .hero-container {
       position: relative;
       z-index: 2;
-      max-width: 1200px;
-      margin-inline: auto;
+      width: 100%;
     }
 
     /* Grade do Hero: 2 colunas no desktop (> 1024px) */
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-      column-gap: var(--space-10);
-      row-gap: var(--space-4);
+      grid-template-columns: minmax(0, 44%) minmax(0, 56%);
+      column-gap: 2rem;
+      row-gap: var(--space-3);
       align-items: center;
     }
 
@@ -602,8 +990,8 @@
     .hero-title {
       grid-column: 1;
       font-family: var(--font-title);
-      font-size: clamp(2rem, 3vw, 2.75rem);
-      line-height: 1.16;
+      font-size: clamp(1.85rem, 2.4vw, 2.25rem);
+      line-height: 1.18;
       font-weight: 700;
       color: var(--paper);
       margin: 0;
@@ -619,8 +1007,8 @@
     .hero-lead {
       grid-column: 1;
       font-family: var(--font-body);
-      font-size: clamp(1rem, 1.35vw, 1.15rem);
-      line-height: 1.58;
+      font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+      line-height: 1.55;
       color: var(--text-lede);
       margin: 0;
       text-align: left;
@@ -631,13 +1019,13 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--space-3);
+      gap: var(--space-2);
       margin-top: var(--space-2);
     }
 
     .hero-btn-primary {
-      font-size: 1rem;
-      padding: 1.05rem 2.4rem;
+      font-size: 0.9375rem;
+      padding: 0.95rem 2.2rem;
       min-height: 48px;
     }
 
@@ -812,20 +1200,33 @@
       display: inline-block;
     }
 
-    /* Botao de Play Central */
-    .vsl-play-btn {
+    /* Botao de Play: Pilula Dourada Discreta no canto inferior direito */
+    .vsl-play-pill {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 6px 16px 6px 8px;
+      background: rgba(14, 27, 43, 0.88);
+      border: 1px solid rgba(198, 164, 90, 0.45);
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 16px rgba(10, 18, 30, 0.5);
+      pointer-events: none;
+      transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .vsl-play-icon-wrap {
+      position: relative;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 3;
-      pointer-events: none;
+      flex-shrink: 0;
     }
 
     .vsl-play-ring-svg {
@@ -836,15 +1237,15 @@
     }
 
     .vsl-play-ring-bg {
-      fill: rgba(14, 27, 43, 0.82);
-      stroke: rgba(198, 164, 90, 0.45);
+      fill: rgba(14, 27, 43, 0.9);
+      stroke: rgba(198, 164, 90, 0.5);
       stroke-width: 1.5;
     }
 
     .vsl-play-ring-active {
       fill: none;
       stroke: var(--gold);
-      stroke-width: 2;
+      stroke-width: 1.8;
       transform-origin: center;
       animation: vslPlayPulse 2.8s ease-in-out infinite;
     }
@@ -855,8 +1256,8 @@
         opacity: 0.85;
       }
       50% {
-        transform: scale(1.14);
-        opacity: 0.3;
+        transform: scale(1.18);
+        opacity: 0.25;
       }
     }
 
@@ -867,18 +1268,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-left: 3px;
+      margin-left: 2px;
       transition: transform 0.25s ease, color 0.25s ease;
     }
 
+    .vsl-play-text {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--paper);
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+      white-space: nowrap;
+    }
+
     @media (hover: hover) and (pointer: fine) {
+      .vsl-facade:hover .vsl-play-pill {
+        background: rgba(14, 27, 43, 0.98);
+        border-color: var(--gold);
+        transform: translateY(-1px);
+      }
       .vsl-facade:hover .vsl-play-icon {
         color: var(--gold-2);
         transform: scale(1.08);
       }
-      .vsl-facade:hover .vsl-play-ring-bg {
-        fill: rgba(14, 27, 43, 0.95);
-        stroke: var(--gold);
+      .vsl-facade:hover .vsl-play-text {
+        color: var(--gold-2);
       }
     }
 
@@ -898,15 +1314,15 @@
     /* Responsividade <= 1024px: 1 coluna centralizada e sequencial */
     @media (max-width: 1024px) {
       .section-hero {
-        padding-top: calc(var(--space-12) + 2rem);
-        padding-bottom: var(--space-12);
+        padding-top: calc(var(--space-10) + 1.75rem);
+        padding-bottom: var(--space-8);
       }
 
       .hero-grid {
         grid-template-columns: 1fr;
-        row-gap: var(--space-4);
+        row-gap: var(--space-3);
         text-align: center;
-        max-width: 680px;
+        max-width: 580px;
         margin-inline: auto;
       }
 
@@ -918,14 +1334,14 @@
       .hero-title {
         grid-column: 1;
         text-align: center;
-        font-size: clamp(1.85rem, 5.5vw, 2.45rem);
+        font-size: clamp(1.75rem, 4.8vw, 2.15rem);
       }
 
       .hero-lead {
         grid-column: 1;
         text-align: center;
-        font-size: 1rem;
-        max-width: 580px;
+        font-size: 0.9375rem;
+        max-width: 500px;
         margin-inline: auto;
       }
 
@@ -933,7 +1349,9 @@
         grid-column: 1;
         grid-row: auto;
         width: 100%;
-        margin-block: var(--space-2);
+        max-width: 520px;
+        margin-inline: auto;
+        margin-block: var(--space-1);
       }
 
       .hero-cta-box {
@@ -953,9 +1371,21 @@
         padding: 3px 8px;
       }
 
-      .vsl-play-btn {
-        width: 52px;
-        height: 52px;
+      .vsl-play-pill {
+        bottom: 0.75rem;
+        right: 0.75rem;
+        min-height: 40px;
+        padding: 4px 12px 4px 6px;
+        gap: 8px;
+      }
+
+      .vsl-play-icon-wrap {
+        width: 28px;
+        height: 28px;
+      }
+
+      .vsl-play-text {
+        font-size: 0.75rem;
       }
     }
 
@@ -991,7 +1421,7 @@
       background-image:
         radial-gradient(circle, rgba(156, 124, 60, 0.08) 1px, transparent 1px);
       background-size: 24px 24px;
-      padding-block: var(--space-20);
+      padding-block: clamp(2.25rem, 3.8vw, 3.125rem);
       color: var(--ink);
       position: relative;
       border-top: 1px solid rgba(156, 124, 60, 0.22);
@@ -999,7 +1429,7 @@
     }
 
     .sinais-header {
-      margin-bottom: var(--space-12);
+      margin-bottom: var(--space-6);
       max-width: 760px;
     }
 
@@ -1013,45 +1443,72 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold-text-on-paper);
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
     }
 
     .sinais-title {
       font-family: var(--font-title);
-      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
       line-height: 1.18;
       font-weight: 700;
       color: var(--ink);
-      margin: 0 0 var(--space-3) 0;
+      margin: 0 0 var(--space-2) 0;
       letter-spacing: -0.01em;
+    }
+
+    .sinais-title-line {
+      display: block;
+      overflow: hidden;
     }
 
     .sinais-lead {
       font-family: var(--font-body);
       font-size: 1.0625rem;
-      line-height: 1.6;
+      line-height: 1.58;
       color: #334050;
       margin: 0;
     }
 
     .sinais-grid {
+      position: relative;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: var(--space-5);
+    }
+
+    /* Fio de Ligacao SVG (Desktop: liga os centros dos 4 cartoes) */
+    .sinais-wire-svg {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 16px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .sinais-wire-path {
+      fill: none;
+      stroke: rgba(156, 124, 60, 0.45);
+      stroke-width: 1.5;
+      stroke-dasharray: 800;
+      stroke-dashoffset: 0;
     }
 
     .sinais-card {
       background: #FFFFFF;
       border: 1px solid rgba(156, 124, 60, 0.24);
       border-radius: var(--radius-sm);
-      padding: var(--space-6);
+      padding: 1.125rem 1.125rem 1rem 1.125rem;
       display: flex;
       flex-direction: column;
       position: relative;
       box-shadow: 0 4px 16px rgba(23, 33, 46, 0.04);
-      transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+      transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease;
+      overflow: hidden;
     }
 
+    /* Linha Dourada no Topo do Cartao */
     .sinais-card-top-line {
       position: absolute;
       top: 0;
@@ -1060,35 +1517,107 @@
       height: 3px;
       background: linear-gradient(90deg, var(--gold), var(--gold-deep));
       transform-origin: left;
+      z-index: 2;
+    }
+
+    /* No Circular no Topo de Cada Cartao */
+    .sinais-card-node {
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 1.5px solid var(--gold);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .sinais-node-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-deep);
+      display: block;
+    }
+
+    /* Brilho Radial Dourado no Hover */
+    .sinais-card-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(198, 164, 90, 0.12), transparent 70%);
+      transition: opacity 0.3s ease;
     }
 
     .sinais-card-header {
-      margin-bottom: var(--space-4);
+      position: relative;
+      z-index: 2;
+      margin-bottom: var(--space-3);
+    }
+
+    .sinais-card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-1);
     }
 
     .sinais-card-num {
-      display: block;
+      display: inline-block;
       font-family: var(--font-mono);
       font-size: var(--text-sm);
       font-weight: 700;
       color: var(--gold-large-on-paper);
       letter-spacing: 0.08em;
-      margin-bottom: var(--space-2);
+      line-height: 1;
+      margin-bottom: 0;
+      clip-path: inset(0 0% 0 0);
+    }
+
+    /* Mini-ilustracao tecnica em traco fino dourado */
+    .sinais-card-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    .sinais-icon-path {
+      fill: none;
+      stroke: var(--gold-deep);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 80;
+      stroke-dashoffset: 0;
+      transition: stroke 0.25s ease;
     }
 
     .sinais-card-title {
       font-family: var(--font-title);
-      font-size: 1.1875rem;
-      line-height: 1.35;
+      font-size: 1.125rem;
+      line-height: 1.32;
       font-weight: 700;
       color: var(--ink);
       margin: 0;
+      min-height: calc(2 * 1.32em);
     }
 
     .sinais-card-row {
-      margin-top: auto;
-      padding-top: var(--space-4);
+      position: relative;
+      z-index: 2;
+      margin-top: 0;
+      padding-top: var(--space-2);
       border-top: 1px solid rgba(23, 33, 46, 0.08);
+      flex: 1;
     }
 
     .sinais-card-label {
@@ -1112,15 +1641,131 @@
 
     @media (hover: hover) and (pointer: fine) {
       .sinais-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(23, 33, 46, 0.08);
+        transform: translateY(-3px);
+        border-color: rgba(156, 124, 60, 0.45);
+        box-shadow: 0 12px 30px rgba(23, 33, 46, 0.08);
+      }
+      .sinais-card:hover .sinais-card-glow {
+        opacity: 1;
+      }
+      .sinais-card:hover .sinais-card-icon .sinais-icon-path {
+        stroke: var(--gold);
+      }
+      .sinais-card:hover .sinais-card-node {
+        transform: translateX(-50%) scale(1.2);
+        box-shadow: 0 0 8px rgba(198, 164, 90, 0.45);
       }
     }
 
     @media (max-width: 1024px) {
       .sinais-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
       }
+      .sinais-wire-svg {
+        display: none;
+      }
+      .sinais-card-node {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-sinais {
+        padding-block: 1.5rem;
+      }
+      .sinais-header {
+        margin-bottom: 0.625rem;
+      }
+      .sinais-grid {
+        grid-template-columns: 1fr;
+        padding-left: 1rem;
+        position: relative;
+        gap: 0.5rem;
+      }
+      /* Linha vertical continua a esquerda dos cartoes (trilho guia) */
+      .sinais-grid::before {
+        content: '';
+        position: absolute;
+        top: 1rem;
+        bottom: 1rem;
+        left: 0.25rem;
+        width: 1.5px;
+        background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+        opacity: 0.45;
+      }
+      .sinais-wire-svg {
+        display: none;
+      }
+      .sinais-card-node {
+        display: flex;
+        top: 1rem;
+        left: -0.75rem;
+        transform: translate(-50%, -50%);
+      }
+      .sinais-card {
+        padding: 0.625rem 0.875rem 0.5rem 0.875rem;
+      }
+      .sinais-card-title {
+        font-size: 1.0625rem;
+        min-height: auto;
+      }
+      .sinais-card-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .sinais-card-top-row {
+        margin-bottom: 0.125rem;
+      }
+      .sinais-card-header {
+        margin-bottom: 0.25rem;
+      }
+      .sinais-card-row {
+        padding-top: 0.25rem;
+      }
+    }
+
+    /* Suporte a reduced-motion para a dobra Sinais */
+    @media (prefers-reduced-motion: reduce) {
+      .sinais-wire-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .sinais-icon-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .sinais-card-top-line {
+        transform: none !important;
+      }
+      .sinais-card-num {
+        clip-path: none !important;
+      }
+      .sinais-card {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .sinais-card-glow {
+        display: none !important;
+      }
+    }
+
+    html.rm .sinais-wire-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .sinais-icon-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .sinais-card-top-line {
+      transform: none !important;
+    }
+    html.rm .sinais-card-num {
+      clip-path: none !important;
+    }
+    html.rm .sinais-card {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    html.rm .sinais-card-glow {
+      display: none !important;
     }
 
     /* ============================================================
@@ -1131,14 +1776,14 @@
       background-image:
         radial-gradient(circle, rgba(198, 164, 90, 0.06) 1px, transparent 1px);
       background-size: 24px 24px;
-      padding-block: var(--space-20);
+      padding-block: clamp(3rem, 4.5vw, 4rem);
       color: var(--paper);
       position: relative;
       border-bottom: 1px solid var(--navy-3);
     }
 
     .mostra-header {
-      margin-bottom: var(--space-12);
+      margin-bottom: var(--space-6);
       max-width: 780px;
     }
 
@@ -1152,12 +1797,12 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
     }
 
     .mostra-title {
       font-family: var(--font-title);
-      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
       line-height: 1.18;
       font-weight: 700;
       color: var(--paper);
@@ -1165,43 +1810,131 @@
       letter-spacing: -0.01em;
     }
 
+    .mostra-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    /* Régua Técnica de Leitura SVG (Desktop & Tablet) */
+    .mostra-ruler-svg {
+      width: 100%;
+      height: 16px;
+      margin-bottom: var(--space-4);
+      display: block;
+      overflow: visible;
+    }
+
+    .mostra-ruler-path {
+      fill: none;
+      stroke: rgba(198, 164, 90, 0.35);
+      stroke-width: 1.2;
+      stroke-dasharray: 1800;
+      stroke-dashoffset: 0;
+    }
+
+    .mostra-grid-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Linha de Varredura Dourada */
+    .mostra-scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, var(--gold-2) 20%, #FFF5D0 50%, var(--gold-2) 80%, transparent);
+      box-shadow: 0 0 16px rgba(229, 195, 120, 0.75), 0 0 32px rgba(198, 164, 90, 0.4);
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(-10px, 0, 0);
+    }
+
     .mostra-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-6);
+      gap: var(--space-5);
     }
 
     .mostra-card {
       background: rgba(14, 27, 43, 0.75);
       border: 1px solid var(--line-dark);
       border-radius: var(--radius-sm);
-      padding: var(--space-6);
+      padding: 1.25rem 3.25rem 1.25rem 1.25rem;
       display: flex;
-      gap: var(--space-5);
+      gap: var(--space-4);
       align-items: flex-start;
       position: relative;
       box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .mostra-card.is-reading {
+      border-color: var(--gold-2);
+      box-shadow: 0 0 20px rgba(229, 195, 120, 0.25);
+    }
+
+    /* Brilho Radial Dourado no Hover */
+    .mostra-card-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(229, 195, 120, 0.12), transparent 70%);
+      transition: opacity 0.3s ease;
     }
 
     .mostra-card-num {
       font-family: var(--font-mono);
-      font-size: 1.5rem;
+      font-size: 1.375rem;
       font-weight: 700;
       color: var(--gold-2);
       line-height: 1;
-      padding-top: 0.2rem;
+      padding-top: 0.15rem;
       flex-shrink: 0;
+      clip-path: inset(0 0% 0 0);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Mini-ilustração no canto superior direito */
+    .mostra-card-icon {
+      position: absolute;
+      top: 1.125rem;
+      right: 1.125rem;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: block;
+      z-index: 2;
+    }
+
+    .mostra-icon-path {
+      fill: none;
+      stroke: var(--gold-2);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 80;
+      stroke-dashoffset: 0;
+      transition: stroke 0.25s ease;
     }
 
     .mostra-card-body {
       flex: 1;
       min-width: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .mostra-card-title {
       font-family: var(--font-title);
-      font-size: 1.25rem;
-      line-height: 1.35;
+      font-size: 1.1875rem;
+      line-height: 1.34;
       font-weight: 700;
       color: var(--paper);
       margin: 0 0 var(--space-2) 0;
@@ -1209,10 +1942,107 @@
 
     .mostra-card-text {
       font-family: var(--font-body);
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 0.9375rem;
+      line-height: 1.55;
       color: var(--text-lede);
       margin: 0;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .mostra-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(198, 164, 90, 0.45);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      }
+      .mostra-card:hover .mostra-card-glow {
+        opacity: 1;
+      }
+      .mostra-card:hover .mostra-card-icon .mostra-icon-path {
+        stroke: #FFF5D0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-mostra {
+        padding-block: var(--space-8);
+      }
+      .mostra-header {
+        margin-bottom: var(--space-4);
+      }
+      .mostra-ruler-svg {
+        display: none;
+      }
+      .mostra-grid {
+        grid-template-columns: 1fr;
+        gap: 0.625rem;
+      }
+      .mostra-card {
+        padding: 0.75rem 2.75rem 0.75rem 0.875rem;
+        gap: 0.625rem;
+      }
+      .mostra-card-icon {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 28px;
+        height: 28px;
+      }
+      .mostra-card-title {
+        font-size: 1.0625rem;
+        margin-bottom: 0.25rem;
+      }
+      .mostra-card-num {
+        font-size: 1.125rem;
+      }
+      .mostra-scan-line {
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--gold-2) 20%, #FFF5D0 50%, var(--gold-2) 80%, transparent);
+        box-shadow: 0 0 16px rgba(229, 195, 120, 0.75), 0 0 32px rgba(198, 164, 90, 0.4);
+        transform: translate3d(0, -10px, 0);
+      }
+    }
+
+    /* Suporte a reduced-motion para Dobra 3 */
+    @media (prefers-reduced-motion: reduce) {
+      .mostra-ruler-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .mostra-icon-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .mostra-card-num {
+        clip-path: none !important;
+      }
+      .mostra-card {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .mostra-scan-line {
+        display: none !important;
+      }
+      .mostra-card-glow {
+        display: none !important;
+      }
+    }
+
+    html.rm .mostra-ruler-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .mostra-icon-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .mostra-card-num {
+      clip-path: none !important;
+    }
+    html.rm .mostra-card {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    html.rm .mostra-scan-line {
+      display: none !important;
+    }
+    html.rm .mostra-card-glow {
+      display: none !important;
     }
 
     /* ============================================================
@@ -1223,14 +2053,14 @@
       background-image:
         radial-gradient(circle, rgba(156, 124, 60, 0.08) 1px, transparent 1px);
       background-size: 24px 24px;
-      padding-block: var(--space-20);
+      padding-block: clamp(3rem, 4.5vw, 4.25rem);
       color: var(--ink);
       position: relative;
       border-bottom: 1px solid rgba(156, 124, 60, 0.22);
     }
 
     .cf-header {
-      margin-bottom: var(--space-12);
+      margin-bottom: var(--space-8);
       max-width: 760px;
     }
 
@@ -1244,12 +2074,12 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold-text-on-paper);
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
     }
 
     .cf-title {
       font-family: var(--font-title);
-      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
       line-height: 1.18;
       font-weight: 700;
       color: var(--ink);
@@ -1257,45 +2087,124 @@
       letter-spacing: -0.01em;
     }
 
+    .cf-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
     /* Passos Conectados (3 Passos) */
+    .cf-steps-wrap {
+      position: relative;
+      margin-bottom: var(--space-12);
+    }
+
+    /* Régua de Progresso SVG (Desktop/Tablet: liga os 3 passos) */
+    .cf-steps-track-svg {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      height: 24px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cf-track-path {
+      fill: none;
+      stroke: rgba(156, 124, 60, 0.45);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 800;
+      stroke-dashoffset: 0;
+    }
+
     .cf-steps-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--space-6);
       position: relative;
-      margin-bottom: var(--space-16);
+      z-index: 2;
     }
 
     .cf-step-card {
       background: #FFFFFF;
       border: 1px solid rgba(156, 124, 60, 0.24);
       border-radius: var(--radius-sm);
-      padding: var(--space-6);
+      padding: 1.35rem 1.25rem 1.25rem 1.25rem;
       position: relative;
       box-shadow: 0 4px 16px rgba(23, 33, 46, 0.04);
       display: flex;
       flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease;
     }
 
+    /* Linha Dourada no Topo do Cartão do Passo */
+    .cf-step-top-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-deep));
+      transform-origin: left;
+      z-index: 3;
+    }
+
+    /* Crachá Numérico com Anel de Progresso SVG */
     .cf-step-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      position: relative;
+      width: 40px;
+      height: 40px;
       border-radius: var(--radius-sm);
       background: var(--navy);
       color: var(--gold);
       font-family: var(--font-mono);
       font-weight: 700;
       font-size: 0.9375rem;
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-3);
+      flex-shrink: 0;
+    }
+
+    .cf-badge-ring {
+      position: absolute;
+      inset: -2px;
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      pointer-events: none;
+    }
+
+    .cf-ring-bg {
+      fill: none;
+      stroke: rgba(198, 164, 90, 0.2);
+      stroke-width: 2;
+    }
+
+    .cf-ring-path {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-dasharray: 120;
+      stroke-dashoffset: 0;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke 0.25s ease;
+    }
+
+    .cf-badge-text {
+      position: relative;
+      z-index: 2;
     }
 
     .cf-step-title {
       font-family: var(--font-title);
-      font-size: 1.25rem;
-      line-height: 1.35;
+      font-size: 1.1875rem;
+      line-height: 1.34;
       font-weight: 700;
       color: var(--ink);
       margin: 0 0 var(--space-2) 0;
@@ -1303,23 +2212,44 @@
 
     .cf-step-desc {
       font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
       line-height: 1.55;
       color: #334050;
       margin: 0;
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      .cf-step-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(156, 124, 60, 0.45);
+        box-shadow: 0 12px 30px rgba(23, 33, 46, 0.08);
+      }
+      .cf-step-card:hover .cf-ring-path {
+        stroke: var(--gold-deep);
+      }
+    }
+
     /* Bloco: Para quem é e para quem não é */
     .cf-audience-wrap {
-      margin-top: var(--space-8);
       border-top: 1px solid rgba(156, 124, 60, 0.22);
-      padding-top: var(--space-12);
+      padding-top: var(--space-10);
+      position: relative;
     }
 
     .cf-audience-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
       gap: var(--space-6);
+      position: relative;
+    }
+
+    /* Divisor entre os dois cartões */
+    .cf-audience-divider {
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(156, 124, 60, 0.35) 20%, rgba(156, 124, 60, 0.35) 80%, transparent);
+      transform-origin: top;
+      align-self: stretch;
     }
 
     .cf-audience-card {
@@ -1327,16 +2257,32 @@
       border-radius: var(--radius-sm);
       padding: var(--space-6);
       box-shadow: 0 4px 16px rgba(23, 33, 46, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .cf-audience-top-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      transform-origin: left;
     }
 
     .cf-audience-card.is-target {
       border: 1px solid rgba(156, 124, 60, 0.32);
-      border-top: 3px solid var(--gold);
+    }
+    .cf-audience-card.is-target .cf-audience-top-line {
+      background: linear-gradient(90deg, var(--gold), var(--gold-deep));
     }
 
     .cf-audience-card.is-filter {
       border: 1px solid rgba(23, 33, 46, 0.16);
-      border-top: 3px solid var(--stone);
+    }
+    .cf-audience-card.is-filter .cf-audience-top-line {
+      background: var(--stone);
     }
 
     .cf-audience-title {
@@ -1353,6 +2299,8 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-4);
+      padding: 0;
+      margin: 0;
     }
 
     .cf-audience-item {
@@ -1366,14 +2314,14 @@
     }
 
     .cf-audience-icon {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .is-target .cf-audience-icon {
@@ -1386,6 +2334,139 @@
       color: var(--stone-2);
     }
 
+    .cf-icon-path {
+      stroke-dasharray: 40;
+      stroke-dashoffset: 0;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cf-audience-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(23, 33, 46, 0.08);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .cf-steps-grid {
+        gap: var(--space-4);
+      }
+      .cf-audience-grid {
+        gap: var(--space-4);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-como-funciona {
+        padding-block: var(--space-10);
+      }
+      .cf-header {
+        margin-bottom: var(--space-5);
+      }
+      .cf-steps-wrap {
+        margin-bottom: var(--space-8);
+      }
+      .cf-steps-track-svg {
+        display: none;
+      }
+      .cf-steps-grid {
+        grid-template-columns: 1fr;
+        padding-left: 1.25rem;
+        position: relative;
+        gap: var(--space-3);
+      }
+      /* Linha vertical conectora no celular */
+      .cf-steps-grid::before {
+        content: '';
+        position: absolute;
+        top: 1rem;
+        bottom: 1rem;
+        left: 0.25rem;
+        width: 1.5px;
+        background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+        opacity: 0.45;
+      }
+      .cf-step-card {
+        padding: 0.875rem 1rem;
+      }
+      .cf-step-title {
+        font-size: 1.0625rem;
+      }
+      .cf-audience-wrap {
+        padding-top: var(--space-8);
+      }
+      .cf-audience-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+      .cf-audience-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(156, 124, 60, 0.35) 20%, rgba(156, 124, 60, 0.35) 80%, transparent);
+        transform-origin: left;
+      }
+      .cf-audience-card {
+        padding: var(--space-5);
+      }
+      .cf-audience-title {
+        font-size: 1.125rem;
+        margin-bottom: var(--space-4);
+      }
+    }
+
+    /* Suporte a reduced-motion para Dobra 4 */
+    @media (prefers-reduced-motion: reduce) {
+      .cf-track-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .cf-ring-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .cf-icon-path {
+        stroke-dashoffset: 0 !important;
+      }
+      .cf-step-top-line {
+        transform: none !important;
+      }
+      .cf-audience-top-line {
+        transform: none !important;
+      }
+      .cf-audience-divider {
+        transform: none !important;
+      }
+      .cf-step-card,
+      .cf-audience-card,
+      .cf-audience-item {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    html.rm .cf-track-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .cf-ring-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .cf-icon-path {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .cf-step-top-line {
+      transform: none !important;
+    }
+    html.rm .cf-audience-top-line {
+      transform: none !important;
+    }
+    html.rm .cf-audience-divider {
+      transform: none !important;
+    }
+    html.rm .cf-step-card,
+    html.rm .cf-audience-card,
+    html.rm .cf-audience-item {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+
+    
     /* ============================================================
        DOBRA 5: QUEM CONDUZ (Fundo Navy, id="quem-conduz")
        Reaproveitado do index.html
@@ -1633,13 +2714,59 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-2);
-      transition: background-color 0.2s ease;
       min-width: 0;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(198, 164, 90, 0.15);
+      border-radius: var(--radius-sm);
+      transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, border-color 0.28s ease, background-color 0.2s ease;
     }
 
-    @media (hover: hover) {
+    .quemconduz-cell-top-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-deep));
+      transform-origin: left;
+      z-index: 2;
+    }
+
+    .quemconduz-cell-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(229, 195, 120, 0.14), transparent 70%);
+      transition: opacity 0.3s ease;
+    }
+
+    .quemconduz-cell-head,
+    .quemconduz-cell-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .quemconduz-cell-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gold-2);
+      letter-spacing: 0.08em;
+      clip-path: inset(0 0% 0 0);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
       .quemconduz-cell:hover {
+        transform: translateY(-3px);
         background: rgba(24, 43, 68, 1);
+        border-color: rgba(198, 164, 90, 0.45);
+        box-shadow: 0 10px 24px rgba(10, 19, 31, 0.4);
+      }
+      .quemconduz-cell:hover .quemconduz-cell-glow {
+        opacity: 1;
       }
     }
 
@@ -1910,6 +3037,19 @@
       .quemconduz-corner-path {
         stroke-dashoffset: 0 !important;
       }
+      .quemconduz-cell-top-line {
+        transform: none !important;
+      }
+      .quemconduz-cell-num {
+        clip-path: none !important;
+      }
+      .quemconduz-cell {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .quemconduz-cell-glow {
+        display: none !important;
+      }
       .quemconduz-regua-active {
         stroke-dashoffset: 0 !important;
       }
@@ -1920,6 +3060,19 @@
 
     html.rm .quemconduz-corner-path {
       stroke-dashoffset: 0 !important;
+    }
+    html.rm .quemconduz-cell-top-line {
+      transform: none !important;
+    }
+    html.rm .quemconduz-cell-num {
+      clip-path: none !important;
+    }
+    html.rm .quemconduz-cell {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    html.rm .quemconduz-cell-glow {
+      display: none !important;
     }
     html.rm .quemconduz-regua-active {
       stroke-dashoffset: 0 !important;
@@ -1952,7 +3105,7 @@
       background-image:
         radial-gradient(circle, rgba(156, 124, 60, 0.08) 1px, transparent 1px);
       background-size: 24px 24px;
-      padding-block: var(--space-20);
+      padding-block: clamp(2.75rem, 4vw, 3.75rem);
       color: var(--ink);
       position: relative;
       border-top: 1px solid rgba(156, 124, 60, 0.22);
@@ -1965,8 +3118,8 @@
     }
 
     .faq-header {
-      margin-bottom: var(--space-10);
-      max-width: 760px;
+      margin-bottom: var(--space-6);
+      max-width: 860px;
     }
 
     .faq-kicker {
@@ -1979,12 +3132,12 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold-text-on-paper);
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
     }
 
     .faq-title {
       font-family: var(--font-title);
-      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
       line-height: 1.18;
       font-weight: 700;
       color: var(--ink);
@@ -1992,50 +3145,113 @@
       letter-spacing: -0.01em;
     }
 
+    .faq-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    /* Layout com Régua Vertical Técnica */
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: var(--space-6);
+      align-items: stretch;
+      max-width: 860px;
+      margin-inline: auto;
+      position: relative;
+    }
+
+    /* Régua Vertical Dourada */
+    .faq-rail {
+      position: relative;
+      width: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .faq-rail-svg {
+      width: 24px;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .faq-rail-track {
+      stroke: rgba(156, 124, 60, 0.45);
+      stroke-width: 1.5;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 0;
+    }
+
+    .faq-rail-node {
+      fill: #FFFFFF;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      transition: transform 0.25s ease, fill 0.25s ease, stroke 0.25s ease;
+      transform-origin: center;
+    }
+
+    .faq-rail-node.is-active {
+      fill: var(--gold);
+      stroke: var(--gold-deep);
+      transform: scale(1.25);
+    }
+
     .faq-list {
       list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
       gap: var(--space-3);
-      max-width: 900px;
     }
 
     .faq-item {
       background: #FFFFFF;
-      border: 1px solid rgba(156, 124, 60, 0.24);
+      border: 1px solid rgba(156, 124, 60, 0.22);
       border-radius: var(--radius-sm);
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(23, 33, 46, 0.03);
+      box-shadow: 0 4px 14px rgba(23, 33, 46, 0.03);
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .faq-item.is-open {
-      border-color: rgba(156, 124, 60, 0.5);
-      box-shadow: 0 6px 20px rgba(23, 33, 46, 0.06);
+      border-color: rgba(156, 124, 60, 0.45);
+      box-shadow: 0 8px 24px rgba(23, 33, 46, 0.07);
+    }
+
+    /* Linha Dourada Superior do Item Aberto */
+    .faq-item-top-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-deep));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 3;
+    }
+
+    .faq-item.is-open .faq-item-top-line {
+      transform: scaleX(1);
     }
 
     .faq-btn {
       width: 100%;
-      padding: 1.25rem 1.4rem;
+      background: none;
+      border: none;
+      padding: 1.125rem 1.25rem;
+      text-align: left;
       display: flex;
       align-items: center;
       gap: var(--space-4);
-      background: transparent;
-      border: none;
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 1.0625rem;
-      font-weight: 600;
-      text-align: left;
       cursor: pointer;
-      min-height: 52px;
-      transition: background-color 0.2s ease;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .faq-btn:hover {
-        background-color: rgba(156, 124, 60, 0.05);
-      }
+      position: relative;
+      font: inherit;
+      color: inherit;
     }
 
     .faq-btn:focus-visible {
@@ -2043,65 +3259,102 @@
       outline-offset: -2px;
     }
 
+    /* Brilho Radial Dourado no Hover */
+    .faq-btn-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(198, 164, 90, 0.12), transparent 70%);
+      transition: opacity 0.3s ease;
+    }
+
     .faq-btn-num {
       font-family: var(--font-mono);
-      font-size: var(--text-xs);
+      font-size: 0.8125rem;
       font-weight: 700;
       color: var(--gold-large-on-paper);
-      letter-spacing: 0.05em;
-      flex: none;
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      clip-path: inset(0 0% 0 0);
     }
 
     .faq-btn-question {
-      flex: 1;
-      min-width: 0;
-      color: var(--ink);
+      font-family: var(--font-title);
+      font-size: 1.0625rem;
       line-height: 1.4;
+      font-weight: 700;
+      color: var(--ink);
+      flex: 1;
+      position: relative;
+      z-index: 2;
     }
 
     .faq-btn-icon {
-      width: 32px;
-      height: 32px;
-      flex: none;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: rgba(156, 124, 60, 0.12);
-      border: 1px solid rgba(156, 124, 60, 0.35);
+      color: var(--gold-text-on-paper);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold-text-on-paper);
-      transition: transform 0.3s var(--ease-spring), background 0.3s ease, color 0.3s ease;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .faq-item.is-open .faq-btn-icon {
-      transform: rotate(45deg);
-      background: var(--navy);
-      color: var(--paper);
-      border-color: var(--navy);
+      background: var(--gold);
+      color: #FFFFFF;
     }
 
+    .faq-icon-svg {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-icon-v {
+      transition: transform 0.3s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    .faq-item.is-open .faq-icon-v {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+
+    /* Abertura e Fechamento com CSS Grid */
     .faq-answer-wrap {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.35s var(--ease-spring);
+      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      opacity: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .faq-item.is-open .faq-answer-wrap {
       grid-template-rows: 1fr;
+      opacity: 1;
     }
 
     .faq-answer-inner {
       overflow: hidden;
+      min-height: 0;
     }
 
     .faq-answer-content {
-      padding: 0 1.4rem 1.4rem calc(1.4rem + var(--space-4) + 1.25rem);
+      padding: 0 1.25rem 1.25rem calc(1.25rem + var(--space-4) + 1.25rem);
     }
 
     .faq-answer-text {
       font-family: var(--font-body);
-      font-size: 0.95rem;
-      line-height: 1.65;
+      font-size: 0.9375rem;
+      line-height: 1.6;
       color: #334050;
       margin: 0;
     }
@@ -2110,7 +3363,97 @@
       color: var(--gold-text-on-paper);
       text-decoration: underline;
       text-underline-offset: 3px;
-      font-weight: 500;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .faq-btn:hover .faq-btn-glow {
+        opacity: 1;
+      }
+      .faq-btn:hover .faq-btn-question {
+        color: var(--gold-deep);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-faq {
+        padding-block: var(--space-10);
+      }
+      .faq-header {
+        margin-bottom: var(--space-6);
+      }
+      .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .faq-rail {
+        display: none;
+      }
+      .faq-btn {
+        padding: 0.875rem 1rem;
+        gap: var(--space-3);
+      }
+      .faq-btn-question {
+        font-size: 1rem;
+      }
+      .faq-answer-content {
+        padding: 0 1rem 1rem calc(1rem + var(--space-3) + 1.125rem);
+      }
+    }
+
+    /* Suporte a reduced-motion para Dobra 6 */
+    @media (prefers-reduced-motion: reduce) {
+      .faq-rail-track {
+        stroke-dashoffset: 0 !important;
+      }
+      .faq-btn-num {
+        clip-path: none !important;
+      }
+      .faq-item {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .faq-btn-glow {
+        display: none !important;
+      }
+      .faq-answer-wrap {
+        transition: none !important;
+      }
+      .faq-icon-v {
+        transition: none !important;
+      }
+    }
+
+    html.rm .faq-rail-track {
+      stroke-dashoffset: 0 !important;
+    }
+    html.rm .faq-btn-num {
+      clip-path: none !important;
+    }
+    html.rm .faq-item {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    html.rm .faq-btn-glow {
+      display: none !important;
+    }
+    html.rm .faq-answer-wrap {
+      transition: none !important;
+    }
+    html.rm .faq-icon-v {
+      transition: none !important;
+    }
+
+    /* Fallback sem JavaScript */
+    html:not(.js) .faq-answer-wrap {
+      grid-template-rows: 1fr !important;
+      opacity: 1 !important;
+    }
+    html:not(.js) .faq-rail-track {
+      stroke-dashoffset: 0 !important;
+    }
+    html:not(.js) .faq-item {
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     /* ============================================================
@@ -2927,16 +4270,19 @@
                     <span class="vsl-badge-dot"></span>
                     <span>Vídeo • 3 min</span>
                   </div>
-                  <span class="vsl-play-btn" aria-hidden="true">
-                    <svg class="vsl-play-ring-svg" viewBox="0 0 56 56">
-                      <circle class="vsl-play-ring-bg" cx="28" cy="28" r="25"/>
-                      <circle class="vsl-play-ring-active" cx="28" cy="28" r="25"/>
-                    </svg>
-                    <span class="vsl-play-icon">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-                        <path d="M8 5v14l11-7z"/>
+                  <span class="vsl-play-pill" aria-hidden="true">
+                    <span class="vsl-play-icon-wrap">
+                      <svg class="vsl-play-ring-svg" viewBox="0 0 36 36">
+                        <circle class="vsl-play-ring-bg" cx="18" cy="18" r="16"/>
+                        <circle class="vsl-play-ring-active" cx="18" cy="18" r="16"/>
                       </svg>
+                      <span class="vsl-play-icon">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </span>
                     </span>
+                    <span class="vsl-play-text">Assistir</span>
                   </span>
                 </a>
               </div>
@@ -2981,11 +4327,28 @@
         </div>
 
         <div class="sinais-grid">
+          <!-- Fio de Ligacao SVG (Desktop: 4 colunas) -->
+          <svg class="sinais-wire-svg" viewBox="0 0 1000 16" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="sinais-wire-path" d="M 125 8 L 875 8" />
+          </svg>
+
           <!-- Cartão 01 -->
           <article class="sinais-card">
             <div class="sinais-card-top-line" aria-hidden="true"></div>
+            <div class="sinais-card-node" aria-hidden="true"><span class="sinais-node-dot"></span></div>
+            <div class="sinais-card-glow" aria-hidden="true"></div>
             <div class="sinais-card-header">
-              <span class="sinais-card-num" aria-hidden="true">01</span>
+              <div class="sinais-card-top-row">
+                <span class="sinais-card-num" aria-hidden="true">01</span>
+                <svg class="sinais-card-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+                  <circle class="sinais-icon-path" cx="20" cy="14" r="4.5"/>
+                  <path class="sinais-icon-path" d="M13 32c0-5 3.1-7.5 7-7.5s7 2.5 7 7.5"/>
+                  <circle class="sinais-icon-path" cx="9" cy="12" r="3.5"/>
+                  <path class="sinais-icon-path" d="M3 28c0-4 2.5-6 6-6"/>
+                  <circle class="sinais-icon-path" cx="31" cy="12" r="3.5"/>
+                  <path class="sinais-icon-path" d="M31 22c3.5 0 6 2 6 6"/>
+                </svg>
+              </div>
               <h3 class="sinais-card-title">O colaborador que resiste e forma um grupo à sua volta</h3>
             </div>
             <div class="sinais-card-row">
@@ -2997,8 +4360,17 @@
           <!-- Cartão 02 -->
           <article class="sinais-card">
             <div class="sinais-card-top-line" aria-hidden="true"></div>
+            <div class="sinais-card-node" aria-hidden="true"><span class="sinais-node-dot"></span></div>
+            <div class="sinais-card-glow" aria-hidden="true"></div>
             <div class="sinais-card-header">
-              <span class="sinais-card-num" aria-hidden="true">02</span>
+              <div class="sinais-card-top-row">
+                <span class="sinais-card-num" aria-hidden="true">02</span>
+                <svg class="sinais-card-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+                  <path class="sinais-icon-path" d="M6 8h28c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H16l-6 6v-6H6c-1.1 0-2-.9-2-2V10c0-1.1.9-2 2-2z"/>
+                  <path class="sinais-icon-path" d="M11 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>
+                  <path class="sinais-icon-path" d="M11 19c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>
+                </svg>
+              </div>
               <h3 class="sinais-card-title">O colaborador que reclama de tudo</h3>
             </div>
             <div class="sinais-card-row">
@@ -3010,8 +4382,21 @@
           <!-- Cartão 03 -->
           <article class="sinais-card">
             <div class="sinais-card-top-line" aria-hidden="true"></div>
+            <div class="sinais-card-node" aria-hidden="true"><span class="sinais-node-dot"></span></div>
+            <div class="sinais-card-glow" aria-hidden="true"></div>
             <div class="sinais-card-header">
-              <span class="sinais-card-num" aria-hidden="true">03</span>
+              <div class="sinais-card-top-row">
+                <span class="sinais-card-num" aria-hidden="true">03</span>
+                <svg class="sinais-card-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+                  <circle class="sinais-icon-path" cx="20" cy="20" r="14"/>
+                  <line class="sinais-icon-path" x1="20" y1="9" x2="20" y2="12"/>
+                  <line class="sinais-icon-path" x1="28" y1="20" x2="31" y2="20"/>
+                  <line class="sinais-icon-path" x1="20" y1="28" x2="20" y2="31"/>
+                  <line class="sinais-icon-path" x1="9" y1="20" x2="12" y2="20"/>
+                  <polyline class="sinais-icon-path" points="20 13 20 20 26 23"/>
+                  <circle class="sinais-icon-path" cx="20" cy="20" r="1.5"/>
+                </svg>
+              </div>
               <h3 class="sinais-card-title">A conversa difícil que fica para depois</h3>
             </div>
             <div class="sinais-card-row">
@@ -3023,8 +4408,22 @@
           <!-- Cartão 04 -->
           <article class="sinais-card">
             <div class="sinais-card-top-line" aria-hidden="true"></div>
+            <div class="sinais-card-node" aria-hidden="true"><span class="sinais-node-dot"></span></div>
+            <div class="sinais-card-glow" aria-hidden="true"></div>
             <div class="sinais-card-header">
-              <span class="sinais-card-num" aria-hidden="true">04</span>
+              <div class="sinais-card-top-row">
+                <span class="sinais-card-num" aria-hidden="true">04</span>
+                <svg class="sinais-card-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+                  <line class="sinais-icon-path" x1="20" y1="7" x2="20" y2="33"/>
+                  <line class="sinais-icon-path" x1="12" y1="33" x2="28" y2="33"/>
+                  <circle class="sinais-icon-path" cx="20" cy="7" r="2"/>
+                  <line class="sinais-icon-path" x1="7" y1="13" x2="33" y2="19"/>
+                  <polyline class="sinais-icon-path" points="4 21 7 13 10 21"/>
+                  <path class="sinais-icon-path" d="M3 21q4 3 8 0z"/>
+                  <polyline class="sinais-icon-path" points="30 27 33 19 36 27"/>
+                  <path class="sinais-icon-path" d="M29 27q4 3 8 0z"/>
+                </svg>
+              </div>
               <h3 class="sinais-card-title">A autoridade que se perde nos pequenos combinados</h3>
             </div>
             <div class="sinais-card-row">
@@ -3046,40 +4445,87 @@
           <h2 class="mostra-title" id="mostraTitle">Uma leitura do seu cenário, não um modelo pronto.</h2>
         </div>
 
-        <div class="mostra-grid">
-          <!-- Item 1 -->
-          <div class="mostra-card">
-            <span class="mostra-card-num" aria-hidden="true">01</span>
-            <div class="mostra-card-body">
-              <h3 class="mostra-card-title">Em que momento você está</h3>
-              <p class="mostra-card-text">Se você está se tornando líder, precisa sustentar a liderança ou conduz uma equipe de várias gerações.</p>
-            </div>
-          </div>
+        <!-- Régua Técnica SVG (Desktop/Tablet) -->
+        <svg class="mostra-ruler-svg" viewBox="0 0 1000 20" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path class="mostra-ruler-path" d="M 0 16 L 1000 16 M 0 16 L 0 4 M 25 16 L 25 12 M 50 16 L 50 10 M 75 16 L 75 12 M 100 16 L 100 10 M 125 16 L 125 8 M 150 16 L 150 10 M 175 16 L 175 12 M 200 16 L 200 10 M 225 16 L 225 12 M 250 16 L 250 4 M 275 16 L 275 12 M 300 16 L 300 10 M 325 16 L 325 12 M 350 16 L 350 10 M 375 16 L 375 8 M 400 16 L 400 10 M 425 16 L 425 12 M 450 16 L 450 10 M 475 16 L 475 12 M 500 16 L 500 4 M 525 16 L 525 12 M 550 16 L 550 10 M 575 16 L 575 12 M 600 16 L 600 10 M 625 16 L 625 8 M 650 16 L 650 10 M 675 16 L 675 12 M 700 16 L 700 10 M 725 16 L 725 12 M 750 16 L 750 4 M 775 16 L 775 12 M 800 16 L 800 10 M 825 16 L 825 12 M 850 16 L 850 10 M 875 16 L 875 8 M 900 16 L 900 10 M 925 16 L 925 12 M 950 16 L 950 10 M 975 16 L 975 12 M 1000 16 L 1000 4" />
+        </svg>
 
-          <!-- Item 2 -->
-          <div class="mostra-card">
-            <span class="mostra-card-num" aria-hidden="true">02</span>
-            <div class="mostra-card-body">
-              <h3 class="mostra-card-title">Onde a liderança está travando</h3>
-              <p class="mostra-card-text">Os pontos em que a sua gestão perde força, a partir de situações reais.</p>
-            </div>
-          </div>
+        <div class="mostra-grid-wrapper">
+          <!-- Linha de Varredura Dourada -->
+          <div class="mostra-scan-line" aria-hidden="true"></div>
 
-          <!-- Item 3 -->
-          <div class="mostra-card">
-            <span class="mostra-card-num" aria-hidden="true">03</span>
-            <div class="mostra-card-body">
-              <h3 class="mostra-card-title">Qual formato serve para você</h3>
-              <p class="mostra-card-text">O diagnóstico indica o formato de mentoria mais adequado ao seu momento.</p>
+          <div class="mostra-grid">
+            <!-- Item 1 -->
+            <div class="mostra-card">
+              <div class="mostra-card-glow" aria-hidden="true"></div>
+              <svg class="mostra-card-icon" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
+                <line class="mostra-icon-path" x1="4" y1="28" x2="36" y2="28"/>
+                <circle class="mostra-icon-path" cx="10" cy="28" r="2.5"/>
+                <circle class="mostra-icon-path" cx="30" cy="28" r="2.5"/>
+                <path class="mostra-icon-path" d="M20 28V12"/>
+                <circle class="mostra-icon-path" cx="20" cy="9" r="4"/>
+                <circle class="mostra-icon-path" cx="20" cy="9" r="1.5"/>
+              </svg>
+              <span class="mostra-card-num" aria-hidden="true">01</span>
+              <div class="mostra-card-body">
+                <h3 class="mostra-card-title">Em que momento você está</h3>
+                <p class="mostra-card-text">Se você está se tornando líder, precisa sustentar a liderança ou conduz uma equipe de várias gerações.</p>
+              </div>
             </div>
-          </div>
 
-          <!-- Item 4 -->
-          <div class="mostra-card">
-            <span class="mostra-card-num" aria-hidden="true">04</span>
-            <div class="mostra-card-body">
-              <h3 class="mostra-card-title">Qual é o próximo passo</h3>
-              <p class="mostra-card-text">Se fizer sentido seguir, apresento o próximo passo na própria conversa.</p>
+            <!-- Item 2 -->
+            <div class="mostra-card">
+              <div class="mostra-card-glow" aria-hidden="true"></div>
+              <svg class="mostra-card-icon" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
+                <circle class="mostra-icon-path" cx="18" cy="18" r="10"/>
+                <line class="mostra-icon-path" x1="25.5" y1="25.5" x2="35" y2="35"/>
+                <line class="mostra-icon-path" x1="18" y1="13" x2="18" y2="15"/>
+                <line class="mostra-icon-path" x1="18" y1="21" x2="18" y2="23"/>
+                <line class="mostra-icon-path" x1="13" y1="18" x2="15" y2="18"/>
+                <line class="mostra-icon-path" x1="21" y1="18" x2="23" y2="18"/>
+                <circle class="mostra-icon-path" cx="18" cy="18" r="2"/>
+              </svg>
+              <span class="mostra-card-num" aria-hidden="true">02</span>
+              <div class="mostra-card-body">
+                <h3 class="mostra-card-title">Onde a liderança está travando</h3>
+                <p class="mostra-card-text">Os pontos em que a sua gestão perde força, a partir de situações reais.</p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="mostra-card">
+              <div class="mostra-card-glow" aria-hidden="true"></div>
+              <svg class="mostra-card-icon" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
+                <circle class="mostra-icon-path" cx="20" cy="33" r="2.5"/>
+                <path class="mostra-icon-path" d="M20 30.5V22"/>
+                <path class="mostra-icon-path" d="M20 22C16 22 10 18 10 12"/>
+                <path class="mostra-icon-path" d="M20 22V12"/>
+                <path class="mostra-icon-path" d="M20 22C24 22 30 18 30 12"/>
+                <circle class="mostra-icon-path" cx="10" cy="9" r="2.5"/>
+                <circle class="mostra-icon-path" cx="20" cy="9" r="2.5"/>
+                <circle class="mostra-icon-path" cx="30" cy="9" r="2.5"/>
+              </svg>
+              <span class="mostra-card-num" aria-hidden="true">03</span>
+              <div class="mostra-card-body">
+                <h3 class="mostra-card-title">Qual formato serve para você</h3>
+                <p class="mostra-card-text">O diagnóstico indica o formato de mentoria mais adequado ao seu momento.</p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="mostra-card">
+              <div class="mostra-card-glow" aria-hidden="true"></div>
+              <svg class="mostra-card-icon" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
+                <path class="mostra-icon-path" d="M6 32C14 32 12 20 22 20H33"/>
+                <polyline class="mostra-icon-path" points="27 14 33 20 27 26"/>
+                <line class="mostra-icon-path" x1="6" y1="20" x2="9" y2="20"/>
+                <circle class="mostra-icon-path" cx="6" cy="32" r="2"/>
+              </svg>
+              <span class="mostra-card-num" aria-hidden="true">04</span>
+              <div class="mostra-card-body">
+                <h3 class="mostra-card-title">Qual é o próximo passo</h3>
+                <p class="mostra-card-text">Se fizer sentido seguir, apresento o próximo passo na própria conversa.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -3097,23 +4543,54 @@
         </div>
 
         <!-- 3 Passos -->
-        <div class="cf-steps-grid">
-          <div class="cf-step-card">
-            <span class="cf-step-badge" aria-hidden="true">01</span>
-            <h3 class="cf-step-title">Responda ao questionário</h3>
-            <p class="cf-step-desc">Menos de 2 minutos.</p>
-          </div>
+        <div class="cf-steps-wrap">
+          <!-- Régua de Progresso SVG (Desktop/Tablet) -->
+          <svg class="cf-steps-track-svg" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="cf-track-path" d="M 166 12 L 485 12 M 475 7 L 485 12 L 475 17 M 500 12 L 818 12 M 808 7 L 818 12 L 808 17" />
+          </svg>
 
-          <div class="cf-step-card">
-            <span class="cf-step-badge" aria-hidden="true">02</span>
-            <h3 class="cf-step-title">Perfil analisado</h3>
-            <p class="cf-step-desc">Cada perfil é analisado, sem aprovação automática.</p>
-          </div>
+          <div class="cf-steps-grid">
+            <!-- Passo 1 -->
+            <div class="cf-step-card">
+              <div class="cf-step-top-line" aria-hidden="true"></div>
+              <span class="cf-step-badge" aria-hidden="true">
+                <svg class="cf-badge-ring" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                  <circle class="cf-ring-bg" cx="22" cy="22" r="19" />
+                  <circle class="cf-ring-path" cx="22" cy="22" r="19" />
+                </svg>
+                <span class="cf-badge-text">01</span>
+              </span>
+              <h3 class="cf-step-title">Responda ao questionário</h3>
+              <p class="cf-step-desc">Menos de 2 minutos.</p>
+            </div>
 
-          <div class="cf-step-card">
-            <span class="cf-step-badge" aria-hidden="true">03</span>
-            <h3 class="cf-step-title">Sessão gratuita de 30 minutos</h3>
-            <p class="cf-step-desc">Por vídeo, com o Adalberto, sobre o seu cenário e o próximo passo.</p>
+            <!-- Passo 2 -->
+            <div class="cf-step-card">
+              <div class="cf-step-top-line" aria-hidden="true"></div>
+              <span class="cf-step-badge" aria-hidden="true">
+                <svg class="cf-badge-ring" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                  <circle class="cf-ring-bg" cx="22" cy="22" r="19" />
+                  <circle class="cf-ring-path" cx="22" cy="22" r="19" />
+                </svg>
+                <span class="cf-badge-text">02</span>
+              </span>
+              <h3 class="cf-step-title">Perfil analisado</h3>
+              <p class="cf-step-desc">Cada perfil é analisado, sem aprovação automática.</p>
+            </div>
+
+            <!-- Passo 3 -->
+            <div class="cf-step-card">
+              <div class="cf-step-top-line" aria-hidden="true"></div>
+              <span class="cf-step-badge" aria-hidden="true">
+                <svg class="cf-badge-ring" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                  <circle class="cf-ring-bg" cx="22" cy="22" r="19" />
+                  <circle class="cf-ring-path" cx="22" cy="22" r="19" />
+                </svg>
+                <span class="cf-badge-text">03</span>
+              </span>
+              <h3 class="cf-step-title">Sessão gratuita de 30 minutos</h3>
+              <p class="cf-step-desc">Por vídeo, com o Adalberto, sobre o seu cenário e o próximo passo.</p>
+            </div>
           </div>
         </div>
 
@@ -3122,28 +4599,29 @@
           <div class="cf-audience-grid">
             <!-- Para quem é -->
             <div class="cf-audience-card is-target">
+              <div class="cf-audience-top-line" aria-hidden="true"></div>
               <h3 class="cf-audience-title">Para quem é</h3>
               <ul class="cf-audience-list">
                 <li class="cf-audience-item">
                   <span class="cf-audience-icon" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="12" height="12">
-                      <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
+                      <polyline class="cf-icon-path is-check" points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                   <span>Lidera pessoas, mesmo sem cargo formal de gestor</span>
                 </li>
                 <li class="cf-audience-item">
                   <span class="cf-audience-icon" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="12" height="12">
-                      <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
+                      <polyline class="cf-icon-path is-check" points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                   <span>Está em transição ou quer estruturar a gestão</span>
                 </li>
                 <li class="cf-audience-item">
                   <span class="cf-audience-icon" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="12" height="12">
-                      <polyline points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
+                      <polyline class="cf-icon-path is-check" points="3 8.5 6.5 12 13 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </span>
                   <span>Está sobrecarregado e quer resolver de forma prática</span>
@@ -3151,33 +4629,37 @@
               </ul>
             </div>
 
+            <!-- Divisor entre os cartões -->
+            <div class="cf-audience-divider" aria-hidden="true"></div>
+
             <!-- Para quem não é -->
             <div class="cf-audience-card is-filter">
+              <div class="cf-audience-top-line" aria-hidden="true"></div>
               <h3 class="cf-audience-title">Para quem não é</h3>
               <ul class="cf-audience-list">
                 <li class="cf-audience-item">
                   <span class="cf-audience-icon" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="12" height="12">
-                      <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                      <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
+                      <line class="cf-icon-path is-x" x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <line class="cf-icon-path is-x" x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </span>
                   <span>Quem busca apenas conteúdo gratuito</span>
                 </li>
                 <li class="cf-audience-item">
                   <span class="cf-audience-icon" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="12" height="12">
-                      <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                      <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
+                      <line class="cf-icon-path is-x" x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <line class="cf-icon-path is-x" x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </span>
                   <span>Quem não quer mudar</span>
                 </li>
                 <li class="cf-audience-item">
                   <span class="cf-audience-icon" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" width="12" height="12">
-                      <line x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                      <line x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" focusable="false">
+                      <line class="cf-icon-path is-x" x1="4" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                      <line class="cf-icon-path is-x" x1="12" y1="4" x2="4" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                   </span>
                   <span>Quem não está comprometido com o processo</span>
@@ -3220,10 +4702,7 @@
                   <path class="quemconduz-corner-path" d="M 84 100 L 100 100 L 100 84" />
                 </svg>
 
-                <!-- Cotas Técnicas Decorativas -->
-                <div class="quemconduz-cota quemconduz-cota-top" aria-hidden="true">
-                  <span class="quemconduz-cota-val">REF 08.QC</span>
-                </div>
+
 
                 <div class="quemconduz-portrait-inner">
                   <picture class="quemconduz-picture">
@@ -3249,7 +4728,6 @@
               <div class="quemconduz-prancha-header">
                 <div class="quemconduz-stamp-meta">
                   <span class="quemconduz-stamp-badge">CARIMBO TÉCNICO</span>
-                  <span class="quemconduz-stamp-code">ACADEMY &middot; FOLHA 08</span>
                 </div>
                 <div class="quemconduz-stamp-title">QUALIFICAÇÕES E ATUAÇÃO PROFISSIONAL</div>
               </div>
@@ -3259,6 +4737,8 @@
                 
                 <!-- Célula 1: Trajetória -->
                 <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-top-line" aria-hidden="true"></div>
+                  <div class="quemconduz-cell-glow" aria-hidden="true"></div>
                   <div class="quemconduz-cell-head">
                     <span class="quemconduz-cell-num" aria-hidden="true">01</span>
                     <h4 class="quemconduz-cell-label">Trajetória</h4>
@@ -3268,6 +4748,8 @@
 
                 <!-- Célula 2: Docência e capacitação -->
                 <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-top-line" aria-hidden="true"></div>
+                  <div class="quemconduz-cell-glow" aria-hidden="true"></div>
                   <div class="quemconduz-cell-head">
                     <span class="quemconduz-cell-num" aria-hidden="true">02</span>
                     <h4 class="quemconduz-cell-label">Docência e capacitação</h4>
@@ -3277,6 +4759,8 @@
 
                 <!-- Célula 3: Conselhos e governança -->
                 <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-top-line" aria-hidden="true"></div>
+                  <div class="quemconduz-cell-glow" aria-hidden="true"></div>
                   <div class="quemconduz-cell-head">
                     <span class="quemconduz-cell-num" aria-hidden="true">03</span>
                     <h4 class="quemconduz-cell-label">Conselhos e governança</h4>
@@ -3286,6 +4770,8 @@
 
                 <!-- Célula 4: Publicações -->
                 <article class="quemconduz-cell">
+                  <div class="quemconduz-cell-top-line" aria-hidden="true"></div>
+                  <div class="quemconduz-cell-glow" aria-hidden="true"></div>
                   <div class="quemconduz-cell-head">
                     <span class="quemconduz-cell-num" aria-hidden="true">04</span>
                     <h4 class="quemconduz-cell-label">Publicações</h4>
@@ -3394,7 +4880,7 @@
     </section>
 
     <!-- ============================================================
-         DOBRA 6: PERGUNTAS FREQUENTES (PAPER)
+         DOBRA 6: PERGUNTAS FREQUENTES (PAPER-2)
     ============================================================ -->
     <section id="faq" class="section-faq" aria-labelledby="faqTitle">
       <div class="max-w faq-container">
@@ -3403,112 +4889,136 @@
           <h2 class="faq-title" id="faqTitle">Antes de responder o questionário.</h2>
         </div>
 
-        <ul class="faq-list" role="list">
-          <!-- Pergunta 01 -->
-          <li class="faq-item" id="faq-item-1">
-            <button type="button" class="faq-btn" id="faq-btn-1" aria-expanded="false" aria-controls="faq-ans-1">
-              <span class="faq-btn-num" aria-hidden="true">01</span>
-              <span class="faq-btn-question">O Diagnóstico de Liderança tem custo?</span>
-              <span class="faq-btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" width="16" height="16" fill="none">
-                  <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-answer-wrap" id="faq-ans-1" role="region" aria-labelledby="faq-btn-1">
-              <div class="faq-answer-inner">
-                <div class="faq-answer-content">
-                  <p class="faq-answer-text">Não. Você responde ao questionário, seu perfil é analisado e conversamos por 30 minutos. Se fizer sentido seguir, apresento o próximo passo na própria conversa.</p>
-                </div>
-              </div>
-            </div>
-          </li>
+        <div class="faq-layout">
+          <!-- Régua Vertical Técnica SVG (Desktop/Tablet) -->
+          <div class="faq-rail" aria-hidden="true">
+            <svg class="faq-rail-svg" viewBox="0 0 24 358" preserveAspectRatio="none" focusable="false">
+              <line class="faq-rail-track" x1="12" y1="31" x2="12" y2="327" />
+              <circle class="faq-rail-node" cx="12" cy="31" r="3.5" />
+              <circle class="faq-rail-node" cx="12" cy="105" r="3.5" />
+              <circle class="faq-rail-node" cx="12" cy="179" r="3.5" />
+              <circle class="faq-rail-node" cx="12" cy="253" r="3.5" />
+              <circle class="faq-rail-node" cx="12" cy="327" r="3.5" />
+            </svg>
+          </div>
 
-          <!-- Pergunta 02 -->
-          <li class="faq-item" id="faq-item-2">
-            <button type="button" class="faq-btn" id="faq-btn-2" aria-expanded="false" aria-controls="faq-ans-2">
-              <span class="faq-btn-num" aria-hidden="true">02</span>
-              <span class="faq-btn-question">Já tentei de tudo com a minha equipe. O que muda aqui?</span>
-              <span class="faq-btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" width="16" height="16" fill="none">
-                  <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-answer-wrap" id="faq-ans-2" role="region" aria-labelledby="faq-btn-2">
-              <div class="faq-answer-inner">
-                <div class="faq-answer-content">
-                  <p class="faq-answer-text">Antes de propor qualquer coisa, o diagnóstico mostra em que momento você está e onde a liderança está travando. O caminho nasce dessa leitura, não de um modelo pronto.</p>
+          <ul class="faq-list" role="list">
+            <!-- Pergunta 01 -->
+            <li class="faq-item" id="faq-item-1">
+              <div class="faq-item-top-line" aria-hidden="true"></div>
+              <button type="button" class="faq-btn" id="faq-btn-1" aria-expanded="false" aria-controls="faq-ans-1">
+                <div class="faq-btn-glow" aria-hidden="true"></div>
+                <span class="faq-btn-num" aria-hidden="true">01</span>
+                <span class="faq-btn-question">O Diagnóstico de Liderança tem custo?</span>
+                <span class="faq-btn-icon" aria-hidden="true">
+                  <svg class="faq-icon-svg" viewBox="0 0 20 20" width="16" height="16" fill="none" focusable="false">
+                    <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line class="faq-icon-v" x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer-wrap" id="faq-ans-1" role="region" aria-labelledby="faq-btn-1">
+                <div class="faq-answer-inner">
+                  <div class="faq-answer-content">
+                    <p class="faq-answer-text">Não. Você responde ao questionário, seu perfil é analisado e conversamos por 30 minutos. Se fizer sentido seguir, apresento o próximo passo na própria conversa.</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
+            </li>
 
-          <!-- Pergunta 03 -->
-          <li class="faq-item" id="faq-item-3">
-            <button type="button" class="faq-btn" id="faq-btn-3" aria-expanded="false" aria-controls="faq-ans-3">
-              <span class="faq-btn-num" aria-hidden="true">03</span>
-              <span class="faq-btn-question">Isso é teoria ou serve para o meu caso?</span>
-              <span class="faq-btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" width="16" height="16" fill="none">
-                  <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-answer-wrap" id="faq-ans-3" role="region" aria-labelledby="faq-btn-3">
-              <div class="faq-answer-inner">
-                <div class="faq-answer-content">
-                  <p class="faq-answer-text">O trabalho parte de situações reais de gestão, sempre anonimizadas. Você leva uma situação concreta, e o plano é construído sobre ela.</p>
+            <!-- Pergunta 02 -->
+            <li class="faq-item" id="faq-item-2">
+              <div class="faq-item-top-line" aria-hidden="true"></div>
+              <button type="button" class="faq-btn" id="faq-btn-2" aria-expanded="false" aria-controls="faq-ans-2">
+                <div class="faq-btn-glow" aria-hidden="true"></div>
+                <span class="faq-btn-num" aria-hidden="true">02</span>
+                <span class="faq-btn-question">Já tentei de tudo com a minha equipe. O que muda aqui?</span>
+                <span class="faq-btn-icon" aria-hidden="true">
+                  <svg class="faq-icon-svg" viewBox="0 0 20 20" width="16" height="16" fill="none" focusable="false">
+                    <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line class="faq-icon-v" x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer-wrap" id="faq-ans-2" role="region" aria-labelledby="faq-btn-2">
+                <div class="faq-answer-inner">
+                  <div class="faq-answer-content">
+                    <p class="faq-answer-text">Antes de propor qualquer coisa, o diagnóstico mostra em que momento você está e onde a liderança está travando. O caminho nasce dessa leitura, não de um modelo pronto.</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
+            </li>
 
-          <!-- Pergunta 04 -->
-          <li class="faq-item" id="faq-item-4">
-            <button type="button" class="faq-btn" id="faq-btn-4" aria-expanded="false" aria-controls="faq-ans-4">
-              <span class="faq-btn-num" aria-hidden="true">04</span>
-              <span class="faq-btn-question">Quanto custa?</span>
-              <span class="faq-btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" width="16" height="16" fill="none">
-                  <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-answer-wrap" id="faq-ans-4" role="region" aria-labelledby="faq-btn-4">
-              <div class="faq-answer-inner">
-                <div class="faq-answer-content">
-                  <p class="faq-answer-text">Os valores e as condições são apresentados na conversa, depois do diagnóstico, de acordo com o formato indicado.</p>
+            <!-- Pergunta 03 -->
+            <li class="faq-item" id="faq-item-3">
+              <div class="faq-item-top-line" aria-hidden="true"></div>
+              <button type="button" class="faq-btn" id="faq-btn-3" aria-expanded="false" aria-controls="faq-ans-3">
+                <div class="faq-btn-glow" aria-hidden="true"></div>
+                <span class="faq-btn-num" aria-hidden="true">03</span>
+                <span class="faq-btn-question">Isso é teoria ou serve para o meu caso?</span>
+                <span class="faq-btn-icon" aria-hidden="true">
+                  <svg class="faq-icon-svg" viewBox="0 0 20 20" width="16" height="16" fill="none" focusable="false">
+                    <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line class="faq-icon-v" x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer-wrap" id="faq-ans-3" role="region" aria-labelledby="faq-btn-3">
+                <div class="faq-answer-inner">
+                  <div class="faq-answer-content">
+                    <p class="faq-answer-text">O trabalho parte de situações reais de gestão, sempre anonimizadas. Você leva uma situação concreta, e o plano é construído sobre ela.</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
+            </li>
 
-          <!-- Pergunta 05 -->
-          <li class="faq-item" id="faq-item-5">
-            <button type="button" class="faq-btn" id="faq-btn-5" aria-expanded="false" aria-controls="faq-ans-5">
-              <span class="faq-btn-num" aria-hidden="true">05</span>
-              <span class="faq-btn-question">O que acontece com os meus dados no questionário?</span>
-              <span class="faq-btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 20 20" width="16" height="16" fill="none">
-                  <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="faq-answer-wrap" id="faq-ans-8" role="region" aria-labelledby="faq-btn-5">
-              <div class="faq-answer-inner">
-                <div class="faq-answer-content">
-                  <p class="faq-answer-text">Eles são usados para analisar o seu perfil e combinar a conversa. Pedidos que não viram contratação são mantidos por até 24 meses, e você pode pedir a exclusão a qualquer momento, com atendimento em até 15 dias. Os detalhes estão na <a href="../privacidade.html" class="faq-answer-link">Política de Privacidade</a>.</p>
+            <!-- Pergunta 04 -->
+            <li class="faq-item" id="faq-item-4">
+              <div class="faq-item-top-line" aria-hidden="true"></div>
+              <button type="button" class="faq-btn" id="faq-btn-4" aria-expanded="false" aria-controls="faq-ans-4">
+                <div class="faq-btn-glow" aria-hidden="true"></div>
+                <span class="faq-btn-num" aria-hidden="true">04</span>
+                <span class="faq-btn-question">Quanto custa?</span>
+                <span class="faq-btn-icon" aria-hidden="true">
+                  <svg class="faq-icon-svg" viewBox="0 0 20 20" width="16" height="16" fill="none" focusable="false">
+                    <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line class="faq-icon-v" x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer-wrap" id="faq-ans-4" role="region" aria-labelledby="faq-btn-4">
+                <div class="faq-answer-inner">
+                  <div class="faq-answer-content">
+                    <p class="faq-answer-text">Os valores e as condições são apresentados na conversa, depois do diagnóstico, de acordo com o formato indicado.</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+
+            <!-- Pergunta 05 -->
+            <li class="faq-item" id="faq-item-5">
+              <div class="faq-item-top-line" aria-hidden="true"></div>
+              <button type="button" class="faq-btn" id="faq-btn-5" aria-expanded="false" aria-controls="faq-ans-5">
+                <div class="faq-btn-glow" aria-hidden="true"></div>
+                <span class="faq-btn-num" aria-hidden="true">05</span>
+                <span class="faq-btn-question">O que acontece com os meus dados no questionário?</span>
+                <span class="faq-btn-icon" aria-hidden="true">
+                  <svg class="faq-icon-svg" viewBox="0 0 20 20" width="16" height="16" fill="none" focusable="false">
+                    <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line class="faq-icon-v" x1="10" y1="4" x2="10" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faq-answer-wrap" id="faq-ans-5" role="region" aria-labelledby="faq-btn-5">
+                <div class="faq-answer-inner">
+                  <div class="faq-answer-content">
+                    <p class="faq-answer-text">Eles são usados para analisar o seu perfil e combinar a conversa. Pedidos que não viram contratação são mantidos por até 24 meses, e você pode pedir a exclusão a qualquer momento, com atendimento em até 15 dias. Os detalhes estão na <a href="../privacidade.html" class="faq-answer-link">Política de Privacidade</a>.</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -3832,56 +5342,7 @@
         );
       }
 
-      // 2. Sinais Cards (Entrada e Linha Dourada)
-      const sinaisCards = $$('.sinais-card');
-      const sinaisLines = $$('.sinais-card-top-line');
-      if (sinaisCards.length) {
-        gsap.from(sinaisCards, {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.sinais-grid',
-            start: 'top 85%',
-            once: true
-          }
-        });
-      }
-      if (sinaisLines.length) {
-        gsap.fromTo(sinaisLines,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: '.sinais-grid',
-              start: 'top 85%',
-              once: true
-            }
-          }
-        );
-      }
-
-      // 3. O que o diagnóstico mostra (Cards)
-      const mostraCards = $$('.mostra-card');
-      if (mostraCards.length) {
-        gsap.from(mostraCards, {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: '.mostra-grid',
-            start: 'top 85%',
-            once: true
-          }
-        });
-      }
+// 2. (Animações de Mostra movidas para initMostra)
     })();
   </script>
 
@@ -3895,27 +5356,255 @@
       const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
       const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 
+      const section = $('#como-funciona');
+      if (!section) return;
+
       if (!hasGsap || isReduced()) return;
 
-      const steps = $$('.cf-step-card');
-      if (steps.length) {
-        gsap.from(steps, {
+      // 1. Cabecalho: H2 com SplitText, Kicker dot pulse
+      const title = $('#cfTitle', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'cf-title-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      const kickerDot = $('.cf-kicker .kicker-dot', section);
+      if (kickerDot) {
+        gsap.fromTo(kickerDot,
+          { scale: 0.6, opacity: 0.4 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: '.cf-header',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 2. Regua de progresso entre os passos (Scrub) e aneis dos crachas
+      const trackPath = $('.cf-track-path', section);
+      const ringPaths = $$('.cf-ring-path', section);
+      const stepCards = $$('.cf-step-card', section);
+      const stepTopLines = $$('.cf-step-top-line', section);
+
+      if (trackPath) {
+        gsap.fromTo(trackPath,
+          { strokeDashoffset: 800 },
+          {
+            strokeDashoffset: 0,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.cf-steps-wrap',
+              start: 'top 80%',
+              end: 'bottom 85%',
+              scrub: 0.5
+            }
+          }
+        );
+      }
+
+      // Entrada dos cartoes de passos e linhas do topo
+      if (stepCards.length) {
+        gsap.from(stepCards, {
           y: 20,
           opacity: 0,
-          duration: 0.6,
-          stagger: 0.12,
+          duration: 0.65,
+          stagger: 0.14,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: '.cf-steps-grid',
-            start: 'top 85%',
+            trigger: '.cf-steps-wrap',
+            start: 'top 82%',
             once: true
           }
         });
       }
+
+      if (stepTopLines.length) {
+        gsap.fromTo(stepTopLines,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 0.75,
+            stagger: 0.14,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.cf-steps-wrap',
+              start: 'top 82%',
+              once: true
+            }
+          }
+        );
+      }
+
+      if (ringPaths.length) {
+        ringPaths.forEach((ring, i) => {
+          gsap.fromTo(ring,
+            { strokeDashoffset: 120 },
+            {
+              strokeDashoffset: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: stepCards[i] || '.cf-steps-wrap',
+                start: 'top 78%',
+                once: true
+              }
+            }
+          );
+        });
+      }
+
+      // 3. Bloco "Para quem e" e "Para quem nao e"
+      const targetCard = $('.cf-audience-card.is-target', section);
+      const filterCard = $('.cf-audience-card.is-filter', section);
+      const divider = $('.cf-audience-divider', section);
+      const audienceLines = $$('.cf-audience-top-line', section);
+      const audienceItems = $$('.cf-audience-item', section);
+      const audienceIcons = $$('.cf-icon-path', section);
+
+      if (targetCard) {
+        gsap.from(targetCard, {
+          x: -25,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.cf-audience-wrap',
+            start: 'top 80%',
+            once: true
+          }
+        });
+      }
+
+      if (filterCard) {
+        gsap.from(filterCard, {
+          x: 25,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.cf-audience-wrap',
+            start: 'top 80%',
+            once: true
+          }
+        });
+      }
+
+      if (divider) {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (!isMobile) {
+          gsap.fromTo(divider,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: '.cf-audience-wrap',
+                start: 'top 80%',
+                once: true
+              }
+            }
+          );
+        } else {
+          gsap.fromTo(divider,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: '.cf-audience-wrap',
+                start: 'top 80%',
+                once: true
+              }
+            }
+          );
+        }
+      }
+
+      if (audienceLines.length) {
+        gsap.fromTo(audienceLines,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.cf-audience-wrap',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+      }
+
+      if (audienceItems.length) {
+        gsap.from(audienceItems, {
+          y: 12,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.cf-audience-wrap',
+            start: 'top 78%',
+            once: true
+          }
+        });
+      }
+
+      if (audienceIcons.length) {
+        gsap.fromTo(audienceIcons,
+          { strokeDashoffset: 40 },
+          {
+            strokeDashoffset: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.cf-audience-wrap',
+              start: 'top 78%',
+              once: true
+            }
+          }
+        );
+      }
     })();
   </script>
 
-  <!-- Script 4: Quem Conduz (Ficha e Contadores) -->
+  <!-- Script 4: Quem conduz (Ficha e Contadores) -->
   <script>
     (function initQuemConduz() {
       const root = document.documentElement;
@@ -3947,9 +5636,28 @@
         });
       }
 
+      const cells = $$('.quemconduz-cell', section);
+
+      // Brilho dourado que acompanha o ponteiro nas células
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        cells.forEach((cell) => {
+          let rafId = null;
+          cell.addEventListener('pointermove', (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              const r = cell.getBoundingClientRect();
+              const mx = e.clientX - r.left;
+              const my = e.clientY - r.top;
+              cell.style.setProperty('--mx', mx + 'px');
+              cell.style.setProperty('--my', my + 'px');
+            });
+          });
+        });
+      }
+
       if (!hasGsap || isReduced()) return;
 
-      // Cantoneiras do Retrato
+      // Cantoneiras do Retrato desenhadas por stroke-dashoffset
       const cornerPaths = $$('.quemconduz-corner-path', section);
       if (cornerPaths.length) {
         gsap.fromTo(cornerPaths,
@@ -3982,8 +5690,10 @@
         });
       }
 
-      // Células do Carimbo
-      const cells = $$('.quemconduz-cell', section);
+      // Células do Carimbo entrando em cascata
+      const cellTopLines = $$('.quemconduz-cell-top-line', section);
+      const cellNums = $$('.quemconduz-cell-num', section);
+
       if (cells.length) {
         gsap.from(cells, {
           y: 16,
@@ -3997,6 +5707,40 @@
             once: true
           }
         });
+      }
+
+      if (cellTopLines.length) {
+        gsap.fromTo(cellTopLines,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 0.7,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.quemconduz-cells-grid',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      if (cellNums.length) {
+        gsap.fromTo(cellNums,
+          { clipPath: 'inset(0 100% 0 0)' },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 0.5,
+            stagger: 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.quemconduz-cells-grid',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
       }
 
       // Régua Dourada com Scrub
@@ -4060,44 +5804,219 @@
 
       const items = $$('.faq-item', section);
       const btns = $$('.faq-btn', section);
+      const railNodes = $$('.faq-rail-node', section);
+      const railTrack = $('.faq-rail-track', section);
 
+      // Alinhamento dinâmico dos nós da régua vertical aos botões
+      function updateRailNodes() {
+        const layout = $('.faq-layout', section);
+        const railSvg = $('.faq-rail-svg', section);
+        if (!layout || !railSvg) return;
+        const layoutTop = layout.getBoundingClientRect().top;
+        btns.forEach((btn, idx) => {
+          const node = railNodes[idx];
+          if (node) {
+            const btnRect = btn.getBoundingClientRect();
+            const centerY = Math.round((btnRect.top - layoutTop) + btnRect.height / 2);
+            node.setAttribute('cy', centerY);
+            if (idx === 0 && railTrack) {
+              railTrack.setAttribute('y1', centerY);
+            }
+            if (idx === btns.length - 1 && railTrack) {
+              railTrack.setAttribute('y2', centerY);
+              railSvg.setAttribute('viewBox', '0 0 24 ' + (centerY + 30));
+            }
+          }
+        });
+      }
+
+      // Executa alinhamento inicial
+      updateRailNodes();
+      window.addEventListener('resize', updateRailNodes);
+
+      // Comportamento do acordeão: um item aberto por vez, foco e teclado
       btns.forEach((btn, idx) => {
-        const item = items[idx];
-        if (!item) return;
+        btn.addEventListener('click', () => {
+          const item = items[idx];
+          const isCurrentlyOpen = item.classList.contains('is-open');
 
-        function toggleFaq() {
-          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-          const willOpen = !isExpanded;
-
-          // Fecha todos os outros
-          btns.forEach((otherBtn, oIdx) => {
-            otherBtn.setAttribute('aria-expanded', 'false');
-            items[oIdx].classList.remove('is-open');
+          // Fecha todos os outros itens
+          items.forEach((otherItem, otherIdx) => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('is-open');
+              btns[otherIdx].setAttribute('aria-expanded', 'false');
+            }
           });
 
-          if (willOpen) {
-            btn.setAttribute('aria-expanded', 'true');
-            item.classList.add('is-open');
-          }
+          // Alterna o item clicado
+          item.classList.toggle('is-open', !isCurrentlyOpen);
+          btn.setAttribute('aria-expanded', !isCurrentlyOpen ? 'true' : 'false');
+
+          // Atualiza nós ativos e posições dinâmicas
+          railNodes.forEach((node, nIdx) => {
+            const isOpen = items[nIdx].classList.contains('is-open');
+            node.classList.toggle('is-active', isOpen);
+          });
+          updateRailNodes();
+          setTimeout(updateRailNodes, 360);
 
           if (hasGsap && window.ScrollTrigger) {
             ScrollTrigger.refresh();
           }
-        }
+        });
 
-        btn.addEventListener('click', toggleFaq);
+        // Navegação por teclado: setas cima/baixo, Home, End
+        btn.addEventListener('keydown', (e) => {
+          let targetIndex = -1;
+          if (e.key === 'ArrowDown') {
+            targetIndex = (idx + 1) % btns.length;
+          } else if (e.key === 'ArrowUp') {
+            targetIndex = (idx - 1 + btns.length) % btns.length;
+          } else if (e.key === 'Home') {
+            targetIndex = 0;
+          } else if (e.key === 'End') {
+            targetIndex = btns.length - 1;
+          }
 
-        item.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' || e.key === 'Esc') {
-            if (btn.getAttribute('aria-expanded') === 'true') {
-              btn.setAttribute('aria-expanded', 'false');
-              item.classList.remove('is-open');
-              btn.focus();
-              if (hasGsap && window.ScrollTrigger) ScrollTrigger.refresh();
-            }
+          if (targetIndex !== -1) {
+            e.preventDefault();
+            btns[targetIndex].focus();
           }
         });
+
+        // Brilho dourado no hover (somente mouse)
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          let rafId = null;
+          btn.addEventListener('pointermove', (e) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              const r = btn.getBoundingClientRect();
+              const mx = e.clientX - r.left;
+              const my = e.clientY - r.top;
+              btn.style.setProperty('--mx', mx + 'px');
+              btn.style.setProperty('--my', my + 'px');
+            });
+          });
+        }
       });
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Cabeçalho H2 com SplitText, Kicker dot pulse
+      const title = $('#faqTitle', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'faq-title-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      const kickerDot = $('.faq-kicker .kicker-dot', section);
+      if (kickerDot) {
+        gsap.fromTo(kickerDot,
+          { scale: 0.6, opacity: 0.4 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: '.faq-header',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 2. Régua vertical dourada ao lado da lista
+      if (railTrack) {
+        gsap.fromTo(railTrack,
+          { strokeDashoffset: 600 },
+          {
+            strokeDashoffset: 0,
+            duration: 1.2,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.faq-layout',
+              start: 'top 82%',
+              once: true
+            }
+          }
+        );
+      }
+
+      if (railNodes.length) {
+        gsap.from(railNodes, {
+          scale: 0,
+          opacity: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'back.out(2)',
+          scrollTrigger: {
+            trigger: '.faq-layout',
+            start: 'top 80%',
+            once: true
+          }
+        });
+      }
+
+      // 3. Itens entrando em cascata e revelação dos números por clip-path
+      if (items.length) {
+        gsap.from(items, {
+          y: 18,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.faq-list',
+            start: 'top 82%',
+            once: true
+          }
+        });
+      }
+
+      const nums = $$('.faq-btn-num', section);
+      if (nums.length) {
+        gsap.fromTo(nums,
+          { clipPath: 'inset(0 100% 0 0)' },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.faq-list',
+              start: 'top 82%',
+              once: true
+            }
+          }
+        );
+      }
     })();
   </script>
 
