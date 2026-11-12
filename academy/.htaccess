@@ -1,0 +1,45 @@
+# ============================================================
+# Configuração Apache / LiteSpeed para Adalberto Chagas Academy
+# Compatível com WordPress no mesmo diretório ou subdiretório
+# ============================================================
+
+# 1. Prioridade do arquivo raiz (index.html antes de index.php)
+DirectoryIndex index.html index.php
+
+# 2. Regras de reescrita para garantir que os arquivos estáticos
+#    tenham prioridade total sobre o roteador do WordPress
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redireciona rotas sem barra final para a barra final (evita conflito com WP)
+  RewriteRule ^diagnostico$ diagnostico/ [R=301,L]
+  RewriteRule ^obrigado$ obrigado/ [R=301,L]
+
+  # Se o arquivo físico ou a pasta física existir, entrega diretamente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+</IfModule>
+
+# 3. Tipos MIME para WebP, MP4, WOFF2 e SVG
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType video/mp4 .mp4
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+</IfModule>
+
+# 4. Cache para máxima velocidade de carregamento
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 2 days"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
+

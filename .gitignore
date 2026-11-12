@@ -1,3 +1,25 @@
+# Dependências
 node_modules/
+
+# Sistema Operacional
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Ambiente e Logs
+*.log
+*.tmp
+
+# Arquivos de teste e rascunhos de automação local
 scratch/
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

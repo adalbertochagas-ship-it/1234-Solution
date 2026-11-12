@@ -456,7 +456,7 @@
         "name": "O Diagnóstico de Liderança tem custo?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Não. Você responde ao questionário, seu perfil é analisado e conversamos por 30 minutos. Se fizer sentido seguir, apresento o próximo passo na própria conversa."
+          "text": "O diagnóstico é gratuito. Você responde ao questionário, seu perfil é analisado e conversamos por 30 minutos. Se fizer sentido seguir, os valores e as condições do formato indicado são apresentados na própria conversa, depois do diagnóstico."
         }
       },
       {
@@ -477,10 +477,10 @@
       },
       {
         "@type": "Question",
-        "name": "Quanto custa?",
+        "name": "Preciso me preparar para a conversa?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Os valores e as condições são apresentados na conversa, depois do diagnóstico, de acordo com o formato indicado."
+          "text": "Basta responder ao questionário com atenção e pensar em uma situação real de gestão que você queira discutir. O restante construímos juntos durante os 30 minutos."
         }
       },
       {
@@ -3470,6 +3470,7 @@
       position: relative;
       border-top: 1px solid var(--navy-3);
       text-align: center;
+      overflow: hidden;
     }
 
     .chamada-final-container {
@@ -3489,6 +3490,11 @@
       letter-spacing: -0.015em;
     }
 
+    .chamada-final-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
     .chamada-final-text {
       font-family: var(--font-body);
       font-size: clamp(1.0625rem, 2vw, 1.25rem);
@@ -3496,7 +3502,39 @@
       color: var(--text-lede);
       max-width: 640px;
       margin-inline: auto;
-      margin-bottom: var(--space-8);
+      margin-bottom: var(--space-4);
+    }
+
+    /* Fio Dourado de Prancha Técnica */
+    .chamada-final-wire {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-inline: auto;
+      margin-bottom: var(--space-3);
+      height: 20px;
+      position: relative;
+    }
+
+    .chamada-final-wire-svg {
+      width: 100px;
+      height: 20px;
+      display: block;
+      overflow: visible;
+    }
+
+    .chamada-final-wire-line {
+      stroke: rgba(198, 164, 90, 0.45);
+      stroke-width: 1.5;
+      stroke-dasharray: 40;
+      stroke-dashoffset: 0;
+    }
+
+    .chamada-final-wire-node {
+      fill: var(--navy);
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      transform-origin: center;
     }
 
     .chamada-final-actions {
@@ -3508,11 +3546,58 @@
       margin-bottom: var(--space-4);
     }
 
+    .chamada-final-btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Brilho radial que acompanha o cursor (somente mouse) */
+    @media (hover: hover) and (pointer: fine) {
+      .chamada-final-btn-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle 120px at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.35), transparent 70%);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 2;
+      }
+      .chamada-final-btn-primary:hover .chamada-final-btn-glow {
+        opacity: 1;
+      }
+    }
+
     .chamada-final-note {
       font-family: var(--font-mono);
       font-size: 0.8125rem;
       color: var(--stone);
       margin-top: var(--space-2);
+    }
+
+    /* Fallback reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .chamada-final-btn-primary {
+        box-shadow: none !important;
+      }
+      .chamada-final-wire-line {
+        stroke-dashoffset: 0 !important;
+      }
+    }
+    html.rm .chamada-final-btn-primary {
+      box-shadow: none !important;
+    }
+    html.rm .chamada-final-wire-line {
+      stroke-dashoffset: 0 !important;
+    }
+
+    /* Fallback sem JavaScript */
+    html:not(.js) .chamada-final-actions .btn {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    html:not(.js) .chamada-final-wire-line {
+      stroke-dashoffset: 0 !important;
     }
 
     /* ============================================================
@@ -4170,7 +4255,7 @@
       }
 
       .section-chamada-final {
-        padding-block: var(--space-10);
+        padding-block: var(--space-8);
       }
       .chamada-final-title {
         font-size: clamp(2rem, 7vw, 2.5rem);
@@ -4178,7 +4263,14 @@
       }
       .chamada-final-text {
         font-size: 1rem;
-        margin-bottom: var(--space-5);
+        margin-bottom: var(--space-3);
+      }
+      .chamada-final-wire {
+        height: 16px;
+        margin-bottom: var(--space-2);
+      }
+      .chamada-final-wire-svg {
+        height: 16px;
       }
       .chamada-final-actions {
         flex-direction: column;
@@ -4871,7 +4963,7 @@
           </div>
           <div class="quemconduz-stat-card">
             <div class="quemconduz-stat-val" data-target="5" data-suffix="">5</div>
-            <div class="quemconduz-stat-label">Livros publicados</div>
+            <div class="quemconduz-stat-label">Obras com capítulos seus</div>
           </div>
         </div>
 
@@ -4920,7 +5012,7 @@
               <div class="faq-answer-wrap" id="faq-ans-1" role="region" aria-labelledby="faq-btn-1">
                 <div class="faq-answer-inner">
                   <div class="faq-answer-content">
-                    <p class="faq-answer-text">Não. Você responde ao questionário, seu perfil é analisado e conversamos por 30 minutos. Se fizer sentido seguir, apresento o próximo passo na própria conversa.</p>
+                    <p class="faq-answer-text">O diagnóstico é gratuito. Você responde ao questionário, seu perfil é analisado e conversamos por 30 minutos. Se fizer sentido seguir, os valores e as condições do formato indicado são apresentados na própria conversa, depois do diagnóstico.</p>
                   </div>
                 </div>
               </div>
@@ -4978,7 +5070,7 @@
               <button type="button" class="faq-btn" id="faq-btn-4" aria-expanded="false" aria-controls="faq-ans-4">
                 <div class="faq-btn-glow" aria-hidden="true"></div>
                 <span class="faq-btn-num" aria-hidden="true">04</span>
-                <span class="faq-btn-question">Quanto custa?</span>
+                <span class="faq-btn-question">Preciso me preparar para a conversa?</span>
                 <span class="faq-btn-icon" aria-hidden="true">
                   <svg class="faq-icon-svg" viewBox="0 0 20 20" width="16" height="16" fill="none" focusable="false">
                     <line x1="4" y1="10" x2="16" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -4989,7 +5081,7 @@
               <div class="faq-answer-wrap" id="faq-ans-4" role="region" aria-labelledby="faq-btn-4">
                 <div class="faq-answer-inner">
                   <div class="faq-answer-content">
-                    <p class="faq-answer-text">Os valores e as condições são apresentados na conversa, depois do diagnóstico, de acordo com o formato indicado.</p>
+                    <p class="faq-answer-text">Basta responder ao questionário com atenção e pensar em uma situação real de gestão que você queira discutir. O restante construímos juntos durante os 30 minutos.</p>
                   </div>
                 </div>
               </div>
@@ -5031,8 +5123,17 @@
 
         <p class="chamada-final-text">O caminho começa pelo Diagnóstico de Liderança, gratuito. Se preferir conversar antes, fale direto comigo.</p>
 
+        <!-- Fio Dourado de Prancha Técnica -->
+        <div class="chamada-final-wire" aria-hidden="true">
+          <svg class="chamada-final-wire-svg" viewBox="0 0 100 24" fill="none">
+            <line class="chamada-final-wire-line" x1="50" y1="0" x2="50" y2="16" />
+            <circle class="chamada-final-wire-node" cx="50" cy="19" r="3" />
+          </svg>
+        </div>
+
         <div class="chamada-final-actions">
-          <a href="https://form.respondi.app/HDwmDKF8" class="btn btn-primary" rel="noopener" data-cta="diagnostico-questionario-final">
+          <a href="https://form.respondi.app/HDwmDKF8" class="btn btn-primary chamada-final-btn-primary" rel="noopener" data-cta="diagnostico-questionario-final" id="chamadaFinalPrimaryBtn">
+            <span class="chamada-final-btn-glow" aria-hidden="true"></span>
             <span class="btn-inner-track" aria-hidden="true">
               <span class="btn-conic"></span>
               <span class="btn-bg">
@@ -5052,11 +5153,12 @@
             <span>Chamar no WhatsApp</span>
             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-            </svg>
+              </svg>
+            </span>
           </a>
         </div>
 
-        <p class="chamada-final-note">Resposta em até 2 dias úteis.</p>
+        <p class="chamada-final-note">Você recebe o retorno por e-mail ou WhatsApp.</p>
       </div>
     </section>
 
@@ -6016,6 +6118,150 @@
             }
           }
         );
+      }
+    })();
+  </script>
+
+  
+  <!-- Script: Chamada Final (Dobra 7) -->
+  <script>
+    (function initChamadaFinal() {
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      const isReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('rm');
+      const hasGsap = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+
+      const section = $('#chamada-final');
+      if (!section) return;
+
+      const primaryBtn = $('#chamadaFinalPrimaryBtn', section) || $('.btn-primary', section);
+      const actionBtns = $$('.chamada-final-actions .btn', section);
+
+      // Brilho radial no hover (somente mouse)
+      if (primaryBtn && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let rafId = null;
+        primaryBtn.addEventListener('pointermove', (e) => {
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(() => {
+            const r = primaryBtn.getBoundingClientRect();
+            const mx = e.clientX - r.left;
+            const my = e.clientY - r.top;
+            primaryBtn.style.setProperty('--mx', mx + 'px');
+            primaryBtn.style.setProperty('--my', my + 'px');
+          });
+        });
+      }
+
+      if (!hasGsap || isReduced()) return;
+
+      // 1. Título com revelação por linhas via SplitText
+      const title = $('#chamadaFinalTitle', section);
+      if (title && typeof window.SplitText !== 'undefined') {
+        try {
+          const split = new SplitText(title, { type: 'lines', linesClass: 'chamada-final-title-line' });
+          gsap.from(split.lines, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        } catch (e) {
+          gsap.from(title, {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 85%',
+              once: true
+            }
+          });
+        }
+      }
+
+      // 2. Fio dourado de prancha técnica
+      const wireLine = $('.chamada-final-wire-line', section);
+      const wireNode = $('.chamada-final-wire-node', section);
+      if (wireLine) {
+        gsap.fromTo(wireLine,
+          { strokeDashoffset: 40 },
+          {
+            strokeDashoffset: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '.chamada-final-wire',
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+      if (wireNode) {
+        gsap.from(wireNode, {
+          scale: 0,
+          opacity: 0,
+          duration: 0.4,
+          delay: 0.35,
+          ease: 'back.out(2)',
+          scrollTrigger: {
+            trigger: '.chamada-final-wire',
+            start: 'top 85%',
+            once: true
+          }
+        });
+      }
+
+      // 3. Botões entrando em sequência e pulso discreto de foco
+      if (actionBtns.length) {
+        gsap.from(actionBtns, {
+          y: 18,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.chamada-final-actions',
+            start: 'top 85%',
+            once: true,
+            onComplete: () => {
+              if (primaryBtn) {
+                gsap.to(primaryBtn, {
+                  keyframes: [
+                    { boxShadow: '0 0 0 6px rgba(198, 164, 90, 0.45)', duration: 0.6, ease: 'power1.out' },
+                    { boxShadow: '0 0 0 0px rgba(198, 164, 90, 0)', duration: 0.6, ease: 'power1.in' }
+                  ],
+                  repeat: 2
+                });
+              }
+            }
+          }
+        });
+      }
+
+      // 4. Nota de resposta
+      const note = $('.chamada-final-note', section);
+      if (note) {
+        gsap.from(note, {
+          opacity: 0,
+          duration: 0.6,
+          delay: 0.4,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: note,
+            start: 'top 90%',
+            once: true
+          }
+        });
       }
     })();
   </script>
