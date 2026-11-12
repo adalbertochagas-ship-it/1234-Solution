@@ -17,6 +17,7 @@ desktop.ini
 
 # Arquivos de teste e rascunhos de automação local
 scratch/
+deploy-wordpress/
 
 # IDEs e Editores
 .vscode/
