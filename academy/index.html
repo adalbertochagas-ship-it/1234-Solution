@@ -4349,19 +4349,6 @@
       z-index: 1;
     }
 
-    /* Marcadores técnicos de prancha nos cantos */
-    .temas-blueprint-mark {
-      position: absolute;
-      font-family: var(--font-mono);
-      font-size: 0.625rem;
-      letter-spacing: 0.14em;
-      color: rgba(156, 124, 60, 0.45);
-      text-transform: uppercase;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .temas-mark-tl { top: var(--space-8); left: var(--space-8); }
-    .temas-mark-tr { top: var(--space-8); right: var(--space-8); text-align: right; }
 
     /* Cabeçalho da Seção */
     .temas-header {
@@ -4695,18 +4682,12 @@
       .temas-assembly-bar {
         display: none;
       }
-      .temas-blueprint-mark {
-        display: none;
-      }
     }
 
     /* Celular (768px ou menos) */
     @media (max-width: 768px) {
       .section-temas {
         padding-block: var(--space-12);
-      }
-      .temas-blueprint-mark {
-        display: none;
       }
       .temas-header {
         margin-bottom: var(--space-8);
@@ -6115,29 +6096,6 @@
       stroke-dashoffset: 0;
     }
 
-    .quemconduz-cota {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--navy);
-      padding: 0 0.5rem;
-      border: 1px solid rgba(198, 164, 90, 0.3);
-      border-radius: 2px;
-      z-index: 4;
-    }
-
-    .quemconduz-cota-val {
-      font-family: var(--font-mono);
-      font-size: 0.625rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      text-transform: uppercase;
-      font-weight: 600;
-    }
 
     .quemconduz-portrait-inner {
       position: relative;
@@ -6214,31 +6172,6 @@
       background: rgba(14, 27, 43, 0.75);
       border-bottom: 1px solid rgba(198, 164, 90, 0.25);
       padding: var(--space-3) var(--space-4);
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .quemconduz-stamp-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .quemconduz-stamp-badge {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .quemconduz-stamp-code {
-      font-family: var(--font-mono);
-      font-size: 0.6875rem;
-      color: rgba(244, 239, 228, 0.55);
-      letter-spacing: 0.06em;
     }
 
     .quemconduz-stamp-title {
@@ -9479,9 +9412,6 @@
          DOBRA 7: TEMAS (Fundo Paper - Redesign Técnico com SVG)
     ============================================================ -->
     <section id="temas" class="section-light section-temas" aria-labelledby="temas-title">
-      <div class="temas-blueprint-mark temas-mark-tl" aria-hidden="true">+ 07.TEMAS // GRID: 1280</div>
-      <div class="temas-blueprint-mark temas-mark-tr" aria-hidden="true">SPEC: IN_COMPANY // 2026</div>
-
       <div class="max-w temas-container">
         <header class="temas-header">
           <div class="temas-eyebrow-wrap">
@@ -9704,11 +9634,6 @@
                   <path class="quemconduz-corner-path" d="M 84 100 L 100 100 L 100 84" />
                 </svg>
 
-                <!-- Cotas Técnicas Decorativas -->
-                <div class="quemconduz-cota quemconduz-cota-top" aria-hidden="true">
-                  <span class="quemconduz-cota-val">REF 08.QC</span>
-                </div>
-
                 <div class="quemconduz-portrait-inner">
                   <picture class="quemconduz-picture">
                     <source media="(max-width: 768px)" srcset="assets/retrato-adalberto-m.webp" width="400" height="532">
@@ -9729,12 +9654,8 @@
           <!-- Coluna 2: Ficha Técnica (Carimbo de Prancha) -->
           <div class="quemconduz-prancha-col">
             <div class="quemconduz-prancha">
-              <!-- Topo do Carimbo Técnico -->
+              <!-- Topo da Ficha de Qualificações -->
               <div class="quemconduz-prancha-header">
-                <div class="quemconduz-stamp-meta">
-                  <span class="quemconduz-stamp-badge">CARIMBO TÉCNICO</span>
-                  <span class="quemconduz-stamp-code">ACADEMY &middot; FOLHA 08</span>
-                </div>
                 <div class="quemconduz-stamp-title">QUALIFICAÇÕES E ATUAÇÃO PROFISSIONAL</div>
               </div>
 
