@@ -15,6 +15,9 @@ DirectoryIndex index.html index.php
   RewriteRule ^diagnostico$ diagnostico/ [R=301,L]
   RewriteRule ^obrigado$ obrigado/ [R=301,L]
 
+  # Mapeia favicon.ico da raiz diretamente para a pasta assets
+  RewriteRule ^favicon\.ico$ assets/favicon.ico [L]
+
   # Se o arquivo físico ou a pasta física existir, entrega diretamente
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
