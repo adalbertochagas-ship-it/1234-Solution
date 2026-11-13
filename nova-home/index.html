@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>1234 Solution | Engenharia que comprova, regulariza e protege o seu patrimônio</title>
-  <meta name="description" content="Consultoria de engenharia em gestão de ativos e patrimonial e serviços técnicos de engenharia para saneamento, autarquias e indústrias de capital intensivo. Comece pelo diagnóstico técnico gratuito." />
+  <meta name="description" content="Consultoria de engenharia em gestão de ativos e patrimonial, serviços técnicos de engenharia, capacitação e governança para saneamento, autarquias e indústrias de capital intensivo. Comece pelo diagnóstico técnico gratuito." />
   <meta name="theme-color" content="#0E1B2B" />
   <meta name="color-scheme" content="dark light" />
   <meta property="og:title" content="1234 Solution | Engenharia que comprova, regulariza e protege o seu patrimônio" />
@@ -358,7 +358,7 @@
        Sequência planejada para a página:
          1 Hero ............... navy
          2 Faixa de prova ..... paper
-         3 Dois caminhos ...... navy
+         3 Três caminhos ...... navy
          4 O problema ......... paper
          5 Como trabalhamos ... navy
          6 Credenciais ........ paper
@@ -431,8 +431,8 @@
     html.js:not(.rm) .proof-list.is-in .proof-item { opacity: 1; transform: none; }
 
     /* ============================================================
-       DOBRA 3: DOIS CAMINHOS (fundo navy)
-       Seletor com duas abas. Sem JavaScript: seletor escondido e os dois painéis
+       DOBRA 3: TRÊS CAMINHOS (fundo navy)
+       Seletor com três abas. Sem JavaScript: seletor escondido e os três painéis
        visíveis, um abaixo do outro. Com JavaScript: painéis na mesma célula do grid.
     ============================================================ */
     .paths-inner { position: relative; z-index: 2; }
@@ -449,7 +449,7 @@
     /* Seletor de abas (só com JavaScript). Aba ativa: navy-2, borda dourada e traço de 2 px na base. */
     .path-tabs { display: none; }
     html.js .path-tabs {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4);
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4);
       margin-bottom: var(--space-4);
       scroll-margin-top: var(--space-24); /* o cabeçalho fixo não cobre o seletor ao chegar pela âncora */
     }
@@ -549,7 +549,7 @@
       .path-list li { padding: var(--space-2) 0; }
       .path-panel-foot { padding-top: var(--space-4); }
     }
-    /* Com JavaScript: os dois painéis dividem a mesma célula (a altura é a do maior, nada pula ao trocar).
+    /* Com JavaScript: os três painéis dividem a mesma célula (a altura é a do maior, nada pula ao trocar).
        O inativo fica com visibility hidden, opacity 0 e pointer-events none, fora do teclado. */
     html.js .path-panel {
       grid-area: 1 / 1;
@@ -2269,6 +2269,8 @@
     }
 
   </style>
+  <link rel="stylesheet" href="assets/consent.css">
+  <script src="assets/consent.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#hero">Ir para o conteúdo</a>
@@ -2343,6 +2345,9 @@
               <span class="mag">
                 <a class="btn btn-ghost" href="#caminho-servicos" aria-label="Serviços técnicos de engenharia: conhecer o caminho">Serviços técnicos de engenharia</a>
               </span>
+              <span class="mag">
+                <a class="btn btn-ghost" href="#caminho-capacitacao" aria-label="Capacitação e governança: conhecer o caminho">Capacitação e governança</a>
+              </span>
             </div>
           </div>
 
@@ -2381,7 +2386,7 @@
       </div>
     </section>
 
-    <!-- DOBRA 3: dois caminhos (fundo navy), seletor com duas abas -->
+    <!-- DOBRA 3: três caminhos (fundo navy), seletor com três abas -->
     <section class="section-dark paths" id="caminhos" data-reveal aria-labelledby="paths-title">
       <div class="hero-grid-lines" aria-hidden="true">
         <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
@@ -2391,11 +2396,11 @@
       <div class="max-w paths-inner">
         <header class="paths-head reveal">
           <p class="eyebrow">Como podemos ajudar</p>
-          <h2 class="paths-title" id="paths-title">Dois caminhos, conforme a sua demanda.</h2>
-          <p class="paths-lede">Escolha por onde começar. Nos dois casos, o primeiro passo é o diagnóstico técnico gratuito.</p>
+          <h2 class="paths-title" id="paths-title">Três caminhos, conforme a sua demanda.</h2>
+          <p class="paths-lede">Escolha por onde começar. Nos três casos, o primeiro passo é o diagnóstico técnico gratuito.</p>
         </header>
 
-        <!-- Seletor: escondido sem JavaScript (os dois painéis aparecem um abaixo do outro) -->
+        <!-- Seletor: escondido sem JavaScript (os três painéis aparecem um abaixo do outro) -->
         <div class="path-tabs reveal reveal-2" role="tablist" aria-label="Caminhos para começar">
           <button type="button" class="path-tab" role="tab" id="tab-ativos" aria-selected="true" aria-controls="caminho-ativos" tabindex="0">
             <span class="path-tab-label">Caminho 01</span>
@@ -2406,6 +2411,11 @@
             <span class="path-tab-label">Caminho 02</span>
             <span class="path-tab-title">Serviços técnicos de engenharia</span>
             <span class="path-tab-note">Condomínios, indústrias, propriedades e empresas</span>
+          </button>
+          <button type="button" class="path-tab" role="tab" id="tab-capacitacao" aria-selected="false" aria-controls="caminho-capacitacao" tabindex="-1">
+            <span class="path-tab-label">Caminho 03</span>
+            <span class="path-tab-title">Capacitação e governança</span>
+            <span class="path-tab-note">Concessionárias, autarquias, indústrias, conselhos e diretorias</span>
           </button>
         </div>
 
@@ -2492,6 +2502,7 @@
                   <ul class="path-list" aria-labelledby="grp-ativos-1">
                     <li>Inventário físico e conciliação contábil</li>
                     <li>Controle patrimonial com RFID e sistemas de gestão de ativos</li>
+                    <li>Oficinas práticas de inventário e controle patrimonial</li>
                   </ul>
                 </div>
                 <div class="path-group">
@@ -2500,25 +2511,19 @@
                     <li>Avaliação de ativos e base regulatória (BAR)</li>
                     <li>Atendimento à regulação (ARSESP e ANA)</li>
                     <li>Laudos e processos de baixa de ativos</li>
+                    <li>Capacitação de equipes técnicas em regulação e base regulatória</li>
                   </ul>
                 </div>
                 <div class="path-group">
                   <p class="path-group-name" id="grp-ativos-3">Sistemas de gestão</p>
                   <ul class="path-list" aria-labelledby="grp-ativos-3">
                     <li>Gestão de ativos conforme a ISO 55000</li>
-                    <li>Planejamento estratégico e políticas de gestão e qualidade</li>
-                  </ul>
-                </div>
-                <div class="path-group">
-                  <p class="path-group-name" id="grp-ativos-4">Governança e capacitação</p>
-                  <ul class="path-list" aria-labelledby="grp-ativos-4">
-                    <li>Apoio a conselhos em finanças, riscos e conformidade</li>
-                    <li>Capacitação de equipes e lideranças</li>
+                    <li>Palestras e treinamentos in company em gestão patrimonial e de ativos</li>
                   </ul>
                 </div>
               </div>
             </div>
-            <p class="path-panel-foot">Sua demanda não aparece aqui? Conte o caso no diagnóstico e dizemos se conseguimos atender.</p>
+            <p class="path-panel-foot">Sua demanda não aparece aqui? Conte o caso no diagnóstico e desenhamos a solução com você.</p>
           </article>
 
           <article class="path-panel" id="caminho-servicos" role="tabpanel" aria-labelledby="tab-servicos">
@@ -2631,7 +2636,122 @@
                 </div>
               </div>
             </div>
-            <p class="path-panel-foot">Sua demanda não aparece aqui? Conte o caso no diagnóstico e dizemos se conseguimos atender.</p>
+            <p class="path-panel-foot">Sua demanda não aparece aqui? Conte o caso no diagnóstico e desenhamos a solução com você.</p>
+          </article>
+
+          <article class="path-panel" id="caminho-capacitacao" role="tabpanel" aria-labelledby="tab-capacitacao">
+            <div class="path-panel-head">
+              <p class="path-label">Caminho 03</p>
+              <h3 class="path-title">Capacitação e governança</h3>
+            </div>
+            <div class="path-col-main">
+              <p class="path-desc">Para diretorias, conselhos e equipes que precisam de palestras, treinamentos e apoio em temas de gestão fora do patrimônio.</p>
+              <a class="btn btn-primary path-btn" href="#contato">
+                <span class="btn-inner-track" aria-hidden="true"><span class="btn-conic"></span><span class="btn-bg"><span class="btn-shimmer"></span><span class="btn-glow"></span></span></span>
+                <span class="btn-label">Conversar sobre capacitação</span>
+                <svg class="btn-label btn-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <div class="path-illustration path-illustration-capacitacao" aria-hidden="true">
+                <svg class="path-illustration-svg" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <g class="path-svg-lines">
+                    <!-- Mesa de reunião / conselho executivo (bordas externa e interna) -->
+                    <ellipse class="path-svg-line" pathLength="1" cx="210" cy="110" rx="90" ry="42" />
+                    <ellipse class="path-svg-line" pathLength="1" cx="210" cy="110" rx="72" ry="30" />
+                    <!-- Eixos principais de governança e alinhamento -->
+                    <line class="path-svg-line" pathLength="1" x1="120" y1="110" x2="300" y2="110" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="68" x2="210" y2="152" />
+                    <!-- Linhas radiais de conexão aos membros do conselho -->
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="150" y2="50" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="190" y2="46" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="230" y2="46" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="270" y2="50" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="150" y2="170" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="190" y2="174" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="230" y2="174" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="270" y2="170" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="95" y2="110" />
+                    <line class="path-svg-line" pathLength="1" x1="210" y1="110" x2="325" y2="110" />
+                    <!-- Painel de apresentação estratégica e diretrizes -->
+                    <line class="path-svg-line" pathLength="1" x1="40" y1="75" x2="40" y2="145" />
+                    <line class="path-svg-line" pathLength="1" x1="40" y1="110" x2="85" y2="110" />
+                    <!-- Linhas de cota técnicas superior (largura de mesa) -->
+                    <line class="path-svg-line" pathLength="1" x1="95" y1="36" x2="95" y2="18" />
+                    <line class="path-svg-line" pathLength="1" x1="325" y1="36" x2="325" y2="18" />
+                    <line class="path-svg-line" pathLength="1" x1="95" y1="22" x2="325" y2="22" />
+                    <path class="path-svg-line" pathLength="1" d="M 103 19 L 95 22 L 103 25" />
+                    <path class="path-svg-line" pathLength="1" d="M 317 19 L 325 22 L 317 25" />
+                    <!-- Linhas de cota lateral direita -->
+                    <line class="path-svg-line" pathLength="1" x1="335" y1="46" x2="375" y2="46" />
+                    <line class="path-svg-line" pathLength="1" x1="335" y1="174" x2="375" y2="174" />
+                    <line class="path-svg-line" pathLength="1" x1="370" y1="46" x2="370" y2="174" />
+                    <path class="path-svg-line" pathLength="1" d="M 367 54 L 370 46 L 373 54" />
+                    <path class="path-svg-line" pathLength="1" d="M 367 166 L 370 174 L 373 166" />
+                  </g>
+                  <!-- Marcadores de pauta e estações de trabalho -->
+                  <g class="path-svg-tags">
+                    <rect class="path-svg-tag" pathLength="1" x="32" y="85" width="8" height="50" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="144" y="74" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="184" y="70" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="224" y="70" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="264" y="74" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="144" y="139" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="184" y="143" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="224" y="143" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="264" y="139" width="12" height="7" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="124" y="106" width="7" height="12" rx="1" />
+                    <rect class="path-svg-tag" pathLength="1" x="289" y="106" width="7" height="12" rx="1" />
+                  </g>
+                  <!-- Nós dos conselheiros / participantes -->
+                  <g class="path-svg-nodes">
+                    <circle class="path-svg-node" cx="150" cy="50" r="4" />
+                    <circle class="path-svg-node" cx="190" cy="46" r="4" />
+                    <circle class="path-svg-node" cx="230" cy="46" r="4" />
+                    <circle class="path-svg-node" cx="270" cy="50" r="4" />
+                    <circle class="path-svg-node" cx="150" cy="170" r="4" />
+                    <circle class="path-svg-node" cx="190" cy="174" r="4" />
+                    <circle class="path-svg-node" cx="230" cy="174" r="4" />
+                    <circle class="path-svg-node" cx="270" cy="170" r="4" />
+                    <circle class="path-svg-node" cx="95" cy="110" r="4.5" />
+                    <circle class="path-svg-node" cx="325" cy="110" r="4" />
+                    <!-- Ponto central de decisão e anel de pulso -->
+                    <circle class="path-svg-node path-svg-node-center" cx="210" cy="110" r="5" />
+                    <circle class="path-svg-pulse" cx="210" cy="110" r="14" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div class="path-col-fronts">
+              <p class="path-fronts-title">Exemplos de temas</p>
+              <div class="path-groups">
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-cap-1">Palestras e treinamentos</p>
+                  <ul class="path-list" aria-labelledby="grp-cap-1">
+                    <li>Palestras para equipes, diretorias e eventos corporativos</li>
+                    <li>Treinamentos e oficinas in company sobre os temas abaixo</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-cap-2">Planejamento e projetos</p>
+                  <ul class="path-list" aria-labelledby="grp-cap-2">
+                    <li>Planejamento estratégico</li>
+                    <li>Gestão de projetos</li>
+                    <li>Políticas de gestão e qualidade</li>
+                    <li>Excelência em gestão</li>
+                  </ul>
+                </div>
+                <div class="path-group">
+                  <p class="path-group-name" id="grp-cap-3">Governança e conselhos</p>
+                  <ul class="path-list" aria-labelledby="grp-cap-3">
+                    <li>Governança corporativa</li>
+                    <li>Avaliação e estruturação de conselhos</li>
+                    <li>Assessoria a conselhos e diretorias em governança e boas práticas</li>
+                    <li>Apoio a conselhos em finanças, riscos e conformidade</li>
+                    <li>Atuação como conselheiro consultivo</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <p class="path-panel-foot">Precisa de outro tema de gestão ou governança? Conte o caso e desenhamos a solução com você.</p>
           </article>
         </div>
       </div>
@@ -2751,7 +2871,7 @@
                 <span class="how-num" aria-hidden="true">01</span>
                 <p class="how-tag">Gratuito</p>
                 <h3 class="how-step-title">Diagnóstico</h3>
-                <p class="how-step-text">Conversa de 30 minutos e leitura dos documentos que você já tem. Entendemos a demanda, o prazo e o que está em jogo.</p>
+                <p class="how-step-text">Conversa inicial e leitura dos documentos que você já tem. Entendemos a demanda, o prazo e o que está em jogo.</p>
               </div>
             </li>
             <li class="how-step reveal" data-step="2" style="--i:2">
@@ -3202,7 +3322,7 @@
                 </h3>
                 <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
                   <div class="faq-panel-inner">
-                    É gratuito e sem compromisso: uma conversa de 30 minutos e a leitura dos documentos que você já tem. Se fizer sentido seguir, enviamos uma proposta por escrito com escopo, prazo e valor. Se não fizer, você sai da conversa sabendo qual é o próximo passo.
+                    É gratuito e sem compromisso: uma conversa inicial e a leitura dos documentos que você já tem. Se fizer sentido seguir, enviamos uma proposta por escrito com escopo, prazo e valor. Se não fizer, você sai da conversa sabendo qual é o próximo passo.
                   </div>
                 </div>
               </li>
@@ -3380,6 +3500,7 @@
             <li><a class="footer-link" href="https://www.instagram.com/adalbertoch" target="_blank" rel="noopener noreferrer">Instagram</a></li>
             <li><a class="footer-link" href="https://www.youtube.com/@adalbertofchagas" target="_blank" rel="noopener noreferrer">YouTube</a></li>
             <li><a class="footer-link" href="privacidade.html">Política de privacidade</a></li>
+            <li><a class="footer-link" href="#" data-consent-open>Gerenciar cookies</a></li>
             <!-- TROCAR: link da página da Academy quando existir -->
           </ul>
         </div>
@@ -3597,7 +3718,7 @@
       });
 
       /* ----------------------------------------------------------
-         Dois caminhos: seletor de abas. Teclado (setas, Home, End), hash na
+         Três caminhos: seletor de abas. Teclado (setas, Home, End), hash na
          URL (carregamento e hashchange) e botões do Hero. Só alterna classes
          e atributos; o fade e os 8 px do painel são CSS transition.
          Fica antes do retorno do movimento reduzido, para valer nos dois casos.
@@ -3605,8 +3726,8 @@
       const pathTabs = $$('.path-tab');
       const pathPanels = $$('.path-panel');
       const pathTablist = $('.path-tabs');
-      if (pathTabs.length === 2 && pathPanels.length === 2 && pathTablist) {
-        const PATH_HASH = ['#caminho-ativos', '#caminho-servicos'];
+      if (pathTabs.length === 3 && pathPanels.length === 3 && pathTablist) {
+        const PATH_HASH = ['#caminho-ativos', '#caminho-servicos', '#caminho-capacitacao'];
         const prefersReduced = function () {
           return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         };
@@ -4652,7 +4773,7 @@
         "name": "O diagnóstico é mesmo gratuito? O que acontece depois?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "É gratuito e sem compromisso: uma conversa de 30 minutos e a leitura dos documentos que você já tem. Se fizer sentido seguir, enviamos uma proposta por escrito com escopo, prazo e valor. Se não fizer, você sai da conversa sabendo qual é o próximo passo."
+          "text": "É gratuito e sem compromisso: uma conversa inicial e a leitura dos documentos que você já tem. Se fizer sentido seguir, enviamos uma proposta por escrito com escopo, prazo e valor. Se não fizer, você sai da conversa sabendo qual é o próximo passo."
         }
       },
       {

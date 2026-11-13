@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Questionário recebido | 1234 Solution</title>
+  <meta name="description" content="Recebemos o seu pedido de diagnóstico técnico." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0E1B2B" />
+  <meta name="color-scheme" content="dark light" />
+
+  <link rel="icon" type="image/png" href="../assets/favicon_1234.png" />
+
+  <!-- Google Fonts: Fraunces, IBM Plex Sans, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600;1,9..144,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       TOKENS: idênticos aos do index.html
+    ============================================================ */
+    :root {
+      --navy: #0E1B2B;  --navy-2: #16283F;  --navy-3: #1E3350;
+      --gold: #C6A45A;  --gold-2: #E4C787;  --gold-deep: #9C7C3C;
+      --paper: #F4EFE4; --paper-2: #ECE4D3;
+      --ink: #17212E;   --stone: #7C8798;   --stone-2: #6E6552;
+      --line-dark: rgba(198,164,90,0.18);
+      --line-light: rgba(23,33,46,0.12);
+      --text-lede: #B9C2CF;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+      --text-xs: 0.6875rem;  --text-sm: 0.8125rem; --text-base: 1rem;
+      --text-lg: 1.125rem;   --text-xl: 1.25rem;   --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;  --text-4xl: 2.25rem;  --text-5xl: 3rem;
+      --text-6xl: 3.75rem;
+
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-6: 1.5rem;  --space-8: 2rem;   --space-12: 3rem;   --space-16: 4rem;
+      --space-20: 5rem;   --space-24: 6rem;
+
+      --radius-sm: 3px; --radius-md: 6px; --radius-lg: 10px; --radius-xl: 16px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(14,27,43,0.35);
+      --shadow-md: 0 8px 28px rgba(14,27,43,0.45);
+      --shadow-lg: 0 20px 60px rgba(14,27,43,0.55);
+
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      --grid-max: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--navy); scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--navy);
+      color: var(--paper);
+      line-height: 1.6;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, h3 { font-family: var(--font-display); }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .max-w { max-width: var(--grid-max); margin-inline: auto; padding-inline: 2rem; width: 100%; }
+    @media (max-width: 640px) { .max-w { padding-inline: 1.25rem; } }
+
+    /* CABEÇALHO SIMPLES */
+    .site-header {
+      position: relative; z-index: 50; width: 100%;
+      background: var(--navy);
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: flex-start;
+      min-height: 4.5rem; padding-block: var(--space-4);
+    }
+    .brand img { height: 40px; width: auto; }
+
+    /* GRID DE LINHAS TÉCNICAS */
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      max-width: var(--grid-max); margin-inline: auto;
+      padding-inline: 2rem; display: grid; grid-template-columns: repeat(8, 1fr);
+      pointer-events: none;
+    }
+    .grid-line { border-left: 1px solid rgba(198,164,90,0.05); height: 100%; }
+    .grid-line:last-child { border-right: 1px solid rgba(198,164,90,0.05); }
+
+    /* DOBRA 1: HERO NAVY */
+    .hero-obrigado {
+      position: relative; padding-block: var(--space-16) var(--space-20);
+      background: var(--navy); overflow: hidden;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: var(--space-12); align-items: start;
+    }
+    @media (max-width: 960px) {
+      .hero-content { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.28em;
+      color: var(--gold-2); margin-bottom: var(--space-4);
+    }
+    .eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 4vw, 3.5rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--paper); margin-bottom: var(--space-6);
+    }
+    .hero-lede {
+      font-size: var(--text-lg); font-weight: 300; line-height: 1.6;
+      color: var(--text-lede); max-width: 48ch; margin-bottom: var(--space-12);
+    }
+
+    /* CARIMBO TÉCNICO (RECEBIDO) */
+    .stamp-wrapper {
+      display: flex; justify-content: flex-end; align-items: flex-start;
+      padding-top: var(--space-4);
+    }
+    @media (max-width: 960px) {
+      .stamp-wrapper { justify-content: flex-start; padding-top: 0; }
+    }
+    .stamp-svg {
+      width: 100%; max-width: 320px; height: auto;
+      transform: rotate(-3deg);
+      filter: drop-shadow(0 8px 24px rgba(14,27,43,0.5));
+    }
+    .stamp-line {
+      stroke: var(--gold); stroke-width: 1.8; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .stamp-text {
+      font-family: var(--font-mono); font-weight: 700; fill: var(--gold-2);
+      letter-spacing: 0.16em;
+    }
+
+    /* TRÊS PASSOS EM LINHA */
+    .steps-section {
+      position: relative; z-index: 2; margin-top: var(--space-12);
+      padding: var(--space-8); background: var(--navy-2);
+      border: 1px solid var(--line-dark); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+    }
+    .steps-ruler-head {
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--gold-2); margin-bottom: var(--space-6);
+    }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-6); position: relative;
+    }
+    @media (max-width: 768px) {
+      .steps-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+    }
+
+    /* Barra conectora horizontal entre passos em desktop */
+    @media (min-width: 769px) {
+      .steps-grid::before {
+        content: ''; position: absolute; top: 18px; left: 24px; right: 24px; height: 1px;
+        background: repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 8px);
+        opacity: 0.35; z-index: 1;
+      }
+    }
+
+    .step-card {
+      position: relative; z-index: 2; display: flex; flex-direction: column;
+      align-items: flex-start; gap: var(--space-2);
+    }
+    .step-num-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--navy); border: 1.5px solid var(--gold);
+      font-family: var(--font-mono); font-size: var(--text-xs); font-weight: 700;
+      color: var(--gold-2); margin-bottom: var(--space-2);
+    }
+    .step-title {
+      font-family: var(--font-mono); font-size: var(--text-sm);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--paper); font-weight: 700;
+    }
+    .step-desc {
+      font-size: var(--text-sm); line-height: 1.5; color: var(--text-lede);
+    }
+
+    /* AVISO DE URGÊNCIA E BOTÃO WHATSAPP */
+    .urgency-box {
+      margin-top: var(--space-12); padding: var(--space-6) var(--space-8);
+      background: rgba(198,164,90,0.06); border: 1px solid rgba(198,164,90,0.3);
+      border-radius: var(--radius-lg);
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: var(--space-6);
+    }
+    .urgency-text {
+      font-size: var(--text-base); line-height: 1.5; color: var(--paper);
+      max-width: 50ch;
+    }
+
+    /* BOTÕES */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; position: relative; overflow: hidden; isolation: isolate;
+      font-family: var(--font-body); font-weight: 600;
+      font-size: var(--text-sm); letter-spacing: 0.02em;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.3s var(--ease-elastic), box-shadow 0.3s, background 0.3s, border-color 0.3s, color 0.3s;
+    }
+    .btn-primary {
+      padding: 0.85rem 2rem; border-radius: var(--radius-sm); color: var(--navy); background: transparent;
+    }
+    .btn-primary .btn-inner-track { position: absolute; inset: 0; z-index: -1; border-radius: inherit; overflow: hidden; padding: 1px; display: block; }
+    .btn-primary .btn-conic {
+      position: absolute; inset: -100%; display: block;
+      background: conic-gradient(from 0deg, transparent 0deg 270deg, var(--gold) 360deg);
+      animation: conic-spin 3s linear infinite;
+    }
+    .btn-primary .btn-bg { position: absolute; inset: 1px; border-radius: inherit; background: var(--gold); overflow: hidden; display: block; }
+    .btn-primary .btn-shimmer {
+      position: absolute; inset: 0; display: block;
+      opacity: 0.15; mix-blend-mode: plus-lighter;
+      background-image: repeating-linear-gradient(90deg, #fff, #fff 1px, transparent 1px, transparent 8px);
+      background-size: 24px 100%;
+      animation: lines-slide 1.8s linear infinite;
+    }
+    .btn-primary .btn-glow {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 70%; height: 60%; display: block;
+      background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.6) 0%, transparent 70%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .btn-primary .btn-label { position: relative; z-index: 1; font-weight: 600; color: var(--navy); }
+    .btn-primary .btn-ico { position: relative; z-index: 1; color: var(--navy); transition: transform 0.25s var(--ease-spring); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover .btn-glow { opacity: 1; }
+      .btn-primary:hover .btn-ico { transform: translateX(3px); }
+    }
+    @keyframes conic-spin { to { transform: rotate(1turn); } }
+    @keyframes lines-slide { 0% { background-position: 0 0; } 100% { background-position: 24px 0; } }
+
+    .btn-ghost {
+      padding: 0.85rem 2rem; border-radius: var(--radius-sm);
+      color: var(--navy); background: transparent;
+      border: 1px solid var(--ink);
+      font-weight: 600;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-ghost:hover {
+        background: rgba(23,33,46,0.06); border-color: var(--navy);
+      }
+    }
+
+    /* DOBRA 2: PREPARAÇÃO (FUNDO PAPER) */
+    .section-paper {
+      background: var(--paper); color: var(--ink);
+      padding-block: var(--space-16) var(--space-20);
+      border-top: 1px solid rgba(198,164,90,0.25);
+    }
+    .paper-head { margin-bottom: var(--space-12); max-width: 680px; }
+    .paper-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: var(--font-mono); font-size: var(--text-xs);
+      text-transform: uppercase; letter-spacing: 0.24em;
+      color: var(--stone-2); margin-bottom: var(--space-4);
+    }
+    .paper-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--stone-2); }
+    .paper-title {
+      font-size: clamp(1.875rem, 3.2vw, 2.75rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .checklist-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-8); margin-bottom: var(--space-12);
+    }
+    @media (max-width: 860px) {
+      .checklist-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); }
+    }
+    .check-card {
+      background: var(--paper-2); padding: var(--space-6);
+      border: 1px solid var(--line-light); border-radius: var(--radius-lg);
+      display: flex; flex-direction: column; gap: var(--space-4);
+    }
+    .check-marker {
+      width: 28px; height: 28px; flex-shrink: 0; color: var(--gold-deep);
+    }
+    .check-text {
+      font-size: var(--text-base); line-height: 1.55; color: var(--ink);
+    }
+
+    .paper-note-box {
+      padding: var(--space-4) var(--space-6); background: rgba(23,33,46,0.04);
+      border-left: 3px solid var(--gold-deep); border-radius: var(--radius-sm);
+      margin-bottom: var(--space-12); max-width: 800px;
+    }
+    .paper-note-text {
+      font-size: var(--text-sm); line-height: 1.6; color: var(--stone-2);
+    }
+
+    .paper-actions {
+      display: flex; align-items: center; justify-content: flex-start;
+    }
+
+    /* RODAPÉ COMPACTO (NAVY) */
+    .site-footer {
+      background: var(--navy); color: var(--paper);
+      border-top: 1px solid var(--line-dark);
+      padding-block: var(--space-12);
+      font-size: var(--text-sm);
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: var(--space-6);
+    }
+    .footer-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4);
+      color: var(--text-lede);
+    }
+    .footer-meta span + span::before {
+      content: '·'; margin-right: var(--space-4); color: var(--gold);
+    }
+    .footer-links {
+      display: flex; align-items: center; gap: var(--space-6);
+    }
+    .footer-link {
+      color: var(--paper); transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--gold-2); }
+
+    /* ACESSIBILIDADE E MOVIMENTO REDUZIDO */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+      }
+      .stamp-line { stroke-dashoffset: 0 !important; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="../assets/consent.css">
+  <script src="../assets/consent.js" data-policy="../privacidade.html" defer></script>
+</head>
+<body>
+
+  <!-- CABEÇALHO -->
+  <header class="site-header">
+    <div class="header-inner max-w">
+      <a class="brand" href="../index.html" aria-label="1234 Solution, voltar à página inicial">
+        <img src="../assets/logo_1234_sm.png" alt="1234 Solution" width="85" height="44" />
+      </a>
+    </div>
+  </header>
+
+  <!-- DOBRA 1: HERO NAVY -->
+  <main>
+    <section class="hero-obrigado" aria-labelledby="obrigado-title">
+      <div class="hero-grid-lines" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+
+      <div class="max-w">
+        <div class="hero-content">
+          <div>
+            <p class="eyebrow">Questionário recebido</p>
+            <h1 class="hero-title" id="obrigado-title">Recebemos o seu pedido.</h1>
+            <p class="hero-lede">Obrigado por responder. Vamos analisar as suas respostas e entrar em contato por WhatsApp ou e-mail para combinar a nossa conversa.</p>
+          </div>
+
+          <!-- CARIMBO TÉCNICO VETORIAL -->
+          <div class="stamp-wrapper" aria-hidden="true">
+            <svg class="stamp-svg" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect class="stamp-line stamp-box" pathLength="1" x="8" y="8" width="264" height="124" rx="4" />
+              <rect class="stamp-line stamp-box-inner" pathLength="1" x="14" y="14" width="252" height="112" rx="2" stroke-dasharray="4 3" />
+              <line class="stamp-line" pathLength="1" x1="14" y1="52" x2="266" y2="52" />
+              <line class="stamp-line" pathLength="1" x1="14" y1="96" x2="266" y2="96" />
+              <text class="stamp-text" x="140" y="38" text-anchor="middle" font-size="16">1234 SOLUTION</text>
+              <text class="stamp-text" x="140" y="80" text-anchor="middle" font-size="24">RECEBIDO</text>
+              <text class="stamp-text" x="140" y="115" text-anchor="middle" font-size="11">DIAGNÓSTICO TÉCNICO REGISTRADO</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- TRÊS PASSOS EM LINHA -->
+        <div class="steps-section" role="region" aria-label="Próximos passos">
+          <p class="steps-ruler-head">Próximos passos</p>
+          <div class="steps-grid">
+            <div class="step-card">
+              <span class="step-num-badge">01</span>
+              <p class="step-title">Análise</p>
+              <p class="step-desc">Lemos as suas respostas.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num-badge">02</span>
+              <p class="step-title">Contato</p>
+              <p class="step-desc">Retorno por WhatsApp ou e-mail para combinar a conversa.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num-badge">03</span>
+              <p class="step-title">Conversa</p>
+              <p class="step-desc">Entendemos a demanda e indicamos o caminho.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVISO DE URGÊNCIA -->
+        <div class="urgency-box">
+          <p class="urgency-text">Se o assunto for urgente, como um prazo de fiscalização correndo, chame direto no WhatsApp.</p>
+          <a class="btn btn-primary" href="https://wa.me/5511933607230?text=Ol%C3%A1%2C%20Adalberto!%20Vim%20pelo%20site%20da%201234%20Solution%20e%20gostaria%20de%20conversar%20sobre%20um%20diagn%C3%B3stico%20t%C3%A9cnico." target="_blank" rel="noopener">
+            <span class="btn-inner-track" aria-hidden="true"><span class="btn-conic"></span><span class="btn-bg"><span class="btn-shimmer"></span><span class="btn-glow"></span></span></span>
+            <span class="btn-label">Chamar no WhatsApp</span>
+            <svg class="btn-label btn-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOBRA 2: PREPARAÇÃO (FUNDO PAPER) -->
+    <section class="section-paper" aria-labelledby="prep-title">
+      <div class="max-w">
+        <header class="paper-head">
+          <p class="paper-eyebrow">Prepare-se para a conversa</p>
+          <h2 class="paper-title" id="prep-title">Para aproveitar melhor a nossa conversa</h2>
+        </header>
+
+        <div class="checklist-grid">
+          <div class="check-card">
+            <svg class="check-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <p class="check-text">Os documentos que você já tem sobre o assunto, como laudos, projetos, notificações e relatórios.</p>
+          </div>
+          <div class="check-card">
+            <svg class="check-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <p class="check-text">O prazo envolvido, se houver.</p>
+          </div>
+          <div class="check-card">
+            <svg class="check-marker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <p class="check-text">Quem participa da decisão.</p>
+          </div>
+        </div>
+
+        <div class="paper-note-box">
+          <p class="paper-note-text">Não envie documentos por esta página. Combinamos como compartilhá-los no primeiro contato.</p>
+        </div>
+
+        <div class="paper-actions">
+          <a class="btn btn-ghost" href="../index.html">Voltar ao site</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ COMPACTO -->
+  <footer class="site-footer">
+    <div class="footer-inner max-w">
+      <div class="footer-meta">
+        <span>1234 Solution Ltda</span>
+        <span>CNPJ 56.364.941/0001-69</span>
+        <span>São Paulo, SP</span>
+      </div>
+      <div class="footer-links">
+        <a class="footer-link" href="../privacidade.html">Política de privacidade</a>
+        <a class="footer-link" href="#" data-consent-open>Gerenciar cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+
+  <!-- SCRIPT DE CONVERSÃO E ANIMAÇÃO -->
+  <script>
+    (function () {
+      'use strict';
+      const root = document.documentElement;
+      const $ = (s, c) => (c || document).querySelector(s);
+      const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+      /* Disparo do evento de conversão */
+      window.dataLayer = window.dataLayer || [];
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          if (!sessionStorage.getItem('sol_lead_sent')) {
+            window.dataLayer.push({
+              event: 'diagnostico_questionario_concluido',
+              page_path: '/obrigado/'
+            });
+            sessionStorage.setItem('sol_lead_sent', '1');
+          }
+        } catch (e) {
+          window.dataLayer.push({
+            event: 'diagnostico_questionario_concluido',
+            page_path: '/obrigado/'
+          });
+        }
+
+        /* Animações GSAP */
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReduced && typeof gsap !== 'undefined') {
+          // Animação do carimbo técnico
+          const stampLines = $$('.stamp-line');
+          stampLines.forEach(line => {
+            line.style.strokeDasharray = '1';
+            line.style.strokeDashoffset = '1';
+          });
+          const stampTexts = $$('.stamp-text');
+          gsap.set(stampTexts, { opacity: 0 });
+          gsap.set('.stamp-svg', { scale: 1.15, opacity: 0 });
+
+          const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+          tl.to('.stamp-svg', { scale: 1, opacity: 1, duration: 0.5, delay: 0.2 })
+            .to(stampLines, { strokeDashoffset: 0, duration: 0.8, stagger: 0.1 }, '-=0.2')
+            .to(stampTexts, { opacity: 1, duration: 0.4, stagger: 0.08 }, '-=0.3');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
+
